@@ -7,6 +7,19 @@
 - **Subline**: `Premium car rental at prices you'll love. Worldwide.`
 
 
+# USPs
+
+- **USP 1**:
+    - Eyebrow: `Global reach`
+    - Title: `2,000+ SIXT stations in over 105 countries`
+- **USP 2**:
+    - Eyebrow: `Distinctive fleet`
+    - Title: `From high-end convertibles to premium SUVs`
+- **USP 3**:
+    - Eyebrow: `Exceptional service`
+    - Title: `Stress-free, trustworthy, no hidden costs`
+
+
 ## Promo campaigns (bento)
 
 - **Promo 1**
