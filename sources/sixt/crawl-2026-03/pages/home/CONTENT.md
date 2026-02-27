@@ -1,13 +1,40 @@
 # Homepage content
 
 
+## Header
+
+- **Help center**: `Help`
+- **Bookings**: `Manage bookings`
+- **Language / currency**: `EN | $`
+- **Account**: `Log in | Register`
+
+## Search context
+
+- **Chip 1**: `Cars`
+- **Chip 2**: `Trucks`
+- **Chip 3**: `Subscription`
+- **Bookings**: `View / edit my booking`
+- **Input 1**:
+    - Label: `Pickup & return`
+    - Input: `Munich Airport`
+- **Button** (next to input):
+    - Label: `Different return location`
+- **Link**: `Apply corporate rate`
+- **Input 2** (date + time):
+    - Label: `Pickup date`
+    - Input: `Mar 16` `12:00 PM`
+- **Input 3** (date + time):
+    - Label: `Return date`
+    - Input: `Mar 20` `12:00 PM`
+- **Primary CTA**: `Show cars`
+
 ## Hero
 
 - **Headline**: `Member-only Rates With SIXT ONE`
 - **Subline**: `Premium car rental at prices you'll love. Worldwide.`
 
 
-# USPs
+## USPs
 
 - **USP 1**:
     - Eyebrow: `Global reach`
@@ -89,6 +116,8 @@
 
 
 ## More SIXT (carousel)
+
+- **Headline**: `More SIXT`
 
 - **Promo 1**
     - Title: `Faster Bookings. Instant Rewards.`

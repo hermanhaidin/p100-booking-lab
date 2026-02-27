@@ -1,5 +1,6 @@
 # Remote images
 
+
 ## Homepage
 
 - Hero banner: https://img.sixt.com/3200/a1d32aef-c392-481a-b9f4-90ec46d8cee3.jpg
@@ -34,3 +35,59 @@
 ### Testimonials
 
 - Background: https://img.sixt.com/1600/5afdbd43-aee2-4177-b4b2-6e0c7d30b996.png
+
+
+## Offer list
+
+- BMW 3 Series Touring: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-3-stw-black-2023.png
+- VW Golf: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-5d-grey-2024.png
+- VW T-Roc: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-t-roc-suv-4d-white-2022-JV.png
+- Banner: https://img.sixt.com/1600/d3432083-e83d-4ee3-9c2d-976cc32e1a19.jpg
+- Cupra Formentor: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/cupra-formentor-suv-grey-2025.png
+- VW Golf Variant: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-variant-stw-4d-grey-2022.png
+- Citroen E-C3 Aircross: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/citroen-c3-aircross-5d-white-2025.png
+- VW T-Roc Cabriolet: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-t-roc-convertible-white-open-2023.png
+- Cupra Tavascan: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/cupra-tavascan-suv-silver-2024.png
+- Skoda Elroq: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/skoda-elroq-suv-grey-2025.png
+- BMW 1 Series: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-1-hatch-4d-black-2025.png
+- Skoda Octavia Estate: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/skoda-octavia-combi-stw-black-2025.png
+- VW ID.7 Tourer: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-id7-stationwagon-grey-2025.png
+- Audi Q2: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/audi-q2-suv-silver-2021.png
+- Audi A3 Sedan: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/audi-a3-4d-grey-2021.png
+- VW Tiguan: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-tiguan-suv-black-2024.png
+- BMW 2 Series Active Tourer: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-2-active-tourer-van-4d-black-2022-JV.png
+- Mercedes-Benz CLA: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-cla-4d-sedan-white-2026.png
+- VW Touran: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-touran-van-grey-2021.png
+- VW Passat Estate: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-passat-stw-silver-2024.png
+- BMW M235 Gran Coupe: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-m235i-grancoupe-4d-blue-2023.png
+- BMW 3 Series: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-3-sedan-4d-white-2023-JV.png
+- VW Tayron: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-tayron-suv-grey-2025.png
+- BMW X1: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x1-m35-suv-black-2025.png
+- BMW M340 Touring: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-m340i-kombi-schwarz-2020.png
+- Mercedes-Benz E-Class: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-e-class-4d-silver-2024.png
+- BMW X3: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x3-suv-silver-2025.png
+- Audi A6 Avant: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/audi-a6-avant-stw-silver-2025.png
+- BMW 4 Series Coupe: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-4-2d-coupe-grey-2021.png
+- BMW 4 Series Convertible: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-4-convertible-2d-black-2023-JV.png
+- VW Caddy Maxi: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-caddy-maxi-silver-2021.png
+- BMW X3 M50: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x3-m50-suv-black-2025.png
+- Mercedes-Benz CLE: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-cle-2d-white-open-2024.png
+- VW Touareg: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-touareg-suv-black-2024.png
+- Porsche Macan 4 Electric: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/porsche-macan-suv-white-2025.png
+- Porsche Taycan: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/porsche-taycan-coupe-2d-silver-2022-JV.png
+- Nissan Primastar: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/nissan-primastar-van-white-2022.png
+- BMW X5 xDrive: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x5-m60-suv-grey-2025.png
+- BMW X7: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x7-m60-suv-grey-2025.png
+- Opel Zafira Life: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/opel-zafira-life-mpv-grey-2024.png
+- BMW X5 M60: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x5-m60-suv-grey-2025.png
+- BMW 7 Series Model xDrive: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-7-sedan-4d-black-2023-JV.png
+- BMW M850 Coupe: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-8-gran-coupe-grey-2022.png
+- BMW X4M: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x4-m40i-5d-schwarz-2019.png
+- Mercedes-Benz Vito Tourer: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-vito-van-black-2020.png
+- Mercedes-Benz V-Class Long: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-v-class-extralong-van-black-2024.png
+- Porsche Cayenne: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/porsche-cayenne-s-hybrid-suv-4d-black-2024.png
+- Mercedes-Benz S-Class Long: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-s-long-sedan-4d-silver-2021-JV.png
+- BMW X7 M60: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x7-m60-suv-grey-2025.png
+- Mercedes-AMG GT 63: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-gt-s-coupe-2d-grey-2024.png
+- Porsche 911 Carrera: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/porsche-911-carrera-4s-coupe-2d-silver-2019-JV.png
+- Offers studio background: https://img.sixt.com/1600/6f09b0e8-6820-4ac0-bedd-5797e9814c18.jpg
