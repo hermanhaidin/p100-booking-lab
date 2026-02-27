@@ -84,4 +84,3 @@
 
 - **Links**: `Help`, `Rental information`, `SIXT for business`, `SIXT partners`, `SIXT Magazine`, `Privacy`, `Do not share or sell my personal information`, `Terms & conditions`, `Customers with disabilities`, `Cookie-Settings`
 - **Copyright**: `© Sixt 2026`
-
