@@ -47,7 +47,22 @@ This repo separates reference material from experiments.
 
 - `sources/` - original crawled websites (read-only)
 - `prototype/` - working booking flow prototype
+  - `prototype/base.html` — shared HTML boilerplate, starting point for new pages
 - `experiments/` - redesign explorations
+
+
+## Icons
+
+Material Symbols loaded via CDN — no install needed.
+
+### How to use icons
+
+1. Browse [fonts.google.com/icons](https://fonts.google.com/icons) and find an icon name (e.g. `arrow_forward`)
+2. Tell Cursor: "Add an `arrow_forward` icon next to the CTA"
+
+### Custom icons
+
+Custom SVGs (flags, vehicles) go in `prototype/assets/icons/`. Raw Figma exports are fine — don't optimize for prototyping.
 
 
 ## Rules

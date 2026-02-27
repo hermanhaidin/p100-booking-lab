@@ -25,6 +25,13 @@ Focus on fast iteration and visual exploration. Optimize for designer readabilit
 - Databases
 - Authentication systems
 
+## Icons
+
+- Material Symbols is loaded via Google Fonts CDN in `prototype/base.html`
+- When creating new HTML pages, always start from or copy `prototype/base.html`
+- Custom SVGs live in `prototype/assets/icons/`, use `{category}-{name}.svg` naming
+
+
 ## Project structure
 
 - Never modify files inside `sources/` - original crawled websites
