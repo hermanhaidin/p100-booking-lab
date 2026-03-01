@@ -20,7 +20,7 @@
 - **Notice text**: `Drivers must have held their driver's license for at least 1 year(s) for this vehicle`
 
 
-## Protection packages
+## Protection packages (radio buttons, none selected by default)
 
 - **Package 1**
     - Title: `No extra protection`

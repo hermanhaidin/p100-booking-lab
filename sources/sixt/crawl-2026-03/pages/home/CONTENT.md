@@ -1,12 +1,12 @@
 # Homepage content
 
-
 ## Header
 
 - **Help center**: `Help`
 - **Bookings**: `Manage bookings`
 - **Language / currency**: `EN | $`
 - **Account**: `Log in | Register`
+
 
 ## Search context
 
@@ -27,6 +27,7 @@
     - Label: `Return date`
     - Input: `Mar 20` `12:00 PM`
 - **Primary CTA**: `Show cars`
+
 
 ## Hero
 

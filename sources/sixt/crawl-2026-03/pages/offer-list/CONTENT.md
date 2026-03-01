@@ -1,6 +1,5 @@
 # Offer list content
 
-
 ## Search context (header)
 
 - **Location**: `Munich Airport`
