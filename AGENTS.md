@@ -16,14 +16,15 @@ Focus on fast iteration and visual exploration. Optimize for designer readabilit
 ## Tech stack
 
 **Prefer:**
-- HTML + CSS
-- Tailwind utilities
+- HTML + CSS with design tokens from `prototype/styles/tokens.css`
+- Reusable utility classes (typography, components) over inline styles
 - Lightweight JavaScript where needed
 
-**Avoid:**
-- Backend services
-- Databases
-- Authentication systems
+**Never introduce:**
+- Tailwind, PostCSS, or CSS build tools
+- React, Vue, or any JS framework
+- Component libraries (shadcn, Radix, etc.)
+- Backend services, databases, or authentication
 
 ## Icons
 
@@ -44,3 +45,5 @@ Focus on fast iteration and visual exploration. Optimize for designer readabilit
 
 - Experiments should not modify shared prototype files
 - If experimentation requires component changes, copy components locally into the experiment folder
+- To override tokens, add an override CSS file loaded after `tokens.css` — do not copy `tokens.css`
+- Experiments must be loadable at their own URL via the dev server
