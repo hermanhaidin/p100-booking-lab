@@ -1,0 +1,416 @@
+/* Typography utility classes — named after P100 text styles. */
+/* These are responsive: font sizes update via tokens.css media queries. */
+
+/* --- Display --- */
+
+.text-display-large-heavy {
+  font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-display);
+  font-weight: 900;
+  line-height: var(--typography-line-height-large-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+}
+
+.text-display-large-heavyCaps {
+  font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-display);
+  font-weight: 900;
+  line-height: var(--typography-line-height-large-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+  text-transform: var(--text-style-display-large-heavy-caps-text-transform);
+}
+
+.text-display-large-regular {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-display);
+  font-weight: 400;
+  line-height: var(--typography-line-height-large-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+}
+
+.text-display-large-regularCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-display);
+  font-weight: 400;
+  line-height: var(--typography-line-height-large-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+  text-transform: var(--text-style-display-large-regular-caps-text-transform);
+}
+
+.text-display-medium-heavy {
+  font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-display);
+  font-weight: 900;
+  line-height: var(--typography-line-height-medium-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+}
+
+.text-display-medium-heavyCaps {
+  font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-display);
+  font-weight: 900;
+  line-height: var(--typography-line-height-medium-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+  text-transform: var(--text-style-display-medium-heavy-caps-text-transform);
+}
+
+.text-display-medium-regular {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-display);
+  font-weight: 400;
+  line-height: var(--typography-line-height-medium-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+}
+
+.text-display-medium-regularCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-display);
+  font-weight: 400;
+  line-height: var(--typography-line-height-medium-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+  text-transform: var(--text-style-display-medium-regular-caps-text-transform);
+}
+
+.text-display-small-heavy {
+  font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-display);
+  font-weight: 900;
+  line-height: var(--typography-line-height-small-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+}
+
+.text-display-small-heavyCaps {
+  font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-display);
+  font-weight: 900;
+  line-height: var(--typography-line-height-small-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+  text-transform: var(--text-style-display-small-heavy-caps-text-transform);
+}
+
+.text-display-small-regular {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-display);
+  font-weight: 400;
+  line-height: var(--typography-line-height-small-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+}
+
+.text-display-small-regularCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-display);
+  font-weight: 400;
+  line-height: var(--typography-line-height-small-display);
+  letter-spacing: var(--typography-letter-spacing-display);
+  text-transform: var(--text-style-display-small-regular-caps-text-transform);
+}
+
+/* --- Title --- */
+
+.text-title-large-heavy {
+  font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-title);
+  font-weight: 900;
+  line-height: var(--typography-line-height-large-title);
+  letter-spacing: var(--typography-letter-spacing-large-title);
+}
+
+.text-title-large-heavyCaps {
+  font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-title);
+  font-weight: 900;
+  line-height: var(--typography-line-height-large-title);
+  letter-spacing: var(--typography-letter-spacing-large-title);
+  text-transform: var(--text-style-title-large-heavy-caps-text-transform);
+}
+
+.text-title-large-regular {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-title);
+  font-weight: 400;
+  line-height: var(--typography-line-height-large-title);
+  letter-spacing: var(--typography-letter-spacing-large-title);
+}
+
+.text-title-large-regularCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-title);
+  font-weight: 400;
+  line-height: var(--typography-line-height-large-title);
+  letter-spacing: var(--typography-letter-spacing-large-title);
+  text-transform: var(--text-style-title-large-regular-caps-text-transform);
+}
+
+.text-title-medium-heavy {
+  font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-title);
+  font-weight: 900;
+  line-height: var(--typography-line-height-medium-title);
+  letter-spacing: var(--typography-letter-spacing-large-title);
+}
+
+.text-title-medium-heavyCaps {
+  font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-title);
+  font-weight: 900;
+  line-height: var(--typography-line-height-medium-title);
+  letter-spacing: var(--typography-letter-spacing-large-title);
+  text-transform: var(--text-style-title-medium-heavy-caps-text-transform);
+}
+
+.text-title-medium-regular {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-title);
+  font-weight: 400;
+  line-height: var(--typography-line-height-medium-title);
+  letter-spacing: var(--typography-letter-spacing-large-title);
+}
+
+.text-title-medium-regularCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-title);
+  font-weight: 400;
+  line-height: var(--typography-line-height-medium-title);
+  letter-spacing: var(--typography-letter-spacing-large-title);
+  text-transform: var(--text-style-title-medium-regular-caps-text-transform);
+}
+
+.text-title-small-heavy {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-title);
+  font-weight: 700;
+  line-height: var(--typography-line-height-small-title);
+  letter-spacing: var(--typography-letter-spacing-small-title);
+}
+
+.text-title-small-heavyCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-title);
+  font-weight: 700;
+  line-height: var(--typography-line-height-small-title);
+  letter-spacing: var(--typography-letter-spacing-small-title);
+  text-transform: var(--text-style-title-small-heavy-caps-text-transform);
+}
+
+.text-title-small-regular {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-title);
+  font-weight: 400;
+  line-height: var(--typography-line-height-small-title);
+  letter-spacing: var(--typography-letter-spacing-small-title);
+}
+
+.text-title-small-regularCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-title);
+  font-weight: 400;
+  line-height: var(--typography-line-height-small-title);
+  letter-spacing: var(--typography-letter-spacing-small-title);
+  text-transform: var(--text-style-title-small-regular-caps-text-transform);
+}
+
+/* --- Copy --- */
+
+/* xlarge */
+.text-copy-xlarge-heavy {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-x-large-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-x-large-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-xlarge-heavyCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-x-large-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-x-large-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+  text-transform: var(--text-style-copy-x-large-heavy-caps-text-transform);
+}
+
+.text-copy-xlarge-heavyTight {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-x-large-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-x-large-tight-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-xlarge-regular {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-x-large-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-x-large-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-xlarge-regularCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-x-large-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-x-large-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+  text-transform: var(--text-style-copy-x-large-regular-caps-text-transform);
+}
+
+.text-copy-xlarge-regularTight {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-x-large-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-x-large-tight-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+/* large */
+.text-copy-large-heavy {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-large-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-large-heavyCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-large-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+  text-transform: var(--text-style-copy-large-heavy-caps-text-transform);
+}
+
+.text-copy-large-heavyTight {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-large-tight-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-large-regular {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-large-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-large-regularCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-large-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+  text-transform: var(--text-style-copy-large-regular-caps-text-transform);
+}
+
+.text-copy-large-regularTight {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-large-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-large-tight-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+/* medium */
+.text-copy-medium-heavy {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-medium-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-medium-heavyCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-medium-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+  text-transform: var(--text-style-copy-medium-heavy-caps-text-transform);
+}
+
+.text-copy-medium-heavyTight {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-medium-tight-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-medium-regular {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-medium-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-medium-regularCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-medium-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+  text-transform: var(--text-style-copy-medium-regular-caps-text-transform);
+}
+
+.text-copy-medium-regularTight {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-medium-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-medium-tight-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+/* small */
+.text-copy-small-heavy {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-small-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-small-heavyCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-small-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+  text-transform: var(--text-style-copy-small-heavy-caps-text-transform);
+}
+
+.text-copy-small-heavyTight {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-copy);
+  font-weight: 700;
+  line-height: var(--typography-line-height-small-tight-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-small-regular {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-small-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
+
+.text-copy-small-regularCaps {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-small-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+  text-transform: var(--text-style-copy-small-regular-caps-text-transform);
+}
+
+.text-copy-small-regularTight {
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-size: var(--typography-font-size-small-copy);
+  font-weight: 400;
+  line-height: var(--typography-line-height-small-tight-copy);
+  letter-spacing: var(--typography-letter-spacing-copy);
+}
