@@ -302,10 +302,10 @@ main {
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-display);
   font-weight: 900;
-  line-height: var(--typography-line-height-large-display);
+  line-height: 1;
   margin: 0;
   text-align: center;
-  text-transform: var(--text-style-display-large-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .hero-subline {
@@ -353,7 +353,7 @@ main {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-title);
   font-weight: 700;
-  line-height: var(--typography-line-height-small-title);
+  line-height: 1.2;
   margin: 0;
 }
 
@@ -404,12 +404,12 @@ main {
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-title);
   font-weight: 900;
-  line-height: var(--typography-line-height-medium-title);
+  line-height: 1;
   margin: 0;
   margin-left: 0;
   margin-right: 0;
   max-width: none;
-  text-transform: var(--text-style-title-medium-heavy-caps-text-transform);
+  text-transform: uppercase;
   width: 100%;
 }
 
@@ -417,11 +417,11 @@ main {
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-title);
   font-weight: 900;
-  line-height: var(--typography-line-height-large-title);
+  line-height: 1;
   margin-left: 0;
   margin-right: 0;
   max-width: none;
-  text-transform: var(--text-style-title-large-heavy-caps-text-transform);
+  text-transform: uppercase;
   width: 100%;
 }
 
@@ -430,7 +430,7 @@ main {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-large-copy);
+  line-height: 1.5;
   margin: 0;
   max-width: none;
   width: 100%;
@@ -447,7 +447,7 @@ main {
   font-weight: 700;
   height: 36px;
   justify-content: center;
-  line-height: var(--typography-line-height-medium-tight-copy);
+  line-height: 1.2;
   margin-top: var(--spacing-3xs);
   min-width: 96px;
   padding: 0 var(--spacing-xs);
@@ -500,10 +500,10 @@ main {
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-display);
   font-weight: 900;
-  line-height: var(--typography-line-height-medium-display);
+  line-height: 1;
   margin: 0 0 var(--spacing-md);
   text-align: center;
-  text-transform: var(--text-style-display-medium-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .offers-carousel {
@@ -583,15 +583,15 @@ main {
   color: var(--color-content-primary);
   font-size: var(--typography-font-size-small-title);
   font-weight: 700;
-  line-height: var(--typography-line-height-small-title);
+  line-height: 1.2;
   margin: 0;
-  text-transform: var(--text-style-title-small-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .offer-carousel-title span {
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-medium-copy);
+  line-height: 1.5;
   text-transform: none;
 }
 
@@ -599,7 +599,7 @@ main {
   color: var(--color-content-primary);
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-medium-copy);
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -614,13 +614,13 @@ main {
 .offer-carousel-price-suffix {
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-medium-tight-copy);
+  line-height: 1.2;
 }
 
 .offer-carousel-price-integer {
   font-size: var(--typography-font-size-small-title);
   font-weight: 700;
-  line-height: var(--typography-line-height-small-title);
+  line-height: 1.2;
   margin-inline: 1px;
 }
 
@@ -733,7 +733,7 @@ main {
   color: var(--color-content-secondary);
   font-size: var(--typography-font-size-small-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-small-copy);
+  line-height: 1.5;
   margin: 0;
   text-align: center;
 }
@@ -754,10 +754,10 @@ main {
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-display);
   font-weight: 900;
-  line-height: var(--typography-line-height-medium-display);
+  line-height: 1;
   margin: 0 0 var(--spacing-md);
   text-align: center;
-  text-transform: var(--text-style-display-medium-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .more-sixt-carousel {
@@ -805,17 +805,17 @@ main {
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-title);
   font-weight: 900;
-  line-height: var(--typography-line-height-medium-title);
+  line-height: 1;
   margin: 0;
   width: 100%;
-  text-transform: var(--text-style-title-medium-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .more-sixt-card-subtitle {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-large-copy);
+  line-height: 1.5;
   margin: 0;
   width: 100%;
 }
@@ -991,7 +991,7 @@ main {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-display);
   font-weight: 400;
-  line-height: var(--typography-line-height-small-display);
+  line-height: 1;
   margin: 0;
   max-width: 100%;
   width: 100%;
@@ -1003,7 +1003,7 @@ main {
   font-size: var(--typography-font-size-medium-copy);
   font-style: normal;
   font-weight: 700;
-  line-height: var(--typography-line-height-medium-copy);
+  line-height: 1.5;
   width: 100%;
 }
 
@@ -1042,9 +1042,9 @@ main {
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-display);
   font-weight: 900;
-  line-height: var(--typography-line-height-small-display);
+  line-height: 1;
   margin: 0;
-  text-transform: var(--text-style-display-small-heavy-caps-text-transform);
+  text-transform: uppercase;
   width: fit-content;
 }
 
@@ -1052,7 +1052,7 @@ main {
   color: var(--color-content-primary);
   font-size: var(--typography-font-size-large-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-large-copy);
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -1088,7 +1088,7 @@ main {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-medium-tight-copy);
+  line-height: 1.2;
   overflow: hidden;
   padding-bottom: var(--spacing-4xs);
   text-decoration: none;
@@ -1173,7 +1173,7 @@ main {
   color: var(--color-content-secondary);
   font-size: var(--typography-font-size-large-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-large-tight-copy);
+  line-height: 1.2;
   margin: 0 0 var(--spacing-xs);
 }
 
@@ -1191,7 +1191,7 @@ main {
   color: var(--color-content-primary);
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-medium-tight-copy);
+  line-height: 1.2;
   text-decoration: none;
   text-underline-offset: var(--spacing-4xs);
 }
@@ -1236,7 +1236,7 @@ main {
   color: var(--color-content-secondary);
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-medium-tight-copy);
+  line-height: 1.2;
 }
 
 @media (min-width: 650px) and (max-width: 899px) {
@@ -1459,12 +1459,12 @@ main {
 
   .offers-carousel-section h2 {
     font-size: var(--typography-font-size-small-display);
-    line-height: var(--typography-line-height-small-display);
+    line-height: 1;
   }
 
   .more-sixt-section h2 {
     font-size: var(--typography-font-size-small-display);
-    line-height: var(--typography-line-height-small-display);
+    line-height: 1;
   }
 
   .offer-carousel-card {
@@ -1490,13 +1490,13 @@ main {
 
   .offer-carousel-title {
     font-size: var(--typography-font-size-medium-title);
-    line-height: var(--typography-line-height-medium-title);
+    line-height: 1;
   }
 
   .offer-carousel-price-prefix,
   .offer-carousel-price-suffix {
     font-size: var(--typography-font-size-medium-copy);
-    line-height: var(--typography-line-height-medium-tight-copy);
+    line-height: 1.2;
   }
 
   .offers-carousel-controls {
@@ -1545,7 +1545,7 @@ main {
 
   .seo-links-intro h2 {
     font-size: var(--typography-font-size-small-display);
-    line-height: var(--typography-line-height-small-display);
+    line-height: 1;
   }
 }
 
@@ -1638,7 +1638,7 @@ main {
 
   .testimonial-quote p {
     font-size: var(--typography-font-size-small-display);
-    line-height: var(--typography-line-height-small-display);
+    line-height: 1;
     max-width: 100%;
   }
 

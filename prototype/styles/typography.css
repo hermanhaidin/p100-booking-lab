@@ -7,7 +7,7 @@
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-display);
   font-weight: 900;
-  line-height: var(--typography-line-height-large-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
 }
 
@@ -15,16 +15,16 @@
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-display);
   font-weight: 900;
-  line-height: var(--typography-line-height-large-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
-  text-transform: var(--text-style-display-large-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-display-large-regular {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-display);
   font-weight: 400;
-  line-height: var(--typography-line-height-large-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
 }
 
@@ -32,16 +32,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-display);
   font-weight: 400;
-  line-height: var(--typography-line-height-large-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
-  text-transform: var(--text-style-display-large-regular-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-display-medium-heavy {
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-display);
   font-weight: 900;
-  line-height: var(--typography-line-height-medium-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
 }
 
@@ -49,16 +49,16 @@
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-display);
   font-weight: 900;
-  line-height: var(--typography-line-height-medium-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
-  text-transform: var(--text-style-display-medium-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-display-medium-regular {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-display);
   font-weight: 400;
-  line-height: var(--typography-line-height-medium-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
 }
 
@@ -66,16 +66,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-display);
   font-weight: 400;
-  line-height: var(--typography-line-height-medium-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
-  text-transform: var(--text-style-display-medium-regular-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-display-small-heavy {
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-display);
   font-weight: 900;
-  line-height: var(--typography-line-height-small-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
 }
 
@@ -83,16 +83,16 @@
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-display);
   font-weight: 900;
-  line-height: var(--typography-line-height-small-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
-  text-transform: var(--text-style-display-small-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-display-small-regular {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-display);
   font-weight: 400;
-  line-height: var(--typography-line-height-small-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
 }
 
@@ -100,9 +100,9 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-display);
   font-weight: 400;
-  line-height: var(--typography-line-height-small-display);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-display);
-  text-transform: var(--text-style-display-small-regular-caps-text-transform);
+  text-transform: uppercase;
 }
 
 /* --- Title --- */
@@ -111,7 +111,7 @@
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-title);
   font-weight: 900;
-  line-height: var(--typography-line-height-large-title);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-large-title);
 }
 
@@ -119,16 +119,16 @@
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-title);
   font-weight: 900;
-  line-height: var(--typography-line-height-large-title);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-large-title);
-  text-transform: var(--text-style-title-large-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-title-large-regular {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-title);
   font-weight: 400;
-  line-height: var(--typography-line-height-large-title);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-large-title);
 }
 
@@ -136,16 +136,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-title);
   font-weight: 400;
-  line-height: var(--typography-line-height-large-title);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-large-title);
-  text-transform: var(--text-style-title-large-regular-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-title-medium-heavy {
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-title);
   font-weight: 900;
-  line-height: var(--typography-line-height-medium-title);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-large-title);
 }
 
@@ -153,16 +153,16 @@
   font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-title);
   font-weight: 900;
-  line-height: var(--typography-line-height-medium-title);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-large-title);
-  text-transform: var(--text-style-title-medium-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-title-medium-regular {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-title);
   font-weight: 400;
-  line-height: var(--typography-line-height-medium-title);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-large-title);
 }
 
@@ -170,16 +170,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-title);
   font-weight: 400;
-  line-height: var(--typography-line-height-medium-title);
+  line-height: 1;
   letter-spacing: var(--typography-letter-spacing-large-title);
-  text-transform: var(--text-style-title-medium-regular-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-title-small-heavy {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-title);
   font-weight: 700;
-  line-height: var(--typography-line-height-small-title);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-small-title);
 }
 
@@ -187,16 +187,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-title);
   font-weight: 700;
-  line-height: var(--typography-line-height-small-title);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-small-title);
-  text-transform: var(--text-style-title-small-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-title-small-regular {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-title);
   font-weight: 400;
-  line-height: var(--typography-line-height-small-title);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-small-title);
 }
 
@@ -204,9 +204,9 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-title);
   font-weight: 400;
-  line-height: var(--typography-line-height-small-title);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-small-title);
-  text-transform: var(--text-style-title-small-regular-caps-text-transform);
+  text-transform: uppercase;
 }
 
 /* --- Copy --- */
@@ -216,7 +216,7 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-x-large-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-x-large-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -224,16 +224,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-x-large-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-x-large-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
-  text-transform: var(--text-style-copy-x-large-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-copy-xlarge-heavyTight {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-x-large-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-x-large-tight-copy);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -241,7 +241,7 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-x-large-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-x-large-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -249,16 +249,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-x-large-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-x-large-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
-  text-transform: var(--text-style-copy-x-large-regular-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-copy-xlarge-regularTight {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-x-large-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-x-large-tight-copy);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -267,7 +267,7 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-large-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -275,16 +275,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-large-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
-  text-transform: var(--text-style-copy-large-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-copy-large-heavyTight {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-large-tight-copy);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -292,7 +292,7 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-large-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -300,16 +300,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-large-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
-  text-transform: var(--text-style-copy-large-regular-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-copy-large-regularTight {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-large-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-large-tight-copy);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -318,7 +318,7 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-medium-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -326,16 +326,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-medium-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
-  text-transform: var(--text-style-copy-medium-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-copy-medium-heavyTight {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-medium-tight-copy);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -343,7 +343,7 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-medium-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -351,16 +351,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-medium-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
-  text-transform: var(--text-style-copy-medium-regular-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-copy-medium-regularTight {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-medium-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-medium-tight-copy);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -369,7 +369,7 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-small-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -377,16 +377,16 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-small-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
-  text-transform: var(--text-style-copy-small-heavy-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-copy-small-heavyTight {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-copy);
   font-weight: 700;
-  line-height: var(--typography-line-height-small-tight-copy);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -394,7 +394,7 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-small-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
 
@@ -402,15 +402,15 @@
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-small-copy);
+  line-height: 1.5;
   letter-spacing: var(--typography-letter-spacing-copy);
-  text-transform: var(--text-style-copy-small-regular-caps-text-transform);
+  text-transform: uppercase;
 }
 
 .text-copy-small-regularTight {
   font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   font-size: var(--typography-font-size-small-copy);
   font-weight: 400;
-  line-height: var(--typography-line-height-small-tight-copy);
+  line-height: 1.2;
   letter-spacing: var(--typography-letter-spacing-copy);
 }
