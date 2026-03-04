@@ -120,7 +120,7 @@
   --elevation-large: 0px 12px 40px 0px #0000001A, 0px 8px 32px 0px #00000014;
 }
 
-[data-p100-theme="primeDark"] {
+[data-p100-theme="prime-dark"] {
   --color-content-primary: #FFFFFF;
   --color-content-secondary: #8D9299;
   --color-content-tertiary: #313234;
@@ -197,7 +197,7 @@
   --radial-gradient-diamond-top-trailing: radial-gradient(100% 100% at 100% 0%, rgba(85, 158, 200, 0.3) 10%, #00000003 100%);
 }
 
-[data-p100-theme="optionLight"] {
+[data-p100-theme="option-light"] {
   --color-content-primary: #FFFFFF;
   --color-content-secondary: #8D9299;
   --color-content-tertiary: #313234;
@@ -274,7 +274,7 @@
   --radial-gradient-diamond-top-trailing: radial-gradient(100% 100% at 100% 0%, rgba(85, 158, 200, 0.3) 10%, #00000003 100%);
 }
 
-[data-p100-theme="optionDark"] {
+[data-p100-theme="option-dark"] {
   --color-content-primary: #FFFFFF;
   --color-content-secondary: #8D9299;
   --color-content-tertiary: #363739;
@@ -351,7 +351,7 @@
   --radial-gradient-diamond-top-trailing: radial-gradient(100% 100% at 100% 0%, rgba(85, 158, 200, 0.3) 10%, #00000003 100%);
 }
 
-[data-p100-theme="accentLight"] {
+[data-p100-theme="accent-light"] {
   --color-content-primary: #1A1A1A;
   --color-content-secondary: #1A1A1A;
   --color-content-tertiary: #1A1A1A;
@@ -428,7 +428,7 @@
   --radial-gradient-diamond-top-trailing: radial-gradient(100% 100% at 100% 0%, rgba(85, 158, 200, 0.3) 10%, #FF500003 100%);
 }
 
-[data-p100-theme="accentDark"] {
+[data-p100-theme="accent-dark"] {
   --color-content-primary: #1A1A1A;
   --color-content-secondary: #1A1A1A;
   --color-content-tertiary: #1A1A1A;

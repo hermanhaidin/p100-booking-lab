@@ -37,7 +37,7 @@ This is a deliberate choice — our token names map directly to the P100 design 
 
 ```html
 <!-- Our approach — reads like the design system -->
-<h2 class="text-display-medium-heavyCaps">More SIXT</h2>
+<h2 class="text-display-medium-heavy-caps">More SIXT</h2>
 
 <!-- Tailwind equivalent — fragmented, no design system link -->
 <h2 class="font-display text-[48px] font-black leading-none uppercase tracking-wider">More SIXT</h2>

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="styles/fonts.css">
   <link rel="stylesheet" href="styles/layout.css">
   <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/typography.css">
   <style>
     body {
       align-items: center;
@@ -27,16 +28,11 @@
     }
 
     h1 {
-      font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
-      font-size: var(--typography-font-size-medium-title);
       margin: 0 0 var(--spacing-xs);
-      text-transform: uppercase;
     }
 
     p {
       color: var(--color-content-secondary);
-      font-size: var(--typography-font-size-large-copy);
-      line-height: 1.4;
       margin: 0 0 var(--spacing-md);
     }
 
@@ -51,8 +47,6 @@
       border-radius: var(--radius-md);
       color: var(--color-on-content-extended-on-brand);
       display: inline-block;
-      font-size: var(--typography-font-size-medium-copy);
-      font-weight: 700;
       min-width: 128px;
       padding: var(--spacing-2xs) var(--spacing-xs);
       text-align: center;
@@ -62,11 +56,11 @@
 </head>
 <body>
   <main>
-    <h1>Booking Prototype</h1>
-    <p>Use this index as local entrypoint for page-by-page funnel prototyping.</p>
+    <h1 class="text-title-medium-heavy-caps">Booking Prototype</h1>
+    <p class="text-copy-large-regular">Use this index as local entrypoint for page-by-page funnel prototyping.</p>
     <div class="links">
-      <a href="./pages/home.html">Open Home</a>
-      <a href="./pages/results.html">Open Results</a>
+      <a href="./pages/home.html" class="text-copy-medium-heavy-tight">Open Home</a>
+      <a href="./pages/results.html" class="text-copy-medium-heavy-tight">Open Results</a>
     </div>
   </main>
 </body>

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../styles/fonts.css">
   <link rel="stylesheet" href="../styles/layout.css">
   <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/typography.css">
   <style>
     body {
       align-items: center;
@@ -27,15 +28,10 @@
     }
 
     h1 {
-      font-family: "Helvetica Now Display", Helvetica, Arial, sans-serif;
-      font-size: var(--typography-font-size-medium-title);
       margin: 0 0 var(--spacing-sm);
-      text-transform: uppercase;
     }
 
     p {
-      font-size: var(--typography-font-size-large-copy);
-      line-height: 1.4;
       margin: 0 0 var(--spacing-md);
     }
 
@@ -44,8 +40,6 @@
       border-radius: var(--radius-md);
       color: var(--color-on-content-extended-on-brand);
       display: inline-block;
-      font-size: var(--typography-font-size-medium-copy);
-      font-weight: 700;
       min-width: 128px;
       padding: var(--spacing-2xs) var(--spacing-xs);
       text-align: center;
@@ -55,9 +49,9 @@
 </head>
 <body>
   <main>
-    <h1>Results Placeholder</h1>
-    <p>This page is intentionally lightweight for MVP routing validation from `home`.</p>
-    <a href="./home.html">Back to Home</a>
+    <h1 class="text-title-medium-heavy-caps">Results Placeholder</h1>
+    <p class="text-copy-large-regular">This page is intentionally lightweight for MVP routing validation from `home`.</p>
+    <a href="./home.html" class="text-copy-medium-heavy-tight">Back to Home</a>
   </main>
 </body>
 </html>
