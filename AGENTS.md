@@ -7,10 +7,10 @@ Focus on fast iteration and visual exploration. Optimize for designer readabilit
 
 ## Goals
 
-- Prototype booking flow using real websites as a baseline
-- Prioritize visual interaction and layout over engineering complexity
-- This is NOT production software
-- Avoid introducing backend logic or complex architecture
+1. Prototype booking flow using real websites as a baseline
+2. Prioritize visual interaction and layout over engineering complexity
+3. This is not a production code
+4. Avoid introducing backend logic or complex architecture
 
 
 ## Tech stack
@@ -33,17 +33,36 @@ Focus on fast iteration and visual exploration. Optimize for designer readabilit
 - Custom SVGs live in `prototype/assets/icons/`, use `{category}-{name}.svg` naming
 
 
+## Operating model
+
+This repository is primarily used in **solo zip mode**:
+- Designers receive a zip, unpack locally, and edit directly in Cursor
+- Git collaboration workflows (branching, PRs, branch protection) are optional and not required for day-to-day design work
+- If files are broken, reset by re-unzipping a fresh copy
+
+When instructions conflict, follow this priority:
+1. User request in chat
+2. This `AGENTS.md`
+3. `README.md` examples
+
+
 ## Project structure
 
-- Never modify files inside `sources/` - original crawled websites
-- Do not modify `prototype/` unless explicitly improving the shared baseline - master version of the booking funnel
-- Most changes should happen inside `experiments/` - independent redesign explorations
-- If unsure, work inside `experiments/`
+- Never modify files inside `sources/` (reference crawl, read-only).
+- `prototype/` is the main working funnel and can be edited directly.
+- `experiments/` is optional; use it for isolated what-if explorations or parallel concepts.
+- Do not force work into `experiments/` unless the user asks for isolation.
+
+### Where to edit what
+
+- `prototype/styles/tokens.css` - design tokens
+- `prototype/styles/typography.css` - text utility classes (`text-*`)
+- `prototype/styles/components/*.css` - reusable components
+- `prototype/styles/pages/*.css` - page-specific layout and composition
 
 
 ## Experiments
 
-- Experiments should not modify shared prototype files
-- If experimentation requires component changes, copy components locally into the experiment folder
-- To override tokens, add an override CSS file loaded after `tokens.css` — do not copy `tokens.css`
-- Experiments must be loadable at their own URL via the dev server
+- Experiments should be loadable by their own URL via the dev server.
+- Experiments may copy/override only the pieces they need (components, page CSS, JS modules).
+- Prefer importing shared styles from `prototype/styles/` and layering overrides.

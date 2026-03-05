@@ -38,9 +38,6 @@ coverage/
 # Prototype runtime artifacts
 npm-debug.log*
 
-# Firecrawl temporary workspace
-.firecrawl/
-
 # Secrets / local credentials
 *.local
 
