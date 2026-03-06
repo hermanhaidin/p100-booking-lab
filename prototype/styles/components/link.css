@@ -1,0 +1,88 @@
+/* Shared link component API for dense, text-forward anchors */
+
+.link {
+  --link-fg: var(--color-content-primary);
+  color: var(--link-fg);
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  max-width: 100%;
+  min-width: 0;
+  outline: none;
+  text-align: left;
+  text-decoration: none;
+  text-underline-offset: var(--spacing-4xs);
+  transition: opacity 120ms ease, color 120ms ease, text-decoration-color 120ms ease;
+  width: fit-content;
+}
+
+.link:visited {
+  color: var(--link-fg);
+}
+
+.link--truncate {
+  display: block;
+  overflow-x: hidden;
+  overflow-y: visible;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.link--primary {
+  --link-fg: var(--color-content-primary);
+}
+
+.link--secondary {
+  --link-fg: var(--color-content-secondary);
+}
+
+.link--brand {
+  --link-fg: var(--color-content-extended-brand);
+}
+
+.link--positive {
+  --link-fg: var(--color-content-extended-strong-success);
+}
+
+.link--cautious {
+  --link-fg: var(--color-content-extended-strong-warning);
+}
+
+.link--destructive {
+  --link-fg: var(--color-content-extended-strong-error);
+}
+
+.link--info {
+  --link-fg: var(--color-content-extended-strong-info);
+}
+
+.link--accent {
+  --link-fg: var(--color-content-extended-strong-accent);
+}
+
+.link:not(.link--underlined) {
+  text-decoration: none;
+}
+
+.link:not(.link--underlined):is(:hover, :active) {
+  text-decoration: underline;
+}
+
+.link--underlined {
+  text-decoration: underline;
+}
+
+.link--underlined:is(:hover, :active) {
+  text-decoration: none;
+}
+
+.link:active {
+  opacity: 0.6;
+}
+
+.link:focus-visible {
+  border-radius: var(--radius-sm);
+  outline: var(--stroke-lg) solid var(--color-overlay-focus);
+  outline-offset: var(--stroke-md);
+}

@@ -1,0 +1,165 @@
+/* Shared button component API */
+
+.button {
+  --button-bg: var(--color-surface-secondary-container);
+  --button-fg: var(--color-content-primary);
+  --button-on-fill-fg: var(--color-on-content-on-primary);
+  --button-outline-stroke: var(--button-bg);
+  --button-outline-fg: var(--button-bg);
+  --button-outline-hover-fg: var(--button-on-fill-fg);
+  align-items: center;
+  background-color: var(--button-bg);
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 0 0 9999px transparent;
+  color: var(--button-fg);
+  cursor: pointer;
+  display: inline-flex;
+  gap: var(--spacing-3xs);
+  justify-content: center;
+  min-width: 96px;
+  outline: none;
+  padding: 0 var(--spacing-xs);
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow 120ms ease, background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  width: fit-content;
+}
+
+.button--small {
+  border-radius: var(--radius-pill);
+  height: 36px;
+  min-width: 96px;
+}
+
+.button--large {
+  border-radius: var(--radius-md);
+  height: 52px;
+  min-width: 128px;
+}
+
+.button--with-icon {
+  padding-left: var(--spacing-sm);
+  padding-right: var(--spacing-md);
+}
+
+.button__icon,
+.button .material-symbols-outlined {
+  color: currentColor;
+  flex: 0 0 auto;
+}
+
+.button--small .button__icon,
+.button--small .material-symbols-outlined {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.button--large .button__icon,
+.button--large .material-symbols-outlined {
+  font-size: 24px;
+  height: 24px;
+  width: 24px;
+}
+
+.button__label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.button--truncate .button__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.button--brand {
+  --button-bg: var(--color-content-extended-brand);
+  --button-fg: var(--color-on-content-extended-on-brand);
+  --button-on-fill-fg: var(--color-on-content-extended-on-brand);
+  --button-outline-stroke: var(--color-content-extended-brand);
+  --button-outline-fg: var(--color-content-extended-brand);
+  --button-outline-hover-fg: var(--color-on-content-extended-on-brand);
+}
+
+.button--primary {
+  --button-bg: var(--color-content-primary);
+  --button-fg: var(--color-on-content-on-primary);
+  --button-on-fill-fg: var(--color-on-content-on-primary);
+  --button-outline-stroke: var(--color-content-primary);
+  --button-outline-fg: var(--color-content-primary);
+  --button-outline-hover-fg: var(--color-on-content-on-primary);
+}
+
+.button--secondary {
+  --button-bg: var(--color-surface-secondary-container);
+  --button-fg: var(--color-content-primary);
+  --button-on-fill-fg: var(--color-on-content-on-primary);
+  --button-outline-stroke: var(--color-content-tertiary);
+  --button-outline-fg: var(--color-content-primary);
+  --button-outline-hover-fg: var(--color-on-content-on-primary);
+}
+
+.button--destructive {
+  --button-bg: var(--color-content-extended-error);
+  --button-fg: var(--color-on-content-extended-on-error);
+  --button-on-fill-fg: var(--color-on-content-extended-on-error);
+  --button-outline-stroke: var(--color-content-extended-error);
+  --button-outline-fg: var(--color-content-extended-error);
+  --button-outline-hover-fg: var(--color-on-content-extended-on-error);
+}
+
+.button--destructive-alt {
+  --button-bg: var(--color-surface-secondary-container);
+  --button-fg: var(--color-content-extended-error);
+  --button-on-fill-fg: var(--color-on-content-extended-on-error);
+  --button-outline-stroke: var(--color-content-tertiary);
+  --button-outline-fg: var(--color-content-extended-error);
+  --button-outline-hover-fg: var(--color-content-extended-error);
+}
+
+.button:not(.button--outlined):hover {
+  box-shadow: inset 0 0 0 9999px var(--color-overlay-hover);
+}
+
+.button:not(.button--outlined):active {
+  box-shadow: inset 0 0 0 9999px var(--color-overlay-pressed);
+}
+
+.button:not(.button--outlined):disabled {
+  box-shadow: inset 0 0 0 9999px var(--color-overlay-disabled);
+  cursor: not-allowed;
+}
+
+.button--outlined {
+  background-color: transparent;
+  border: var(--stroke-md) solid var(--button-outline-stroke);
+  color: var(--button-outline-fg);
+}
+
+.button--outlined:hover {
+  background-color: var(--button-outline-stroke);
+  color: var(--button-outline-hover-fg);
+}
+
+.button--outlined:active {
+  background-color: var(--button-outline-stroke);
+  box-shadow: inset 0 0 0 9999px var(--color-overlay-pressed);
+  color: var(--button-outline-hover-fg);
+}
+
+.button:focus-visible {
+  outline: var(--stroke-lg) solid var(--color-overlay-focus);
+  outline-offset: var(--stroke-md);
+}
+
+.button:not(.button--outlined):is(:active, :disabled) .button__label,
+.button:not(.button--outlined):is(:active, :disabled) .button__icon,
+.button:not(.button--outlined):is(:active, :disabled) .material-symbols-outlined,
+.button--outlined:active .button__label,
+.button--outlined:active .button__icon,
+.button--outlined:active .material-symbols-outlined {
+  opacity: 0.6;
+}

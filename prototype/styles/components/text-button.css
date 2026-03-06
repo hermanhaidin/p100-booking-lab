@@ -1,0 +1,146 @@
+/* Shared text-button component API */
+
+.text-button {
+  --text-button-fg: var(--color-content-primary);
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--text-button-fg);
+  cursor: pointer;
+  display: inline-flex;
+  gap: 0;
+  height: 36px;
+  justify-content: flex-start;
+  margin: 0;
+  min-width: 0;
+  outline: none;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+  text-underline-offset: var(--spacing-4xs);
+  transition: opacity 120ms ease, color 120ms ease, text-decoration-color 120ms ease;
+  width: fit-content;
+}
+
+.text-button:visited {
+  color: var(--text-button-fg);
+}
+
+/* Text content must be wrapped in .text-button__label.
+   Underline interactions target the label only, never icons. */
+.text-button__label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  white-space: normal;
+}
+
+.text-button--truncate .text-button__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-button--truncate {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-button--with-leading-icon {
+  gap: var(--spacing-3xs);
+}
+
+.text-button--with-trailing-icon {
+  gap: var(--spacing-4xs);
+}
+
+.text-button__icon--leading,
+.text-button__icon--trailing {
+  color: currentColor;
+  flex: 0 0 auto;
+}
+
+.text-button--small .text-button__icon--leading {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.text-button--large .text-button__icon--leading {
+  font-size: 24px;
+  height: 24px;
+  width: 24px;
+}
+
+.text-button__icon--trailing {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.text-button--primary {
+  --text-button-fg: var(--color-content-primary);
+}
+
+.text-button--secondary {
+  --text-button-fg: var(--color-content-secondary);
+}
+
+.text-button--brand {
+  --text-button-fg: var(--color-content-extended-brand);
+}
+
+.text-button--positive {
+  --text-button-fg: var(--color-content-extended-strong-success);
+}
+
+.text-button--cautious {
+  --text-button-fg: var(--color-content-extended-strong-warning);
+}
+
+.text-button--destructive {
+  --text-button-fg: var(--color-content-extended-strong-error);
+}
+
+.text-button--info {
+  --text-button-fg: var(--color-content-extended-strong-info);
+}
+
+.text-button--accent {
+  --text-button-fg: var(--color-content-extended-strong-accent);
+}
+
+.text-button:not(.text-button--underlined) .text-button__label {
+  text-decoration: none;
+}
+
+.text-button:not(.text-button--underlined):is(:hover, :active) .text-button__label {
+  text-decoration: underline;
+}
+
+.text-button--underlined .text-button__label {
+  text-decoration: underline;
+}
+
+.text-button--underlined:is(:hover, :active) .text-button__label {
+  text-decoration: none;
+}
+
+.text-button:active {
+  opacity: 0.6;
+}
+
+.text-button:disabled,
+.text-button[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.text-button:focus-visible {
+  outline: var(--stroke-lg) solid var(--color-overlay-focus);
+  outline-offset: var(--stroke-md);
+  border-radius: var(--radius-sm);
+}
