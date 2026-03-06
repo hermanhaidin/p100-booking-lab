@@ -1,4 +1,8 @@
-/* Shared link component API for dense, text-forward anchors */
+/* Shared link component API for dense, text-forward anchors
+   Variant contract:
+   - Kind names mirror token semantics: primary|secondary|tertiary|brand|info|accent|success|warning|error
+   - on-* variants are foreground colors for filled backgrounds and use --color-on-content-* tokens
+   - Keep kind/on-* foreground mappings aligned with icon-button and text-button */
 
 .link {
   --link-fg: var(--color-content-primary);
@@ -41,15 +45,15 @@
   --link-fg: var(--color-content-extended-brand);
 }
 
-.link--positive {
+.link--success {
   --link-fg: var(--color-content-extended-strong-success);
 }
 
-.link--cautious {
+.link--warning {
   --link-fg: var(--color-content-extended-strong-warning);
 }
 
-.link--destructive {
+.link--error {
   --link-fg: var(--color-content-extended-strong-error);
 }
 
@@ -61,6 +65,44 @@
   --link-fg: var(--color-content-extended-strong-accent);
 }
 
+.link--on-primary {
+  --link-fg: var(--color-on-content-on-primary);
+}
+
+.link--on-secondary {
+  --link-fg: var(--color-on-content-on-secondary);
+}
+
+.link--on-tertiary {
+  --link-fg: var(--color-on-content-on-tertiary);
+}
+
+.link--on-brand {
+  --link-fg: var(--color-on-content-extended-on-brand);
+}
+
+.link--on-info {
+  --link-fg: var(--color-on-content-extended-on-info);
+}
+
+.link--on-accent {
+  --link-fg: var(--color-on-content-extended-on-accent);
+}
+
+.link--on-success {
+  --link-fg: var(--color-on-content-extended-on-success);
+}
+
+.link--on-warning {
+  --link-fg: var(--color-on-content-extended-on-warning);
+}
+
+.link--on-error {
+  --link-fg: var(--color-on-content-extended-on-error);
+}
+
+/* Interaction contract:
+   Underline behavior is controlled by --underlined rules, not color kind variants. */
 .link:not(.link--underlined) {
   text-decoration: none;
 }

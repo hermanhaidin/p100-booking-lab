@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../styles/components/button.css">
   <link rel="stylesheet" href="../styles/components/text-button.css">
   <link rel="stylesheet" href="../styles/components/link.css">
+  <link rel="stylesheet" href="../styles/components/icon-button.css">
   <link rel="stylesheet" href="../styles/pages/home.css">
 </head>
 <body>
@@ -23,7 +24,9 @@
         <div class="layout-shell">
           <div class="utility-bar">
             <div class="brand-group">
-              <span class="material-symbols-outlined header-menu-icon" aria-hidden="true">menu</span>
+              <button type="button" class="icon-button icon-button--large icon-button--on-brand" aria-label="Open menu">
+                <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">menu</span>
+              </button>
               <img class="brand-logo" src="../assets/logos/sixt_rent_the_car_on_dark.svg" alt="SIXT rent the car">
             </div>
             <nav class="utility-links" aria-label="Utility links">
@@ -596,11 +599,11 @@
           <img src="../assets/logos/sixt_rent_the_car_on_dark.svg" alt="SIXT rent the car">
         </a>
         <div class="home-footer-social" aria-label="Social links">
-          <a href="#" class="home-footer-social-icon" aria-label="Instagram">
-            <img src="../assets/icons/logo_instagram.svg" alt="">
+          <a href="#" class="home-footer-social-icon icon-button icon-button--large icon-button--primary" aria-label="Instagram">
+            <img class="icon-button__icon" src="../assets/icons/logo_instagram.svg" alt="">
           </a>
-          <a href="#" class="home-footer-social-icon" aria-label="LinkedIn">
-            <img src="../assets/icons/logo_linkedin.svg" alt="">
+          <a href="#" class="home-footer-social-icon icon-button icon-button--large icon-button--primary" aria-label="LinkedIn">
+            <img class="icon-button__icon" src="../assets/icons/logo_linkedin.svg" alt="">
           </a>
         </div>
       </div>

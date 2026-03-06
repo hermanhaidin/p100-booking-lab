@@ -1,4 +1,8 @@
-/* Shared text-button component API */
+/* Shared text-button component API
+   Variant contract:
+   - Kind names mirror token semantics: primary|secondary|tertiary|brand|info|accent|success|warning|error
+   - on-* variants are foreground colors for filled backgrounds and use --color-on-content-* tokens
+   - Keep kind/on-* foreground mappings aligned with icon-button and link */
 
 .text-button {
   --text-button-fg: var(--color-content-primary);
@@ -93,15 +97,15 @@
   --text-button-fg: var(--color-content-extended-brand);
 }
 
-.text-button--positive {
+.text-button--success {
   --text-button-fg: var(--color-content-extended-strong-success);
 }
 
-.text-button--cautious {
+.text-button--warning {
   --text-button-fg: var(--color-content-extended-strong-warning);
 }
 
-.text-button--destructive {
+.text-button--error {
   --text-button-fg: var(--color-content-extended-strong-error);
 }
 
@@ -113,6 +117,44 @@
   --text-button-fg: var(--color-content-extended-strong-accent);
 }
 
+.text-button--on-primary {
+  --text-button-fg: var(--color-on-content-on-primary);
+}
+
+.text-button--on-secondary {
+  --text-button-fg: var(--color-on-content-on-secondary);
+}
+
+.text-button--on-tertiary {
+  --text-button-fg: var(--color-on-content-on-tertiary);
+}
+
+.text-button--on-brand {
+  --text-button-fg: var(--color-on-content-extended-on-brand);
+}
+
+.text-button--on-info {
+  --text-button-fg: var(--color-on-content-extended-on-info);
+}
+
+.text-button--on-accent {
+  --text-button-fg: var(--color-on-content-extended-on-accent);
+}
+
+.text-button--on-success {
+  --text-button-fg: var(--color-on-content-extended-on-success);
+}
+
+.text-button--on-warning {
+  --text-button-fg: var(--color-on-content-extended-on-warning);
+}
+
+.text-button--on-error {
+  --text-button-fg: var(--color-on-content-extended-on-error);
+}
+
+/* Interaction contract:
+   Underline behavior is controlled by --underlined rules, not color kind variants. */
 .text-button:not(.text-button--underlined) .text-button__label {
   text-decoration: none;
 }

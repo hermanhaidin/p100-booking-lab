@@ -26,11 +26,6 @@
   width: auto;
 }
 
-.header-menu-icon {
-  color: var(--color-on-content-extended-on-brand);
-  font-size: 24px;
-}
-
 .utility-links {
   align-items: center;
   display: flex;
@@ -921,22 +916,11 @@ main {
 .home-footer-social {
   align-items: center;
   display: inline-flex;
-  gap: var(--spacing-xs);
-}
-
-.home-footer-social-icon {
-  align-items: center;
-  color: var(--color-content-primary);
-  display: inline-flex;
-  justify-content: center;
-  text-decoration: none;
+  gap: var(--spacing-2xs);
 }
 
 .home-footer-social-icon img {
-  display: block;
   filter: brightness(0) invert(1);
-  height: 24px;
-  width: 24px;
 }
 
 .home-footer-columns {
