@@ -1,9 +1,13 @@
 /* Shared link component API for dense, text-forward anchors
    Variant contract:
-   - Kind names mirror token semantics: primary|secondary|tertiary|brand|info|accent|success|warning|error
+   - Kind names mirror token semantics:
+     primary|secondary|brand|info|accent|success|warning|error
    - on-* variants are foreground colors for filled backgrounds and use --color-on-content-* tokens
-   - Keep kind/on-* foreground mappings aligned with icon-button and text-button */
+   - Keep kind/on-* foreground mappings aligned with icon-button and text-button
+   - Add new kinds by setting --link-fg in kind blocks; avoid duplicating interaction rules.
+   - Disabled state is intentionally unsupported; links represent navigational destinations. */
 
+/* Base layout */
 .link {
   --link-fg: var(--color-content-primary);
   color: var(--link-fg);
@@ -16,7 +20,7 @@
   text-align: left;
   text-decoration: none;
   text-underline-offset: var(--spacing-4xs);
-  transition: opacity 120ms ease, color 120ms ease, text-decoration-color 120ms ease;
+  transition: opacity 150ms ease, color 150ms ease, text-decoration-color 150ms ease;
   width: fit-content;
 }
 
@@ -33,6 +37,7 @@
   width: 100%;
 }
 
+/* Kind tokens (foreground only; behavior is shared below) */
 .link--primary {
   --link-fg: var(--color-content-primary);
 }
@@ -54,7 +59,7 @@
 }
 
 .link--error {
-  --link-fg: var(--color-content-extended-strong-error);
+  --link-fg: var(--color-content-extended-error);
 }
 
 .link--info {
@@ -71,10 +76,6 @@
 
 .link--on-secondary {
   --link-fg: var(--color-on-content-on-secondary);
-}
-
-.link--on-tertiary {
-  --link-fg: var(--color-on-content-on-tertiary);
 }
 
 .link--on-brand {
@@ -101,8 +102,9 @@
   --link-fg: var(--color-on-content-extended-on-error);
 }
 
-/* Interaction contract:
-   Underline behavior is controlled by --underlined rules, not color kind variants. */
+/* Underline interaction model
+   - Default mode: no underline at rest, underline on hover/active
+   - Underlined mode: underline at rest, removed on hover/active */
 .link:not(.link--underlined) {
   text-decoration: none;
 }
@@ -123,6 +125,7 @@
   opacity: 0.6;
 }
 
+/* Focus-visible ring aligns with other interactive components */
 .link:focus-visible {
   border-radius: var(--radius-sm);
   outline: var(--stroke-lg) solid var(--color-overlay-focus);

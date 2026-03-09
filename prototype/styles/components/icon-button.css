@@ -1,8 +1,9 @@
 /* Shared icon-button component API
    Variant contract:
-   - Kind names mirror token semantics: primary|secondary|tertiary|brand|info|accent|success|warning|error
+   - Kind names mirror token semantics: primary|secondary|brand|info|accent|success|warning|error
    - on-* variants are foreground colors for filled backgrounds and use --color-on-content-* tokens
-   - Keep kind/on-* foreground mappings aligned with text-button and link */
+   - Keep kind/on-* foreground mappings aligned with text-button and link
+   - If an element is not meant to navigate, prefer <button disabled> over a disabled-styled anchor. */
 
 .icon-button {
   --icon-button-fg: var(--color-content-primary);
@@ -66,10 +67,6 @@ img.icon-button__icon {
   --icon-button-fg: var(--color-content-secondary);
 }
 
-.icon-button--tertiary {
-  --icon-button-fg: var(--color-content-tertiary);
-}
-
 .icon-button--brand {
   --icon-button-fg: var(--color-content-extended-brand);
 }
@@ -91,7 +88,7 @@ img.icon-button__icon {
 }
 
 .icon-button--error {
-  --icon-button-fg: var(--color-content-extended-strong-error);
+  --icon-button-fg: var(--color-content-extended-error);
 }
 
 .icon-button--on-primary {
@@ -100,10 +97,6 @@ img.icon-button__icon {
 
 .icon-button--on-secondary {
   --icon-button-fg: var(--color-on-content-on-secondary);
-}
-
-.icon-button--on-tertiary {
-  --icon-button-fg: var(--color-on-content-on-tertiary);
 }
 
 .icon-button--on-brand {

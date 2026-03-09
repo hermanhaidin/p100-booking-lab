@@ -1,9 +1,12 @@
 /* Shared text-button component API
    Variant contract:
-   - Kind names mirror token semantics: primary|secondary|tertiary|brand|info|accent|success|warning|error
+   - Kind names mirror token semantics:
+     primary|secondary|brand|info|accent|success|warning|error
    - on-* variants are foreground colors for filled backgrounds and use --color-on-content-* tokens
-   - Keep kind/on-* foreground mappings aligned with icon-button and link */
+   - Keep kind/on-* foreground mappings aligned with icon-button and link
+   - Add new kinds by setting --text-button-fg in kind blocks; avoid duplicating interaction rules. */
 
+/* Base layout + sizing */
 .text-button {
   --text-button-fg: var(--color-content-primary);
   align-items: center;
@@ -23,7 +26,7 @@
   text-align: left;
   text-decoration: none;
   text-underline-offset: var(--spacing-4xs);
-  transition: opacity 120ms ease, color 120ms ease, text-decoration-color 120ms ease;
+  transition: opacity 150ms ease, color 150ms ease, text-decoration-color 150ms ease;
   width: fit-content;
 }
 
@@ -31,7 +34,8 @@
   color: var(--text-button-fg);
 }
 
-/* Text content must be wrapped in .text-button__label.
+/* Label + truncation primitives
+   Text content must be wrapped in .text-button__label.
    Underline interactions target the label only, never icons. */
 .text-button__label {
   min-width: 0;
@@ -61,6 +65,7 @@
   gap: var(--spacing-4xs);
 }
 
+/* Icon sizing follows the component size scale */
 .text-button__icon--leading,
 .text-button__icon--trailing {
   color: currentColor;
@@ -85,6 +90,7 @@
   width: 16px;
 }
 
+/* Kind tokens (foreground only; behavior is shared below) */
 .text-button--primary {
   --text-button-fg: var(--color-content-primary);
 }
@@ -106,7 +112,7 @@
 }
 
 .text-button--error {
-  --text-button-fg: var(--color-content-extended-strong-error);
+  --text-button-fg: var(--color-content-extended-error);
 }
 
 .text-button--info {
@@ -123,10 +129,6 @@
 
 .text-button--on-secondary {
   --text-button-fg: var(--color-on-content-on-secondary);
-}
-
-.text-button--on-tertiary {
-  --text-button-fg: var(--color-on-content-on-tertiary);
 }
 
 .text-button--on-brand {
@@ -153,13 +155,15 @@
   --text-button-fg: var(--color-on-content-extended-on-error);
 }
 
-/* Interaction contract:
-   Underline behavior is controlled by --underlined rules, not color kind variants. */
+/* Underline interaction model
+   - Default mode: no underline at rest, underline on hover/active
+   - Underlined mode: underline at rest, removed on hover/active
+   - Disabled states are excluded from all interaction selectors */
 .text-button:not(.text-button--underlined) .text-button__label {
   text-decoration: none;
 }
 
-.text-button:not(.text-button--underlined):is(:hover, :active) .text-button__label {
+.text-button:not(.text-button--underlined):not(:disabled):not([aria-disabled="true"]):is(:hover, :active) .text-button__label {
   text-decoration: underline;
 }
 
@@ -167,21 +171,23 @@
   text-decoration: underline;
 }
 
-.text-button--underlined:is(:hover, :active) .text-button__label {
+.text-button--underlined:not(:disabled):not([aria-disabled="true"]):is(:hover, :active) .text-button__label {
   text-decoration: none;
 }
 
-.text-button:active {
+.text-button:not(:disabled):not([aria-disabled="true"]):active {
   opacity: 0.6;
 }
 
+/* Disabled + focus states
+   aria-disabled is supported for non-button elements (e.g. anchors). */
 .text-button:disabled,
 .text-button[aria-disabled="true"] {
   cursor: not-allowed;
   opacity: 0.3;
 }
 
-.text-button:focus-visible {
+.text-button:not(:disabled):not([aria-disabled="true"]):focus-visible {
   outline: var(--stroke-lg) solid var(--color-overlay-focus);
   outline-offset: var(--stroke-md);
   border-radius: var(--radius-sm);

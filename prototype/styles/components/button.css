@@ -44,7 +44,7 @@
   padding: 0 var(--spacing-xs);
   text-align: center;
   text-decoration: none;
-  transition: box-shadow 150ms ease, background-color 150ms ease-in-out, border-color 150ms ease, color 125ms ease, transform 150ms ease-in-out;
+  transition: box-shadow 150ms ease, background-color 150ms ease-in-out, border-color 150ms ease, color 150ms ease, transform 150ms ease-in-out;
   width: fit-content;
 }
 
