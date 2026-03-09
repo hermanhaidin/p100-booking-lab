@@ -1,0 +1,18 @@
+/* Base element styles and global defaults. */
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-size: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  color: var(--color-content-primary);
+  background-color: var(--color-surface-canvas);
+}

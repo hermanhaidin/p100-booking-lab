@@ -1,0 +1,143 @@
+/* Shared icon-button component API
+   Variant contract:
+   - Kind names mirror token semantics: primary|secondary|brand|info|accent|success|warning|error
+   - on-* variants are foreground colors for filled backgrounds and use --color-on-content-* tokens
+   - Keep kind/on-* foreground mappings aligned with text-button and link
+   - If an element is not meant to navigate, prefer <button disabled> over a disabled-styled anchor. */
+
+.icon-button {
+  --icon-button-fg: var(--color-content-primary);
+  --icon-button-icon-size: 24px;
+  --icon-button-hit-size: 36px;
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  box-sizing: border-box;
+  color: var(--icon-button-fg);
+  cursor: pointer;
+  display: inline-flex;
+  height: var(--icon-button-hit-size);
+  inline-size: var(--icon-button-hit-size);
+  justify-content: center;
+  margin: 0;
+  min-height: var(--icon-button-hit-size);
+  min-width: var(--icon-button-hit-size);
+  outline: none;
+  padding: 0;
+  text-decoration: none;
+  transition: opacity 120ms ease, color 120ms ease;
+  width: var(--icon-button-hit-size);
+}
+
+.icon-button:visited {
+  color: var(--icon-button-fg);
+}
+
+.icon-button__icon {
+  color: currentColor;
+  display: block;
+  flex: 0 0 auto;
+  font-size: var(--icon-button-icon-size);
+  height: var(--icon-button-icon-size);
+  transition: transform 120ms ease;
+  width: var(--icon-button-icon-size);
+}
+
+.icon-button__icon img,
+img.icon-button__icon {
+  object-fit: contain;
+}
+
+.icon-button--small {
+  --icon-button-icon-size: 16px;
+  --icon-button-hit-size: 36px;
+}
+
+.icon-button--large {
+  --icon-button-icon-size: 24px;
+  --icon-button-hit-size: 36px;
+}
+
+.icon-button--primary {
+  --icon-button-fg: var(--color-content-primary);
+}
+
+.icon-button--secondary {
+  --icon-button-fg: var(--color-content-secondary);
+}
+
+.icon-button--brand {
+  --icon-button-fg: var(--color-content-extended-brand);
+}
+
+.icon-button--info {
+  --icon-button-fg: var(--color-content-extended-strong-info);
+}
+
+.icon-button--accent {
+  --icon-button-fg: var(--color-content-extended-strong-accent);
+}
+
+.icon-button--success {
+  --icon-button-fg: var(--color-content-extended-strong-success);
+}
+
+.icon-button--warning {
+  --icon-button-fg: var(--color-content-extended-strong-warning);
+}
+
+.icon-button--error {
+  --icon-button-fg: var(--color-content-extended-error);
+}
+
+.icon-button--on-primary {
+  --icon-button-fg: var(--color-on-content-on-primary);
+}
+
+.icon-button--on-secondary {
+  --icon-button-fg: var(--color-on-content-on-secondary);
+}
+
+.icon-button--on-brand {
+  --icon-button-fg: var(--color-on-content-extended-on-brand);
+}
+
+.icon-button--on-info {
+  --icon-button-fg: var(--color-on-content-extended-on-info);
+}
+
+.icon-button--on-accent {
+  --icon-button-fg: var(--color-on-content-extended-on-accent);
+}
+
+.icon-button--on-success {
+  --icon-button-fg: var(--color-on-content-extended-on-success);
+}
+
+.icon-button--on-warning {
+  --icon-button-fg: var(--color-on-content-extended-on-warning);
+}
+
+.icon-button--on-error {
+  --icon-button-fg: var(--color-on-content-extended-on-error);
+}
+
+.icon-button:not(:disabled):not([aria-disabled="true"]):hover .icon-button__icon {
+  transform: scale(1.08);
+}
+
+.icon-button:not(:disabled):not([aria-disabled="true"]):active {
+  opacity: 0.6;
+}
+
+.icon-button:disabled,
+.icon-button[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.icon-button:focus-visible {
+  outline: var(--stroke-lg) solid var(--color-overlay-focus);
+  outline-offset: var(--stroke-md);
+}

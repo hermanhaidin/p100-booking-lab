@@ -1,0 +1,133 @@
+/* Shared link component API for dense, text-forward anchors
+   Variant contract:
+   - Kind names mirror token semantics:
+     primary|secondary|brand|info|accent|success|warning|error
+   - on-* variants are foreground colors for filled backgrounds and use --color-on-content-* tokens
+   - Keep kind/on-* foreground mappings aligned with icon-button and text-button
+   - Add new kinds by setting --link-fg in kind blocks; avoid duplicating interaction rules.
+   - Disabled state is intentionally unsupported; links represent navigational destinations. */
+
+/* Base layout */
+.link {
+  --link-fg: var(--color-content-primary);
+  color: var(--link-fg);
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  max-width: 100%;
+  min-width: 0;
+  outline: none;
+  text-align: left;
+  text-decoration: none;
+  text-underline-offset: var(--spacing-4xs);
+  transition: opacity 150ms ease, color 150ms ease, text-decoration-color 150ms ease;
+  width: fit-content;
+}
+
+.link:visited {
+  color: var(--link-fg);
+}
+
+.link--truncate {
+  display: block;
+  overflow-x: hidden;
+  overflow-y: visible;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+/* Kind tokens (foreground only; behavior is shared below) */
+.link--primary {
+  --link-fg: var(--color-content-primary);
+}
+
+.link--secondary {
+  --link-fg: var(--color-content-secondary);
+}
+
+.link--brand {
+  --link-fg: var(--color-content-extended-brand);
+}
+
+.link--success {
+  --link-fg: var(--color-content-extended-strong-success);
+}
+
+.link--warning {
+  --link-fg: var(--color-content-extended-strong-warning);
+}
+
+.link--error {
+  --link-fg: var(--color-content-extended-error);
+}
+
+.link--info {
+  --link-fg: var(--color-content-extended-strong-info);
+}
+
+.link--accent {
+  --link-fg: var(--color-content-extended-strong-accent);
+}
+
+.link--on-primary {
+  --link-fg: var(--color-on-content-on-primary);
+}
+
+.link--on-secondary {
+  --link-fg: var(--color-on-content-on-secondary);
+}
+
+.link--on-brand {
+  --link-fg: var(--color-on-content-extended-on-brand);
+}
+
+.link--on-info {
+  --link-fg: var(--color-on-content-extended-on-info);
+}
+
+.link--on-accent {
+  --link-fg: var(--color-on-content-extended-on-accent);
+}
+
+.link--on-success {
+  --link-fg: var(--color-on-content-extended-on-success);
+}
+
+.link--on-warning {
+  --link-fg: var(--color-on-content-extended-on-warning);
+}
+
+.link--on-error {
+  --link-fg: var(--color-on-content-extended-on-error);
+}
+
+/* Underline interaction model
+   - Default mode: no underline at rest, underline on hover/active
+   - Underlined mode: underline at rest, removed on hover/active */
+.link:not(.link--underlined) {
+  text-decoration: none;
+}
+
+.link:not(.link--underlined):is(:hover, :active) {
+  text-decoration: underline;
+}
+
+.link--underlined {
+  text-decoration: underline;
+}
+
+.link--underlined:is(:hover, :active) {
+  text-decoration: none;
+}
+
+.link:active {
+  opacity: 0.6;
+}
+
+/* Focus-visible ring aligns with other interactive components */
+.link:focus-visible {
+  border-radius: var(--radius-sm);
+  outline: var(--stroke-lg) solid var(--color-overlay-focus);
+  outline-offset: var(--stroke-md);
+}
