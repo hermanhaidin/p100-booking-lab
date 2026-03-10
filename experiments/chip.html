@@ -136,6 +136,60 @@
     </section>
 
     <section class="playground-card">
+      <h2 class="playground-title text-title-medium-heavy-caps">Disabled states</h2>
+      <div class="chip-row">
+        <button type="button" class="chip chip--small text-copy-medium-regular-tight" disabled>
+          <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">bolt</span>
+          <span class="chip__label">Small solid disabled</span>
+        </button>
+        <button type="button" class="chip chip--small chip--outlined text-copy-medium-regular-tight" disabled>
+          <span class="chip__label">Small outlined disabled</span>
+        </button>
+      </div>
+      <div class="chip-row">
+        <button type="button" class="chip chip--large" disabled>
+          <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">apartment</span>
+          <span class="chip__content">
+            <span class="chip__label text-copy-medium-regular-tight">Large solid disabled</span>
+            <span class="chip__sublabel text-copy-small-regular">No interactions</span>
+          </span>
+        </button>
+        <button type="button" class="chip chip--large chip--outlined" disabled>
+          <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">home</span>
+          <span class="chip__content">
+            <span class="chip__label text-copy-medium-regular-tight">Large outlined disabled</span>
+            <span class="chip__sublabel text-copy-small-regular">No interactions</span>
+          </span>
+        </button>
+      </div>
+      <div class="chip-row">
+        <button type="button" class="chip chip--small is-active text-copy-medium-regular-tight" disabled>
+          <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">directions_car</span>
+          <span class="chip__label">Small solid disabled + selected</span>
+        </button>
+        <button type="button" class="chip chip--small chip--outlined is-active text-copy-medium-regular-tight" disabled>
+          <span class="chip__label">Small outlined disabled + selected</span>
+        </button>
+      </div>
+      <div class="chip-row">
+        <button type="button" class="chip chip--large is-active" disabled>
+          <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">apartment</span>
+          <span class="chip__content">
+            <span class="chip__label text-copy-medium-regular-tight">Large solid disabled + selected</span>
+            <span class="chip__sublabel text-copy-small-regular">No interactions</span>
+          </span>
+        </button>
+        <button type="button" class="chip chip--large chip--outlined is-active" disabled>
+          <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">home</span>
+          <span class="chip__content">
+            <span class="chip__label text-copy-medium-regular-tight">Large outlined disabled + selected</span>
+            <span class="chip__sublabel text-copy-small-regular">No interactions</span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <section class="playground-card">
       <h2 class="playground-title text-title-medium-heavy-caps">Tablist behavior demo</h2>
       <div class="chip-row" role="tablist" aria-label="SEO categories demo" data-chip-tablist>
         <button type="button" class="chip chip--small is-active text-copy-medium-regular-tight" role="tab" aria-selected="true" data-demo-tab="airports">
@@ -146,6 +200,9 @@
         </button>
         <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" data-demo-tab="worldwide">
           <span class="chip__label">Worldwide</span>
+        </button>
+        <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" data-demo-tab="metro" disabled>
+          <span class="chip__label">Metro areas (disabled)</span>
         </button>
       </div>
     </section>

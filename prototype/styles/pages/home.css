@@ -487,31 +487,7 @@ main {
 
 .offers-carousel-arrows-row {
   display: inline-flex;
-  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
   gap: var(--spacing-xs);
-}
-
-.offers-carousel-arrow {
-  align-items: center;
-  background-color: var(--color-overlay-dimming);
-  border: none;
-  border-radius: var(--radius-pill);
-  color: var(--color-content-primary);
-  cursor: pointer;
-  display: inline-flex;
-  height: 36px;
-  justify-content: center;
-  padding: 0;
-  width: 36px;
-}
-
-.offers-carousel-arrow .material-symbols-outlined {
-  font-size: 24px;
-}
-
-.offers-carousel-arrow:disabled {
-  cursor: default;
-  opacity: 0.35;
 }
 
 .offers-carousel-disclaimer {
@@ -603,12 +579,6 @@ main {
 
 .more-sixt-section .offers-carousel-controls {
   align-items: center;
-}
-
-.more-sixt-section .offers-carousel-arrow {
-  background-color: var(--color-surface-container);
-  box-shadow: var(--elevation-small);
-  color: var(--color-content-primary);
 }
 
 .more-sixt-section .offers-carousel-dot::before {
@@ -767,12 +737,6 @@ main {
   display: block;
   font-style: normal;
   width: 100%;
-}
-
-.testimonial-section .offers-carousel-arrow {
-  background-color: var(--color-surface-container);
-  box-shadow: var(--elevation-small);
-  color: var(--color-content-primary);
 }
 
 .seo-links-section {
@@ -1206,7 +1170,7 @@ main {
     z-index: 3;
   }
 
-  .offers-carousel-arrows .offers-carousel-arrow {
+  .offers-carousel-arrows .floating-button {
     pointer-events: auto;
   }
 
