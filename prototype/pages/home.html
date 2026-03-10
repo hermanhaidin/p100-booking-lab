@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../styles/base.css">
   <link rel="stylesheet" href="../styles/typography.css">
   <link rel="stylesheet" href="../styles/components/button.css">
+  <link rel="stylesheet" href="../styles/components/chip.css">
   <link rel="stylesheet" href="../styles/components/text-button.css">
   <link rel="stylesheet" href="../styles/components/link.css">
   <link rel="stylesheet" href="../styles/components/icon-button.css">
@@ -51,17 +52,17 @@
 
           <section class="search-shell" aria-label="Search context">
             <div class="booking-chips" role="tablist" aria-label="Booking mode">
-              <button type="button" class="chip is-active text-copy-medium-regular" data-chip="cars">
-                <span class="material-symbols-outlined chip-icon" aria-hidden="true">directions_car</span>
-                Cars
+              <button type="button" class="chip chip--small is-active text-copy-medium-regular-tight" data-chip="cars">
+                <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">directions_car</span>
+                <span class="chip__label">Cars</span>
               </button>
-              <button type="button" class="chip text-copy-medium-regular" data-chip="trucks">
-                <span class="material-symbols-outlined chip-icon" aria-hidden="true">local_shipping</span>
-                Trucks
+              <button type="button" class="chip chip--small text-copy-medium-regular-tight" data-chip="trucks">
+                <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">local_shipping</span>
+                <span class="chip__label">Trucks</span>
               </button>
-              <button type="button" class="chip text-copy-medium-regular" data-chip="subscription">
-                <span class="material-symbols-outlined chip-icon chip-icon-outline" aria-hidden="true">update</span>
-                Subscription
+              <button type="button" class="chip chip--small text-copy-medium-regular-tight" data-chip="subscription">
+                <span class="material-symbols-outlined chip__icon chip__icon--outline" aria-hidden="true">update</span>
+                <span class="chip__label">Subscription</span>
               </button>
               <a class="booking-link text-button text-button--small text-button--primary text-button--underlined text-copy-small-heavy-tight" href="#">
                 <span class="text-button__label">View / edit my booking</span>
@@ -459,11 +460,21 @@
         </div>
           <div class="seo-links-content text-copy-medium-heavy-tight">
           <div class="seo-links-chip-row" role="tablist" aria-label="SEO categories">
-            <button type="button" class="chip is-active text-copy-medium-regular" role="tab" aria-selected="true" aria-controls="seo-panel-airports" id="seo-tab-airports" data-seo-tab="airports">US Airport locations</button>
-            <button type="button" class="chip text-copy-medium-regular" role="tab" aria-selected="false" aria-controls="seo-panel-us-cities" id="seo-tab-us-cities" data-seo-tab="us-cities">US cities</button>
-            <button type="button" class="chip text-copy-medium-regular" role="tab" aria-selected="false" aria-controls="seo-panel-worldwide" id="seo-tab-worldwide" data-seo-tab="worldwide">Worldwide</button>
-            <button type="button" class="chip text-copy-medium-regular" role="tab" aria-selected="false" aria-controls="seo-panel-most-booked" id="seo-tab-most-booked" data-seo-tab="most-booked">Most booked outside US</button>
-            <button type="button" class="chip text-copy-medium-regular" role="tab" aria-selected="false" aria-controls="seo-panel-fleet" id="seo-tab-fleet" data-seo-tab="fleet">Fleet &amp; services</button>
+            <button type="button" class="chip chip--small is-active text-copy-medium-regular-tight" role="tab" aria-selected="true" aria-controls="seo-panel-airports" id="seo-tab-airports" data-seo-tab="airports">
+              <span class="chip__label">US Airport locations</span>
+            </button>
+            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-us-cities" id="seo-tab-us-cities" data-seo-tab="us-cities">
+              <span class="chip__label">US cities</span>
+            </button>
+            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-worldwide" id="seo-tab-worldwide" data-seo-tab="worldwide">
+              <span class="chip__label">Worldwide</span>
+            </button>
+            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-most-booked" id="seo-tab-most-booked" data-seo-tab="most-booked">
+              <span class="chip__label">Most booked outside US</span>
+            </button>
+            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-fleet" id="seo-tab-fleet" data-seo-tab="fleet">
+              <span class="chip__label">Fleet &amp; services</span>
+            </button>
           </div>
 
           <div class="seo-links-panel is-active" role="tabpanel" id="seo-panel-airports" aria-labelledby="seo-tab-airports" data-seo-panel="airports">
