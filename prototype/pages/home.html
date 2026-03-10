@@ -11,9 +11,12 @@
   <link rel="stylesheet" href="../styles/base.css">
   <link rel="stylesheet" href="../styles/typography.css">
   <link rel="stylesheet" href="../styles/components/button.css">
+  <link rel="stylesheet" href="../styles/components/chip.css">
   <link rel="stylesheet" href="../styles/components/text-button.css">
   <link rel="stylesheet" href="../styles/components/link.css">
   <link rel="stylesheet" href="../styles/components/icon-button.css">
+  <link rel="stylesheet" href="../styles/components/floating-button.css">
+  <link rel="stylesheet" href="../styles/components/carousel.css">
   <link rel="stylesheet" href="../styles/pages/home.css">
 </head>
 <body>
@@ -51,17 +54,17 @@
 
           <section class="search-shell" aria-label="Search context">
             <div class="booking-chips" role="tablist" aria-label="Booking mode">
-              <button type="button" class="chip is-active text-copy-medium-regular" data-chip="cars">
-                <span class="material-symbols-outlined chip-icon" aria-hidden="true">directions_car</span>
-                Cars
+              <button type="button" class="chip chip--small is-active text-copy-medium-regular-tight" data-chip="cars">
+                <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">directions_car</span>
+                <span class="chip__label">Cars</span>
               </button>
-              <button type="button" class="chip text-copy-medium-regular" data-chip="trucks">
-                <span class="material-symbols-outlined chip-icon" aria-hidden="true">local_shipping</span>
-                Trucks
+              <button type="button" class="chip chip--small text-copy-medium-regular-tight" data-chip="trucks">
+                <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">local_shipping</span>
+                <span class="chip__label">Trucks</span>
               </button>
-              <button type="button" class="chip text-copy-medium-regular" data-chip="subscription">
-                <span class="material-symbols-outlined chip-icon chip-icon-outline" aria-hidden="true">update</span>
-                Subscription
+              <button type="button" class="chip chip--small text-copy-medium-regular-tight" data-chip="subscription">
+                <span class="material-symbols-outlined chip__icon chip__icon--outline" aria-hidden="true">update</span>
+                <span class="chip__label">Subscription</span>
               </button>
               <a class="booking-link text-button text-button--small text-button--primary text-button--underlined text-copy-small-heavy-tight" href="#">
                 <span class="text-button__label">View / edit my booking</span>
@@ -198,9 +201,9 @@
     <section class="placeholder-section dark offers-carousel-section" aria-label="Offers placeholder" data-p100-theme="option-light">
       <div class="layout-shell placeholder-shell offers-carousel-shell">
         <h2 class="text-display-medium-heavy-caps">The perfect car for your next trip from Munich Airport</h2>
-        <div class="offers-carousel" data-offers-carousel>
-          <div class="offers-carousel-viewport">
-            <div class="offers-carousel-track">
+        <div class="carousel" data-offers-carousel>
+          <div class="carousel__viewport">
+            <div class="carousel__track">
               <article class="offer-carousel-card">
                 <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-5d-grey-2024.png" alt="VW Golf">
                 <div class="offer-carousel-content">
@@ -280,30 +283,30 @@
                 </div>
               </article>
             </div>
-            <div class="offers-carousel-arrows">
-              <button type="button" class="offers-carousel-arrow" data-carousel-prev aria-label="Previous offer">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+            <div class="carousel__arrows">
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous offer">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
               </button>
-              <button type="button" class="offers-carousel-arrow" data-carousel-next aria-label="Next offer">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next offer">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
               </button>
             </div>
           </div>
-          <div class="offers-carousel-controls">
-            <div class="offers-carousel-dots">
-              <button type="button" class="offers-carousel-dot is-active" data-carousel-dot="0" aria-label="Go to offer 1"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="1" aria-label="Go to offer 2"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="2" aria-label="Go to offer 3"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="3" aria-label="Go to offer 4"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="4" aria-label="Go to offer 5"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="5" aria-label="Go to offer 6"></button>
+          <div class="carousel__controls">
+            <div class="carousel__dots">
+              <button type="button" class="carousel__dot is-active" data-carousel-dot="0" aria-label="Go to offer 1"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="1" aria-label="Go to offer 2"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="2" aria-label="Go to offer 3"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="3" aria-label="Go to offer 4"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="4" aria-label="Go to offer 5"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="5" aria-label="Go to offer 6"></button>
             </div>
-            <div class="offers-carousel-arrows-row">
-              <button type="button" class="offers-carousel-arrow" data-carousel-prev aria-label="Previous offer">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+            <div class="carousel__arrows-row">
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous offer">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
               </button>
-              <button type="button" class="offers-carousel-arrow" data-carousel-next aria-label="Next offer">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next offer">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
               </button>
             </div>
           </div>
@@ -315,9 +318,9 @@
     <section class="placeholder-section more-sixt-section" aria-label="More SIXT">
       <div class="layout-shell placeholder-shell more-sixt-shell">
         <h2 class="text-display-medium-heavy-caps">More SIXT</h2>
-        <div class="offers-carousel more-sixt-carousel" data-more-sixt-carousel>
-          <div class="offers-carousel-viewport">
-            <div class="offers-carousel-track more-sixt-carousel-track">
+        <div class="carousel more-sixt-carousel" data-more-sixt-carousel>
+          <div class="carousel__viewport">
+            <div class="carousel__track more-sixt-carousel-track">
               <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/421f0424-a73a-4c84-a078-02627d2c2aba.png')">
                 <div class="more-sixt-card-content">
                   <p class="more-sixt-card-title text-title-medium-heavy-caps">Faster Bookings. Instant Rewards.</p>
@@ -361,30 +364,30 @@
                 </div>
               </article>
             </div>
-            <div class="offers-carousel-arrows">
-              <button type="button" class="offers-carousel-arrow" data-carousel-prev aria-label="Previous More SIXT card">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+            <div class="carousel__arrows">
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous More SIXT card">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
               </button>
-              <button type="button" class="offers-carousel-arrow" data-carousel-next aria-label="Next More SIXT card">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next More SIXT card">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
               </button>
             </div>
           </div>
-          <div class="offers-carousel-controls">
-            <div class="offers-carousel-dots">
-              <button type="button" class="offers-carousel-dot is-active" data-carousel-dot="0" aria-label="Go to More SIXT card 1"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="1" aria-label="Go to More SIXT card 2"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="2" aria-label="Go to More SIXT card 3"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="3" aria-label="Go to More SIXT card 4"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="4" aria-label="Go to More SIXT card 5"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="5" aria-label="Go to More SIXT card 6"></button>
+          <div class="carousel__controls">
+            <div class="carousel__dots">
+              <button type="button" class="carousel__dot is-active" data-carousel-dot="0" aria-label="Go to More SIXT card 1"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="1" aria-label="Go to More SIXT card 2"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="2" aria-label="Go to More SIXT card 3"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="3" aria-label="Go to More SIXT card 4"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="4" aria-label="Go to More SIXT card 5"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="5" aria-label="Go to More SIXT card 6"></button>
             </div>
-            <div class="offers-carousel-arrows-row">
-              <button type="button" class="offers-carousel-arrow" data-carousel-prev aria-label="Previous More SIXT card">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+            <div class="carousel__arrows-row">
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous More SIXT card">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
               </button>
-              <button type="button" class="offers-carousel-arrow" data-carousel-next aria-label="Next More SIXT card">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next More SIXT card">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
               </button>
             </div>
           </div>
@@ -394,9 +397,9 @@
 
     <section class="placeholder-section dark testimonial-section" aria-label="Testimonials" data-p100-theme="option-light">
       <div class="layout-shell placeholder-shell testimonial-shell">
-        <div class="offers-carousel testimonial-carousel" data-testimonial-carousel>
-          <div class="offers-carousel-viewport">
-            <div class="offers-carousel-track">
+        <div class="carousel testimonial-carousel" data-testimonial-carousel>
+          <div class="carousel__viewport">
+            <div class="carousel__track">
               <article class="testimonial-card">
                 <blockquote class="testimonial-quote">
                   <p class="text-display-small-regular">"SIXT is the only rental company I've never had an issue with. Seriously... they've turned me into a lifelong client."</p>
@@ -422,28 +425,28 @@
                 </blockquote>
               </article>
             </div>
-            <div class="offers-carousel-arrows">
-              <button type="button" class="offers-carousel-arrow" data-carousel-prev aria-label="Previous testimonial">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+            <div class="carousel__arrows">
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous testimonial">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
               </button>
-              <button type="button" class="offers-carousel-arrow" data-carousel-next aria-label="Next testimonial">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next testimonial">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
               </button>
             </div>
           </div>
-          <div class="offers-carousel-controls">
-            <div class="offers-carousel-dots">
-              <button type="button" class="offers-carousel-dot is-active" data-carousel-dot="0" aria-label="Go to testimonial 1"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="1" aria-label="Go to testimonial 2"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="2" aria-label="Go to testimonial 3"></button>
-              <button type="button" class="offers-carousel-dot" data-carousel-dot="3" aria-label="Go to testimonial 4"></button>
+          <div class="carousel__controls">
+            <div class="carousel__dots">
+              <button type="button" class="carousel__dot is-active" data-carousel-dot="0" aria-label="Go to testimonial 1"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="1" aria-label="Go to testimonial 2"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="2" aria-label="Go to testimonial 3"></button>
+              <button type="button" class="carousel__dot" data-carousel-dot="3" aria-label="Go to testimonial 4"></button>
             </div>
-            <div class="offers-carousel-arrows-row">
-              <button type="button" class="offers-carousel-arrow" data-carousel-prev aria-label="Previous testimonial">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+            <div class="carousel__arrows-row">
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous testimonial">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
               </button>
-              <button type="button" class="offers-carousel-arrow" data-carousel-next aria-label="Next testimonial">
-                <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next testimonial">
+                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
               </button>
             </div>
           </div>
@@ -459,11 +462,21 @@
         </div>
           <div class="seo-links-content text-copy-medium-heavy-tight">
           <div class="seo-links-chip-row" role="tablist" aria-label="SEO categories">
-            <button type="button" class="chip is-active text-copy-medium-regular" role="tab" aria-selected="true" aria-controls="seo-panel-airports" id="seo-tab-airports" data-seo-tab="airports">US Airport locations</button>
-            <button type="button" class="chip text-copy-medium-regular" role="tab" aria-selected="false" aria-controls="seo-panel-us-cities" id="seo-tab-us-cities" data-seo-tab="us-cities">US cities</button>
-            <button type="button" class="chip text-copy-medium-regular" role="tab" aria-selected="false" aria-controls="seo-panel-worldwide" id="seo-tab-worldwide" data-seo-tab="worldwide">Worldwide</button>
-            <button type="button" class="chip text-copy-medium-regular" role="tab" aria-selected="false" aria-controls="seo-panel-most-booked" id="seo-tab-most-booked" data-seo-tab="most-booked">Most booked outside US</button>
-            <button type="button" class="chip text-copy-medium-regular" role="tab" aria-selected="false" aria-controls="seo-panel-fleet" id="seo-tab-fleet" data-seo-tab="fleet">Fleet &amp; services</button>
+            <button type="button" class="chip chip--small is-active text-copy-medium-regular-tight" role="tab" aria-selected="true" aria-controls="seo-panel-airports" id="seo-tab-airports" data-seo-tab="airports">
+              <span class="chip__label">US Airport locations</span>
+            </button>
+            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-us-cities" id="seo-tab-us-cities" data-seo-tab="us-cities">
+              <span class="chip__label">US cities</span>
+            </button>
+            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-worldwide" id="seo-tab-worldwide" data-seo-tab="worldwide">
+              <span class="chip__label">Worldwide</span>
+            </button>
+            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-most-booked" id="seo-tab-most-booked" data-seo-tab="most-booked">
+              <span class="chip__label">Most booked outside US</span>
+            </button>
+            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-fleet" id="seo-tab-fleet" data-seo-tab="fleet">
+              <span class="chip__label">Fleet &amp; services</span>
+            </button>
           </div>
 
           <div class="seo-links-panel is-active" role="tabpanel" id="seo-panel-airports" aria-labelledby="seo-tab-airports" data-seo-panel="airports">
@@ -670,6 +683,7 @@
     </div>
   </footer>
 
+  <script src="../scripts/components/carousel.js"></script>
   <script src="../scripts/pages/home.js"></script>
 </body>
 </html>
