@@ -29,6 +29,7 @@ coverage/
 .cache/
 .parcel-cache/
 .npm/
+.vite/
 
 # Temporary files
 *.tmp
