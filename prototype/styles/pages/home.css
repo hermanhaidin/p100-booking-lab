@@ -337,25 +337,6 @@ main {
   text-align: center;
 }
 
-.offers-carousel {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-
-.offers-carousel-viewport {
-  overflow: hidden;
-  position: relative;
-  touch-action: pan-y;
-}
-
-.offers-carousel-track {
-  display: flex;
-  gap: var(--spacing-xs);
-  transition: transform 320ms ease;
-  will-change: transform;
-}
-
 .offer-carousel-card {
   background-color: var(--color-surface-container);
   border-radius: var(--radius-lg);
@@ -433,61 +414,6 @@ main {
 
 .offer-carousel-price-suffix {
   margin: 0;
-}
-
-.offers-carousel-controls {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-}
-
-.offers-carousel-dots {
-  display: inline-flex;
-  gap: 0;
-}
-
-.offers-carousel-dot {
-  align-items: center;
-  background: transparent;
-  border: none;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  display: inline-flex;
-  height: var(--spacing-xs);
-  justify-content: center;
-  padding: 0;
-  width: var(--spacing-xs);
-}
-
-.offers-carousel-dot[hidden] {
-  display: none;
-}
-
-.offers-carousel-dot::before {
-  background-color: var(--color-content-secondary);
-  border-radius: var(--radius-pill);
-  content: "";
-  height: 6px;
-  opacity: 0.8;
-  width: 6px;
-}
-
-.offers-carousel-dot.is-active {
-  opacity: 1;
-}
-
-.offers-carousel-dot.is-active::before {
-  background-color: var(--color-content-primary);
-  opacity: 1;
-}
-
-.offers-carousel-arrows {
-  display: none;
-}
-
-.offers-carousel-arrows-row {
-  display: inline-flex;
-  gap: var(--spacing-xs);
 }
 
 .offers-carousel-disclaimer {
@@ -577,18 +503,18 @@ main {
   color: var(--color-on-content-on-primary);
 }
 
-.more-sixt-section .offers-carousel-controls {
+.more-sixt-section .carousel__controls {
   align-items: center;
 }
 
-.more-sixt-section .offers-carousel-dot::before {
+.more-sixt-section .carousel__dot::before {
   background-color: var(--color-content-secondary);
   height: 6px;
   opacity: 0.8;
   width: 6px;
 }
 
-.more-sixt-section .offers-carousel-dot.is-active::before {
+.more-sixt-section .carousel__dot.is-active::before {
   background-color: var(--color-content-primary);
   opacity: 1;
 }
@@ -692,13 +618,13 @@ main {
   gap: var(--spacing-2xs);
 }
 
-.testimonial-carousel .offers-carousel-viewport {
+.testimonial-carousel .carousel__viewport {
   aspect-ratio: 4 / 5;
   align-items: center;
   display: flex;
 }
 
-.testimonial-carousel .offers-carousel-track {
+.testimonial-carousel .carousel__track {
   align-items: center;
   gap: 0;
   width: 100%;
@@ -1138,7 +1064,7 @@ main {
     padding: 0;
   }
 
-  .testimonial-carousel .offers-carousel-viewport {
+  .testimonial-carousel .carousel__viewport {
     aspect-ratio: 4 / 5;
   }
 
@@ -1146,33 +1072,6 @@ main {
     padding: var(--spacing-md) var(--spacing-xs) var(--spacing-lg);
   }
 
-
-  .offers-carousel-controls {
-    justify-content: center;
-  }
-
-  .more-sixt-section .offers-carousel-controls {
-    justify-content: center;
-  }
-
-  .offers-carousel-arrows-row {
-    display: none;
-  }
-
-  .offers-carousel-arrows {
-    display: flex;
-    inset: 50% 0 auto;
-    justify-content: space-between;
-    padding-inline: var(--spacing-xs);
-    pointer-events: none;
-    position: absolute;
-    transform: translateY(-50%);
-    z-index: 3;
-  }
-
-  .offers-carousel-arrows .floating-button {
-    pointer-events: auto;
-  }
 
   .more-sixt-card-content {
     gap: var(--spacing-xs);
@@ -1187,7 +1086,7 @@ main {
     width: 100%;
   }
 
-  .more-sixt-section .offers-carousel-arrows {
+  .more-sixt-section .carousel__arrows {
     padding-inline: var(--spacing-2xs);
   }
 
@@ -1258,7 +1157,7 @@ main {
     gap: var(--spacing-3xl);
   }
 
-  .offers-carousel-track {
+  .carousel__track {
     gap: var(--spacing-md);
   }
 
@@ -1272,7 +1171,7 @@ main {
     padding: 0;
   }
 
-  .testimonial-carousel .offers-carousel-viewport {
+  .testimonial-carousel .carousel__viewport {
     aspect-ratio: 21 / 9;
   }
 
@@ -1309,7 +1208,7 @@ main {
     padding: 0;
   }
 
-  .testimonial-carousel .offers-carousel-viewport {
+  .testimonial-carousel .carousel__viewport {
     aspect-ratio: 16 / 9;
   }
 
@@ -1328,7 +1227,7 @@ main {
     padding: 0;
   }
 
-  .testimonial-carousel .offers-carousel-viewport {
+  .testimonial-carousel .carousel__viewport {
     aspect-ratio: 21 / 9;
   }
 
@@ -1364,7 +1263,7 @@ main {
     flex-direction: column;
   }
 
-  .testimonial-carousel .offers-carousel-viewport {
+  .testimonial-carousel .carousel__viewport {
     aspect-ratio: auto;
     flex: 1 1 auto;
   }
