@@ -1,0 +1,162 @@
+/* Shared badge component API
+   - Badges are read-only marketing/detail nudges (not interactive controls).
+   - All badges are pill-shaped and fixed at 24px height.
+   - Visual variants appear in this order: solid, outlined, bordered.
+   - Parent wrappers should use an 8px horizontal + vertical gap between badges. */
+
+/* Base contract + default token fallbacks. */
+.badge {
+  --badge-bg: var(--color-content-extended-soft-brand);
+  --badge-fg: var(--color-content-extended-strong-brand);
+  --badge-border-color: var(--color-content-extended-brand);
+  align-items: center;
+  background-color: var(--badge-bg);
+  border: none;
+  border-radius: var(--radius-pill);
+  color: var(--badge-fg);
+  display: inline-flex;
+  gap: var(--spacing-4xs);
+  height: 24px;
+  max-width: 100%;
+  min-width: 0;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.badge--text-only {
+  padding-left: var(--spacing-2xs);
+  padding-right: var(--spacing-2xs);
+}
+
+.badge--with-icon {
+  padding-left: var(--spacing-3xs);
+  padding-right: var(--spacing-2xs);
+}
+
+.badge__icon,
+.badge .material-symbols-outlined {
+  color: currentColor;
+  flex: 0 0 auto;
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.badge .material-symbols-outlined,
+.badge__icon--filled {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 20;
+}
+
+.badge__icon--outline {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+}
+
+.badge__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Semantic kind token mappings for solid badges. */
+.badge--primary {
+  --badge-bg: var(--color-content-primary);
+  --badge-fg: var(--color-on-content-on-primary);
+  --badge-border-color: var(--color-content-primary);
+}
+
+.badge--secondary {
+  --badge-bg: var(--color-content-secondary);
+  --badge-fg: var(--color-on-content-on-secondary);
+  --badge-border-color: var(--color-content-secondary);
+}
+
+.badge--brand {
+  --badge-bg: var(--color-content-extended-brand);
+  --badge-fg: var(--color-on-content-extended-on-brand);
+  --badge-border-color: var(--color-content-extended-brand);
+}
+
+.badge--info {
+  --badge-bg: var(--color-content-extended-info);
+  --badge-fg: var(--color-on-content-extended-on-info);
+  --badge-border-color: var(--color-content-extended-strong-info);
+}
+
+.badge--accent {
+  --badge-bg: var(--color-content-extended-accent);
+  --badge-fg: var(--color-on-content-extended-on-accent);
+  --badge-border-color: var(--color-content-extended-strong-accent);
+}
+
+.badge--success {
+  --badge-bg: var(--color-content-extended-success);
+  --badge-fg: var(--color-on-content-extended-on-success);
+  --badge-border-color: var(--color-content-extended-strong-success);
+}
+
+.badge--warning {
+  --badge-bg: var(--color-content-extended-warning);
+  --badge-fg: var(--color-on-content-extended-on-warning);
+  --badge-border-color: var(--color-content-extended-strong-warning);
+}
+
+.badge--error {
+  --badge-bg: var(--color-content-extended-error);
+  --badge-fg: var(--color-on-content-extended-on-error);
+  --badge-border-color: var(--color-content-extended-error);
+}
+
+/* Outlined uses border-color tokens for stroke + content color. */
+.badge--outlined {
+  background-color: transparent;
+  border: var(--stroke-sm) solid var(--badge-border-color);
+  color: var(--badge-border-color);
+}
+
+.badge--bordered {
+  background-color: var(--badge-bordered-bg, var(--badge-bg));
+  border: none;
+  color: var(--badge-bordered-fg, var(--badge-fg));
+}
+
+/* Bordered uses soft fills with per-kind readable foreground overrides. */
+.badge--bordered.badge--primary {
+  --badge-bordered-bg: var(--color-surface-secondary-container);
+  --badge-bordered-fg: var(--color-content-primary);
+}
+
+.badge--bordered.badge--secondary {
+  --badge-bordered-bg: var(--color-surface-container);
+  --badge-bordered-fg: var(--color-content-primary);
+}
+
+.badge--bordered.badge--brand {
+  --badge-bordered-bg: var(--color-content-extended-soft-brand);
+  --badge-bordered-fg: var(--color-content-extended-brand);
+}
+
+.badge--bordered.badge--info {
+  --badge-bordered-bg: var(--color-content-extended-soft-info);
+  --badge-bordered-fg: var(--color-content-extended-strong-info);
+}
+
+.badge--bordered.badge--accent {
+  --badge-bordered-bg: var(--color-content-extended-soft-accent);
+  --badge-bordered-fg: var(--color-content-extended-strong-accent);
+}
+
+.badge--bordered.badge--success {
+  --badge-bordered-bg: var(--color-content-extended-soft-success);
+  --badge-bordered-fg: var(--color-content-extended-strong-success);
+}
+
+.badge--bordered.badge--warning {
+  --badge-bordered-bg: var(--color-content-extended-soft-warning);
+  --badge-bordered-fg: var(--color-content-extended-strong-warning);
+}
+
+.badge--bordered.badge--error {
+  --badge-bordered-bg: var(--color-content-extended-soft-error);
+  --badge-bordered-fg: var(--color-content-extended-error);
+}

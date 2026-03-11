@@ -401,21 +401,6 @@ main {
   margin: 0;
 }
 
-.offer-carousel-price {
-  color: var(--color-content-primary);
-  align-items: baseline;
-  display: inline-flex;
-  margin: 0;
-}
-
-.offer-carousel-price-integer {
-  margin-inline: 1px;
-}
-
-.offer-carousel-price-suffix {
-  margin: 0;
-}
-
 .offers-carousel-disclaimer {
   color: var(--color-content-secondary);
   margin: 0;

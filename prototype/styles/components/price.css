@@ -1,0 +1,101 @@
+.price {
+  --price-element-gap: var(--spacing-5xs);
+  --price-prefix-gap: var(--price-element-gap);
+  --price-sign-gap: var(--price-element-gap);
+  --price-currency-gap: var(--price-element-gap);
+  --price-suffix-gap: var(--price-element-gap);
+  --price-strike-position: 50%;
+  align-items: baseline;
+  color: var(--color-content-primary);
+  display: inline-flex;
+  margin: 0;
+  position: relative;
+  white-space: nowrap;
+}
+
+.price__prefix {
+  margin-inline-end: var(--price-prefix-gap);
+}
+
+.price__sign {
+  margin-inline-end: var(--price-sign-gap);
+}
+
+.price__currency {
+  margin-inline-end: var(--price-currency-gap);
+  order: 30;
+}
+
+.price__integer {
+  order: 40;
+}
+
+.price__decimal {
+  order: 50;
+}
+
+.price__suffix {
+  margin-inline-start: var(--price-suffix-gap);
+  order: 60;
+}
+
+.price__prefix {
+  order: 10;
+}
+
+.price__sign {
+  order: 20;
+}
+
+.price--small {
+  --price-element-gap: var(--spacing-5xs);
+}
+
+.price--medium {
+  --price-element-gap: var(--spacing-5xs);
+}
+
+.price--large {
+  --price-element-gap: var(--spacing-5xs);
+}
+
+.price--regular,
+.price--heavy {
+  /* Weight is applied through typography utility classes in markup. */
+}
+
+.price--currency-right .price__currency {
+  margin-inline-end: 0;
+  margin-inline-start: var(--price-element-gap);
+  order: 55;
+}
+
+.price--hot {
+  color: var(--color-content-extended-brand);
+}
+
+.price--muted {
+  color: var(--color-content-secondary);
+}
+
+.price--striked {
+  color: var(--color-content-secondary);
+}
+
+.price--striked::after {
+  background-color: currentColor;
+  content: "";
+  height: calc((var(--stroke-sm) + var(--stroke-md)) / 2);
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: var(--price-strike-position);
+  transform: translateY(-50%);
+}
+
+.price--large.price--striked {
+  --price-strike-position: 60%;
+}
+
+/* Keep the suffix as '/ day' with a space after '/'. */

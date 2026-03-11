@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Badge Playground</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="../prototype/styles/tokens.css">
+  <link rel="stylesheet" href="../prototype/styles/fonts.css">
+  <link rel="stylesheet" href="../prototype/styles/layout.css">
+  <link rel="stylesheet" href="../prototype/styles/base.css">
+  <link rel="stylesheet" href="../prototype/styles/typography.css">
+  <link rel="stylesheet" href="../prototype/styles/components/badge.css">
+  <link rel="stylesheet" href="../prototype/styles/components/badge.presents.css">
+  <style>
+    .badge-playground {
+      background-color: var(--color-surface-canvas);
+      color: var(--color-content-primary);
+      min-height: 100vh;
+      padding-block: var(--spacing-xl);
+    }
+
+    .badge-playground-shell {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+
+    .badge-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+
+    .badge-section__title,
+    .badge-row-label {
+      margin: 0;
+    }
+
+    .badge-grid {
+      display: grid;
+      gap: var(--spacing-xs);
+    }
+
+    .badge-grid-row {
+      border-top: var(--stroke-sm) solid color-mix(in srgb, var(--color-content-secondary) 20%, transparent);
+      display: grid;
+      gap: var(--spacing-xs);
+      padding-top: var(--spacing-xs);
+    }
+
+    .badge-row {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-3xs);
+    }
+
+    .badge-section--offer-demo {
+      background-color: var(--color-surface-container);
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.12) 48%, rgba(0, 0, 0, 0.62) 100%),
+        url("https://img.sixt.com/1600/6f09b0e8-6820-4ac0-bedd-5797e9814c18.jpg");
+      background-position: center;
+      background-size: cover;
+      border: var(--stroke-sm) solid var(--color-content-tertiary);
+      border-radius: var(--radius-lg);
+      color: var(--color-global-white);
+      padding: var(--spacing-md);
+    }
+
+  </style>
+</head>
+<body>
+  <main class="badge-playground">
+    <section class="layout-shell badge-playground-shell" aria-label="Badge playground">
+      <header class="badge-section">
+        <h1 class="badge-section__title text-title-medium-heavy-caps">Badge playground</h1>
+        <p class="text-copy-medium-regular">
+          Visual QA for all badge kinds and variants. Badges use 24px height, 4px icon-label gap, and 8px wrap gap.
+        </p>
+      </header>
+
+      <section class="badge-section" aria-label="Solid badges">
+        <h2 class="badge-section__title text-title-small-heavy-caps">Solid</h2>
+        <div class="badge-grid">
+          <div class="badge-grid-row">
+            <p class="badge-row-label text-copy-small-regular-tight">Text only</p>
+            <div class="badge-row">
+              <span class="badge badge--primary badge--text-only text-copy-small-heavy-tight"><span class="badge__label">Primary</span></span>
+              <span class="badge badge--secondary badge--text-only text-copy-small-heavy-tight"><span class="badge__label">Secondary</span></span>
+              <span class="badge badge--brand badge--text-only text-copy-small-heavy-tight"><span class="badge__label">Brand</span></span>
+              <span class="badge badge--info badge--text-only text-copy-small-heavy-tight"><span class="badge__label">Info</span></span>
+              <span class="badge badge--accent badge--text-only text-copy-small-heavy-tight"><span class="badge__label">Accent</span></span>
+              <span class="badge badge--success badge--text-only text-copy-small-heavy-tight"><span class="badge__label">Success</span></span>
+              <span class="badge badge--warning badge--text-only text-copy-small-heavy-tight"><span class="badge__label">Warning</span></span>
+              <span class="badge badge--error badge--text-only text-copy-small-heavy-tight"><span class="badge__label">Error</span></span>
+            </div>
+          </div>
+
+          <div class="badge-grid-row">
+            <p class="badge-row-label text-copy-small-regular-tight">Icon + text</p>
+            <div class="badge-row">
+              <span class="badge badge--primary badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">star</span><span class="badge__label">Primary</span></span>
+              <span class="badge badge--secondary badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">notifications</span><span class="badge__label">Secondary</span></span>
+              <span class="badge badge--brand badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">local_fire_department</span><span class="badge__label">Brand</span></span>
+              <span class="badge badge--info badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">info</span><span class="badge__label">Info</span></span>
+              <span class="badge badge--accent badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">diamond</span><span class="badge__label">Accent</span></span>
+              <span class="badge badge--success badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">check_circle</span><span class="badge__label">Success</span></span>
+              <span class="badge badge--warning badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">warning</span><span class="badge__label">Warning</span></span>
+              <span class="badge badge--error badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">error</span><span class="badge__label">Error</span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="badge-section" aria-label="Outlined badges">
+        <h2 class="badge-section__title text-title-small-heavy-caps">Outlined</h2>
+        <div class="badge-row">
+          <span class="badge badge--outlined badge--primary badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">star</span><span class="badge__label">Primary</span></span>
+          <span class="badge badge--outlined badge--secondary badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">notifications</span><span class="badge__label">Secondary</span></span>
+          <span class="badge badge--outlined badge--brand badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">local_fire_department</span><span class="badge__label">Brand</span></span>
+          <span class="badge badge--outlined badge--info badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">info</span><span class="badge__label">Info</span></span>
+          <span class="badge badge--outlined badge--accent badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">diamond</span><span class="badge__label">Accent</span></span>
+          <span class="badge badge--outlined badge--success badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">check_circle</span><span class="badge__label">Success</span></span>
+          <span class="badge badge--outlined badge--warning badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">warning</span><span class="badge__label">Warning</span></span>
+          <span class="badge badge--outlined badge--error badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">error</span><span class="badge__label">Error</span></span>
+        </div>
+      </section>
+
+      <section class="badge-section" aria-label="Bordered badges">
+        <h2 class="badge-section__title text-title-small-heavy-caps">Bordered</h2>
+        <div class="badge-row">
+          <span class="badge badge--bordered badge--primary badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">star</span><span class="badge__label">Primary</span></span>
+          <span class="badge badge--bordered badge--secondary badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">notifications</span><span class="badge__label">Secondary</span></span>
+          <span class="badge badge--bordered badge--brand badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">local_fire_department</span><span class="badge__label">Brand</span></span>
+          <span class="badge badge--bordered badge--info badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">info</span><span class="badge__label">Info</span></span>
+          <span class="badge badge--bordered badge--accent badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">diamond</span><span class="badge__label">Accent</span></span>
+          <span class="badge badge--bordered badge--success badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">check_circle</span><span class="badge__label">Success</span></span>
+          <span class="badge badge--bordered badge--warning badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">warning</span><span class="badge__label">Warning</span></span>
+          <span class="badge badge--bordered badge--error badge--with-icon text-copy-small-heavy-tight"><span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">error</span><span class="badge__label">Error</span></span>
+        </div>
+      </section>
+
+      <section class="badge-section" aria-label="Icon fill override examples">
+        <h2 class="badge-section__title text-title-small-heavy-caps">Icon fill override</h2>
+        <div class="badge-row">
+          <span class="badge badge--brand badge--with-icon text-copy-small-heavy-tight">
+            <span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">workspace_premium</span>
+            <span class="badge__label">Default FILL 1</span>
+          </span>
+          <span class="badge badge--brand badge--with-icon text-copy-small-heavy-tight">
+            <span class="material-symbols-outlined badge__icon badge__icon--outline" aria-hidden="true">workspace_premium</span>
+            <span class="badge__label">Override FILL 0</span>
+          </span>
+        </div>
+      </section>
+
+      <section class="badge-section badge-section--offer-demo" aria-label="Offer-like examples">
+        <h2 class="badge-section__title text-title-small-heavy-caps">Offer-like row</h2>
+        <div class="badge-row">
+          <span class="badge badge--premium-brand badge--with-icon text-copy-small-regular-tight">
+            <span class="badge__label">Premium brand</span>
+            <span class="material-symbols-outlined" aria-hidden="true">info</span>
+          </span>
+          <span class="badge badge--similar-model badge--with-icon text-copy-small-regular-tight">
+            <span class="badge__label">Or similar model</span>
+            <span class="material-symbols-outlined" aria-hidden="true">info</span>
+          </span>
+          <span class="badge badge--guaranteed-model badge--with-icon text-copy-small-regular-tight">
+            <span class="badge__label">Guaranteed model</span>
+            <span class="material-symbols-outlined" aria-hidden="true">info</span>
+          </span>
+          <span class="badge badge--with-icon badge--offer-spec text-copy-small-regular-tight">
+            <span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">person</span>
+            <span class="badge__label">5</span>
+          </span>
+          <span class="badge badge--with-icon badge--offer-spec text-copy-small-regular-tight">
+            <span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">work</span>
+            <span class="badge__label">4</span>
+          </span>
+          <span class="badge badge--with-icon badge--hot-offer-promo text-copy-small-heavy-tight">
+            <img class="badge__icon" src="../prototype/assets/icons/special_flame_fill_color.svg" alt="" aria-hidden="true">
+            <span class="badge__label">Hot offer</span>
+          </span>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
