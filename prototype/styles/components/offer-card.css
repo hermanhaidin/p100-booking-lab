@@ -148,6 +148,8 @@
   margin: 0;
 }
 
+/* Offer-card contract:
+   if .badge--hot-offer-promo is present, daily price should include .price--hot. */
 /* Card-specific badge placement override */
 .offer-card-bottom .badge--hot-offer-promo {
   align-self: flex-start;

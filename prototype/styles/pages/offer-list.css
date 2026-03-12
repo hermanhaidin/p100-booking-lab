@@ -108,8 +108,20 @@
 
 .offer-list-filters {
   display: flex;
-  flex-wrap: wrap;
   gap: var(--spacing-3xs);
+  margin: calc(-1 * var(--spacing-3xs));
+  overflow-x: auto;
+  padding: var(--spacing-3xs);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.offer-list-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.offer-list-filters > .chip {
+  flex-shrink: 0;
 }
 
 .offer-list-filters .material-symbols-outlined.chip__icon {
@@ -185,16 +197,10 @@
   }
 }
 
-@media (min-width: 650px) {
+@media (min-width: 900px) {
   .offer-list-grid {
     --offer-list-grid-gutter: var(--spacing-xs);
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 900px) {
-  .offer-list-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .offer-list-footer-shell {
@@ -217,6 +223,7 @@
 @media (min-width: 1200px) {
   .offer-list-grid {
     --offer-list-grid-gutter: var(--spacing-md);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .offer-list-header-shell {
