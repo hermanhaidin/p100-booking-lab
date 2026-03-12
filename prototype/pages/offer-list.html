@@ -25,24 +25,38 @@
 <body>
   <div class="offer-list-header" data-p100-theme="option-light">
     <header class="layout-shell offer-list-header-shell">
+      <a href="./home.html" class="icon-button icon-button--large icon-button--primary offer-list-back-button" aria-label="Go back">
+        <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">arrow_back_ios_new</span>
+      </a>
       <a href="./home.html" class="offer-list-logo-link" aria-label="Go to home">
         <img class="offer-list-logo" src="../assets/logos/sixt_rent_the_car_on_dark.svg" alt="SIXT rent the car">
       </a>
-      <button type="button" class="offer-list-search-button" aria-label="Trip context button">
-        <span class="offer-list-search-copy">
-          <span class="offer-list-search-location text-copy-small-heavy">Munich Airport</span>
-          <span class="offer-list-search-dates text-copy-small-regular">Mar 16 | 12:00 PM - Mar 20 | 12:00 PM</span>
-        </span>
-        <span class="material-symbols-outlined offer-list-search-edit" aria-hidden="true">edit</span>
-      </button>
+      <div class="offer-list-mobile-search-row">
+        <button type="button" class="offer-list-search-button" aria-label="Trip context button">
+          <span class="offer-list-search-copy">
+            <span class="offer-list-search-location text-copy-small-heavy">Munich Airport</span>
+            <span class="offer-list-search-dates text-copy-small-regular">Mar 16 | 12:00 PM - Mar 20 | 12:00 PM</span>
+          </span>
+          <span class="material-symbols-outlined offer-list-search-edit" aria-hidden="true">edit</span>
+        </button>
+        <button type="button" class="icon-button icon-button--large icon-button--primary offer-list-mobile-filter-button" aria-label="Open filters">
+          <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">filter_list</span>
+        </button>
+      </div>
       <nav class="offer-list-utility-nav" aria-label="Utility links">
-        <a href="#" class="text-button text-button--large text-button--primary text-copy-medium-heavy-tight text-button--with-leading-icon">
+        <a href="#" class="text-button text-button--large text-button--primary text-copy-medium-heavy-tight text-button--with-leading-icon offer-list-utility-link-desktop">
           <span class="material-symbols-outlined text-button__icon--leading" aria-hidden="true">language</span>
           <span class="text-button__label">EN | $</span>
         </a>
-        <a href="#" class="text-button text-button--large text-button--primary text-copy-medium-heavy-tight text-button--with-leading-icon">
+        <a href="#" class="text-button text-button--large text-button--primary text-copy-medium-heavy-tight text-button--with-leading-icon offer-list-utility-link-desktop">
           <span class="material-symbols-outlined text-button__icon--leading" aria-hidden="true">person</span>
           <span class="text-button__label">Log in | Register</span>
+        </a>
+        <a href="#" class="icon-button icon-button--large icon-button--primary offer-list-utility-link-mobile" aria-label="Language and currency">
+          <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">language</span>
+        </a>
+        <a href="#" class="icon-button icon-button--large icon-button--primary offer-list-utility-link-mobile offer-list-utility-link-mobile-person" aria-label="Log in or register">
+          <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">person</span>
         </a>
       </nav>
     </header>
@@ -86,7 +100,7 @@
       </div>
     </section>
 
-    <section class="offer-list-offers-section layout-shell" aria-label="Offers" data-p100-theme="option-light">
+    <section class="offer-list-offers-section layout-shell" aria-label="Offers">
       <div
         id="offer-list-grid"
         class="offer-list-grid"
@@ -179,7 +193,7 @@
         };
       };
 
-      const escapeHtml = (value) => value
+      const escapeHtml = (value) => String(value ?? "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
@@ -267,7 +281,7 @@
         const dailyPrice = parsePriceParts(offer["Price per day"], "day");
         const totalPrice = parsePriceParts(offer["Total price"], "total");
         return `
-        <a href="#" class="offer-card ${getVariant(modelLabel)} offer-card-link" aria-label="View ${escapeHtml(offer.Title)} offer">
+        <a href="#" class="offer-card ${getVariant(modelLabel)} offer-card-link" aria-label="View ${escapeHtml(offer.Title)} offer" data-p100-theme="option-light">
           <div class="offer-card-top">
             <div class="offer-card-heading">
               <p class="offer-card-title text-title-small-heavy-caps">${escapeHtml(offer.Title)}</p>
@@ -312,7 +326,7 @@
       };
 
       const renderBanner = (banner, bannerImage) => `
-        <a href="#" class="offer-banner" aria-label="${escapeHtml(banner.title)}">
+        <a href="#" class="offer-banner" aria-label="${escapeHtml(banner.title)}" data-p100-theme="option-light">
           <img class="offer-banner__image" src="${escapeHtml(bannerImage)}" alt="" aria-hidden="true">
           <div class="offer-banner__content">
             <div class="offer-banner__text">
@@ -323,6 +337,16 @@
           </div>
         </a>
       `;
+
+      const syncBannerHeightToCard = () => {
+        const firstCard = grid.querySelector(".offer-card.offer-card-link");
+        if (!firstCard) {
+          return;
+        }
+
+        const cardHeight = Math.round(firstCard.getBoundingClientRect().height);
+        document.documentElement.style.setProperty("--offer-banner-mobile-height", `${cardHeight}px`);
+      };
 
       const renderOffers = async () => {
         const [contentResponse, assetsResponse] = await Promise.all([
@@ -354,8 +378,10 @@
         });
 
         grid.innerHTML = parts.join("");
+        requestAnimationFrame(syncBannerHeightToCard);
       };
 
+      window.addEventListener("resize", syncBannerHeightToCard);
       renderOffers();
     })();
   </script>

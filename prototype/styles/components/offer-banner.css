@@ -77,3 +77,10 @@
 .offer-banner__cta {
   width: 100%;
 }
+
+@media (max-width: 899px) {
+  .offer-banner {
+    height: var(--offer-banner-mobile-height, auto);
+    min-height: var(--offer-banner-mobile-height, auto);
+  }
+}
