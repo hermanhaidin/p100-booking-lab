@@ -1,3 +1,10 @@
+/* Shared price component API
+   - Prices are composable from optional parts: prefix, sign, currency, integer, decimal, suffix.
+   - Default market is EN + USD with left currency; use .price--currency-right for regional swaps.
+   - Integer and decimal stay visually attached (no gap); all other adjacent parts use the shared part gap.
+   - Typography/weight is set in markup via text utilities to keep size intent explicit. */
+
+/* Base layout + spacing tokens */
 .price {
   --price-element-gap: var(--spacing-5xs);
   --price-prefix-gap: var(--price-element-gap);
@@ -13,6 +20,7 @@
   white-space: nowrap;
 }
 
+/* Part spacing primitives */
 .price__prefix {
   margin-inline-end: var(--price-prefix-gap);
 }
@@ -39,6 +47,7 @@
   order: 60;
 }
 
+/* Part order keeps price assembly predictable across variants */
 .price__prefix {
   order: 10;
 }
@@ -47,6 +56,7 @@
   order: 20;
 }
 
+/* Size modifiers (layout-only here; text sizing lives in typography utilities) */
 .price--small {
   --price-element-gap: var(--spacing-5xs);
 }
@@ -59,17 +69,16 @@
   --price-element-gap: var(--spacing-5xs);
 }
 
-.price--regular,
-.price--heavy {
-  /* Weight is applied through typography utility classes in markup. */
-}
+/* Weight modifiers are semantic flags; utilities in markup carry actual font weight. */
 
+/* Currency position toggle for right-currency locales */
 .price--currency-right .price__currency {
   margin-inline-end: 0;
   margin-inline-start: var(--price-element-gap);
   order: 55;
 }
 
+/* Semantic color states */
 .price--hot {
   color: var(--color-content-extended-brand);
 }
@@ -82,6 +91,7 @@
   color: var(--color-content-secondary);
 }
 
+/* Striked uses a full-width overlay line (not text-decoration) for consistent cross-part rendering. */
 .price--striked::after {
   background-color: currentColor;
   content: "";
@@ -94,6 +104,7 @@
   transform: translateY(-50%);
 }
 
+/* Large prices place strike lower so it crosses the decimal center, not the title-sized integer center. */
 .price--large.price--striked {
   --price-strike-position: 60%;
 }

@@ -38,8 +38,8 @@
 
 /* Guaranteed-model: warning fill + trailing outlined info icon. */
 .badge--guaranteed-model {
-  background-color: var(--color-content-extended-strong-warning);
-  color: var(--color-on-content-extended-on-warning);
+  background-color: var(--color-loyalty-gold);
+  color: var(--color-global-white);
 }
 
 .badge--guaranteed-model.badge--with-icon {

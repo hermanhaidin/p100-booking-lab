@@ -30,7 +30,7 @@
     - Title: `BMW 3 Series Touring`
     - Subtitle: `Full-size Elite Wagon Automatic`
     - Model label: `Premium brand`
-    - Badges: `Top pick`, `Hot offer`
+    - Badges: `Hot offer`
     - Specs: `5 seats`, `4 suitcases`, `Automatic`
     - Included: `Unlimited kilometers`
     - Price per day: `$107.64/day`
@@ -360,7 +360,7 @@
     - Title: `Audi A6 Avant`
     - Subtitle: `Premium Elite Wagon Automatic`
     - Model label: `Premium brand`
-    - Badges: `Highly rated`, `Hot offer`
+    - Badges: `Hot offer`
     - Specs: `5 seats`, `4 suitcases`, `Automatic`
     - Included: `Unlimited kilometers`
     - Price per day: `$127.54/day`
@@ -420,7 +420,7 @@
     - Title: `VW Touareg`
     - Subtitle: `Luxury SUV Automatic`
     - Model label: `Or similar model`
-    - Badges: `four-wheel drive guaranteed`
+    - Badges: `Four-Wheel Drive Guaranteed`
     - Specs: `5 seats`, `6 suitcases`, `6 bags`, `Automatic`
     - Included: `Unlimited kilometers`
     - Price per day: `$165.40/day`
@@ -441,7 +441,7 @@
     - Subtitle: `Premium Elite Gran Coupe Automatic`
     - Model label: `Guaranteed model`
     - Badges: `Sports & Luxury Car`
-    - Specs: `4 seats`, `2 suitcases`, `2 bags`, `Automatic`
+    - Specs: `4 seats`, `4 suitcases`, `Automatic`
     - Included: `1,200 kilometers included`
     - Price per day: `$181.36/day`
     - Total price: `$1,086.83 total`
@@ -460,7 +460,7 @@
     - Title: `BMW X5 xDrive`
     - Subtitle: `Luxury Elite SUV Automatic`
     - Model label: `Premium brand`
-    - Badges: `Hot offer`, `four-wheel drive guaranteed`
+    - Badges: `Hot offer`, `Four-Wheel Drive Guaranteed`
     - Specs: `5 seats`, `6 suitcases`, `Automatic`
     - Included: `Unlimited kilometers`
     - Price per day: `$195.36/day`
@@ -500,7 +500,7 @@
     - Title: `BMW 7 Series Model xDrive`
     - Subtitle: `Extraordinary Sedan Automatic`
     - Model label: `Premium brand`
-    - Badges: `four-wheel drive guaranteed`
+    - Badges: `Four-Wheel Drive Guaranteed`
     - Specs: `5 seats`, `4 suitcases`, `Automatic`
     - Included: `Unlimited kilometers`
     - Price per day: `$231.30/day`
