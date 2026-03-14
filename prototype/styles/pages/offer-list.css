@@ -5,21 +5,16 @@
 
 .offer-list-title-section {
   padding-block: var(--spacing-sm);
-  position: relative;
 }
 
 .offer-list-title-section h1 {
   margin: 0;
 }
 
-.offer-list-title-section::after {
-  background-color: color-mix(in srgb, var(--color-content-secondary) 10%, transparent);
-  content: "";
-  height: var(--stroke-sm);
-  left: 50%;
-  position: absolute;
-  top: 100%;
-  transform: translateX(-50%);
+.offer-list-title-separator {
+  margin: 0;
+  margin-bottom: calc(-1 * var(--stroke-sm));
+  margin-inline: calc(50% - 50vw);
   width: 100vw;
 }
 
@@ -134,6 +129,10 @@
   }
 
   .offer-list-title-section {
+    display: none;
+  }
+
+  .offer-list-title-separator {
     display: none;
   }
 
