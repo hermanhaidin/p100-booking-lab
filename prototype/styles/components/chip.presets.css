@@ -1,0 +1,70 @@
+/* Chip presets layer:
+   keeps domain-specific behavior separate from the base chip primitive. */
+
+/* Dropdown chip contract:
+   - trailing disclosure icon uses keyboard_arrow_down in markup
+   - chevron never rotates when opening/closing overlays */
+.chip--dropdown {
+  gap: var(--spacing-3xs);
+}
+
+/* Dropdown chips with a trailing chevron use tighter end padding (12px). */
+.chip--dropdown:has(.chip__icon--trailing) {
+  padding-right: var(--spacing-2xs);
+}
+
+.chip--dropdown .chip__icon--trailing,
+.chip--dropdown .material-symbols-outlined.chip__icon--trailing {
+  flex: 0 0 auto;
+  font-size: 16px;
+  height: 16px;
+  transform: none;
+  width: 16px;
+}
+
+/* Sort/filter policy:
+   default is unselected; add .is-active only after intentional user action. */
+.chip--sort,
+.chip--filter {}
+
+/* Mobile filter trigger preset:
+   icon-only control with chip-like interaction behavior and state policy. */
+.chip--filter-mobile-trigger {
+  --chip-mobile-filter-bg: var(--color-surface-secondary-container);
+  --chip-mobile-filter-fg: var(--color-content-primary);
+  --chip-mobile-filter-selected-bg: var(--color-content-primary);
+  --chip-mobile-filter-selected-fg: var(--color-on-content-on-primary);
+  --chip-mobile-filter-press-scale: 0.94;
+  background-color: var(--chip-mobile-filter-bg);
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 0 0 9999px transparent;
+  color: var(--chip-mobile-filter-fg);
+  height: 52px;
+  min-height: 52px;
+  min-width: 52px;
+  transition: box-shadow 150ms ease, transform 150ms ease, opacity 150ms ease, background-color 150ms ease, color 150ms ease;
+  width: 52px;
+}
+
+.icon-button.chip--filter-mobile-trigger .icon-button__icon {
+  transform: none;
+}
+
+.icon-button.chip--filter-mobile-trigger:not(:disabled):not([aria-disabled="true"]):is(:hover, :active) {
+  box-shadow: inset 0 0 0 9999px var(--color-overlay-hover);
+}
+
+.icon-button.chip--filter-mobile-trigger:not(:disabled):not([aria-disabled="true"]):hover .icon-button__icon,
+.icon-button.chip--filter-mobile-trigger:not(:disabled):not([aria-disabled="true"]):active .icon-button__icon {
+  transform: none;
+}
+
+.icon-button.chip--filter-mobile-trigger:not(:disabled):not([aria-disabled="true"]):active {
+  opacity: 1;
+  transform: scale(var(--chip-mobile-filter-press-scale));
+}
+
+.chip--filter-mobile-trigger.is-active {
+  background-color: var(--chip-mobile-filter-selected-bg);
+  color: var(--chip-mobile-filter-selected-fg);
+}
