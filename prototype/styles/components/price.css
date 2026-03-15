@@ -1,0 +1,112 @@
+/* Shared price component API
+   - Prices are composable from optional parts: prefix, sign, currency, integer, decimal, suffix.
+   - Default market is EN + USD with left currency; use .price--currency-right for regional swaps.
+   - Integer and decimal stay visually attached (no gap); all other adjacent parts use the shared part gap.
+   - Typography/weight is set in markup via text utilities to keep size intent explicit. */
+
+/* Base layout + spacing tokens */
+.price {
+  --price-element-gap: var(--spacing-5xs);
+  --price-prefix-gap: var(--price-element-gap);
+  --price-sign-gap: var(--price-element-gap);
+  --price-currency-gap: var(--price-element-gap);
+  --price-suffix-gap: var(--price-element-gap);
+  --price-strike-position: 50%;
+  align-items: baseline;
+  color: var(--color-content-primary);
+  display: inline-flex;
+  margin: 0;
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Part spacing primitives */
+.price__prefix {
+  margin-inline-end: var(--price-prefix-gap);
+}
+
+.price__sign {
+  margin-inline-end: var(--price-sign-gap);
+}
+
+.price__currency {
+  margin-inline-end: var(--price-currency-gap);
+  order: 30;
+}
+
+.price__integer {
+  order: 40;
+}
+
+.price__decimal {
+  order: 50;
+}
+
+.price__suffix {
+  margin-inline-start: var(--price-suffix-gap);
+  order: 60;
+}
+
+/* Part order keeps price assembly predictable across variants */
+.price__prefix {
+  order: 10;
+}
+
+.price__sign {
+  order: 20;
+}
+
+/* Size modifiers (layout-only here; text sizing lives in typography utilities) */
+.price--small {
+  --price-element-gap: var(--spacing-5xs);
+}
+
+.price--medium {
+  --price-element-gap: var(--spacing-5xs);
+}
+
+.price--large {
+  --price-element-gap: var(--spacing-5xs);
+}
+
+/* Weight modifiers are semantic flags; utilities in markup carry actual font weight. */
+
+/* Currency position toggle for right-currency locales */
+.price--currency-right .price__currency {
+  margin-inline-end: 0;
+  margin-inline-start: var(--price-element-gap);
+  order: 55;
+}
+
+/* Semantic color states */
+.price--hot {
+  color: var(--color-content-extended-brand);
+}
+
+.price--muted {
+  color: var(--color-content-secondary);
+}
+
+.price--striked {
+  color: var(--color-content-secondary);
+}
+
+/* Striked uses a full-width overlay line (not text-decoration) for consistent cross-part rendering. */
+.price--striked::after {
+  background-color: currentColor;
+  content: "";
+  height: calc((var(--stroke-sm) + var(--stroke-md)) / 2);
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: var(--price-strike-position);
+  transform: translateY(-50%);
+}
+
+/* Large prices place strike lower so it crosses the decimal center, not the title-sized integer center. */
+.price--large.price--striked {
+  --price-strike-position: 60%;
+}
+
+/* Keep the suffix as '/ day' with a space after '/'. */

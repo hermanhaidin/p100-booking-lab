@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Booking Prototype - Offer List</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/fonts.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/typography.css">
+  <link rel="stylesheet" href="../styles/components/button.css">
+  <link rel="stylesheet" href="../styles/components/chip.css">
+  <link rel="stylesheet" href="../styles/components/chip.presets.css">
+  <link rel="stylesheet" href="../styles/components/booking-header.css">
+  <link rel="stylesheet" href="../styles/components/badge.css">
+  <link rel="stylesheet" href="../styles/components/badge.presets.css">
+  <link rel="stylesheet" href="../styles/components/text-button.css">
+  <link rel="stylesheet" href="../styles/components/link.css">
+  <link rel="stylesheet" href="../styles/components/icon-button.css">
+  <link rel="stylesheet" href="../styles/components/price.css">
+  <link rel="stylesheet" href="../styles/components/offer-card.css">
+  <link rel="stylesheet" href="../styles/components/offer-banner.css">
+  <link rel="stylesheet" href="../styles/components/booking-footer.css">
+  <link rel="stylesheet" href="../styles/components/separator.css">
+  <link rel="stylesheet" href="../styles/pages/offer-list.css">
+</head>
+<body>
+  <div class="booking-header" data-p100-theme="option-light">
+    <header class="layout-shell booking-header__shell">
+      <a href="./home.html" class="icon-button icon-button--large icon-button--primary booking-header__back-button" aria-label="Go back">
+        <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">arrow_back_ios_new</span>
+      </a>
+      <a href="./home.html" class="booking-header__logo-link" aria-label="Go to home">
+        <img class="booking-header__logo" src="../assets/logos/sixt_rent_the_car_on_dark.svg" alt="SIXT rent the car">
+      </a>
+      <div class="booking-header__search-row">
+        <button type="button" class="booking-header__search-button button--ibe" aria-label="Trip context button">
+          <span class="booking-header__search-copy">
+            <span class="booking-header__search-location text-copy-small-heavy">Munich Airport</span>
+            <span class="booking-header__search-dates text-copy-small-regular">Mar 16 | 12:00 PM - Mar 20 | 12:00 PM</span>
+          </span>
+          <span class="material-symbols-outlined booking-header__search-edit" aria-hidden="true">edit</span>
+        </button>
+        <button type="button" class="icon-button icon-button--large icon-button--primary booking-header__mobile-filter-button chip--filter-mobile-trigger" aria-label="Open filters">
+          <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">filter_list</span>
+        </button>
+      </div>
+      <nav class="booking-header__utility-nav" aria-label="Utility links">
+        <a href="#" class="text-button text-button--large text-button--primary text-copy-medium-heavy-tight text-button--with-leading-icon booking-header__utility-link-desktop">
+          <span class="material-symbols-outlined text-button__icon--leading" aria-hidden="true">language</span>
+          <span class="text-button__label">EN | $</span>
+        </a>
+        <a href="#" class="text-button text-button--large text-button--primary text-copy-medium-heavy-tight text-button--with-leading-icon booking-header__utility-link-desktop">
+          <span class="material-symbols-outlined text-button__icon--leading" aria-hidden="true">person</span>
+          <span class="text-button__label">Log in | Register</span>
+        </a>
+        <a href="#" class="icon-button icon-button--large icon-button--primary booking-header__utility-link-mobile" aria-label="Language and currency">
+          <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">language</span>
+        </a>
+        <a href="#" class="icon-button icon-button--large icon-button--primary booking-header__utility-link-mobile booking-header__utility-link-mobile-person" aria-label="Log in or register">
+          <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">person</span>
+        </a>
+      </nav>
+    </header>
+  </div>
+
+  <main class="offer-list-main">
+    <section class="offer-list-title-section layout-shell" aria-label="Offer list title">
+      <h1 class="text-title-medium-heavy-caps">Which car do you want to drive?</h1>
+    </section>
+
+    <hr class="separator separator--horizontal separator--small separator--contrast-low offer-list-title-separator" aria-hidden="true">
+
+    <section class="offer-list-filters-section layout-shell" aria-label="Offer list filters">
+      <div class="offer-list-filters" role="tablist" aria-label="Quick filters">
+        <button type="button" class="chip chip--small chip--dropdown chip--sort text-copy-medium-regular-tight">
+          <span class="material-symbols-outlined chip__icon" aria-hidden="true">swap_vert</span>
+          <span class="chip__label">Recommended</span>
+          <span class="material-symbols-outlined chip__icon chip__icon--trailing" aria-hidden="true">keyboard_arrow_down</span>
+        </button>
+        <button type="button" class="chip chip--small chip--dropdown chip--filter text-copy-medium-regular-tight">
+          <span class="material-symbols-outlined chip__icon" aria-hidden="true">tune</span>
+          <span class="chip__label">Filters</span>
+          <span class="material-symbols-outlined chip__icon chip__icon--trailing" aria-hidden="true">keyboard_arrow_down</span>
+        </button>
+        <button type="button" class="chip chip--small text-copy-medium-regular-tight">
+          <img class="chip__icon" src="../assets/icons/special_flame_fill_color.svg" alt="" aria-hidden="true">
+          <span class="chip__label">Hot offers</span>
+        </button>
+        <button type="button" class="chip chip--small text-copy-medium-regular-tight">
+          <span class="material-symbols-outlined chip__icon" aria-hidden="true">diamond</span>
+          <span class="chip__label">Premium brand</span>
+        </button>
+        <button type="button" class="chip chip--small text-copy-medium-regular-tight">
+          <span class="material-symbols-outlined chip__icon" aria-hidden="true">hdr_auto</span>
+          <span class="chip__label">Automatic</span>
+        </button>
+        <button type="button" class="chip chip--small text-copy-medium-regular-tight">
+          <span class="material-symbols-outlined chip__icon" aria-hidden="true">bolt</span>
+          <span class="chip__label">Electric</span>
+        </button>
+        <button type="button" class="chip chip--small text-copy-medium-regular-tight">
+          <span class="material-symbols-outlined chip__icon" aria-hidden="true">power</span>
+          <span class="chip__label">Hybrid</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="offer-list-offers-section layout-shell" aria-label="Offers">
+      <div
+        id="offer-list-grid"
+        class="offer-list-grid"
+        data-content-src="../../sources/sixt/crawl-2026-03/pages/offer-list/CONTENT.md"
+        data-assets-src="../../sources/sixt/assets/ASSETS.md"
+      ></div>
+      <p class="offer-list-disclaimer offer-list-offers-disclaimer text-copy-medium-regular">
+        The prices shown are starting rates and may change depending on your rental. Cancellation fees may apply.
+      </p>
+    </section>
+  </main>
+
+  <footer class="booking-footer" data-p100-theme="option-light">
+    <div class="layout-shell booking-footer__shell">
+      <nav class="booking-footer__legal-links text-copy-medium-heavy-tight" aria-label="Legal links">
+        <a href="#" class="link link--large link--primary text-copy-medium-heavy">Help</a>
+        <a href="#" class="link link--large link--primary text-copy-medium-heavy">Rental information</a>
+        <a href="#" class="link link--large link--primary text-copy-medium-heavy">SIXT for business</a>
+        <a href="#" class="link link--large link--primary text-copy-medium-heavy">SIXT partners</a>
+        <a href="#" class="link link--large link--primary text-copy-medium-heavy">SIXT Magazine</a>
+        <a href="#" class="link link--large link--primary text-copy-medium-heavy">Privacy</a>
+        <a href="#" class="link link--large link--primary text-copy-medium-heavy">Do not share or sell my personal information</a>
+        <a href="#" class="link link--large link--primary text-copy-medium-heavy">Terms &amp; conditions</a>
+        <a href="#" class="link link--large link--primary text-copy-medium-heavy">Customers with disabilities</a>
+        <a href="#" class="link link--large link--primary text-copy-medium-heavy">Cookie-Settings</a>
+      </nav>
+      <p class="booking-footer__copyright text-copy-medium-regular-tight">&copy; Sixt 2026</p>
+    </div>
+  </footer>
+  <script>
+    (() => {
+      const header = document.querySelector(".booking-header");
+      const grid = document.getElementById("offer-list-grid");
+      if (!grid) {
+        return;
+      }
+
+      const syncHeaderTheme = () => {
+        if (!header) {
+          return;
+        }
+        const isMobile = window.matchMedia("(max-width: 649px)").matches;
+        header.setAttribute("data-p100-theme", isMobile ? "prime-light" : "option-light");
+      };
+
+      const parseAssets = (markdown) => {
+        const assets = new Map();
+        const lines = markdown.split("\n");
+        for (const line of lines) {
+          const match = line.match(/^-\s*(.*?):\s*(https?:\/\/\S+)\s*$/);
+          if (match) {
+            assets.set(match[1].trim(), match[2].trim());
+          }
+        }
+        return assets;
+      };
+
+      const parseOfferBlock = (block) => {
+        const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
+        const offer = {};
+        for (const line of lines) {
+          const match = line.match(/^-\s*([^:]+):\s*(.*)$/);
+          if (!match) {
+            continue;
+          }
+          const key = match[1].trim();
+          const value = match[2].replaceAll("`", "").trim();
+          offer[key] = value;
+        }
+        offer.Badges = offer.Badges && offer.Badges !== "N/A"
+          ? offer.Badges.split(",").map((value) => value.trim()).filter(Boolean)
+          : [];
+        offer.Specs = offer.Specs
+          ? offer.Specs.split(",").map((value) => value.trim()).filter(Boolean)
+          : [];
+        return offer;
+      };
+
+      const parseOffers = (markdown) => {
+        const offers = [];
+        const offerMatches = markdown.matchAll(/- \*\*Offer (\d+)\*\*\n((?: {4}- .*\n)+)/g);
+        for (const match of offerMatches) {
+          offers.push({
+            index: Number(match[1]),
+            ...parseOfferBlock(match[2])
+          });
+        }
+        return offers;
+      };
+
+      const parseBanner = (markdown) => {
+        const titleMatch = markdown.match(/## Banner[\s\S]*?- \*\*Title\*\*: `([^`]+)`/);
+        const subtitleMatch = markdown.match(/## Banner[\s\S]*?- \*\*Subtitle\*\*: `([^`]+)`/);
+        const ctaMatch = markdown.match(/## Banner[\s\S]*?- \*\*CTA\*\*: `([^`]+)`/);
+        return {
+          title: titleMatch ? titleMatch[1] : "",
+          subtitle: subtitleMatch ? subtitleMatch[1] : "",
+          cta: ctaMatch ? ctaMatch[1] : ""
+        };
+      };
+
+      const escapeHtml = (value) => String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll("\"", "&quot;");
+
+      const parsePriceParts = (value, type) => {
+        const cleaned = value.replaceAll("$", "").trim();
+        const [amount, suffixRaw] = cleaned.split(type === "day" ? "/" : " ");
+        const [integerPart, decimalPart] = amount.split(".");
+        const suffix = type === "day" ? `/ ${suffixRaw.trim()}` : suffixRaw.trim();
+        return {
+          integerPart,
+          decimalPart: `.${decimalPart ?? "00"}`,
+          suffix
+        };
+      };
+
+      const getVariant = (modelLabel) => {
+        if (modelLabel === "Premium brand") {
+          return "offer-card--premium";
+        }
+        if (modelLabel === "Guaranteed model") {
+          return "offer-card--guaranteed";
+        }
+        return "offer-card--default";
+      };
+
+      const getModelBadgeClass = (modelLabel) => {
+        if (modelLabel === "Premium brand") {
+          return "badge--premium-brand";
+        }
+        if (modelLabel === "Guaranteed model") {
+          return "badge--guaranteed-model";
+        }
+        return "badge--similar-model";
+      };
+
+      const getSpecBadge = (spec) => {
+        const seatMatch = spec.match(/^(\d+) seats$/i);
+        if (seatMatch) {
+          return { icon: "person", label: seatMatch[1] };
+        }
+        const bagMatch = spec.match(/^(\d+) suitcases$/i);
+        if (bagMatch) {
+          return { icon: "travel_luggage_and_bags", label: bagMatch[1] };
+        }
+        if (spec === "Automatic") {
+          return { icon: "hdr_auto", label: "Automatic" };
+        }
+        if (spec === "Manual") {
+          return { icon: "auto_transmission", label: "Manual" };
+        }
+        if (spec === "Electric") {
+          return { icon: "bolt", label: "Electric" };
+        }
+        if (spec === "Hybrid") {
+          return { icon: "power", label: "Hybrid" };
+        }
+        if (/^\d+mi$/i.test(spec)) {
+          return { icon: "battery_charging_full", label: spec };
+        }
+        return { icon: "info", label: spec };
+      };
+
+      const renderSpecBadges = (specs) => specs.map((spec) => {
+        const item = getSpecBadge(spec);
+        return `
+              <span class="badge badge--with-icon badge--offer-spec text-copy-small-regular-tight">
+                <span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">${escapeHtml(item.icon)}</span>
+                <span class="badge__label">${escapeHtml(item.label)}</span>
+              </span>`;
+      }).join("");
+
+      const renderBottomBadges = (badges) => badges
+        .filter((badge) => badge !== "Hot offer")
+        .map((badge) => `
+            <span class="badge badge--outlined badge--primary badge--text-only offer-card-bottom-badge text-copy-small-heavy-tight">
+              <span class="badge__label">${escapeHtml(badge)}</span>
+            </span>`)
+        .join("");
+
+      const renderOfferCard = (offer, imageUrl) => {
+        const modelLabel = offer["Model label"] || "Or similar model";
+        const isHotOffer = offer.Badges.includes("Hot offer");
+        const dailyPrice = parsePriceParts(offer["Price per day"], "day");
+        const totalPrice = parsePriceParts(offer["Total price"], "total");
+        return `
+        <a href="#" class="offer-card ${getVariant(modelLabel)} offer-card-link" aria-label="View ${escapeHtml(offer.Title)} offer" data-p100-theme="option-light">
+          <div class="offer-card-top">
+            <div class="offer-card-heading">
+              <p class="offer-card-title text-title-small-heavy-caps">${escapeHtml(offer.Title)}</p>
+              <p class="offer-card-subtitle text-copy-medium-regular">${escapeHtml(offer.Subtitle)}</p>
+            </div>
+            <div class="offer-card-badges" aria-label="Offer badges">
+              <span class="badge ${getModelBadgeClass(modelLabel)} badge--with-icon text-copy-small-regular-tight">
+                <span class="badge__label">${escapeHtml(modelLabel)}</span>
+                <span class="material-symbols-outlined" aria-hidden="true">info</span>
+              </span>${renderSpecBadges(offer.Specs)}
+            </div>
+          </div>
+          <div class="offer-card-media">
+            <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(offer.Title)}">
+          </div>
+          <div class="offer-card-bottom">
+            ${isHotOffer ? `<span class="badge badge--with-icon badge--hot-offer-promo text-copy-small-heavy-tight">
+              <img class="badge__icon" src="../assets/icons/special_flame_fill_color.svg" alt="" aria-hidden="true">
+              <span class="badge__label">Hot offer</span>
+            </span>` : ""}
+            <p class="offer-card-included text-copy-small-regular">
+              <span class="material-symbols-outlined offer-card-included__icon" aria-hidden="true">check</span>
+              <span>${escapeHtml(offer.Included)}</span>
+            </p>
+            <div class="offer-card-pricing">
+              <p class="price price--large price--heavy${isHotOffer ? " price--hot" : ""}">
+                <span class="price__currency text-copy-medium-heavy-tight">$</span>
+                <span class="price__integer text-title-small-heavy">${escapeHtml(dailyPrice.integerPart)}</span>
+                <span class="price__decimal text-copy-medium-heavy-tight">${escapeHtml(dailyPrice.decimalPart)}</span>
+                <span class="price__suffix text-copy-medium-heavy-tight">${escapeHtml(dailyPrice.suffix)}</span>
+              </p>
+              <p class="price price--medium price--regular price--muted offer-card-price-total">
+                <span class="price__currency text-copy-small-regular">$</span>
+                <span class="price__integer text-copy-medium-regular">${escapeHtml(totalPrice.integerPart)}</span>
+                <span class="price__decimal text-copy-medium-regular">${escapeHtml(totalPrice.decimalPart)}</span>
+                <span class="price__suffix text-copy-small-regular">${escapeHtml(totalPrice.suffix)}</span>
+              </p>
+            </div>
+            ${renderBottomBadges(offer.Badges)}
+          </div>
+        </a>`;
+      };
+
+      const renderBanner = (banner, bannerImage) => `
+        <a href="#" class="offer-banner" aria-label="${escapeHtml(banner.title)}" data-p100-theme="option-light">
+          <img class="offer-banner__image" src="${escapeHtml(bannerImage)}" alt="" aria-hidden="true">
+          <div class="offer-banner__content">
+            <div class="offer-banner__text">
+              <p class="offer-banner__title text-title-medium-heavy-caps">${escapeHtml(banner.title)}</p>
+              <p class="offer-banner__subtitle text-copy-medium-regular">${escapeHtml(banner.subtitle)}</p>
+            </div>
+            <button type="button" class="button button--large button--brand offer-banner__cta text-copy-large-heavy-tight"><span class="button__label">${escapeHtml(banner.cta)}</span></button>
+          </div>
+        </a>
+      `;
+
+      const syncBannerHeightToCard = () => {
+        const firstCard = grid.querySelector(".offer-card.offer-card-link");
+        if (!firstCard) {
+          return;
+        }
+
+        const cardHeight = Math.round(firstCard.getBoundingClientRect().height);
+        document.documentElement.style.setProperty("--offer-banner-mobile-height", `${cardHeight}px`);
+      };
+
+      const renderOffers = async () => {
+        const [contentResponse, assetsResponse] = await Promise.all([
+          fetch(grid.dataset.contentSrc),
+          fetch(grid.dataset.assetsSrc)
+        ]);
+
+        if (!contentResponse.ok || !assetsResponse.ok) {
+          return;
+        }
+
+        const [contentMarkdown, assetsMarkdown] = await Promise.all([
+          contentResponse.text(),
+          assetsResponse.text()
+        ]);
+
+        const offers = parseOffers(contentMarkdown);
+        const banner = parseBanner(contentMarkdown);
+        const assets = parseAssets(assetsMarkdown);
+        const bannerImage = assets.get("Banner") || "";
+        const parts = [];
+
+        offers.forEach((offer, index) => {
+          const imageUrl = assets.get(offer.Title) || "";
+          parts.push(renderOfferCard(offer, imageUrl));
+          if (index === 2) {
+            parts.push(renderBanner(banner, bannerImage));
+          }
+        });
+
+        grid.innerHTML = parts.join("");
+        requestAnimationFrame(syncBannerHeightToCard);
+      };
+
+      syncHeaderTheme();
+      window.addEventListener("resize", syncHeaderTheme);
+      window.addEventListener("resize", syncBannerHeightToCard);
+      renderOffers();
+    })();
+  </script>
+</body>
+</html>

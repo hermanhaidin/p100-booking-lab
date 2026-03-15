@@ -1,0 +1,156 @@
+/* Shared offer-card component API
+   - Cards present vehicle rental offers after pickup location and dates are selected.
+   - Card shell is split into top content, centered media, and bottom content.
+   - Variant modifiers control the trailing top radial overlay:
+     offer-card--default | offer-card--premium | offer-card--guaranteed. */
+
+/* Base shell + media layering */
+.offer-card {
+  background-color: var(--color-surface-container);
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.08) 45%, rgba(0, 0, 0, 0.58) 100%),
+    url("https://img.sixt.com/1600/6f09b0e8-6820-4ac0-bedd-5797e9814c18.jpg");
+  background-position: center;
+  background-size: cover;
+  border: none;
+  border-radius: var(--radius-lg);
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.offer-card::before {
+  content: "";
+  height: 50%;
+  inset: 0 0 auto 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+
+/* Variant overlays */
+.offer-card--default::before {
+  display: none;
+}
+
+.offer-card--premium::before {
+  background: var(--radial-gradient-brand-top-trailing);
+}
+
+.offer-card--guaranteed::before {
+  background: var(--radial-gradient-gold-top-trailing);
+}
+
+/* Link behavior */
+.offer-card-link {
+  color: inherit;
+  cursor: pointer;
+  outline: var(--stroke-xl) solid transparent;
+  outline-offset: var(--stroke-xl);
+  text-decoration: none;
+  transition: outline-color 150ms ease;
+}
+
+.offer-card-link:hover {
+  outline-color: var(--color-content-secondary);
+}
+
+.offer-card-link:focus-visible {
+  outline-color: var(--color-overlay-focus);
+}
+
+/* Top block (always anchored to top) */
+.offer-card-top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xs);
+  inset: 0 0 auto 0;
+  padding: var(--spacing-xs) var(--spacing-xs) 0;
+  position: absolute;
+  z-index: 2;
+}
+
+.offer-card-heading p {
+  margin: 0;
+}
+
+.offer-card-title,
+.offer-card-subtitle {
+  color: var(--color-content-primary);
+}
+
+.offer-card-badges {
+  align-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3xs);
+  padding-top: var(--spacing-3xs);
+}
+
+/* Centered media lane
+   Vertical 96px breathing space keeps images visually centered across grid rows. */
+.offer-card-media {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-block: var(--spacing-5xl);
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.offer-card-media img {
+  aspect-ratio: 3 / 2;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Bottom block (always anchored to bottom)
+   No min-height so optional badges wrap naturally. */
+.offer-card-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xs);
+  inset: auto 0 0 0;
+  justify-content: flex-end;
+  padding: 0 var(--spacing-xs) var(--spacing-xs);
+  position: absolute;
+  z-index: 2;
+}
+
+.offer-card-bottom-badge {
+  align-self: flex-start;
+}
+
+.offer-card-included {
+  align-items: center;
+  color: var(--color-content-primary);
+  display: inline-flex;
+  gap: var(--spacing-4xs);
+  margin: 0;
+}
+
+.offer-card-included__icon {
+  color: var(--color-content-extended-success);
+  font-size: 16px;
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 20;
+}
+
+.offer-card-pricing {
+  align-items: baseline;
+  display: flex;
+  gap: var(--spacing-3xs);
+}
+
+.offer-card-price-total {
+  margin: 0;
+}
+
+/* Offer-card contract:
+   if .badge--hot-offer-promo is present, daily price should include .price--hot. */
+/* Card-specific badge placement override */
+.offer-card-bottom .badge--hot-offer-promo {
+  align-self: flex-start;
+}
