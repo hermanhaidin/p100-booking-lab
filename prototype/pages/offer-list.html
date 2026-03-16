@@ -19,8 +19,10 @@
   <link rel="stylesheet" href="../styles/components/text-button.css">
   <link rel="stylesheet" href="../styles/components/link.css">
   <link rel="stylesheet" href="../styles/components/icon-button.css">
+  <link rel="stylesheet" href="../styles/components/radio-button.css">
   <link rel="stylesheet" href="../styles/components/price.css">
   <link rel="stylesheet" href="../styles/components/offer-card.css">
+  <link rel="stylesheet" href="../styles/components/offer-details.css">
   <link rel="stylesheet" href="../styles/components/offer-banner.css">
   <link rel="stylesheet" href="../styles/components/booking-footer.css">
   <link rel="stylesheet" href="../styles/components/separator.css">
@@ -145,6 +147,17 @@
       if (!grid) {
         return;
       }
+      const MOBILE_BREAKPOINT = "(max-width: 649px)";
+      const TABLET_BREAKPOINT = "(min-width: 650px) and (max-width: 1199px)";
+      const INLINE_DETAILS_ID = "offer-details-panel-inline";
+      const MOBILE_DETAILS_ID = "offer-details-panel-mobile";
+      const mobileDetailsOverlay = document.createElement("div");
+      const mobileDetailsSheet = document.createElement("div");
+      let offersData = [];
+      let assetsMap = new Map();
+      let bannerData = null;
+      let selectedOfferIndex = null;
+      let lastTriggerElement = null;
 
       const syncHeaderTheme = () => {
         if (!header) {
@@ -275,6 +288,127 @@
         return { icon: "info", label: spec };
       };
 
+      const getOfferVariantKey = (modelLabel) => {
+        if (modelLabel === "Premium brand") {
+          return "premium";
+        }
+        if (modelLabel === "Guaranteed model") {
+          return "guaranteed";
+        }
+        return "default";
+      };
+
+      const getModelBadgeLabel = (offer) => offer["Model label"] || "Or similar model";
+
+      const getMinimumAge = (offer) => getOfferVariantKey(getModelBadgeLabel(offer)) === "default" ? 18 : 21;
+
+      const getDailyPriceAmount = (offer) => {
+        const dailyRaw = String(offer["Price per day"] ?? "")
+          .replaceAll("$", "")
+          .replaceAll("/day", "")
+          .trim();
+        const dailyAmount = Number.parseFloat(dailyRaw);
+        return Number.isFinite(dailyAmount) ? dailyAmount : 0;
+      };
+
+      const getFlexibleAddon = (offer) => {
+        return (getDailyPriceAmount(offer) * 0.05).toFixed(2);
+      };
+
+      const getMileageDetails = (offer) => {
+        const includedRaw = String(offer.Included ?? "").trim();
+        const limitedMatch = includedRaw.match(/([\d,]+)\s*(?:kilometers?|km)\s*included/i);
+        if (limitedMatch) {
+          const includedKm = limitedMatch[1];
+          const additionalPerKm = (getDailyPriceAmount(offer) * 0.005).toFixed(2);
+          return {
+            title: `${includedKm} km`,
+            subtitle: `+$${additionalPerKm} / for every additional km`,
+            includedLabel: "Included"
+          };
+        }
+        return {
+          title: "Unlimited kilometers",
+          subtitle: "All kilometers are included in the price",
+          includedLabel: "Included"
+        };
+      };
+
+      const getRangeSpec = (offer) => offer.Specs.find((spec) => /^\d+mi$/i.test(spec));
+      const hasElectricSpec = (offer) => offer.Specs.some((spec) => spec.toLowerCase() === "electric");
+      const hasHybridSpec = (offer) => offer.Specs.some((spec) => spec.toLowerCase() === "hybrid");
+      const getSeatsSpec = (offer) => offer.Specs.find((spec) => /^\d+\s+seats$/i.test(spec));
+      const getSuitcasesSpec = (offer) => offer.Specs.find((spec) => /^\d+\s+suitcases$/i.test(spec));
+      const getTransmissionSpec = (offer) => offer.Specs.find((spec) => /^(automatic|manual)$/i.test(spec));
+
+      const getDetailsSpecs = (offer) => {
+        const specs = [];
+        const rangeSpec = getRangeSpec(offer);
+        const seatsSpec = getSeatsSpec(offer);
+        const suitcasesSpec = getSuitcasesSpec(offer);
+        const transmissionSpec = getTransmissionSpec(offer);
+
+        if (rangeSpec) {
+          specs.push({ icon: "battery_charging_full", label: `Range ~${rangeSpec}` });
+        }
+        if (seatsSpec) {
+          const seatsCount = seatsSpec.match(/^(\d+)/i)?.[1] || "";
+          specs.push({ icon: "person", label: `${seatsCount} Seats` });
+        }
+        if (suitcasesSpec) {
+          const suitcasesCount = suitcasesSpec.match(/^(\d+)/i)?.[1] || "";
+          specs.push({ icon: "travel_luggage_and_bags", label: `${suitcasesCount} Suitcase(s)` });
+        }
+        if (transmissionSpec) {
+          const isAutomatic = transmissionSpec.toLowerCase() === "automatic";
+          specs.push({
+            icon: isAutomatic ? "hdr_auto" : "auto_transmission",
+            label: isAutomatic ? "Automatic" : "Manual"
+          });
+        }
+        if (hasElectricSpec(offer)) {
+          specs.push({ icon: "cable", label: "Cables included" });
+        }
+        specs.push({ icon: "id_card", label: `Minimum age of the youngest driver: ${getMinimumAge(offer)}` });
+        return specs;
+      };
+
+      const renderDetailsSpecBadges = (offer) => getDetailsSpecs(offer).map((item) => `
+          <span class="badge badge--with-icon badge--offer-spec text-copy-small-regular-tight">
+            <span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">${escapeHtml(item.icon)}</span>
+            <span class="badge__label">${escapeHtml(item.label)}</span>
+          </span>
+      `).join("");
+
+      const renderModelBadges = (offer) => {
+        const modelLabel = getModelBadgeLabel(offer);
+        const variant = getOfferVariantKey(modelLabel);
+        const items = [];
+        items.push(`
+          <span class="badge ${getModelBadgeClass(modelLabel)} badge--with-icon text-copy-small-regular-tight">
+            <span class="badge__label">${escapeHtml(modelLabel)}</span>
+            <span class="material-symbols-outlined" aria-hidden="true">info</span>
+          </span>
+        `);
+        if (hasElectricSpec(offer)) {
+          items.push(`
+            <span class="badge badge--with-icon badge--offer-spec text-copy-small-regular-tight">
+              <span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">bolt</span>
+              <span class="badge__label">Electric</span>
+            </span>
+          `);
+        }
+        if (hasHybridSpec(offer)) {
+          items.push(`
+            <span class="badge badge--with-icon badge--offer-spec text-copy-small-regular-tight">
+              <span class="material-symbols-outlined badge__icon badge__icon--filled" aria-hidden="true">power</span>
+              <span class="badge__label">Hybrid</span>
+            </span>
+          `);
+        }
+        return { variant, html: items.join("") };
+      };
+
       const renderSpecBadges = (specs) => specs.map((spec) => {
         const item = getSpecBadge(spec);
         return `
@@ -292,13 +426,20 @@
             </span>`)
         .join("");
 
-      const renderOfferCard = (offer, imageUrl) => {
-        const modelLabel = offer["Model label"] || "Or similar model";
+      const renderOfferCard = (offer, imageUrl, offerIndex) => {
+        const modelLabel = getModelBadgeLabel(offer);
+        const isActive = selectedOfferIndex === offerIndex;
         const isHotOffer = offer.Badges.includes("Hot offer");
         const dailyPrice = parsePriceParts(offer["Price per day"], "day");
         const totalPrice = parsePriceParts(offer["Total price"], "total");
         return `
-        <a href="#" class="offer-card ${getVariant(modelLabel)} offer-card-link" aria-label="View ${escapeHtml(offer.Title)} offer" data-p100-theme="option-light">
+        <a href="#"
+          class="offer-card ${getVariant(modelLabel)} offer-card-link${isActive ? " is-active" : ""}"
+          aria-label="View ${escapeHtml(offer.Title)} offer"
+          data-p100-theme="option-light"
+          data-offer-index="${offerIndex}"
+          aria-expanded="${isActive ? "true" : "false"}"
+          aria-controls="${INLINE_DETAILS_ID}">
           <div class="offer-card-top">
             <div class="offer-card-heading">
               <p class="offer-card-title text-title-small-heavy-caps">${escapeHtml(offer.Title)}</p>
@@ -355,6 +496,219 @@
         </a>
       `;
 
+      const renderOfferDetails = (offer, imageUrl, mobile) => {
+        const modelData = renderModelBadges(offer);
+        const dailyPrice = parsePriceParts(offer["Price per day"], "day");
+        const totalPrice = parsePriceParts(offer["Total price"], "total");
+        const closeLabel = mobile ? "Close offer details overlay" : "Close offer details panel";
+        const flexibleAddon = getFlexibleAddon(offer);
+        const flexibleAddonPrice = parsePriceParts(`$ ${flexibleAddon} / day`, "day");
+        const mileageDetails = getMileageDetails(offer);
+        const detailsId = mobile ? MOBILE_DETAILS_ID : INLINE_DETAILS_ID;
+        return `
+          <article
+            id="${detailsId}"
+            class="offer-details offer-details--${modelData.variant}${mobile ? " offer-details--mobile" : " offer-details--inline"}"
+            data-p100-theme="prime-light"
+            ${mobile ? 'role="dialog" aria-modal="true" aria-labelledby="offer-details-mobile-title"' : ""}
+          >
+            <section class="offer-details__media" aria-label="Vehicle details" data-p100-theme="option-light">
+              <button type="button" class="icon-button icon-button--large icon-button--primary offer-details__close offer-details__close--media" data-offer-details-close aria-label="${closeLabel}">
+                <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">${mobile ? "arrow_back_ios_new" : "close"}</span>
+              </button>
+              <div class="offer-details__media-top">
+                <p id="${mobile ? "offer-details-mobile-title" : "offer-details-inline-title"}" class="offer-details__title text-title-medium-heavy-caps">${escapeHtml(offer.Title)}</p>
+                <p class="offer-details__subtitle text-copy-medium-regular">${escapeHtml(offer.Subtitle)}</p>
+              </div>
+              <div class="offer-details__media-main">
+                <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(offer.Title)}">
+              </div>
+              <div class="offer-details__media-bottom">
+                <div class="offer-details__model-badge">${modelData.html}</div>
+                <div class="offer-details__specs">${renderDetailsSpecBadges(offer)}</div>
+                ${mobile ? `
+                <div class="offer-details__included-strip">
+                  <span class="material-symbols-outlined" aria-hidden="true">check</span>
+                  <span class="text-copy-small-heavy">${escapeHtml(offer.Included)}</span>
+                </div>` : ""}
+              </div>
+            </section>
+            <section class="offer-details__booking" aria-label="Booking details">
+              <button type="button" class="icon-button icon-button--large icon-button--primary offer-details__close offer-details__close--booking" data-offer-details-close aria-label="${closeLabel}">
+                <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">${mobile ? "arrow_back_ios_new" : "close"}</span>
+              </button>
+              <p class="offer-details__section-title text-copy-large-heavy-tight">Booking option</p>
+              <div class="offer-details__option-group" role="radiogroup" aria-label="Booking option">
+                <label class="offer-details__option">
+                  <span class="offer-details__option-row">
+                    <span class="radio-button">
+                      <input class="radio-button__native" type="radio" name="booking-option-${detailsId}" value="best-price" checked>
+                      <span class="radio-button__control" aria-hidden="true"></span>
+                    </span>
+                    <span class="offer-details__option-main">
+                      <span class="text-copy-large-heavy-tight">Best price</span>
+                      <span class="offer-details__option-sub text-copy-small-regular">Free cancellation and rebooking within 24h</span>
+                      <span class="offer-details__option-mobile-value text-copy-medium-heavy-tight">Included</span>
+                    </span>
+                    <span class="offer-details__option-meta">
+                      <span class="offer-details__option-meta-value text-copy-medium-heavy-tight">Included</span>
+                      <button type="button" class="icon-button icon-button--large icon-button--primary offer-details__option-info-button" aria-label="More booking option information" data-offer-option-info>
+                        <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
+                      </button>
+                    </span>
+                  </span>
+                </label>
+                <label class="offer-details__option">
+                  <span class="offer-details__option-row">
+                    <span class="radio-button">
+                      <input class="radio-button__native" type="radio" name="booking-option-${detailsId}" value="stay-flexible">
+                      <span class="radio-button__control" aria-hidden="true"></span>
+                    </span>
+                    <span class="offer-details__option-main">
+                      <span class="text-copy-large-heavy-tight">Stay flexible</span>
+                      <span class="offer-details__option-sub text-copy-small-regular">Free cancellation and rebooking any time before pickup</span>
+                      <span class="price price--medium price--heavy offer-details__option-mobile-value">
+                        <span class="price__sign text-copy-small-heavy-tight">+</span>
+                        <span class="price__currency text-copy-small-heavy-tight">$</span>
+                        <span class="price__integer text-copy-medium-heavy-tight">${escapeHtml(flexibleAddonPrice.integerPart)}</span>
+                        <span class="price__decimal text-copy-medium-heavy-tight">${escapeHtml(flexibleAddonPrice.decimalPart)}</span>
+                        <span class="price__suffix text-copy-small-heavy-tight">${escapeHtml(flexibleAddonPrice.suffix)}</span>
+                      </span>
+                    </span>
+                    <span class="offer-details__option-meta">
+                      <span class="badge badge--premium-brand badge--text-only text-copy-small-heavy-tight"><span class="badge__label">Popular</span></span>
+                      <span class="price price--medium price--heavy offer-details__option-meta-value">
+                        <span class="price__sign text-copy-small-heavy-tight">+</span>
+                        <span class="price__currency text-copy-small-heavy-tight">$</span>
+                        <span class="price__integer text-copy-medium-heavy-tight">${escapeHtml(flexibleAddonPrice.integerPart)}</span>
+                        <span class="price__decimal text-copy-medium-heavy-tight">${escapeHtml(flexibleAddonPrice.decimalPart)}</span>
+                        <span class="price__suffix text-copy-small-heavy-tight">${escapeHtml(flexibleAddonPrice.suffix)}</span>
+                      </span>
+                      <button type="button" class="icon-button icon-button--large icon-button--primary offer-details__option-info-button" aria-label="More booking option information" data-offer-option-info>
+                        <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
+                      </button>
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <p class="offer-details__section-title text-copy-large-heavy-tight">Mileage</p>
+              <div class="offer-details__option-group offer-details__option-group--single" aria-label="Mileage option">
+                <div class="offer-details__option offer-details__option--static is-selected">
+                  <div class="offer-details__option-row offer-details__option-row--static">
+                    <span class="offer-details__option-main">
+                      <span class="text-copy-large-heavy-tight">${escapeHtml(mileageDetails.title)}</span>
+                      <span class="offer-details__option-sub text-copy-small-regular">${escapeHtml(mileageDetails.subtitle)}</span>
+                      <span class="offer-details__option-mobile-value text-copy-medium-heavy-tight">${escapeHtml(mileageDetails.includedLabel)}</span>
+                    </span>
+                    <span class="offer-details__option-meta">
+                      <span class="offer-details__option-meta-value text-copy-medium-heavy-tight">${escapeHtml(mileageDetails.includedLabel)}</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="offer-details__booking-bottom">
+                <button type="button" class="button button--large button--brand offer-details__next text-copy-large-heavy-tight"><span class="button__label">Next</span></button>
+                <div class="offer-details__desktop-price">
+                  <div class="offer-card-pricing">
+                    <p class="price price--large price--heavy offer-details__price-total">
+                      <span class="price__currency text-copy-medium-heavy-tight">$</span>
+                      <span class="price__integer text-title-small-heavy">${escapeHtml(dailyPrice.integerPart)}</span>
+                      <span class="price__decimal text-copy-medium-heavy-tight">${escapeHtml(dailyPrice.decimalPart)}</span>
+                      <span class="price__suffix text-copy-medium-heavy-tight">${escapeHtml(dailyPrice.suffix)}</span>
+                    </p>
+                    <p class="price price--medium price--regular price--muted offer-card-price-total">
+                      <span class="price__currency text-copy-small-regular">$</span>
+                      <span class="price__integer text-copy-medium-regular">${escapeHtml(totalPrice.integerPart)}</span>
+                      <span class="price__decimal text-copy-medium-regular">${escapeHtml(totalPrice.decimalPart)}</span>
+                      <span class="price__suffix text-copy-small-regular">${escapeHtml(totalPrice.suffix)}</span>
+                    </p>
+                  </div>
+                  <button type="button" class="text-button text-button--large text-button--primary text-button--underlined text-copy-medium-heavy offer-details__price-link" data-offer-price-details>
+                    <span class="text-button__label">Price details</span>
+                  </button>
+                </div>
+                <div class="offer-details__mobile-total">
+                  <div class="offer-details__mobile-total-left">
+                    <span class="text-title-small-heavy">Total</span>
+                    <button type="button" class="text-button text-button--large text-button--primary text-button--underlined text-copy-medium-heavy offer-details__price-link offer-details__mobile-price-link" data-offer-price-details>
+                      <span class="text-button__label">Price details</span>
+                    </button>
+                  </div>
+                  <p class="price price--large price--heavy offer-details__mobile-total-price">
+                    <span class="price__currency text-copy-medium-heavy-tight">$</span>
+                    <span class="price__integer text-title-small-heavy">${escapeHtml(totalPrice.integerPart)}</span>
+                    <span class="price__decimal text-copy-medium-heavy-tight">${escapeHtml(totalPrice.decimalPart)}</span>
+                  </p>
+                </div>
+              </div>
+            </section>
+          </article>
+        `;
+      };
+
+      const getGridColumns = () => {
+        if (window.matchMedia("(min-width: 1200px)").matches) {
+          return 3;
+        }
+        if (window.matchMedia("(min-width: 650px)").matches) {
+          return 2;
+        }
+        return 1;
+      };
+
+      const buildGridSequence = () => {
+        const sequence = [];
+        offersData.forEach((offer, offerIndex) => {
+          sequence.push({ type: "offer", offer, offerIndex });
+          if (offerIndex === 2 && bannerData) {
+            sequence.push({ type: "banner" });
+          }
+        });
+        return sequence;
+      };
+
+      const getInlineInsertIndex = (sequence) => {
+        if (selectedOfferIndex === null) {
+          return -1;
+        }
+        const selectedSequenceIndex = sequence.findIndex((item) => item.type === "offer" && item.offerIndex === selectedOfferIndex);
+        if (selectedSequenceIndex < 0) {
+          return -1;
+        }
+        const columns = getGridColumns();
+        return Math.min((Math.floor(selectedSequenceIndex / columns) + 1) * columns, sequence.length);
+      };
+
+      const closeOfferDetails = ({ restoreFocus = true } = {}) => {
+        if (selectedOfferIndex === null) {
+          return;
+        }
+        selectedOfferIndex = null;
+        renderList();
+        if (restoreFocus && lastTriggerElement && lastTriggerElement.isConnected) {
+          lastTriggerElement.focus();
+        }
+      };
+
+      const syncMobileDialogState = () => {
+        const isMobile = window.matchMedia(MOBILE_BREAKPOINT).matches;
+        const mobileOpen = isMobile && selectedOfferIndex !== null;
+        mobileDetailsOverlay.classList.toggle("is-open", mobileOpen);
+        mobileDetailsOverlay.setAttribute("aria-hidden", mobileOpen ? "false" : "true");
+        mobileDetailsSheet.classList.toggle("is-open", mobileOpen);
+        mobileDetailsSheet.setAttribute("aria-hidden", mobileOpen ? "false" : "true");
+        document.body.classList.toggle("offer-details-lock-scroll", mobileOpen);
+      };
+
+      const focusDetailsCloseButton = () => {
+        const scope = window.matchMedia(MOBILE_BREAKPOINT).matches ? mobileDetailsSheet : grid;
+        const closeButtons = [...scope.querySelectorAll(".offer-details__close")];
+        const target = closeButtons.find((button) => button.offsetParent !== null);
+        if (target) {
+          target.focus({ preventScroll: true });
+        }
+      };
+
       const syncBannerHeightToCard = () => {
         const firstCard = grid.querySelector(".offer-card.offer-card-link");
         if (!firstCard) {
@@ -365,7 +719,66 @@
         document.documentElement.style.setProperty("--offer-banner-mobile-height", `${cardHeight}px`);
       };
 
-      const renderOffers = async () => {
+      const scrollInlineDetailsIntoView = () => {
+        if (selectedOfferIndex === null || window.matchMedia(MOBILE_BREAKPOINT).matches) {
+          return;
+        }
+        const details = document.getElementById(INLINE_DETAILS_ID);
+        if (!details) {
+          return;
+        }
+        const rect = details.getBoundingClientRect();
+        const pageY = window.scrollY + rect.top;
+        const isTablet = window.matchMedia(TABLET_BREAKPOINT).matches;
+        const targetY = isTablet
+          ? Math.max(0, pageY - Math.round(window.innerHeight * 0.18))
+          : Math.max(0, pageY - Math.round((window.innerHeight - rect.height) / 2));
+        window.scrollTo({ top: targetY, behavior: "smooth" });
+      };
+
+      const renderList = () => {
+        const isMobile = window.matchMedia(MOBILE_BREAKPOINT).matches;
+        const sequence = buildGridSequence();
+        const inlineInsertIndex = !isMobile ? getInlineInsertIndex(sequence) : -1;
+        const parts = [];
+
+        sequence.forEach((item, index) => {
+          if (item.type === "offer") {
+            const imageUrl = assetsMap.get(item.offer.Title) || "";
+            parts.push(renderOfferCard(item.offer, imageUrl, item.offerIndex));
+          } else if (item.type === "banner" && bannerData) {
+            const bannerImage = assetsMap.get("Banner") || "";
+            parts.push(renderBanner(bannerData, bannerImage));
+          }
+          if (inlineInsertIndex === index + 1 && selectedOfferIndex !== null) {
+            const selectedOffer = offersData[selectedOfferIndex];
+            const selectedImage = selectedOffer ? assetsMap.get(selectedOffer.Title) || "" : "";
+            if (selectedOffer) {
+              parts.push(`<div class="offer-list-details-slot"><div class="offer-list-details-wrapper">${renderOfferDetails(selectedOffer, selectedImage, false)}</div></div>`);
+            }
+          }
+        });
+
+        grid.innerHTML = parts.join("");
+
+        if (isMobile && selectedOfferIndex !== null) {
+          const selectedOffer = offersData[selectedOfferIndex];
+          const selectedImage = selectedOffer ? assetsMap.get(selectedOffer.Title) || "" : "";
+          mobileDetailsSheet.innerHTML = selectedOffer ? renderOfferDetails(selectedOffer, selectedImage, true) : "";
+        } else {
+          mobileDetailsSheet.innerHTML = "";
+        }
+
+        syncMobileDialogState();
+        requestAnimationFrame(() => {
+          syncBannerHeightToCard();
+          if (!isMobile && selectedOfferIndex !== null) {
+            scrollInlineDetailsIntoView();
+          }
+        });
+      };
+
+      const fetchAndPrepareData = async () => {
         const [contentResponse, assetsResponse] = await Promise.all([
           fetch(grid.dataset.contentSrc),
           fetch(grid.dataset.assetsSrc)
@@ -380,28 +793,86 @@
           assetsResponse.text()
         ]);
 
-        const offers = parseOffers(contentMarkdown);
-        const banner = parseBanner(contentMarkdown);
-        const assets = parseAssets(assetsMarkdown);
-        const bannerImage = assets.get("Banner") || "";
-        const parts = [];
+        offersData = parseOffers(contentMarkdown);
+        bannerData = parseBanner(contentMarkdown);
+        assetsMap = parseAssets(assetsMarkdown);
+      };
 
-        offers.forEach((offer, index) => {
-          const imageUrl = assets.get(offer.Title) || "";
-          parts.push(renderOfferCard(offer, imageUrl));
-          if (index === 2) {
-            parts.push(renderBanner(banner, bannerImage));
-          }
-        });
+      const onGridClick = (event) => {
+        const optionInfoButton = event.target.closest("[data-offer-option-info]");
+        if (optionInfoButton) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
 
-        grid.innerHTML = parts.join("");
-        requestAnimationFrame(syncBannerHeightToCard);
+        const closeButton = event.target.closest("[data-offer-details-close]");
+        if (closeButton) {
+          event.preventDefault();
+          closeOfferDetails();
+          return;
+        }
+
+        const card = event.target.closest(".offer-card-link[data-offer-index]");
+        if (!card) {
+          return;
+        }
+        event.preventDefault();
+        const index = Number(card.dataset.offerIndex);
+        if (!Number.isInteger(index)) {
+          return;
+        }
+        selectedOfferIndex = index;
+        lastTriggerElement = card;
+        renderList();
+        requestAnimationFrame(focusDetailsCloseButton);
+      };
+
+      const onMobileLayerClick = (event) => {
+        const optionInfoButton = event.target.closest("[data-offer-option-info]");
+        if (optionInfoButton) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+
+        if (event.target.closest("[data-offer-details-close]")) {
+          event.preventDefault();
+          closeOfferDetails();
+        }
+      };
+
+      const onKeyDown = (event) => {
+        if (event.key === "Escape" && selectedOfferIndex !== null) {
+          closeOfferDetails();
+        }
+      };
+
+      const initMobileLayer = () => {
+        mobileDetailsOverlay.className = "offer-details-overlay";
+        mobileDetailsOverlay.setAttribute("aria-hidden", "true");
+        mobileDetailsSheet.className = "offer-details-mobile-sheet";
+        mobileDetailsSheet.id = "offer-details-mobile-sheet";
+        mobileDetailsSheet.setAttribute("aria-hidden", "true");
+        document.body.append(mobileDetailsOverlay, mobileDetailsSheet);
+      };
+
+      const onViewportResize = () => {
+        syncHeaderTheme();
+        renderList();
       };
 
       syncHeaderTheme();
-      window.addEventListener("resize", syncHeaderTheme);
-      window.addEventListener("resize", syncBannerHeightToCard);
-      renderOffers();
+      initMobileLayer();
+      grid.addEventListener("click", onGridClick);
+      mobileDetailsOverlay.addEventListener("click", () => closeOfferDetails());
+      mobileDetailsSheet.addEventListener("click", onMobileLayerClick);
+      window.addEventListener("keydown", onKeyDown);
+      window.addEventListener("resize", onViewportResize);
+
+      fetchAndPrepareData().then(() => {
+        renderList();
+      });
     })();
   </script>
 </body>
