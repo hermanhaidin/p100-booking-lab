@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="../styles/components/link.css">
   <link rel="stylesheet" href="../styles/components/icon-button.css">
   <link rel="stylesheet" href="../styles/components/radio-button.css">
+  <link rel="stylesheet" href="../styles/components/radio-button.presets.css">
   <link rel="stylesheet" href="../styles/components/price.css">
   <link rel="stylesheet" href="../styles/components/offer-card.css">
   <link rel="stylesheet" href="../styles/components/offer-details.css">
@@ -239,6 +240,49 @@
           decimalPart: `.${decimalPart ?? "00"}`,
           suffix
         };
+      };
+
+      const getPriceAmount = (priceParts) => Number.parseFloat(`${priceParts.integerPart}${priceParts.decimalPart}`);
+
+      const buildPriceParts = (amount, suffix) => {
+        const normalized = Number.isFinite(amount) ? amount : 0;
+        const [integerPart, decimalDigits] = normalized.toFixed(2).split(".");
+        return {
+          integerPart,
+          decimalPart: `.${decimalDigits}`,
+          suffix
+        };
+      };
+
+      const getTripDurationDaysFromHeader = () => {
+        const tripContextButton = document.querySelector(".booking-header__search-button");
+        if (!tripContextButton) {
+          return null;
+        }
+
+        const text = tripContextButton.textContent || "";
+        const tripMatch = text.match(/([A-Za-z]{3}\s+\d{1,2})\s*\|\s*([\d:]+\s*[AP]M)\s*-\s*([A-Za-z]{3}\s+\d{1,2})\s*\|\s*([\d:]+\s*[AP]M)/i);
+        if (!tripMatch) {
+          return null;
+        }
+
+        const [, startDatePart, startTimePart, endDatePart, endTimePart] = tripMatch;
+        const year = new Date().getFullYear();
+        const start = new Date(`${startDatePart} ${year} ${startTimePart}`);
+        let end = new Date(`${endDatePart} ${year} ${endTimePart}`);
+        if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+          return null;
+        }
+        if (end < start) {
+          end = new Date(`${endDatePart} ${year + 1} ${endTimePart}`);
+        }
+
+        const diffMs = end.getTime() - start.getTime();
+        if (diffMs <= 0) {
+          return null;
+        }
+
+        return Math.max(1, Math.round(diffMs / (1000 * 60 * 60 * 24)));
       };
 
       const getVariant = (modelLabel) => {
@@ -538,9 +582,9 @@
                 <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">${mobile ? "arrow_back_ios_new" : "close"}</span>
               </button>
               <p class="offer-details__section-title text-copy-large-heavy-tight">Booking option</p>
-              <div class="offer-details__option-group" role="radiogroup" aria-label="Booking option">
-                <label class="offer-details__option">
-                  <span class="offer-details__option-row">
+              <div class="offer-details__option-group radio-choice-card-group" role="radiogroup" aria-label="Booking option">
+                <label class="offer-details__option radio-choice-card">
+                  <span class="offer-details__option-row radio-choice-card__row">
                     <span class="radio-button">
                       <input class="radio-button__native" type="radio" name="booking-option-${detailsId}" value="best-price" checked>
                       <span class="radio-button__control" aria-hidden="true"></span>
@@ -550,16 +594,16 @@
                       <span class="offer-details__option-sub text-copy-small-regular">Free cancellation and rebooking within 24h</span>
                       <span class="offer-details__option-mobile-value text-copy-medium-heavy-tight">Included</span>
                     </span>
-                    <span class="offer-details__option-meta">
+                    <span class="offer-details__option-meta radio-choice-card__meta">
                       <span class="offer-details__option-meta-value text-copy-medium-heavy-tight">Included</span>
-                      <button type="button" class="icon-button icon-button--large icon-button--primary offer-details__option-info-button" aria-label="More booking option information" data-offer-option-info>
+                      <button type="button" class="icon-button icon-button--large icon-button--primary offer-details__option-info-button radio-choice-card__info-button" aria-label="More booking option information" data-offer-option-info>
                         <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
                       </button>
                     </span>
                   </span>
                 </label>
-                <label class="offer-details__option">
-                  <span class="offer-details__option-row">
+                <label class="offer-details__option radio-choice-card">
+                  <span class="offer-details__option-row radio-choice-card__row">
                     <span class="radio-button">
                       <input class="radio-button__native" type="radio" name="booking-option-${detailsId}" value="stay-flexible">
                       <span class="radio-button__control" aria-hidden="true"></span>
@@ -575,7 +619,7 @@
                         <span class="price__suffix text-copy-small-heavy-tight">${escapeHtml(flexibleAddonPrice.suffix)}</span>
                       </span>
                     </span>
-                    <span class="offer-details__option-meta">
+                    <span class="offer-details__option-meta radio-choice-card__meta">
                       <span class="badge badge--premium-brand badge--text-only text-copy-small-heavy-tight"><span class="badge__label">Popular</span></span>
                       <span class="price price--medium price--heavy offer-details__option-meta-value">
                         <span class="price__sign text-copy-small-heavy-tight">+</span>
@@ -584,7 +628,7 @@
                         <span class="price__decimal text-copy-medium-heavy-tight">${escapeHtml(flexibleAddonPrice.decimalPart)}</span>
                         <span class="price__suffix text-copy-small-heavy-tight">${escapeHtml(flexibleAddonPrice.suffix)}</span>
                       </span>
-                      <button type="button" class="icon-button icon-button--large icon-button--primary offer-details__option-info-button" aria-label="More booking option information" data-offer-option-info>
+                      <button type="button" class="icon-button icon-button--large icon-button--primary offer-details__option-info-button radio-choice-card__info-button" aria-label="More booking option information" data-offer-option-info>
                         <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
                       </button>
                     </span>
@@ -592,15 +636,15 @@
                 </label>
               </div>
               <p class="offer-details__section-title text-copy-large-heavy-tight">Mileage</p>
-              <div class="offer-details__option-group offer-details__option-group--single" aria-label="Mileage option">
-                <div class="offer-details__option offer-details__option--static is-selected">
-                  <div class="offer-details__option-row offer-details__option-row--static">
+              <div class="offer-details__option-group offer-details__option-group--single radio-choice-card-group radio-choice-card-group--single" aria-label="Mileage option">
+                <div class="offer-details__option offer-details__option--static is-selected radio-choice-card radio-choice-card--static">
+                  <div class="offer-details__option-row offer-details__option-row--static radio-choice-card__row radio-choice-card__row--static">
                     <span class="offer-details__option-main">
                       <span class="text-copy-large-heavy-tight">${escapeHtml(mileageDetails.title)}</span>
                       <span class="offer-details__option-sub text-copy-small-regular">${escapeHtml(mileageDetails.subtitle)}</span>
                       <span class="offer-details__option-mobile-value text-copy-medium-heavy-tight">${escapeHtml(mileageDetails.includedLabel)}</span>
                     </span>
-                    <span class="offer-details__option-meta">
+                    <span class="offer-details__option-meta radio-choice-card__meta">
                       <span class="offer-details__option-meta-value text-copy-medium-heavy-tight">${escapeHtml(mileageDetails.includedLabel)}</span>
                     </span>
                   </div>
@@ -612,15 +656,15 @@
                   <div class="offer-card-pricing">
                     <p class="price price--large price--heavy offer-details__price-total">
                       <span class="price__currency text-copy-medium-heavy-tight">$</span>
-                      <span class="price__integer text-title-small-heavy">${escapeHtml(dailyPrice.integerPart)}</span>
-                      <span class="price__decimal text-copy-medium-heavy-tight">${escapeHtml(dailyPrice.decimalPart)}</span>
-                      <span class="price__suffix text-copy-medium-heavy-tight">${escapeHtml(dailyPrice.suffix)}</span>
+                      <span class="price__integer text-title-small-heavy" data-offer-details-price="daily-integer">${escapeHtml(dailyPrice.integerPart)}</span>
+                      <span class="price__decimal text-copy-medium-heavy-tight" data-offer-details-price="daily-decimal">${escapeHtml(dailyPrice.decimalPart)}</span>
+                      <span class="price__suffix text-copy-medium-heavy-tight" data-offer-details-price="daily-suffix">${escapeHtml(dailyPrice.suffix)}</span>
                     </p>
                     <p class="price price--medium price--regular price--muted offer-card-price-total">
                       <span class="price__currency text-copy-small-regular">$</span>
-                      <span class="price__integer text-copy-medium-regular">${escapeHtml(totalPrice.integerPart)}</span>
-                      <span class="price__decimal text-copy-medium-regular">${escapeHtml(totalPrice.decimalPart)}</span>
-                      <span class="price__suffix text-copy-small-regular">${escapeHtml(totalPrice.suffix)}</span>
+                      <span class="price__integer text-copy-medium-regular" data-offer-details-price="total-integer">${escapeHtml(totalPrice.integerPart)}</span>
+                      <span class="price__decimal text-copy-medium-regular" data-offer-details-price="total-decimal">${escapeHtml(totalPrice.decimalPart)}</span>
+                      <span class="price__suffix text-copy-small-regular" data-offer-details-price="total-suffix">${escapeHtml(totalPrice.suffix)}</span>
                     </p>
                   </div>
                   <button type="button" class="text-button text-button--large text-button--primary text-button--underlined text-copy-medium-heavy offer-details__price-link" data-offer-price-details>
@@ -636,8 +680,8 @@
                   </div>
                   <p class="price price--large price--heavy offer-details__mobile-total-price">
                     <span class="price__currency text-copy-medium-heavy-tight">$</span>
-                    <span class="price__integer text-title-small-heavy">${escapeHtml(totalPrice.integerPart)}</span>
-                    <span class="price__decimal text-copy-medium-heavy-tight">${escapeHtml(totalPrice.decimalPart)}</span>
+                    <span class="price__integer text-title-small-heavy" data-offer-details-price="mobile-total-integer">${escapeHtml(totalPrice.integerPart)}</span>
+                    <span class="price__decimal text-copy-medium-heavy-tight" data-offer-details-price="mobile-total-decimal">${escapeHtml(totalPrice.decimalPart)}</span>
                   </p>
                 </div>
               </div>
@@ -842,6 +886,64 @@
         }
       };
 
+      const updateOfferDetailsPricing = (detailsRoot, offer, bookingOption) => {
+        if (!detailsRoot || !offer) {
+          return;
+        }
+
+        const baseDailyParts = parsePriceParts(offer["Price per day"], "day");
+        const baseTotalParts = parsePriceParts(offer["Total price"], "total");
+        const baseDailyAmount = getPriceAmount(baseDailyParts);
+        const baseTotalAmount = getPriceAmount(baseTotalParts);
+        const flexibleAddonAmount = Number.parseFloat(getFlexibleAddon(offer));
+        const isFlexible = bookingOption === "stay-flexible";
+        const fallbackRentalDays = baseDailyAmount > 0
+          ? Math.max(1, Math.round(baseTotalAmount / baseDailyAmount))
+          : 1;
+        const rentalDays = getTripDurationDaysFromHeader() || fallbackRentalDays;
+        const nextDailyAmount = isFlexible ? baseDailyAmount + flexibleAddonAmount : baseDailyAmount;
+        const nextTotalAmount = isFlexible ? baseTotalAmount + (flexibleAddonAmount * rentalDays) : baseTotalAmount;
+        const nextDailyParts = buildPriceParts(nextDailyAmount, baseDailyParts.suffix);
+        const nextTotalParts = buildPriceParts(nextTotalAmount, baseTotalParts.suffix);
+
+        const setText = (key, value) => {
+          const node = detailsRoot.querySelector(`[data-offer-details-price="${key}"]`);
+          if (node) {
+            node.textContent = value;
+          }
+        };
+
+        setText("daily-integer", nextDailyParts.integerPart);
+        setText("daily-decimal", nextDailyParts.decimalPart);
+        setText("daily-suffix", nextDailyParts.suffix);
+        setText("total-integer", nextTotalParts.integerPart);
+        setText("total-decimal", nextTotalParts.decimalPart);
+        setText("total-suffix", nextTotalParts.suffix);
+        setText("mobile-total-integer", nextTotalParts.integerPart);
+        setText("mobile-total-decimal", nextTotalParts.decimalPart);
+      };
+
+      const onBookingOptionChange = (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLInputElement)) {
+          return;
+        }
+        if (!target.matches('.radio-button__native[type="radio"][name^="booking-option-"]')) {
+          return;
+        }
+        if (selectedOfferIndex === null) {
+          return;
+        }
+
+        const offer = offersData[selectedOfferIndex];
+        if (!offer) {
+          return;
+        }
+
+        const detailsRoot = target.closest(".offer-details");
+        updateOfferDetailsPricing(detailsRoot, offer, target.value);
+      };
+
       const onKeyDown = (event) => {
         if (event.key === "Escape" && selectedOfferIndex !== null) {
           closeOfferDetails();
@@ -865,8 +967,10 @@
       syncHeaderTheme();
       initMobileLayer();
       grid.addEventListener("click", onGridClick);
+      grid.addEventListener("change", onBookingOptionChange);
       mobileDetailsOverlay.addEventListener("click", () => closeOfferDetails());
       mobileDetailsSheet.addEventListener("click", onMobileLayerClick);
+      mobileDetailsSheet.addEventListener("change", onBookingOptionChange);
       window.addEventListener("keydown", onKeyDown);
       window.addEventListener("resize", onViewportResize);
 
