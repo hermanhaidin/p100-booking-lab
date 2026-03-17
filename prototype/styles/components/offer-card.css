@@ -43,10 +43,13 @@
 
 /* Link behavior */
 .offer-card-link {
+  --offer-card-active-indicator-width: 20px;
+  --offer-card-active-indicator-height: 10px;
   color: inherit;
   cursor: pointer;
   outline: var(--stroke-xl) solid transparent;
   outline-offset: var(--stroke-xl);
+  position: relative;
   text-decoration: none;
   transition: outline-color 150ms ease;
 }
@@ -57,6 +60,25 @@
 
 .offer-card-link:focus-visible {
   outline-color: var(--color-overlay-focus);
+}
+
+.offer-card-link.is-active {
+  outline-color: var(--color-content-extended-brand);
+  overflow: visible;
+}
+
+.offer-card-link.is-active::after {
+  background-color: var(--color-content-extended-brand);
+  bottom: calc(-1 * (var(--stroke-xl) + var(--offer-card-active-indicator-height)));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  content: "";
+  height: var(--offer-card-active-indicator-height);
+  left: 50%;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-50%);
+  width: var(--offer-card-active-indicator-width);
+  z-index: 3;
 }
 
 /* Top block (always anchored to top) */
