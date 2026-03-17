@@ -4,7 +4,6 @@
 
 .offer-details {
   --offer-details-media-min-height: 370px;
-  --offer-details-image-max-width: 420px;
   background-color: var(--color-surface-container);
   border-radius: var(--radius-lg);
   box-shadow: var(--elevation-large);
@@ -30,6 +29,7 @@
   display: none;
 }
 
+/* Media section (hero, title, specs) */
 .offer-details__media {
   background-color: var(--color-surface-container);
   background-image:
@@ -152,6 +152,7 @@
   color: var(--color-on-content-extended-on-success);
 }
 
+/* Booking section (options, pricing, CTA) */
 .offer-details__booking {
   align-content: start;
   background-color: var(--color-surface-container);
@@ -163,11 +164,6 @@
 
 .offer-details__section-title {
   margin: 0;
-}
-
-.offer-details__option-content {
-  display: grid;
-  gap: var(--spacing-4xs);
 }
 
 .offer-details__option-main {
@@ -188,42 +184,15 @@
   white-space: nowrap;
 }
 
-.offer-details__option-top {
-  align-items: center;
-  display: flex;
-  gap: var(--spacing-3xs);
-  justify-content: space-between;
-}
-
-.offer-details__option-left {
-  align-items: center;
-  display: flex;
-  gap: var(--spacing-3xs);
-}
-
 .offer-details__option-sub {
   color: var(--color-content-secondary);
   margin: 0;
-}
-
-.offer-details__option-price-row {
-  align-items: center;
-  display: flex;
-  gap: var(--spacing-3xs);
-  justify-content: flex-end;
 }
 
 .offer-details__booking-bottom {
   align-items: end;
   display: grid;
   gap: var(--spacing-sm);
-}
-
-.offer-details__price-row {
-  align-items: baseline;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-3xs);
 }
 
 .offer-details__price-total {
@@ -308,6 +277,7 @@ body.offer-details-lock-scroll {
   overflow: hidden;
 }
 
+/* Responsive: mobile (max-width 649px) */
 @media (max-width: 649px) {
   .offer-details-mobile-sheet {
     border-radius: 0;
@@ -318,11 +288,6 @@ body.offer-details-lock-scroll {
     border-radius: 0;
     min-height: 430px;
     padding: var(--spacing-2xl) var(--spacing-xs) 0;
-  }
-
-  .offer-details-mobile-sheet .offer-details__media-main img {
-    max-width: none;
-    width: 100%;
   }
 
   .offer-details-mobile-sheet .offer-details__booking {
@@ -368,6 +333,18 @@ body.offer-details-lock-scroll {
   }
 }
 
+/* Responsive: tablet and up (>= 900px) */
+@media (min-width: 900px) {
+  .offer-details__close--media {
+    display: none;
+  }
+
+  .offer-details__close--booking {
+    display: inline-flex;
+  }
+}
+
+/* Responsive: tablet (650px-1199px) */
 @media (min-width: 650px) and (max-width: 1199px) {
   .offer-details__media {
     min-height: 440px;
@@ -391,6 +368,7 @@ body.offer-details-lock-scroll {
   }
 }
 
+/* Responsive: tablet landscape (900px-1199px) */
 @media (min-width: 900px) and (max-width: 1199px) {
   .offer-details {
     grid-template-columns: 1fr 1.05fr;
@@ -415,16 +393,9 @@ body.offer-details-lock-scroll {
     grid-row: 2;
     width: 100%;
   }
-
-  .offer-details__close--media {
-    display: none;
-  }
-
-  .offer-details__close--booking {
-    display: inline-flex;
-  }
 }
 
+/* Responsive: desktop (>= 1200px) */
 @media (min-width: 1200px) {
   .offer-details {
     grid-template-columns: 1fr 1.05fr;
@@ -432,14 +403,6 @@ body.offer-details-lock-scroll {
 
   .offer-details__booking {
     position: relative;
-  }
-
-  .offer-details__close--media {
-    display: none;
-  }
-
-  .offer-details__close--booking {
-    display: inline-flex;
   }
 
   .offer-details__media-main {

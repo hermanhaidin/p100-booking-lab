@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="../styles/pages/offer-list.css">
 </head>
 <body>
+  <!-- Header: trip context and utility actions -->
   <div class="booking-header" data-p100-theme="option-light">
     <header class="layout-shell booking-header__shell">
       <a href="./home.html" class="icon-button icon-button--large icon-button--primary booking-header__back-button" aria-label="Go back">
@@ -69,6 +70,7 @@
     </header>
   </div>
 
+  <!-- Main: title, quick filters, and offer grid mount point -->
   <main class="offer-list-main">
     <section class="offer-list-title-section layout-shell" aria-label="Offer list title">
       <h1 class="text-title-medium-heavy-caps">Which car do you want to drive?</h1>
@@ -124,6 +126,7 @@
     </section>
   </main>
 
+  <!-- Footer: legal and support links -->
   <footer class="booking-footer" data-p100-theme="option-light">
     <div class="layout-shell booking-footer__shell">
       <nav class="booking-footer__legal-links text-copy-medium-heavy-tight" aria-label="Legal links">
@@ -141,8 +144,10 @@
       <p class="booking-footer__copyright text-copy-medium-regular-tight">&copy; Sixt 2026</p>
     </div>
   </footer>
+  <!-- Offer list rendering and interactions -->
   <script>
     (() => {
+      // Core DOM refs and runtime state.
       const header = document.querySelector(".booking-header");
       const grid = document.getElementById("offer-list-grid");
       if (!grid) {
@@ -168,6 +173,7 @@
         header.setAttribute("data-p100-theme", isMobile ? "prime-light" : "option-light");
       };
 
+      // CONTENT.md / ASSETS.md parsing helpers.
       const parseAssets = (markdown) => {
         const assets = new Map();
         const lines = markdown.split("\n");
@@ -242,7 +248,13 @@
         };
       };
 
-      const getPriceAmount = (priceParts) => Number.parseFloat(`${priceParts.integerPart}${priceParts.decimalPart}`);
+      const parseCurrencyAmount = (value) => {
+        const normalized = String(value ?? "").replace(/[^0-9.-]/g, "");
+        const amount = Number.parseFloat(normalized);
+        return Number.isFinite(amount) ? amount : 0;
+      };
+
+      const getPriceAmount = (priceParts) => parseCurrencyAmount(`${priceParts.integerPart}${priceParts.decimalPart}`);
 
       const buildPriceParts = (amount, suffix) => {
         const normalized = Number.isFinite(amount) ? amount : 0;
@@ -348,11 +360,9 @@
 
       const getDailyPriceAmount = (offer) => {
         const dailyRaw = String(offer["Price per day"] ?? "")
-          .replaceAll("$", "")
           .replaceAll("/day", "")
           .trim();
-        const dailyAmount = Number.parseFloat(dailyRaw);
-        return Number.isFinite(dailyAmount) ? dailyAmount : 0;
+        return parseCurrencyAmount(dailyRaw);
       };
 
       const getFlexibleAddon = (offer) => {
@@ -470,6 +480,7 @@
             </span>`)
         .join("");
 
+      // UI renderers: cards, banner, and details panel/sheet.
       const renderOfferCard = (offer, imageUrl, offerIndex) => {
         const modelLabel = getModelBadgeLabel(offer);
         const isActive = selectedOfferIndex === offerIndex;
@@ -582,6 +593,7 @@
                 <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">${mobile ? "arrow_back_ios_new" : "close"}</span>
               </button>
               <p class="offer-details__section-title text-copy-large-heavy-tight">Booking option</p>
+              <!-- Booking options: selectable radio choice cards -->
               <div class="offer-details__option-group radio-choice-card-group" role="radiogroup" aria-label="Booking option">
                 <label class="offer-details__option radio-choice-card">
                   <span class="offer-details__option-row radio-choice-card__row">
@@ -636,6 +648,7 @@
                 </label>
               </div>
               <p class="offer-details__section-title text-copy-large-heavy-tight">Mileage</p>
+              <!-- Mileage option: single static choice card -->
               <div class="offer-details__option-group offer-details__option-group--single radio-choice-card-group radio-choice-card-group--single" aria-label="Mileage option">
                 <div class="offer-details__option offer-details__option--static is-selected radio-choice-card radio-choice-card--static">
                   <div class="offer-details__option-row offer-details__option-row--static radio-choice-card__row radio-choice-card__row--static">
@@ -822,6 +835,7 @@
         });
       };
 
+      // Data loading and event handlers.
       const fetchAndPrepareData = async () => {
         const [contentResponse, assetsResponse] = await Promise.all([
           fetch(grid.dataset.contentSrc),
@@ -964,6 +978,7 @@
         renderList();
       };
 
+      // Bootstrap.
       syncHeaderTheme();
       initMobileLayer();
       grid.addEventListener("click", onGridClick);
