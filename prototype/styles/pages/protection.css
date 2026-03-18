@@ -39,7 +39,7 @@
 .protection-top__summary-main {
   display: grid;
   justify-items: end;
-  row-gap: 0;
+  row-gap: var(--spacing-3xs);
 }
 
 .protection-top__total-row {
@@ -59,6 +59,12 @@
 
 .protection-price-details.text-button {
   justify-self: end;
+  margin-block: calc(-1 * var(--spacing-3xs));
+}
+
+#protectionContinueTop,
+#protectionContinueMobile {
+  width: 200px;
 }
 
 .protection-divider {
@@ -105,29 +111,10 @@
   gap: var(--protection-cards-gap);
 }
 
-.protection-overview {
-  background-color: var(--color-surface-secondary-container);
-  border-radius: var(--radius-md);
+.booking-overview {
   margin-top: var(--spacing-xs);
-  padding: var(--spacing-xs);
   position: sticky;
   top: var(--spacing-xs);
-}
-
-.protection-overview__title {
-  margin: 0 0 var(--spacing-2xs);
-}
-
-.protection-overview__list {
-  display: grid;
-  gap: var(--spacing-2xs);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#protectionSelectedPackageItem[hidden] {
-  display: none !important;
 }
 
 .protection-info-button.icon-button {
@@ -165,7 +152,7 @@
     gap: var(--spacing-xs);
   }
 
-  .protection-overview {
+  .booking-overview {
     margin-bottom: calc(var(--protection-mobile-summary-height, 85px));
     position: static;
   }
@@ -173,7 +160,7 @@
   .protection-mobile-summary {
     align-items: center;
     background-color: var(--color-surface-canvas);
-    border-top: var(--stroke-sm) solid var(--color-content-tertiary);
+    border-top: var(--stroke-sm) solid color-mix(in srgb, var(--color-content-secondary) 10%, transparent);
     bottom: 0;
     display: grid;
     gap: var(--spacing-xs);
@@ -222,6 +209,10 @@
 }
 
 @media (min-width: 650px) and (max-width: 899px) {
+  .protection-top {
+    padding-block: var(--spacing-sm);
+  }
+
   .protection-content {
     --protection-cards-gap: var(--spacing-xs);
     padding-block: var(--spacing-xs);
@@ -236,12 +227,20 @@
     gap: var(--spacing-xs);
   }
 
-  .protection-overview {
+  .booking-overview {
     margin-top: 0;
+  }
+
+  .protection-mobile-summary {
+    padding-inline: var(--spacing-lg);
   }
 }
 
 @media (min-width: 900px) and (max-width: 1199px) {
+  .protection-top {
+    padding-block: var(--spacing-xs);
+  }
+
   .protection-content {
     --protection-cards-gap: var(--spacing-xs);
     padding-block: var(--spacing-xs);
@@ -260,17 +259,18 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .protection-overview {
+  .booking-overview {
     margin-top: 0;
     max-width: calc((100% - var(--protection-cards-gap)) / 2);
   }
 
-  #protectionContinueTop {
-    width: 200px;
-  }
 }
 
 @media (min-width: 1200px) {
+  .protection-top {
+    padding-block: var(--spacing-xs);
+  }
+
   .protection-top__summary {
     column-gap: var(--spacing-md);
   }
@@ -293,13 +293,10 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .protection-overview {
+  .booking-overview {
     margin-top: 0;
     max-width: calc((100% - var(--protection-cards-gap)) / 2);
   }
 
-  #protectionContinueTop {
-    width: 200px;
-  }
 }
 

@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="../styles/components/separator.css">
   <link rel="stylesheet" href="../styles/components/price.css">
   <link rel="stylesheet" href="../styles/components/protection-card.css">
+  <link rel="stylesheet" href="../styles/components/booking-overview.css">
   <link rel="stylesheet" href="../styles/pages/protection.css">
 </head>
 <body>
@@ -96,27 +97,27 @@
         <div>
           <div id="protectionCards" class="protection-cards" role="radiogroup" aria-label="Protection package"></div>
         </div>
-        <aside class="protection-overview" aria-label="Your booking overview">
-          <p class="protection-overview__title text-copy-large-heavy-tight">Your booking overview:</p>
-          <ul class="protection-overview__list">
+        <aside class="booking-overview" aria-label="Your booking overview">
+          <p class="booking-overview__title text-copy-large-heavy-tight">Your booking overview:</p>
+          <ul class="booking-overview__list">
             <li class="list-item list-item--medium list-item--primary">
               <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
               <span class="list-item__label text-copy-medium-regular">Third party insurance</span>
-              <button type="button" class="icon-button list-item__trailing-action protection-info-button" aria-label="More information about third party insurance">
+              <button type="button" class="icon-button list-item__trailing-action booking-overview__info-button" aria-label="More information about third party insurance">
                 <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
               </button>
             </li>
             <li class="list-item list-item--medium list-item--primary">
               <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
               <span class="list-item__label text-copy-medium-regular">24/7 Breakdown assistance</span>
-              <button type="button" class="icon-button list-item__trailing-action protection-info-button" aria-label="More information about breakdown assistance">
+              <button type="button" class="icon-button list-item__trailing-action booking-overview__info-button" aria-label="More information about breakdown assistance">
                 <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
               </button>
             </li>
             <li class="list-item list-item--medium list-item--primary">
               <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
               <span class="list-item__label text-copy-medium-regular">Tires suitable for winter</span>
-              <button type="button" class="icon-button list-item__trailing-action protection-info-button" aria-label="More information about winter tires">
+              <button type="button" class="icon-button list-item__trailing-action booking-overview__info-button" aria-label="More information about winter tires">
                 <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
               </button>
             </li>
@@ -124,10 +125,10 @@
               <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
               <span id="protectionMileageLabel" class="list-item__label text-copy-medium-regular">Unlimited kilometers</span>
             </li>
-            <li id="protectionSelectedPackageItem" class="list-item list-item--medium list-item--primary" hidden>
+            <li id="protectionSelectedPackageItem" class="list-item list-item--medium list-item--primary booking-overview__item" hidden>
               <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
               <span id="protectionSelectedPackageLabel" class="list-item__label text-copy-medium-regular"></span>
-              <button type="button" class="icon-button list-item__trailing-action protection-info-button" aria-label="More information about selected protection package">
+              <button type="button" class="icon-button list-item__trailing-action booking-overview__info-button" aria-label="More information about selected protection package">
                 <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
               </button>
             </li>
