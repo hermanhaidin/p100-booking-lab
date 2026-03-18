@@ -856,6 +856,67 @@
         assetsMap = parseAssets(assetsMarkdown);
       };
 
+      const getRenderedTotalAmount = (detailsRoot) => {
+        if (!detailsRoot) {
+          return null;
+        }
+        const integerNode = detailsRoot.querySelector('[data-offer-details-price="total-integer"]');
+        const decimalNode = detailsRoot.querySelector('[data-offer-details-price="total-decimal"]');
+        const mobileIntegerNode = detailsRoot.querySelector('[data-offer-details-price="mobile-total-integer"]');
+        const mobileDecimalNode = detailsRoot.querySelector('[data-offer-details-price="mobile-total-decimal"]');
+        const integerPart = (integerNode?.textContent || mobileIntegerNode?.textContent || "").replaceAll(",", "").trim();
+        const decimalPart = (decimalNode?.textContent || mobileDecimalNode?.textContent || "").trim();
+        if (!integerPart) {
+          return null;
+        }
+        return parseCurrencyAmount(`${integerPart}${decimalPart}`);
+      };
+
+      const getRenderedDailyAmount = (detailsRoot) => {
+        if (!detailsRoot) {
+          return null;
+        }
+        const integerNode = detailsRoot.querySelector('[data-offer-details-price="daily-integer"]');
+        const decimalNode = detailsRoot.querySelector('[data-offer-details-price="daily-decimal"]');
+        const integerPart = (integerNode?.textContent || "").replaceAll(",", "").trim();
+        const decimalPart = (decimalNode?.textContent || "").trim();
+        if (!integerPart) {
+          return null;
+        }
+        return parseCurrencyAmount(`${integerPart}${decimalPart}`);
+      };
+
+      const proceedToProtection = (nextButton) => {
+        if (selectedOfferIndex === null) {
+          return;
+        }
+        const selectedOffer = offersData[selectedOfferIndex];
+        if (!selectedOffer) {
+          return;
+        }
+        const detailsRoot = nextButton.closest(".offer-details");
+        const renderedTotal = getRenderedTotalAmount(detailsRoot);
+        const renderedDaily = getRenderedDailyAmount(detailsRoot);
+        const totalAmount = Number.isFinite(renderedTotal) ? renderedTotal : parseCurrencyAmount(selectedOffer["Total price"]);
+        const baseDailyParts = parsePriceParts(selectedOffer["Price per day"], "day");
+        const baseTotalParts = parsePriceParts(selectedOffer["Total price"], "total");
+        const baseDailyAmount = getPriceAmount(baseDailyParts);
+        const baseTotalAmount = getPriceAmount(baseTotalParts);
+        const fallbackRentalDays = baseDailyAmount > 0
+          ? Math.max(1, Math.round(baseTotalAmount / baseDailyAmount))
+          : 1;
+        const rentalDays = getTripDurationDaysFromHeader() || fallbackRentalDays;
+        const params = new URLSearchParams({
+          offerIndex: String(selectedOfferIndex),
+          offerTitle: selectedOffer.Title || "",
+          total: totalAmount.toFixed(2),
+          daily: (Number.isFinite(renderedDaily) ? renderedDaily : baseDailyAmount).toFixed(2),
+          minimumAge: String(getMinimumAge(selectedOffer)),
+          rentalDays: String(rentalDays)
+        });
+        window.location.href = `./protection.html?${params.toString()}`;
+      };
+
       const onGridClick = (event) => {
         const optionInfoButton = event.target.closest("[data-offer-option-info]");
         if (optionInfoButton) {
@@ -868,6 +929,13 @@
         if (closeButton) {
           event.preventDefault();
           closeOfferDetails();
+          return;
+        }
+
+        const nextButton = event.target.closest(".offer-details__next");
+        if (nextButton) {
+          event.preventDefault();
+          proceedToProtection(nextButton);
           return;
         }
 
@@ -897,6 +965,13 @@
         if (event.target.closest("[data-offer-details-close]")) {
           event.preventDefault();
           closeOfferDetails();
+          return;
+        }
+
+        const nextButton = event.target.closest(".offer-details__next");
+        if (nextButton) {
+          event.preventDefault();
+          proceedToProtection(nextButton);
         }
       };
 
