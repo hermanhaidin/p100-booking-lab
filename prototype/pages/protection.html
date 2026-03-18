@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="../styles/components/booking-footer.css">
   <link rel="stylesheet" href="../styles/components/separator.css">
   <link rel="stylesheet" href="../styles/components/price.css">
+  <link rel="stylesheet" href="../styles/components/protection-card.css">
   <link rel="stylesheet" href="../styles/pages/protection.css">
 </head>
 <body>
@@ -115,14 +116,14 @@
             </li>
             <li class="list-item list-item--medium list-item--primary">
               <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
-              <span class="list-item__label text-copy-medium-regular">Unlimited kilometers</span>
+              <span id="protectionMileageLabel" class="list-item__label text-copy-medium-regular">Unlimited kilometers</span>
               <button type="button" class="icon-button list-item__trailing-action protection-info-button" aria-label="More information about unlimited kilometers">
                 <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
               </button>
             </li>
             <li class="list-item list-item--medium list-item--primary">
               <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
-              <span class="list-item__label text-copy-medium-regular">Booking option: Best price - Pay now, cancel and rebook for a fee</span>
+              <span id="protectionBookingOptionLabel" class="list-item__label text-copy-medium-regular">Booking option: Best price - Pay now, cancel and rebook for a fee</span>
               <button type="button" class="icon-button list-item__trailing-action protection-info-button" aria-label="More information about booking option">
                 <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
               </button>
@@ -171,6 +172,8 @@
       const totalMobile = document.getElementById("protectionTotalMobile");
       const continueTop = document.getElementById("protectionContinueTop");
       const continueMobile = document.getElementById("protectionContinueMobile");
+      const bookingOptionLabel = document.getElementById("protectionBookingOptionLabel");
+      const mileageLabel = document.getElementById("protectionMileageLabel");
       const params = new URLSearchParams(window.location.search);
 
       const parseAmount = (value, fallback) => {
@@ -225,6 +228,10 @@
       const rentalDaysFromQuery = parseAmount(params.get("rentalDays"), 0);
       const rentalDaysFallback = offerDaily > 0 ? Math.max(1, Math.round(total / offerDaily)) : 1;
       const rentalDays = Math.max(1, Math.round(rentalDaysFromQuery || rentalDaysFallback));
+      const bookingOption = params.get("bookingOption") || "best-price";
+      const mileageType = params.get("mileageType") || "unlimited";
+      const mileageIncludedKm = params.get("mileageIncludedKm") || "";
+      const mileageExtraPerKm = params.get("mileageExtraPerKm") || "";
       const state = {
         selectedId: null,
         expandedId: null
@@ -251,7 +258,7 @@
             title: "No extra protection",
             stars: 0,
             deductible: "Deductible: up to full vehicle value",
-            deductibleKind: "warning",
+            deductibleKind: "error",
             discount: "",
             daily: null,
             previous: null,
@@ -263,7 +270,7 @@
             title: "Basic Protection",
             stars: 1,
             deductible: `Deductible: up to ${formatCurrency(total * 2)}`,
-            deductibleKind: "default",
+            deductibleKind: "primary",
             discount: "",
             daily: basicDaily,
             previous: null,
@@ -523,6 +530,26 @@
         continueMobile.disabled = !enabled;
       };
 
+      const syncBookingOptionLabel = () => {
+        if (!bookingOptionLabel) {
+          return;
+        }
+        bookingOptionLabel.textContent = bookingOption === "stay-flexible"
+          ? "Booking option: Stay flexible - Free cancellation and rebooking any time before pickup time"
+          : "Booking option: Best price - Pay now, cancel and rebook for a fee";
+      };
+
+      const syncMileageLabel = () => {
+        if (!mileageLabel) {
+          return;
+        }
+        if (mileageType === "limited" && mileageIncludedKm && mileageExtraPerKm) {
+          mileageLabel.textContent = `${mileageIncludedKm} km are included, each additional kilometer costs $${mileageExtraPerKm}`;
+          return;
+        }
+        mileageLabel.textContent = "Unlimited kilometers";
+      };
+
       const selectOption = (optionId) => {
         state.selectedId = optionId;
         if (isMobile()) {
@@ -582,6 +609,8 @@
 
       syncTotals();
       syncNotice();
+      syncBookingOptionLabel();
+      syncMileageLabel();
       syncContinueState();
       renderCards();
       syncCardUi();

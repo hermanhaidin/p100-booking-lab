@@ -895,6 +895,16 @@
           return;
         }
         const detailsRoot = nextButton.closest(".offer-details");
+        const selectedBookingOptionInput = detailsRoot?.querySelector('.radio-button__native[type="radio"][name^="booking-option-"]:checked');
+        const bookingOption = selectedBookingOptionInput instanceof HTMLInputElement
+          ? selectedBookingOptionInput.value
+          : "best-price";
+        const mileageDetails = getMileageDetails(selectedOffer);
+        const limitedKmMatch = mileageDetails.title.match(/^([\d,]+)\s*km$/i);
+        const extraKmPriceMatch = mileageDetails.subtitle.match(/\+\$([\d.]+)/i);
+        const mileageIncludedKm = limitedKmMatch?.[1] || "";
+        const mileageExtraPerKm = extraKmPriceMatch?.[1] || "";
+        const mileageType = mileageIncludedKm && mileageExtraPerKm ? "limited" : "unlimited";
         const renderedTotal = getRenderedTotalAmount(detailsRoot);
         const renderedDaily = getRenderedDailyAmount(detailsRoot);
         const totalAmount = Number.isFinite(renderedTotal) ? renderedTotal : parseCurrencyAmount(selectedOffer["Total price"]);
@@ -912,7 +922,11 @@
           total: totalAmount.toFixed(2),
           daily: (Number.isFinite(renderedDaily) ? renderedDaily : baseDailyAmount).toFixed(2),
           minimumAge: String(getMinimumAge(selectedOffer)),
-          rentalDays: String(rentalDays)
+          rentalDays: String(rentalDays),
+          bookingOption,
+          mileageType,
+          mileageIncludedKm,
+          mileageExtraPerKm
         });
         window.location.href = `./protection.html?${params.toString()}`;
       };
