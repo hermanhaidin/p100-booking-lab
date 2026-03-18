@@ -26,8 +26,11 @@
   <link rel="stylesheet" href="../styles/pages/protection.css">
 </head>
 <body>
-  <header class="booking-header booking-header--search-hidden" data-p100-theme="option-light">
+  <header class="booking-header booking-header--search-hidden booking-header--step" data-p100-theme="option-light">
     <div class="layout-shell booking-header__shell">
+      <a href="./offer-list.html" class="icon-button icon-button--large icon-button--primary booking-header__back-button" aria-label="Go back to offer list">
+        <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">arrow_back_ios_new</span>
+      </a>
       <a href="./home.html" class="booking-header__logo-link" aria-label="Go to home">
         <img class="booking-header__logo" src="../assets/logos/sixt_rent_the_car_on_dark.svg" alt="SIXT rent the car">
       </a>
@@ -47,6 +50,9 @@
           <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">person</span>
         </a>
       </nav>
+      <div class="booking-header__title-row">
+        <h1 class="text-title-medium-heavy-caps">Which protection package do you need?</h1>
+      </div>
     </div>
   </header>
 
@@ -117,16 +123,17 @@
             <li class="list-item list-item--medium list-item--primary">
               <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
               <span id="protectionMileageLabel" class="list-item__label text-copy-medium-regular">Unlimited kilometers</span>
-              <button type="button" class="icon-button list-item__trailing-action protection-info-button" aria-label="More information about unlimited kilometers">
+            </li>
+            <li id="protectionSelectedPackageItem" class="list-item list-item--medium list-item--primary" hidden>
+              <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
+              <span id="protectionSelectedPackageLabel" class="list-item__label text-copy-medium-regular"></span>
+              <button type="button" class="icon-button list-item__trailing-action protection-info-button" aria-label="More information about selected protection package">
                 <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
               </button>
             </li>
             <li class="list-item list-item--medium list-item--primary">
               <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
               <span id="protectionBookingOptionLabel" class="list-item__label text-copy-medium-regular">Booking option: Best price - Pay now, cancel and rebook for a fee</span>
-              <button type="button" class="icon-button list-item__trailing-action protection-info-button" aria-label="More information about booking option">
-                <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">info</span>
-              </button>
             </li>
           </ul>
         </aside>
@@ -136,7 +143,11 @@
 
   <div class="protection-mobile-summary" aria-live="polite">
     <div class="protection-mobile-summary__price">
-      <p class="text-title-small-heavy" id="protectionTotalMobile">$649.72</p>
+      <p class="price price--large price--heavy" id="protectionTotalMobile">
+        <span class="price__currency text-copy-medium-heavy-tight">$</span>
+        <span class="price__integer text-title-small-heavy">649</span>
+        <span class="price__decimal text-copy-medium-heavy-tight">.72</span>
+      </p>
       <button type="button" class="text-button text-button--large text-button--primary text-button--underlined text-copy-medium-heavy protection-price-details">
         <span class="text-button__label">Price details</span>
       </button>
@@ -172,8 +183,12 @@
       const totalMobile = document.getElementById("protectionTotalMobile");
       const continueTop = document.getElementById("protectionContinueTop");
       const continueMobile = document.getElementById("protectionContinueMobile");
+      const mobileSummary = document.querySelector(".protection-mobile-summary");
+      const pageFooter = document.querySelector(".booking-footer");
       const bookingOptionLabel = document.getElementById("protectionBookingOptionLabel");
       const mileageLabel = document.getElementById("protectionMileageLabel");
+      const selectedPackageItem = document.getElementById("protectionSelectedPackageItem");
+      const selectedPackageLabel = document.getElementById("protectionSelectedPackageLabel");
       const params = new URLSearchParams(window.location.search);
 
       const parseAmount = (value, fallback) => {
@@ -250,8 +265,8 @@
         const basicDaily = total * 0.05;
         const smartDaily = total * 0.075;
         const allInclusiveDaily = total * 0.085;
-        const smartPrevious = smartDaily / (1 - 0.47);
-        const allPrevious = allInclusiveDaily / (1 - 0.51);
+        const smartPrevious = smartDaily / (1 - 0.40);
+        const allPrevious = allInclusiveDaily / (1 - 0.50);
         return [
           {
             id: "none",
@@ -283,7 +298,7 @@
             stars: 2,
             deductible: "No deductible",
             deductibleKind: "success",
-            discount: "-47% online discount",
+            discount: "-40% online discount",
             daily: smartDaily,
             previous: smartPrevious,
             coverage: [true, true, false, false],
@@ -295,7 +310,7 @@
             stars: 3,
             deductible: "No deductible",
             deductibleKind: "success",
-            discount: "-51% online discount",
+            discount: "-50% online discount",
             daily: allInclusiveDaily,
             previous: allPrevious,
             coverage: [true, true, true, true],
@@ -510,14 +525,17 @@
           ? selectedOption.daily * rentalDays
           : 0;
         const grandTotal = total + protectionTotal;
-        const formatted = formatCurrency(grandTotal);
         const totalParts = getTotalPriceParts(grandTotal);
         totalTop.innerHTML = `
           <span class="price__currency text-copy-medium-heavy-tight">${totalParts.currency}</span>
           <span class="price__integer text-title-small-heavy">${totalParts.integerPart}</span>
           <span class="price__decimal text-copy-medium-heavy-tight">${totalParts.decimalPart}</span>
         `;
-        totalMobile.textContent = formatted;
+        totalMobile.innerHTML = `
+          <span class="price__currency text-copy-medium-heavy-tight">${totalParts.currency}</span>
+          <span class="price__integer text-title-small-heavy">${totalParts.integerPart}</span>
+          <span class="price__decimal text-copy-medium-heavy-tight">${totalParts.decimalPart}</span>
+        `;
       };
 
       const syncNotice = () => {
@@ -550,14 +568,51 @@
         mileageLabel.textContent = "Unlimited kilometers";
       };
 
+      const syncSelectedPackageLabel = () => {
+        if (!selectedPackageItem || !selectedPackageLabel) {
+          return;
+        }
+        const options = getOptions();
+        const selectedOption = options.find((option) => option.id === state.selectedId);
+        if (!selectedOption || selectedOption.id === "none") {
+          selectedPackageItem.hidden = true;
+          selectedPackageLabel.textContent = "";
+          return;
+        }
+        selectedPackageLabel.textContent = `${selectedOption.title} - ${selectedOption.deductible}`;
+        selectedPackageItem.hidden = false;
+      };
+
+      const syncMobileSummaryPosition = () => {
+        if (!(mobileSummary instanceof HTMLElement) || !(pageFooter instanceof HTMLElement)) {
+          return;
+        }
+        const summaryHeight = Math.ceil(mobileSummary.getBoundingClientRect().height);
+        document.documentElement.style.setProperty("--protection-mobile-summary-height", `${summaryHeight}px`);
+        if (!window.matchMedia("(max-width: 899px)").matches) {
+          mobileSummary.style.bottom = "0px";
+          return;
+        }
+        const footerRect = pageFooter.getBoundingClientRect();
+        const overlapWithFooter = Math.max(0, window.innerHeight - footerRect.top);
+        mobileSummary.style.bottom = `${overlapWithFooter}px`;
+      };
+
+      const scheduleMobileSummarySync = () => {
+        syncMobileSummaryPosition();
+        requestAnimationFrame(syncMobileSummaryPosition);
+      };
+
       const selectOption = (optionId) => {
         state.selectedId = optionId;
         if (isMobile()) {
           state.expandedId = optionId;
         }
         syncTotals();
+        syncSelectedPackageLabel();
         syncContinueState();
         syncCardUi();
+        scheduleMobileSummarySync();
       };
 
       cardsRoot.addEventListener("click", (event) => {
@@ -575,6 +630,7 @@
           if (optionId) {
             state.expandedId = state.expandedId === optionId ? null : optionId;
             updateCardExpansionUi();
+            scheduleMobileSummarySync();
           }
           return;
         }
@@ -602,18 +658,32 @@
         }
       });
 
+      cardsRoot.addEventListener("transitionend", (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) {
+          return;
+        }
+        if (target.classList.contains("protection-card__bottom")) {
+          scheduleMobileSummarySync();
+        }
+      });
+
       window.addEventListener("resize", () => {
         renderCards();
         syncCardUi();
+        scheduleMobileSummarySync();
       });
+      window.addEventListener("scroll", syncMobileSummaryPosition, { passive: true });
 
       syncTotals();
       syncNotice();
       syncBookingOptionLabel();
       syncMileageLabel();
+      syncSelectedPackageLabel();
       syncContinueState();
       renderCards();
       syncCardUi();
+      scheduleMobileSummarySync();
     })();
   </script>
 </body>
