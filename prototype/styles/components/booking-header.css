@@ -1,13 +1,17 @@
-/* Booking header component:
-   shared top-of-funnel shell with responsive nav/search behavior. */
+/* Booking header contract.
+   Required slots: __shell + __utility-nav.
+   Optional slots: __search-row, __title-row.
+   Variants: default (search visible), --search-hidden (hide search),
+   --step (show mobile title row for protection/add-ons/review).
+   Breakpoints: <650 mobile, 650-899 compact tablet, >=900 full tablet/desktop. */
 
-/* Root theme host for responsive prime/option switching. */
+/* Theme host. */
 .booking-header {
   background-color: var(--color-surface-canvas);
   color: var(--color-content-primary);
 }
 
-/* Desktop/tablet shell layout (mobile overrides below). */
+/* Base shell layout (desktop/tablet-first). */
 .booking-header__shell {
   align-items: center;
   display: flex;
@@ -15,7 +19,7 @@
   height: 64px;
 }
 
-/* Brand slot: logo on >=650px, app-style back affordance on mobile. */
+/* Brand slot: logo on >=650, back affordance on mobile. */
 .booking-header__logo-link {
   display: inline-flex;
 }
@@ -37,14 +41,21 @@
   display: none;
 }
 
-/* Search row wrapper:
-   display: contents lets shell flex layout own children on larger breakpoints. */
+/* Optional search row; display:contents keeps shell as the layout owner on >=650. */
 .booking-header__search-row {
   display: contents;
 }
 
-/* IBE button (location + trip dates):
-   grows to available width until capped at 560px. */
+/* Optional step title row (hidden by default, opt-in via --step on mobile). */
+.booking-header__title-row {
+  display: none;
+}
+
+.booking-header__title-row h1 {
+  margin: 0;
+}
+
+/* IBE button (location + trip dates). */
 .booking-header__search-button.button--ibe {
   align-items: center;
   background-color: var(--color-surface-secondary-container);
@@ -98,8 +109,7 @@
   width: 24px;
 }
 
-/* Utility links:
-   text links on larger breakpoints, icon variants on smaller breakpoints. */
+/* Utility links: text on larger breakpoints, icons on smaller breakpoints. */
 .booking-header__utility-nav {
   align-items: center;
   display: inline-flex;
@@ -128,13 +138,12 @@
   display: none;
 }
 
-/* Optional later-step modifier:
-   hide IBE control when trip dates/location should be locked. */
+/* Variant: hide trip search control on later steps. */
 .booking-header--search-hidden .booking-header__search-button.button--ibe {
   display: none;
 }
 
-/* Mobile header (prime): back button + icon utilities + two-row shell. */
+/* Mobile (<650): back button + icon utilities + optional second row content. */
 @media (max-width: 649px) {
   .booking-header {
     --color-content-primary: var(--color-global-sixt-anthracite);
@@ -216,6 +225,12 @@
     grid-template-columns: minmax(0, 1fr) auto;
   }
 
+  .booking-header--step .booking-header__title-row {
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
   .booking-header__search-location,
   .booking-header__search-dates,
   .booking-header__search-edit {
@@ -223,8 +238,7 @@
   }
 }
 
-/* Tablet+ behavior:
-   24px shell gap, nav pinned right, IBE caps at 560px. */
+/* Tablet+ (>=650): nav pinned right, IBE caps at 560px. */
 @media (min-width: 650px) {
   .booking-header__shell {
     gap: var(--spacing-md);
@@ -244,8 +258,7 @@
   }
 }
 
-/* 650-899:
-   replace language text link with language icon, keep login text link. */
+/* 650-899: language text becomes icon, login stays text. */
 @media (min-width: 650px) and (max-width: 899px) {
   .booking-header__utility-nav {
     gap: var(--spacing-2xs);
