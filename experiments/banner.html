@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Banner Component Playground</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="../prototype/styles/tokens.css">
+  <link rel="stylesheet" href="../prototype/styles/fonts.css">
+  <link rel="stylesheet" href="../prototype/styles/layout.css">
+  <link rel="stylesheet" href="../prototype/styles/base.css">
+  <link rel="stylesheet" href="../prototype/styles/typography.css">
+  <link rel="stylesheet" href="../prototype/styles/components/button.css">
+  <link rel="stylesheet" href="../prototype/styles/components/text-button.css">
+  <link rel="stylesheet" href="../prototype/styles/components/icon-button.css">
+  <link rel="stylesheet" href="../prototype/styles/components/price.css">
+  <link rel="stylesheet" href="../prototype/styles/components/list-item.css">
+  <link rel="stylesheet" href="../prototype/styles/components/banner.css">
+  <style>
+    .banner-demo-main {
+      background-color: var(--color-surface-canvas);
+      color: var(--color-content-primary);
+      min-height: 100dvh;
+      padding: var(--spacing-lg) 0;
+    }
+
+    .banner-demo-shell {
+      display: grid;
+      gap: var(--spacing-md);
+    }
+
+    .banner-demo-card {
+      background-color: var(--color-surface-container);
+      border: var(--stroke-sm) solid color-mix(in srgb, var(--color-content-secondary) 25%, transparent);
+      border-radius: var(--radius-lg);
+      display: grid;
+      gap: var(--spacing-xs);
+      padding: var(--spacing-md);
+    }
+
+    .banner-demo-title,
+    .banner-demo-copy {
+      margin: 0;
+    }
+
+    .banner-demo-grid {
+      display: grid;
+      gap: var(--spacing-xs);
+    }
+
+    .banner-demo-frame {
+      border: var(--stroke-sm) dashed color-mix(in srgb, var(--color-content-secondary) 40%, transparent);
+      border-radius: var(--radius-md);
+      display: grid;
+      gap: var(--spacing-xs);
+      justify-self: start;
+      padding: var(--spacing-xs);
+      width: min(100%, 1440px);
+    }
+
+    .banner-demo-frame--narrow {
+      width: min(100%, 560px);
+    }
+
+    .banner-demo-frame--wide {
+      width: min(100%, 920px);
+    }
+
+    .banner-demo-frame--max {
+      width: min(100%, 1440px);
+    }
+
+    .banner-demo-row {
+      display: grid;
+      gap: var(--spacing-xs);
+    }
+
+    .banner-demo-separator {
+      border: none;
+      border-top: var(--stroke-sm) solid color-mix(in srgb, var(--color-content-secondary) 25%, transparent);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <main class="banner-demo-main">
+    <section class="layout-shell banner-demo-shell" aria-label="Banner component playground">
+      <header class="banner-demo-card">
+        <h1 class="banner-demo-title text-title-medium-heavy-caps">Banner component</h1>
+        <p class="banner-demo-copy text-copy-large-regular">Contract playground for all 8 kinds, width behavior around 600px, optional content slots, action combinations, and floating usage.</p>
+      </header>
+
+      <section class="banner-demo-card" aria-label="Banner kinds">
+        <h2 class="banner-demo-title text-copy-large-heavy-tight">Kinds and action contracts</h2>
+        <p class="banner-demo-copy text-copy-medium-regular">Each kind shows leading icon + title + description + text action + pill CTA + close icon.</p>
+        <div class="banner-demo-grid">
+          <div class="banner banner--primary banner--no-title">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <p class="banner__description text-copy-medium-regular">Your booking is confirmed for May 12.</p>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--primary" aria-label="Close primary banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+
+          <div class="banner banner--primary">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <div class="banner__title-row">
+                <p class="banner__title text-copy-large-heavy-tight">Primary banner</p>
+              </div>
+              <p class="banner__description text-copy-medium-regular">Surface-secondary-container background with primary actions and brand CTA.</p>
+            </div>
+            <div class="banner__actions">
+              <button type="button" class="text-button text-button--large text-button--primary text-button--underlined text-copy-medium-heavy-tight">
+                <span class="text-button__label">Learn more</span>
+              </button>
+              <button type="button" class="button button--small button--brand text-copy-medium-heavy-tight">
+                <span class="button__label">Continue</span>
+              </button>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--primary" aria-label="Close primary banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+
+          <div class="banner banner--secondary">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <div class="banner__title-row">
+                <p class="banner__title text-copy-large-heavy-tight">Secondary banner</p>
+              </div>
+              <p class="banner__description text-copy-medium-regular">Surface-container background with primary actions and brand CTA.</p>
+            </div>
+            <div class="banner__actions">
+              <a href="#" class="text-button text-button--large text-button--primary text-copy-medium-heavy-tight text-button--underlined">
+                <span class="text-button__label">Details</span>
+              </a>
+              <button type="button" class="button button--small button--brand button--outlined text-copy-medium-heavy-tight">
+                <span class="button__label">Select</span>
+              </button>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--primary" aria-label="Close secondary banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+
+          <div class="banner banner--brand banner--with-brand-gradient" data-p100-theme="option-light">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <div class="banner__title-row">
+                <p class="banner__title text-copy-large-heavy-tight">Brand banner (option theme)</p>
+              </div>
+              <p class="banner__description text-copy-medium-regular">Uses option-light host theme so the surface stays dark in all contexts.</p>
+            </div>
+            <div class="banner__actions">
+              <button type="button" class="text-button text-button--large text-button--primary text-button--underlined text-copy-medium-heavy-tight">
+                <span class="text-button__label">Terms</span>
+              </button>
+              <button type="button" class="button button--small button--brand text-copy-medium-heavy-tight">
+                <span class="button__label">Upgrade</span>
+              </button>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--primary" aria-label="Close brand banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+
+          <div class="banner banner--info">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <div class="banner__title-row">
+                <p class="banner__title text-copy-large-heavy-tight">Info banner</p>
+              </div>
+              <p class="banner__description text-copy-medium-regular">Soft info background with info actions and optional outlined CTA.</p>
+            </div>
+            <div class="banner__actions">
+              <button type="button" class="text-button text-button--large text-button--info text-button--underlined text-copy-medium-heavy-tight">
+                <span class="text-button__label">Policy</span>
+              </button>
+              <button type="button" class="button button--small button--info button--outlined text-copy-medium-heavy-tight">
+                <span class="button__label">Review</span>
+              </button>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--info" aria-label="Close info banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+
+          <div class="banner banner--accent">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <div class="banner__title-row">
+                <p class="banner__title text-copy-large-heavy-tight">Accent banner</p>
+              </div>
+              <p class="banner__description text-copy-medium-regular">Soft accent background with accent-mapped controls.</p>
+            </div>
+            <div class="banner__actions">
+              <button type="button" class="text-button text-button--large text-button--accent text-button--underlined text-copy-medium-heavy-tight">
+                <span class="text-button__label">Compare</span>
+              </button>
+              <button type="button" class="button button--small button--accent text-copy-medium-heavy-tight">
+                <span class="button__label">Apply</span>
+              </button>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--accent" aria-label="Close accent banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+
+          <div class="banner banner--success">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <div class="banner__title-row">
+                <p class="banner__title text-copy-large-heavy-tight">Success banner</p>
+              </div>
+              <p class="banner__description text-copy-medium-regular">Soft success surface with success text links, CTA, and close action.</p>
+            </div>
+            <div class="banner__actions">
+              <button type="button" class="text-button text-button--large text-button--success text-button--underlined text-copy-medium-heavy-tight">
+                <span class="text-button__label">See receipt</span>
+              </button>
+              <button type="button" class="button button--small button--success text-copy-medium-heavy-tight">
+                <span class="button__label">Done</span>
+              </button>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--success" aria-label="Close success banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+
+          <div class="banner banner--warning">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <div class="banner__title-row">
+                <p class="banner__title text-copy-large-heavy-tight">Warning banner</p>
+              </div>
+              <p class="banner__description text-copy-medium-regular">Soft warning surface with warning actions and outlined warning CTA.</p>
+            </div>
+            <div class="banner__actions">
+              <button type="button" class="text-button text-button--large text-button--warning text-button--underlined text-copy-medium-heavy-tight">
+                <span class="text-button__label">Check now</span>
+              </button>
+              <button type="button" class="button button--small button--warning button--outlined text-copy-medium-heavy-tight">
+                <span class="button__label">Fix</span>
+              </button>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--warning" aria-label="Close warning banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+
+          <div class="banner banner--error">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <div class="banner__title-row">
+                <p class="banner__title text-copy-large-heavy-tight">Error banner</p>
+              </div>
+              <p class="banner__description text-copy-medium-regular">Soft error background with error actions and error CTA mapping.</p>
+            </div>
+            <div class="banner__actions">
+              <button type="button" class="text-button text-button--large text-button--error text-button--underlined text-copy-medium-heavy-tight">
+                <span class="text-button__label">Try again</span>
+              </button>
+              <button type="button" class="button button--small button--error text-copy-medium-heavy-tight">
+                <span class="button__label">Retry</span>
+              </button>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--error" aria-label="Close error banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="banner-demo-card" aria-label="Optional content slots">
+        <h2 class="banner-demo-title text-copy-large-heavy-tight">Optional icon, title, price, and list</h2>
+        <div class="banner-demo-row">
+          <div class="banner-demo-frame banner-demo-frame--wide">
+            <div class="banner banner--primary banner--no-icon">
+              <div class="banner__body">
+                <div class="banner__title-row">
+                  <p class="banner__title text-copy-large-heavy-tight">Icon disabled</p>
+                </div>
+                <p class="banner__description text-copy-medium-regular">Use <code>banner--no-icon</code> when the leading icon is not needed.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="banner-demo-frame banner-demo-frame--wide">
+            <div class="banner banner--info banner--no-title">
+              <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+              <div class="banner__body">
+                <p class="banner__description text-copy-medium-regular">Description-only banner. Title is disabled while the icon stays visible.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="banner-demo-frame banner-demo-frame--narrow">
+            <div class="banner banner--info banner--no-title">
+              <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+              <div class="banner__body">
+                <p class="banner__description text-copy-medium-regular">No-title banner with actions. At narrow width, actions are shown below the description row.</p>
+              </div>
+              <div class="banner__actions">
+                <button type="button" class="text-button text-button--large text-button--info text-button--underlined text-copy-medium-heavy-tight">
+                  <span class="text-button__label">Coverage terms</span>
+                </button>
+                <button type="button" class="button button--small button--info text-copy-medium-heavy-tight">
+                  <span class="button__label">Add option</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="banner-demo-frame banner-demo-frame--wide">
+            <div class="banner banner--success">
+              <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+              <div class="banner__body">
+                <div class="banner__title-row">
+                  <p class="banner__title text-copy-large-heavy-tight">Roadside Plus</p>
+                  <p class="price price--medium banner__price">
+                    <span class="price__sign text-copy-medium-heavy">+</span>
+                    <span class="price__currency text-copy-medium-heavy">$</span>
+                    <span class="price__integer text-copy-medium-heavy">200</span>
+                  </p>
+                </div>
+                <p class="banner__description text-copy-medium-regular">Title and optional medium price stay in the same accent color lane.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="banner-demo-frame banner-demo-frame--wide">
+            <div class="banner banner--secondary">
+              <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+              <div class="banner__body">
+                <div class="banner__title-row">
+                  <p class="banner__title text-copy-large-heavy-tight">Included in this package</p>
+                </div>
+                <p class="banner__description text-copy-medium-regular">Lists follow booking-overview/protection-card rhythm and use medium list items.</p>
+                <ul class="banner__list">
+                  <li class="list-item list-item--medium list-item--primary">
+                    <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
+                    <span class="list-item__label text-copy-medium-regular">Tire, windshield, and windows coverage</span>
+                  </li>
+                  <li class="list-item list-item--medium list-item--primary">
+                    <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
+                    <span class="list-item__label text-copy-medium-regular">Roadside help for common mobility issues</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="banner-demo-card" aria-label="Width behavior">
+        <h2 class="banner-demo-title text-copy-large-heavy-tight">Width behavior and button wrapping</h2>
+        <p class="banner-demo-copy text-copy-medium-regular">Container widths below and above 600px switch layout axis automatically.</p>
+
+        <div class="banner-demo-frame banner-demo-frame--narrow">
+          <p class="banner-demo-copy text-copy-small-regular">Narrow frame (560px): icon stays top-aligned, actions move below content and wrap.</p>
+          <div class="banner banner--accent">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <div class="banner__title-row">
+                <p class="banner__title text-copy-large-heavy-tight">Long banner content in a constrained layout</p>
+              </div>
+              <p class="banner__description text-copy-medium-regular">This sample intentionally uses longer copy so you can inspect text wrapping, vertical rhythm, and action flow while the banner width is below 600px.</p>
+            </div>
+            <div class="banner__actions">
+              <button type="button" class="text-button text-button--large text-button--accent text-button--underlined text-copy-medium-heavy-tight">
+                <span class="text-button__label">Coverage terms</span>
+              </button>
+              <button type="button" class="button button--small button--accent text-copy-medium-heavy-tight">
+                <span class="button__label">Add package</span>
+              </button>
+              <button type="button" class="button button--small button--accent button--outlined text-copy-medium-heavy-tight">
+                <span class="button__label">Maybe later</span>
+              </button>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--accent" aria-label="Close narrow banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+        </div>
+
+        <hr class="banner-demo-separator" aria-hidden="true">
+
+        <div class="banner-demo-frame banner-demo-frame--wide">
+          <p class="banner-demo-copy text-copy-small-regular">Wide frame (920px): icon centers vertically and actions sit on the right side.</p>
+          <div class="banner banner--accent">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <div class="banner__title-row">
+                <p class="banner__title text-copy-large-heavy-tight">Same content at wider width</p>
+              </div>
+              <p class="banner__description text-copy-medium-regular">At widths above 600px the action cluster moves to the right and aligns vertically with the content block.</p>
+            </div>
+            <div class="banner__actions">
+              <button type="button" class="text-button text-button--large text-button--accent text-button--underlined text-copy-medium-heavy-tight">
+                <span class="text-button__label">Coverage terms</span>
+              </button>
+              <button type="button" class="button button--small button--accent text-copy-medium-heavy-tight">
+                <span class="button__label">Add package</span>
+              </button>
+              <button type="button" class="button button--small button--accent button--outlined text-copy-medium-heavy-tight">
+                <span class="button__label">Maybe later</span>
+              </button>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--accent" aria-label="Close wide banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="banner-demo-card" aria-label="Floating usage and max width">
+        <h2 class="banner-demo-title text-copy-large-heavy-tight">Floating toast/popup and 1440 max-width</h2>
+        <div class="banner-demo-frame banner-demo-frame--max">
+          <div class="banner banner--brand banner--with-brand-gradient banner--floating" data-p100-theme="option-light">
+            <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">info</span>
+            <div class="banner__body">
+              <div class="banner__title-row">
+                <p class="banner__title text-copy-large-heavy-tight">Floating brand toast</p>
+              </div>
+              <p class="banner__description text-copy-medium-regular">Use <code>banner--floating</code> for popup/toast treatments with large elevation and an optional close action.</p>
+            </div>
+            <div class="banner__actions">
+              <button type="button" class="text-button text-button--large text-button--primary text-button--underlined text-copy-medium-heavy-tight">
+                <span class="text-button__label">Dismiss</span>
+              </button>
+            </div>
+            <button type="button" class="banner__close icon-button icon-button--large icon-button--primary" aria-label="Close floating banner">
+              <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="banner-demo-card" aria-label="Booking-flow scenarios">
+        <h2 class="banner-demo-title text-copy-large-heavy-tight">Booking-flow scenarios</h2>
+        <p class="banner-demo-copy text-copy-medium-regular">Real-world compositions that stress-test different slot combinations.</p>
+        <div class="banner-demo-grid">
+
+          <div class="banner-demo-frame banner-demo-frame--wide">
+            <p class="banner-demo-copy text-copy-small-regular">Minimal description-only — no icon, no title. Common inline notice or status update.</p>
+            <div class="banner banner--primary banner--no-icon banner--no-title">
+              <div class="banner__body">
+                <p class="banner__description text-copy-medium-regular">Your booking confirmation has been sent to max@example.com.</p>
+              </div>
+              <button type="button" class="banner__close icon-button icon-button--large icon-button--primary" aria-label="Dismiss notice">
+                <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="banner-demo-frame banner-demo-frame--narrow">
+            <p class="banner-demo-copy text-copy-small-regular">Non-dismissible validation error — no close button, no actions. Grid collapses to single column.</p>
+            <div class="banner banner--error">
+              <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">error</span>
+              <div class="banner__body">
+                <div class="banner__title-row">
+                  <p class="banner__title text-copy-large-heavy-tight">Payment failed</p>
+                </div>
+                <p class="banner__description text-copy-medium-regular">Your card ending in 4242 was declined. Please check your details or try a different payment method.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="banner-demo-frame banner-demo-frame--wide">
+            <p class="banner-demo-copy text-copy-small-regular">Full-content protection upsell — icon, title with price, bullet list, actions, and close.</p>
+            <div class="banner banner--info">
+              <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">verified_user</span>
+              <div class="banner__body">
+                <div class="banner__title-row">
+                  <p class="banner__title text-copy-large-heavy-tight">Liability Protection</p>
+                  <p class="price price--medium banner__price">
+                    <span class="price__sign text-copy-medium-heavy">+</span>
+                    <span class="price__currency text-copy-medium-heavy">€</span>
+                    <span class="price__integer text-copy-medium-heavy">12</span>
+                    <span class="price__decimal text-copy-medium-heavy">.90</span>
+                    <span class="price__suffix text-copy-medium-heavy">/ day</span>
+                  </p>
+                </div>
+                <p class="banner__description text-copy-medium-regular">Reduce your excess from €950 to €0 with full coverage.</p>
+                <ul class="banner__list">
+                  <li class="list-item list-item--medium list-item--primary">
+                    <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
+                    <span class="list-item__label text-copy-medium-regular">No excess on collision damage</span>
+                  </li>
+                  <li class="list-item list-item--medium list-item--primary">
+                    <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
+                    <span class="list-item__label text-copy-medium-regular">Windshield, tires, and roof included</span>
+                  </li>
+                  <li class="list-item list-item--medium list-item--primary">
+                    <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
+                    <span class="list-item__label text-copy-medium-regular">24/7 roadside assistance</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="banner__actions">
+                <button type="button" class="text-button text-button--large text-button--info text-button--underlined text-copy-medium-heavy-tight">
+                  <span class="text-button__label">Coverage details</span>
+                </button>
+                <button type="button" class="button button--small button--info text-copy-medium-heavy-tight">
+                  <span class="button__label">Add protection</span>
+                </button>
+              </div>
+              <button type="button" class="banner__close icon-button icon-button--large icon-button--info" aria-label="Close protection banner">
+                <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="banner-demo-frame banner-demo-frame--narrow">
+            <p class="banner-demo-copy text-copy-small-regular">Same protection upsell at narrow width — actions drop below content, list wraps naturally.</p>
+            <div class="banner banner--info">
+              <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">verified_user</span>
+              <div class="banner__body">
+                <div class="banner__title-row">
+                  <p class="banner__title text-copy-large-heavy-tight">Liability Protection</p>
+                  <p class="price price--medium banner__price">
+                    <span class="price__sign text-copy-medium-heavy">+</span>
+                    <span class="price__currency text-copy-medium-heavy">€</span>
+                    <span class="price__integer text-copy-medium-heavy">12</span>
+                    <span class="price__decimal text-copy-medium-heavy">.90</span>
+                    <span class="price__suffix text-copy-medium-heavy">/ day</span>
+                  </p>
+                </div>
+                <p class="banner__description text-copy-medium-regular">Reduce your excess from €950 to €0 with full coverage.</p>
+                <ul class="banner__list">
+                  <li class="list-item list-item--medium list-item--primary">
+                    <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
+                    <span class="list-item__label text-copy-medium-regular">No excess on collision damage</span>
+                  </li>
+                  <li class="list-item list-item--medium list-item--primary">
+                    <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
+                    <span class="list-item__label text-copy-medium-regular">Windshield, tires, and roof included</span>
+                  </li>
+                  <li class="list-item list-item--medium list-item--primary">
+                    <span class="material-symbols-outlined list-item__leading-icon" aria-hidden="true">check</span>
+                    <span class="list-item__label text-copy-medium-regular">24/7 roadside assistance</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="banner__actions">
+                <button type="button" class="text-button text-button--large text-button--info text-button--underlined text-copy-medium-heavy-tight">
+                  <span class="text-button__label">Coverage details</span>
+                </button>
+                <button type="button" class="button button--small button--info text-copy-medium-heavy-tight">
+                  <span class="button__label">Add protection</span>
+                </button>
+              </div>
+              <button type="button" class="banner__close icon-button icon-button--large icon-button--info" aria-label="Close protection banner">
+                <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="banner-demo-frame banner-demo-frame--wide">
+            <p class="banner-demo-copy text-copy-small-regular">Warning banner with single text action, no CTA pill — lightweight prompt pattern.</p>
+            <div class="banner banner--warning">
+              <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">schedule</span>
+              <div class="banner__body">
+                <div class="banner__title-row">
+                  <p class="banner__title text-copy-large-heavy-tight">Reservation expires soon</p>
+                </div>
+                <p class="banner__description text-copy-medium-regular">Your vehicle hold expires in 12 minutes. Complete checkout to keep your rate.</p>
+              </div>
+              <div class="banner__actions">
+                <button type="button" class="text-button text-button--large text-button--warning text-button--underlined text-copy-medium-heavy-tight">
+                  <span class="text-button__label">Continue to checkout</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="banner-demo-frame banner-demo-frame--wide">
+            <p class="banner-demo-copy text-copy-small-regular">Success confirmation — icon, description, no title. Vertically centers icon against single-line text.</p>
+            <div class="banner banner--success banner--no-title">
+              <span class="material-symbols-outlined banner__leading-icon" aria-hidden="true">check_circle</span>
+              <div class="banner__body">
+                <p class="banner__description text-copy-medium-regular">Protection package added to your booking. You can change this until pickup.</p>
+              </div>
+              <button type="button" class="banner__close icon-button icon-button--large icon-button--success" aria-label="Dismiss confirmation">
+                <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">close</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

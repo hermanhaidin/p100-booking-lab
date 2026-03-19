@@ -1,0 +1,200 @@
+/* Shared banner component API.
+   Variant contract:
+   - Role names: primary (default) | secondary | brand | info | success | warning | error
+   - Role blocks set tokens; shared element selectors consume them.
+   - Add new roles by setting variables in the role block, not by cloning element selectors.
+   Composes: bullet-item, checkbox, icon-button, text-button, button, price.
+   Source: built for p100 — follows AGENTS.md conventions */
+
+.banner {
+  --banner-bg: var(--color-surface-secondary-container);
+  --banner-icon-color: var(--color-content-extended-brand);
+  --banner-title-color: var(--color-content-primary);
+  align-items: center;
+  background: var(--banner-bg);
+  border-radius: var(--radius-lg);
+  container-type: inline-size;
+  display: flex;
+}
+
+/* Role tokens */
+.banner--secondary {
+  --banner-bg: var(--color-surface-container);
+}
+
+.banner--brand {
+  --banner-bg: var(--radial-gradient-brand-top-leading), var(--color-surface-canvas);
+}
+
+.banner--info {
+  --banner-bg: var(--color-content-extended-soft-info);
+  --banner-icon-color: var(--color-content-extended-strong-info);
+  --banner-title-color: var(--color-content-extended-strong-info);
+}
+
+.banner--success {
+  --banner-bg: var(--color-content-extended-soft-success);
+  --banner-icon-color: var(--color-content-extended-strong-success);
+  --banner-title-color: var(--color-content-extended-strong-success);
+}
+
+.banner--warning {
+  --banner-bg: var(--color-content-extended-soft-warning);
+  --banner-icon-color: var(--color-content-extended-strong-warning);
+  --banner-title-color: var(--color-content-extended-strong-warning);
+}
+
+.banner--error {
+  --banner-bg: var(--color-content-extended-soft-error);
+  --banner-icon-color: var(--color-content-extended-strong-error);
+  --banner-title-color: var(--color-content-extended-strong-error);
+}
+
+/* Elements */
+.banner__leading-icon {
+  align-items: center;
+  align-self: stretch;
+  color: var(--banner-title-color);
+  display: flex;
+  flex-shrink: 0;
+  overflow: clip;
+  padding-block: var(--spacing-xs);
+  padding-inline-start: var(--spacing-xs);
+}
+
+.banner__leading-icon .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1;
+}
+
+.banner--brand .banner__leading-icon {
+  color: var(--banner-icon-color);
+}
+
+.banner__content {
+  align-items: center;
+  display: flex;
+  flex: 1 1 0;
+  gap: var(--spacing-2xs);
+  min-width: 0;
+  padding: var(--spacing-xs);
+}
+
+.banner__body {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.banner__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4xs);
+  min-height: 24px;
+  padding-block-end: var(--spacing-3xs);
+}
+
+.banner__title-row {
+  align-items: start;
+  display: flex;
+  gap: var(--spacing-3xs);
+}
+
+.banner__title-icon {
+  color: var(--banner-icon-color);
+  flex-shrink: 0;
+  height: 24px;
+  width: 24px;
+}
+
+.banner__title-icon.material-symbols-outlined {
+  font-variation-settings: 'FILL' 1;
+}
+
+.banner__title {
+  color: var(--banner-title-color);
+  flex: 1 1 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.banner__price {
+  align-items: end;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: center;
+  min-height: 24px;
+}
+
+.banner__description {
+  color: var(--color-content-primary);
+  margin: 0;
+}
+
+.banner__bullets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4xs);
+  list-style: none;
+  margin: 0;
+  padding: 0 0 var(--spacing-3xs);
+}
+
+.banner__actions {
+  align-items: center;
+  align-self: stretch;
+  column-gap: var(--spacing-xs);
+  display: flex;
+  flex-direction: row-reverse;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  row-gap: 0;
+}
+
+.banner__close {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  max-height: 24px;
+  max-width: 24px;
+  overflow: visible;
+}
+
+/* Compact layout (component width ≤ 600px) */
+@container (max-width: 600px) {
+  .banner {
+    align-items: start;
+  }
+
+  .banner__leading-icon {
+    align-items: start;
+  }
+
+  .banner__content {
+    align-items: start;
+    column-gap: var(--spacing-2xs);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: var(--spacing-xs) var(--spacing-xs) var(--spacing-3xs);
+    row-gap: 0;
+  }
+
+  .banner__body {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .banner__close {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .banner__actions {
+    flex-direction: row;
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 48px;
+  }
+}
