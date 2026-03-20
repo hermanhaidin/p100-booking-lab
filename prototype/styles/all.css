@@ -1,0 +1,39 @@
+/* CSS bundle — single import for all shared styles.
+   Pages that haven't migrated to Web Components use this. */
+
+/* Foundation */
+@import "tokens.css";
+@import "fonts.css";
+@import "layout.css";
+@import "base.css";
+@import "typography.css";
+
+/* Components */
+@import "components/badge.css";
+@import "components/badge.presets.css";
+@import "components/banner.css";
+@import "components/booking-footer.css";
+@import "components/booking-header.css";
+@import "components/booking-overview.css";
+@import "components/button.css";
+@import "components/carousel.css";
+@import "components/chip.css";
+@import "components/chip.presets.css";
+@import "components/floating-button.css";
+@import "components/icon-button.css";
+@import "components/link.css";
+@import "components/list-item.css";
+@import "components/offer-banner.css";
+@import "components/offer-card.css";
+@import "components/offer-details.css";
+@import "components/price.css";
+@import "components/protection-card.css";
+@import "components/radio-button.css";
+@import "components/radio-button.presets.css";
+@import "components/separator.css";
+@import "components/text-button.css";
+
+/* Pages */
+@import "pages/home.css";
+@import "pages/offer-list.css";
+@import "pages/protection.css";
