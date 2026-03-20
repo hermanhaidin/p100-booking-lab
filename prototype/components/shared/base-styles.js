@@ -7,8 +7,18 @@ const css = `
 /* --- Material Symbols icon utility --- */
 
 .material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* --- Typography utility classes --- */

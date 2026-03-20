@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Components Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/all.css">
+  <style>
+    .section { padding: var(--spacing-md) 0; }
+    .section h2 { margin: 0 0 var(--spacing-xs); }
+    .row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-3xs); margin-bottom: var(--spacing-xs); }
+    .row-start { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--spacing-3xs); margin-bottom: var(--spacing-xs); }
+    .col { display: flex; flex-direction: column; gap: var(--spacing-3xs); margin-bottom: var(--spacing-xs); }
+    .dark-bg { background-color: var(--color-content-primary); padding: var(--spacing-xs); border-radius: var(--radius-md); }
+    .brand-bg { background-color: var(--color-content-extended-brand); padding: var(--spacing-xs); border-radius: var(--radius-md); }
+    label.row-label { color: var(--color-content-secondary); min-width: 120px; }
+  </style>
+</head>
+<body>
+  <main class="layout-shell">
+
+    <h1 class="text-title-large-heavy">Leaf Web Components</h1>
+    <p class="text-copy-large-regular" style="color: var(--color-content-secondary);">Verification page for all 10 leaf components.</p>
+
+    <!-- ========== SEPARATOR ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-separator&gt;</h2>
+      <div class="col">
+        <ox-separator></ox-separator>
+        <ox-separator size="medium" contrast="medium"></ox-separator>
+        <ox-separator size="large" contrast="high"></ox-separator>
+        <ox-separator size="extra-large" contrast="high"></ox-separator>
+        <div style="display: flex; height: 40px; gap: var(--spacing-xs); align-items: stretch;">
+          <span class="text-copy-medium-regular">Left</span>
+          <ox-separator orientation="vertical" size="small" contrast="medium"></ox-separator>
+          <span class="text-copy-medium-regular">Right</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== BADGE ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-badge&gt;</h2>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Solid (default)</p>
+      <div class="row">
+        <ox-badge>Default</ox-badge>
+        <ox-badge kind="brand">Brand</ox-badge>
+        <ox-badge kind="primary">Primary</ox-badge>
+        <ox-badge kind="secondary">Secondary</ox-badge>
+        <ox-badge kind="success">Success</ox-badge>
+        <ox-badge kind="warning">Warning</ox-badge>
+        <ox-badge kind="error">Error</ox-badge>
+        <ox-badge kind="info">Info</ox-badge>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">With icon</p>
+      <div class="row">
+        <ox-badge kind="brand" icon="star">Featured</ox-badge>
+        <ox-badge kind="success" icon="check_circle">Verified</ox-badge>
+        <ox-badge kind="error" icon="warning" icon-style="outline">Alert</ox-badge>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Outlined</p>
+      <div class="row">
+        <ox-badge kind="brand" variant="outlined">Brand</ox-badge>
+        <ox-badge kind="primary" variant="outlined">Primary</ox-badge>
+        <ox-badge kind="error" variant="outlined">Error</ox-badge>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Bordered</p>
+      <div class="row">
+        <ox-badge kind="brand" variant="bordered">Brand</ox-badge>
+        <ox-badge kind="info" variant="bordered">Info</ox-badge>
+        <ox-badge kind="success" variant="bordered">Success</ox-badge>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Presets</p>
+      <div class="row dark-bg">
+        <ox-badge preset="offer-spec" icon="speed">5 seats</ox-badge>
+        <ox-badge preset="similar-model" icon="info">Similar model</ox-badge>
+      </div>
+      <div class="row">
+        <ox-badge preset="premium-brand" icon="info">Popular</ox-badge>
+        <ox-badge preset="guaranteed-model" icon="info">Guaranteed</ox-badge>
+        <ox-badge preset="hot-offer-promo">Hot offer</ox-badge>
+      </div>
+    </div>
+
+    <!-- ========== PRICE ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-price&gt;</h2>
+      <div class="col">
+        <div class="row">
+          <label class="row-label text-copy-small-regular">Large (default)</label>
+          <ox-price size="large" currency="$" integer="71" decimal=".27" suffix="/ day"></ox-price>
+        </div>
+        <div class="row">
+          <label class="row-label text-copy-small-regular">Large + prefix</label>
+          <ox-price size="large" currency="$" integer="49" decimal=".99" suffix="/ day" prefix="from"></ox-price>
+        </div>
+        <div class="row">
+          <label class="row-label text-copy-small-regular">Large hot</label>
+          <ox-price size="large" variant="hot" currency="$" integer="39" decimal=".00" suffix="/ day"></ox-price>
+        </div>
+        <div class="row">
+          <label class="row-label text-copy-small-regular">Medium muted</label>
+          <ox-price size="medium" variant="muted" currency="$" integer="245" decimal=".80" suffix="total"></ox-price>
+        </div>
+        <div class="row">
+          <label class="row-label text-copy-small-regular">Medium striked</label>
+          <ox-price size="medium" variant="striked" currency="$" integer="89" decimal=".50"></ox-price>
+        </div>
+        <div class="row">
+          <label class="row-label text-copy-small-regular">Medium + sign</label>
+          <ox-price size="medium" currency="$" integer="12" decimal=".00" suffix="/ day" sign="+"></ox-price>
+        </div>
+        <div class="row">
+          <label class="row-label text-copy-small-regular">Currency right</label>
+          <ox-price size="large" currency-position="right" currency="€" integer="55" decimal=",90" suffix="/ Tag"></ox-price>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== BUTTON ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-button&gt;</h2>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Solid (large)</p>
+      <div class="row">
+        <ox-button kind="brand">Brand</ox-button>
+        <ox-button kind="primary">Primary</ox-button>
+        <ox-button kind="secondary">Secondary</ox-button>
+        <ox-button kind="error">Error</ox-button>
+        <ox-button kind="brand" disabled>Disabled</ox-button>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Solid (small)</p>
+      <div class="row">
+        <ox-button kind="brand" size="small">Brand</ox-button>
+        <ox-button kind="primary" size="small">Primary</ox-button>
+        <ox-button kind="secondary" size="small">Secondary</ox-button>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Outlined</p>
+      <div class="row">
+        <ox-button kind="brand" variant="outlined">Brand</ox-button>
+        <ox-button kind="primary" variant="outlined">Primary</ox-button>
+        <ox-button kind="secondary" variant="outlined">Secondary</ox-button>
+        <ox-button kind="primary" variant="outlined" size="small">Small</ox-button>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">With icon</p>
+      <div class="row">
+        <ox-button kind="brand" icon="arrow_forward">Continue</ox-button>
+        <ox-button kind="primary" size="small" icon="add">Add</ox-button>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">As link</p>
+      <div class="row">
+        <ox-button kind="primary" variant="outlined" size="small" href="#">Book now</ox-button>
+      </div>
+    </div>
+
+    <!-- ========== ICON BUTTON ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-icon-button&gt;</h2>
+      <div class="row">
+        <ox-icon-button kind="primary" icon="close" label="Close"></ox-icon-button>
+        <ox-icon-button kind="primary" icon="arrow_back_ios_new" label="Back"></ox-icon-button>
+        <ox-icon-button kind="secondary" icon="info" label="Info"></ox-icon-button>
+        <ox-icon-button kind="brand" icon="favorite" label="Favorite"></ox-icon-button>
+        <ox-icon-button kind="error" icon="delete" label="Delete"></ox-icon-button>
+        <ox-icon-button kind="primary" icon="menu" label="Menu" size="small"></ox-icon-button>
+        <ox-icon-button kind="primary" icon="close" label="Close" disabled></ox-icon-button>
+      </div>
+      <div class="row brand-bg">
+        <ox-icon-button kind="on-brand" icon="menu" label="Menu"></ox-icon-button>
+        <ox-icon-button kind="on-brand" icon="close" label="Close"></ox-icon-button>
+      </div>
+    </div>
+
+    <!-- ========== TEXT BUTTON ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-text-button&gt;</h2>
+      <div class="col">
+        <div class="row">
+          <ox-text-button kind="primary" size="large">Primary large</ox-text-button>
+          <ox-text-button kind="primary" size="small">Primary small</ox-text-button>
+        </div>
+        <div class="row">
+          <ox-text-button kind="primary" size="large" icon="help_center">Help</ox-text-button>
+          <ox-text-button kind="secondary" size="large" icon="add">Different return location</ox-text-button>
+        </div>
+        <div class="row">
+          <ox-text-button kind="primary" size="large" underlined>Underlined</ox-text-button>
+          <ox-text-button kind="primary" size="small" underlined>Small underlined</ox-text-button>
+        </div>
+        <div class="row">
+          <ox-text-button kind="brand" size="large" trailing-icon="arrow_forward">Learn more</ox-text-button>
+          <ox-text-button kind="primary" size="large" disabled>Disabled</ox-text-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== CHIP ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-chip&gt;</h2>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Small chips</p>
+      <div class="row">
+        <ox-chip icon="directions_car" icon-style="filled" selected>Cars</ox-chip>
+        <ox-chip icon="local_shipping" icon-style="filled">Trucks</ox-chip>
+        <ox-chip icon="update" icon-style="outline">Subscription</ox-chip>
+        <ox-chip>Label only</ox-chip>
+        <ox-chip disabled>Disabled</ox-chip>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Large chips</p>
+      <div class="row">
+        <ox-chip size="large" icon="calendar_today">Pick-up</ox-chip>
+        <ox-chip size="large" icon="calendar_today" selected sublabel="Mon, Jun 15">Date</ox-chip>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Outlined</p>
+      <div class="row">
+        <ox-chip variant="outlined">Unselected</ox-chip>
+        <ox-chip variant="outlined" selected>Selected</ox-chip>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Dropdown preset</p>
+      <div class="row">
+        <ox-chip preset="dropdown" icon="swap_vert">Recommended</ox-chip>
+        <ox-chip preset="dropdown" icon="tune">Filters</ox-chip>
+      </div>
+    </div>
+
+    <!-- ========== LINK ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-link&gt;</h2>
+      <div class="col">
+        <div class="row">
+          <ox-link href="#" class="text-copy-medium-heavy">Primary link</ox-link>
+          <ox-link href="#" kind="brand" class="text-copy-medium-heavy">Brand link</ox-link>
+          <ox-link href="#" kind="secondary" class="text-copy-medium-heavy">Secondary link</ox-link>
+          <ox-link href="#" kind="error" class="text-copy-medium-heavy">Error link</ox-link>
+        </div>
+        <div class="row">
+          <ox-link href="#" underlined class="text-copy-medium-heavy">Underlined at rest</ox-link>
+        </div>
+        <div class="row" style="max-width: 200px;">
+          <ox-link href="#" truncate class="text-copy-medium-heavy">This is a very long link that should truncate with an ellipsis</ox-link>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== LIST ITEM ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-list-item&gt;</h2>
+      <div class="col" style="max-width: 480px;">
+        <ox-list-item kind="primary" size="medium" icon="check">Third party insurance</ox-list-item>
+        <ox-list-item kind="primary" size="medium" icon="check" trailing-icon="info" trailing-label="More info">Collision damage waiver</ox-list-item>
+        <ox-list-item kind="primary" size="medium" icon="close">Roadside assistance</ox-list-item>
+        <ox-list-item kind="success" size="large" icon="check_circle">Included in your plan</ox-list-item>
+        <ox-list-item kind="error" size="small" icon="warning">Missing documentation</ox-list-item>
+      </div>
+    </div>
+
+    <!-- ========== FLOATING BUTTON ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-floating-button&gt;</h2>
+      <div class="row">
+        <ox-floating-button size="small" content="icon-only" icon="chevron_left" label="Previous"></ox-floating-button>
+        <ox-floating-button size="medium" content="icon-only" icon="chevron_left" label="Previous"></ox-floating-button>
+        <ox-floating-button size="medium" content="icon-only" icon="chevron_right" label="Next"></ox-floating-button>
+        <ox-floating-button size="large" content="icon-only" icon="arrow_upward" label="Scroll to top"></ox-floating-button>
+      </div>
+      <div class="row">
+        <ox-floating-button size="small" content="text-only">Filter</ox-floating-button>
+        <ox-floating-button size="medium" content="text-only">Apply</ox-floating-button>
+        <ox-floating-button size="large" content="text-only">Show results</ox-floating-button>
+      </div>
+      <div class="row">
+        <ox-floating-button size="small" content="icon-text" icon="tune">Filters</ox-floating-button>
+        <ox-floating-button size="medium" content="icon-text" icon="map">Map view</ox-floating-button>
+        <ox-floating-button size="large" content="icon-text" icon="edit">Edit booking</ox-floating-button>
+        <ox-floating-button size="medium" content="icon-only" icon="close" label="Close" disabled></ox-floating-button>
+      </div>
+    </div>
+
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <p class="text-copy-medium-regular" style="color: var(--color-content-secondary); padding: var(--spacing-lg) 0;">End of component test page.</p>
+
+  </main>
+
+  <script type="module" src="../components/index.js"></script>
+</body>
+</html>
