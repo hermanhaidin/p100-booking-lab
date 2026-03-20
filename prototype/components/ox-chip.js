@@ -33,7 +33,6 @@ styles.replaceSync(`
     color: var(--chip-fg);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
     gap: var(--spacing-3xs);
     justify-content: center;
     min-width: 64px;

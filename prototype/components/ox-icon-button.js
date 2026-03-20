@@ -25,7 +25,6 @@ styles.replaceSync(`
     color: var(--icon-button-fg);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
     height: var(--icon-button-hit-size);
     justify-content: center;
     margin: 0;

@@ -22,7 +22,6 @@ styles.replaceSync(`
     color: var(--text-button-fg);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
     gap: 0;
     height: 36px;
     justify-content: flex-start;

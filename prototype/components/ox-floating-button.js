@@ -30,7 +30,6 @@ styles.replaceSync(`
     color: var(--color-content-primary);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
     gap: var(--floating-button-gap);
     height: var(--floating-button-height);
     justify-content: center;

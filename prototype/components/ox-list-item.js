@@ -47,7 +47,6 @@ styles.replaceSync(`
     color: var(--list-item-trailing-action-color);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
     justify-content: center;
     margin: calc(-1 * var(--spacing-3xs));
     outline: none;

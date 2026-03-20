@@ -27,7 +27,6 @@ styles.replaceSync(`
     text-underline-offset: var(--spacing-4xs);
     transition: opacity 150ms ease, color 150ms ease, text-decoration-color 150ms ease;
     width: fit-content;
-    font: inherit;
   }
 
   a:visited { color: var(--link-fg); }
