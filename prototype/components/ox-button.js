@@ -291,9 +291,9 @@ class OXButton extends HTMLElement {
     }
 
     this.shadowRoot.innerHTML = `
-      <${tag} class="btn ${typoClass}" ${attrs.join(' ')}>
+      <${tag} class="btn" ${attrs.join(' ')}>
         ${iconHtml}
-        <span class="label"><slot></slot></span>
+        <span class="label ${typoClass}"><slot></slot></span>
       </${tag}>`;
   }
 }

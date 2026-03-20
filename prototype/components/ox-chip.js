@@ -214,13 +214,13 @@ class OXChip extends HTMLElement {
 
     const labelContent = sublabel
       ? `<span class="content">
-           <span class="label"><slot></slot></span>
+           <span class="label ${typoClass}"><slot></slot></span>
            <span class="sublabel text-copy-small-regular">${sublabel}</span>
          </span>`
-      : `<span class="label"><slot></slot></span>`;
+      : `<span class="label ${typoClass}"><slot></slot></span>`;
 
     this.shadowRoot.innerHTML = `
-      <button type="button" class="chip ${typoClass}" ${disabled ? 'disabled' : ''}>
+      <button type="button" class="chip" ${disabled ? 'disabled' : ''}>
         ${iconHtml}
         ${labelContent}
         ${trailingHtml}
