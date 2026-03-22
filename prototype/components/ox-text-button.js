@@ -1,6 +1,8 @@
 /* Shared text-button component API
    - Kind names mirror token semantics: primary|secondary|brand|info|accent|success|warning|error + on-* variants
    - Underline interaction targets label only, never icons
+   - Touch target exceeds content height; negative vertical margins collapse layout footprint.
+     Small: 36px target, -8px margin. Large: 48px target, -12px margin.
    API: <ox-text-button kind="primary" size="large" icon="help_center" underlined>Label</ox-text-button> */
 
 import { baseStyles } from './shared/base-styles.js';
@@ -9,10 +11,23 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`
   :host {
     --text-button-fg: var(--color-content-primary);
+    --text-button-hit-height: 48px;
+    --text-button-v-margin: -12px;
     display: inline-flex;
   }
 
   :host([hidden]) { display: none; }
+
+  :host([size="small"]) {
+    --text-button-hit-height: 36px;
+    --text-button-v-margin: -8px;
+  }
+
+  :host(:not([size])),
+  :host([size="large"]) {
+    --text-button-hit-height: 48px;
+    --text-button-v-margin: -12px;
+  }
 
   .btn {
     align-items: center;
@@ -23,9 +38,9 @@ styles.replaceSync(`
     cursor: pointer;
     display: inline-flex;
     gap: 0;
-    height: 36px;
     justify-content: flex-start;
-    margin: 0;
+    margin: var(--text-button-v-margin) 0;
+    min-height: var(--text-button-hit-height);
     min-width: 0;
     outline: none;
     padding: 0;
@@ -42,6 +57,7 @@ styles.replaceSync(`
     min-width: 0;
     overflow-wrap: anywhere;
     text-decoration: none;
+    text-decoration-thickness: var(--stroke-sm);
     white-space: normal;
   }
 

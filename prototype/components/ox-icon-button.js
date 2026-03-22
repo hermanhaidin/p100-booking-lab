@@ -1,39 +1,50 @@
 /* Shared icon-button component API
    - Kind names mirror token semantics: primary|secondary|brand|info|accent|success|warning|error
    - on-* variants are foreground colors for filled backgrounds
+   - Touch target exceeds icon size; negative margins collapse layout footprint to icon dimensions.
+     Small: 16px icon, 32px target, -8px margin. Large: 24px icon, 48px target, -12px margin.
    API: <ox-icon-button kind="primary" size="large" icon="close" label="Close"></ox-icon-button> */
 
 import { baseStyles } from './shared/base-styles.js';
+import { iconButtonStyles } from './shared/ox-icon-button-styles.js';
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`
   :host {
     --icon-button-fg: var(--color-content-primary);
     --icon-button-icon-size: 24px;
-    --icon-button-hit-size: 36px;
+    --icon-button-hit-size: 48px;
+    --icon-button-margin: -12px;
     display: inline-flex;
   }
 
   :host([hidden]) { display: none; }
 
+  :host([size="small"]) {
+    --icon-button-icon-size: 16px;
+    --icon-button-hit-size: 32px;
+    --icon-button-margin: -8px;
+  }
+
+  :host(:not([size])),
+  :host([size="large"]) {
+    --icon-button-icon-size: 24px;
+    --icon-button-hit-size: 48px;
+    --icon-button-margin: -12px;
+  }
+
   .btn {
     align-items: center;
-    background: transparent;
-    border: none;
     border-radius: var(--radius-sm);
     box-sizing: border-box;
     color: var(--icon-button-fg);
-    cursor: pointer;
     display: inline-flex;
     height: var(--icon-button-hit-size);
     justify-content: center;
-    margin: 0;
+    margin: var(--icon-button-margin);
     min-height: var(--icon-button-hit-size);
     min-width: var(--icon-button-hit-size);
-    outline: none;
-    padding: 0;
     text-decoration: none;
-    transition: opacity 120ms ease, color 120ms ease;
     width: var(--icon-button-hit-size);
   }
 
@@ -45,17 +56,7 @@ styles.replaceSync(`
     flex: 0 0 auto;
     font-size: var(--icon-button-icon-size);
     height: var(--icon-button-icon-size);
-    transition: transform 120ms ease;
     width: var(--icon-button-icon-size);
-  }
-
-  :host([size="small"]) {
-    --icon-button-icon-size: 16px;
-  }
-
-  :host(:not([size])),
-  :host([size="large"]) {
-    --icon-button-icon-size: 24px;
   }
 
   /* Kind tokens */
@@ -78,25 +79,6 @@ styles.replaceSync(`
   :host([kind="on-warning"]) { --icon-button-fg: var(--color-on-content-extended-on-warning); }
   :host([kind="on-error"]) { --icon-button-fg: var(--color-on-content-extended-on-error); }
 
-  /* Interactions */
-  .btn:not(:disabled):not([aria-disabled="true"]):hover .icon {
-    transform: scale(1.08);
-  }
-
-  .btn:not(:disabled):not([aria-disabled="true"]):active {
-    opacity: 0.6;
-  }
-
-  .btn:disabled,
-  .btn[aria-disabled="true"] {
-    cursor: not-allowed;
-    opacity: 0.3;
-  }
-
-  .btn:focus-visible {
-    outline: var(--stroke-lg) solid var(--color-overlay-focus);
-    outline-offset: var(--stroke-md);
-  }
 `);
 
 class OXIconButton extends HTMLElement {
@@ -105,7 +87,7 @@ class OXIconButton extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [baseStyles, styles];
+    this.shadowRoot.adoptedStyleSheets = [baseStyles, iconButtonStyles, styles];
   }
 
   connectedCallback() {
@@ -133,8 +115,8 @@ class OXIconButton extends HTMLElement {
     }
 
     this.shadowRoot.innerHTML = `
-      <${tag} class="btn" ${attrs.join(' ')}>
-        <span class="icon material-symbols-outlined" aria-hidden="true">${icon}</span>
+      <${tag} class="btn icon-btn" ${attrs.join(' ')}>
+        <span class="icon icon-btn-icon material-symbols-outlined" aria-hidden="true">${icon}</span>
       </${tag}>`;
   }
 }

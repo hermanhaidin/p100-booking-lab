@@ -1,6 +1,7 @@
 /* Shared floating-button component API
    - Sizes: small|medium|large
    - Content modes: icon-only|text-only|icon-text
+   - Padding is intentionally one step tighter than ox-button to reduce overlay footprint.
    - No kind variants; background uses surface-container token
    API: <ox-floating-button size="medium" content="icon-only" icon="chevron_left" label="Previous">Label</ox-floating-button> */
 
@@ -111,13 +112,13 @@ styles.replaceSync(`
 
   :host([content="icon-text"][size="small"]),
   :host([content="icon-text"]:not([size])) {
-    --floating-button-gap: var(--spacing-2xs);
+    --floating-button-gap: var(--spacing-3xs);
     --floating-button-icon-size: 16px;
   }
 
   :host([content="icon-text"][size="medium"]),
   :host([content="icon-text"][size="large"]) {
-    --floating-button-gap: var(--spacing-2xs);
+    --floating-button-gap: var(--spacing-3xs);
     --floating-button-icon-size: 24px;
   }
 

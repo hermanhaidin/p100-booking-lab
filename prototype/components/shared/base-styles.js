@@ -21,6 +21,12 @@ const css = `
   -webkit-font-smoothing: antialiased;
 }
 
+/* Add "filled" attribute to any component to switch icons to filled style.
+   Purely CSS-driven — no JS observation needed. Works on every component that adopts baseStyles. */
+:host([filled]) .material-symbols-outlined {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
 /* --- Typography utility classes --- */
 /* Named after P100 text styles. Responsive: font sizes update via tokens.css media queries. */
 

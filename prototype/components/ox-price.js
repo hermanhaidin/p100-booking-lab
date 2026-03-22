@@ -1,30 +1,35 @@
 /* Shared price component API
    - Prices are composable from optional parts: prefix, sign, currency, integer, decimal, suffix.
    - Default market is EN + USD with left currency; use currency-position="right" for regional swaps.
-   - Typography is applied internally based on size + variant weight.
-   API: <ox-price size="large" variant="default" currency="$" integer="71" decimal=".27" suffix="/ day"> */
+   - Kind controls color: primary (default), secondary, brand, info, accent, success, warning, error,
+     plus on-foreground kinds: on-primary, on-secondary, on-brand, on-info, on-accent, on-success, on-warning, on-error.
+   - Boolean "regular" switches from heavy (default) to regular weight typography.
+   - Boolean "striked" adds a strikethrough line; thickness follows weight (1px regular, 2px heavy).
+   API: <ox-price kind="primary" size="large" currency="$" integer="71" decimal=".27" suffix="/ day">
+        <ox-price kind="secondary" regular striked currency="$" integer="89" decimal=".50"> */
 
 import { baseStyles } from './shared/base-styles.js';
 
 const TYPO = {
   large:  { integer: 'text-title-small-heavy',  rest: 'text-copy-medium-heavy-tight' },
-  medium: { integer: 'text-copy-medium-heavy-tight', rest: 'text-copy-small-heavy-tight' },
+  medium: { integer: 'text-copy-medium-heavy-tight', rest: 'text-copy-medium-heavy-tight' },
   small:  { integer: 'text-copy-small-heavy',   rest: 'text-copy-small-heavy' },
 };
 
 const TYPO_REGULAR = {
   large:  { integer: 'text-title-small-regular',  rest: 'text-copy-medium-regular' },
-  medium: { integer: 'text-copy-medium-regular', rest: 'text-copy-small-regular' },
+  medium: { integer: 'text-copy-medium-regular', rest: 'text-copy-medium-regular' },
   small:  { integer: 'text-copy-small-regular',  rest: 'text-copy-small-regular' },
 };
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`
   :host {
+    --price-fg: var(--color-content-primary);
     --price-element-gap: var(--spacing-5xs);
     --price-strike-position: 50%;
     align-items: baseline;
-    color: var(--color-content-primary);
+    color: var(--price-fg);
     display: inline-flex;
     margin: 0;
     position: relative;
@@ -62,22 +67,31 @@ styles.replaceSync(`
     order: 55;
   }
 
-  :host([variant="hot"]) {
-    color: var(--color-content-extended-brand);
-  }
+  /* Kind tokens */
+  :host([kind="primary"]),
+  :host(:not([kind])) { --price-fg: var(--color-content-primary); }
+  :host([kind="secondary"]) { --price-fg: var(--color-content-secondary); }
+  :host([kind="brand"]) { --price-fg: var(--color-content-extended-brand); }
+  :host([kind="info"]) { --price-fg: var(--color-content-extended-strong-info); }
+  :host([kind="accent"]) { --price-fg: var(--color-content-extended-strong-accent); }
+  :host([kind="success"]) { --price-fg: var(--color-content-extended-strong-success); }
+  :host([kind="warning"]) { --price-fg: var(--color-content-extended-strong-warning); }
+  :host([kind="error"]) { --price-fg: var(--color-content-extended-error); }
 
-  :host([variant="muted"]) {
-    color: var(--color-content-secondary);
-  }
+  :host([kind="on-primary"]) { --price-fg: var(--color-on-content-on-primary); }
+  :host([kind="on-secondary"]) { --price-fg: var(--color-on-content-on-secondary); }
+  :host([kind="on-brand"]) { --price-fg: var(--color-on-content-extended-on-brand); }
+  :host([kind="on-info"]) { --price-fg: var(--color-on-content-extended-on-info); }
+  :host([kind="on-accent"]) { --price-fg: var(--color-on-content-extended-on-accent); }
+  :host([kind="on-success"]) { --price-fg: var(--color-on-content-extended-on-success); }
+  :host([kind="on-warning"]) { --price-fg: var(--color-on-content-extended-on-warning); }
+  :host([kind="on-error"]) { --price-fg: var(--color-on-content-extended-on-error); }
 
-  :host([variant="striked"]) {
-    color: var(--color-content-secondary);
-  }
-
-  :host([variant="striked"])::after {
+  /* Strikethrough */
+  :host([striked])::after {
     background-color: currentColor;
     content: "";
-    height: calc((var(--stroke-sm) + var(--stroke-md)) / 2);
+    height: var(--stroke-md);
     left: 0;
     pointer-events: none;
     position: absolute;
@@ -86,14 +100,18 @@ styles.replaceSync(`
     transform: translateY(-50%);
   }
 
-  :host([size="large"][variant="striked"]) {
+  :host([regular][striked])::after {
+    height: var(--stroke-sm);
+  }
+
+  :host([size="large"][striked]) {
     --price-strike-position: 60%;
   }
 `);
 
 class OXPrice extends HTMLElement {
   static observedAttributes = [
-    'size', 'variant', 'currency-position',
+    'kind', 'size', 'regular', 'striked', 'currency-position',
     'integer', 'decimal', 'suffix', 'prefix', 'sign', 'currency',
   ];
 
@@ -113,8 +131,7 @@ class OXPrice extends HTMLElement {
 
   render() {
     const size = this.getAttribute('size') || 'large';
-    const variant = this.getAttribute('variant') || 'default';
-    const isRegular = variant === 'muted' || variant === 'striked';
+    const isRegular = this.hasAttribute('regular');
     const typo = (isRegular ? TYPO_REGULAR : TYPO)[size] || TYPO.large;
 
     const prefix = this.getAttribute('prefix');

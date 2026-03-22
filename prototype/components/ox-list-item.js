@@ -5,6 +5,7 @@
    API: <ox-list-item kind="primary" size="medium" icon="check" trailing-icon="info" trailing-label="More info">Label text</ox-list-item> */
 
 import { baseStyles } from './shared/base-styles.js';
+import { iconButtonStyles } from './shared/ox-icon-button-styles.js';
 
 const TYPO_MAP = {
   small: 'text-copy-small-regular',
@@ -41,31 +42,16 @@ styles.replaceSync(`
   .trailing-btn {
     align-items: center;
     align-self: start;
-    background: transparent;
-    border: none;
     border-radius: var(--radius-sm);
     color: var(--list-item-trailing-action-color);
-    cursor: pointer;
     display: inline-flex;
     justify-content: center;
     margin: calc(-1 * var(--spacing-3xs));
-    outline: none;
-    padding: 0;
-    transition: opacity 120ms ease, color 120ms ease;
-  }
-
-  .trailing-btn:not(:disabled):hover .trailing-icon { transform: scale(1.08); }
-  .trailing-btn:not(:disabled):active { opacity: 0.6; }
-
-  .trailing-btn:focus-visible {
-    outline: var(--stroke-lg) solid var(--color-overlay-focus);
-    outline-offset: var(--stroke-md);
   }
 
   .trailing-icon {
     color: currentColor;
     display: block;
-    transition: transform 120ms ease;
   }
 
   /* Small */
@@ -170,7 +156,7 @@ class OXListItem extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [baseStyles, styles];
+    this.shadowRoot.adoptedStyleSheets = [baseStyles, iconButtonStyles, styles];
   }
 
   connectedCallback() {
@@ -193,8 +179,8 @@ class OXListItem extends HTMLElement {
       : '';
 
     const trailingHtml = trailingIcon
-      ? `<button type="button" class="trailing-btn" aria-label="${trailingLabel}">
-           <span class="trailing-icon material-symbols-outlined" aria-hidden="true">${trailingIcon}</span>
+      ? `<button type="button" class="trailing-btn icon-btn" aria-label="${trailingLabel}">
+           <span class="trailing-icon icon-btn-icon material-symbols-outlined" aria-hidden="true">${trailingIcon}</span>
          </button>`
       : '';
 

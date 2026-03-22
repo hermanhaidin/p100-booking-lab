@@ -2,7 +2,7 @@
    - Chips are button-like toggles/tabs with optional selected state.
    - Supports small/large sizes and solid/outlined variants.
    - Preset: dropdown (adds trailing keyboard_arrow_down icon).
-   API: <ox-chip size="small" variant="solid" icon="directions_car" icon-style="filled" selected disabled preset="dropdown" sublabel="...">Label</ox-chip> */
+   API: <ox-chip size="small" variant="solid" icon="directions_car" selected disabled preset="dropdown" sublabel="...">Label</ox-chip> */
 
 import { baseStyles } from './shared/base-styles.js';
 
@@ -79,20 +79,11 @@ styles.replaceSync(`
     width: 24px;
   }
 
-  :host([icon-style="filled"]) .icon,
-  :host(:not([icon-style])) .icon {
-    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
-  }
-
-  :host([icon-style="outline"]) .icon {
-    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-  }
-
   .content {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-5xs);
+    gap: 0;
     min-width: 0;
   }
 
@@ -180,7 +171,7 @@ styles.replaceSync(`
 `);
 
 class OXChip extends HTMLElement {
-  static observedAttributes = ['size', 'variant', 'icon', 'icon-style', 'selected', 'disabled', 'preset', 'sublabel'];
+  static observedAttributes = ['size', 'variant', 'icon', 'selected', 'disabled', 'preset', 'sublabel'];
 
   constructor() {
     super();
@@ -202,7 +193,7 @@ class OXChip extends HTMLElement {
     const preset = this.getAttribute('preset');
     const disabled = this.hasAttribute('disabled');
     const size = this.getAttribute('size') || 'small';
-    const typoClass = size === 'large' ? 'text-copy-large-regular-tight' : 'text-copy-medium-regular-tight';
+    const typoClass = 'text-copy-medium-regular-tight';
 
     const iconHtml = icon
       ? `<span class="icon material-symbols-outlined" aria-hidden="true">${icon}</span>`

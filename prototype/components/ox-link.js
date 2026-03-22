@@ -1,4 +1,5 @@
-/* Shared link component API for dense, text-forward anchors
+/* Shared link component API — inline text link for use within prose and body copy.
+   - For standalone actionable links with icons/touch targets, use ox-text-button with href instead.
    - Kind names: primary|secondary|brand|info|accent|success|warning|error + on-* variants
    - Disabled state intentionally unsupported; links represent navigational destinations.
    API: <ox-link href="#" kind="primary" underlined truncate>Link text</ox-link> */
@@ -24,6 +25,7 @@ styles.replaceSync(`
     outline: none;
     text-align: left;
     text-decoration: none;
+    text-decoration-thickness: var(--stroke-sm);
     text-underline-offset: var(--spacing-4xs);
     transition: opacity 150ms ease, color 150ms ease, text-decoration-color 150ms ease;
     width: fit-content;

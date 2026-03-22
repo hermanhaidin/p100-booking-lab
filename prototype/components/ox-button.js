@@ -70,9 +70,15 @@ styles.replaceSync(`
     min-width: 96px;
   }
 
-  :host([icon]) .btn {
+  :host(:not([size])[icon]) .btn,
+  :host([size="large"][icon]) .btn {
     padding-left: var(--spacing-sm);
     padding-right: var(--spacing-md);
+  }
+
+  :host([size="small"][icon]) .btn {
+    padding-left: var(--spacing-2xs);
+    padding-right: var(--spacing-xs);
   }
 
   .icon {

@@ -45,6 +45,7 @@ Focus on fast iteration and visual exploration. Optimize for designer readabilit
 - When creating new HTML pages, always start from or copy `prototype/base.html`
 - Custom SVGs live in `prototype/assets/icons/`, use `{category}-{name}.svg` naming
 - Icon utilities are also available inside Web Components via the shared base styles module
+- Default icon style is **outlined** (FILL 0). Add the `filled` boolean attribute to any component to switch to filled style (FILL 1). This is a shared CSS-driven behavior from `base-styles.js` — no per-component JS needed.
 
 
 ## Operating model

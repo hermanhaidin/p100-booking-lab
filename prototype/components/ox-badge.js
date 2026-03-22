@@ -1,19 +1,20 @@
 /* Shared badge component API
-   - Badges are read-only marketing/detail nudges (not interactive controls).
-   - All badges are pill-shaped and fixed at 24px height.
+   - Badges are pill-shaped and fixed at 24px height.
    - Visual variants: solid, outlined, bordered.
    - Presets: offer-spec, similar-model, premium-brand, guaranteed-model, hot-offer-promo.
-   API: <ox-badge kind="brand" variant="solid" icon="star" icon-style="filled" preset="">Label</ox-badge> */
+   - Trailing-icon presets render the icon as a small interactive icon button.
+   API: <ox-badge kind="brand" variant="solid" icon="star" preset="">Label</ox-badge> */
 
 import { baseStyles } from './shared/base-styles.js';
+import { iconButtonStyles } from './shared/ox-icon-button-styles.js';
 
 const TRAILING_ICON_PRESETS = ['similar-model', 'premium-brand', 'guaranteed-model'];
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`
   :host {
-    --badge-bg: var(--color-content-extended-soft-brand);
-    --badge-fg: var(--color-content-extended-strong-brand);
+    --badge-bg: var(--color-content-extended-brand);
+    --badge-fg: var(--color-on-content-extended-on-brand);
     --badge-border-color: var(--color-content-extended-brand);
     align-items: center;
     background-color: var(--badge-bg);
@@ -47,11 +48,6 @@ styles.replaceSync(`
     font-size: 16px;
     height: 16px;
     width: 16px;
-    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 20;
-  }
-
-  :host([icon-style="outline"]) .icon {
-    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
   }
 
   .label {
@@ -59,6 +55,28 @@ styles.replaceSync(`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .trailing-btn {
+    align-items: center;
+    border-radius: var(--radius-sm);
+    color: currentColor;
+    display: inline-flex;
+    flex: 0 0 auto;
+    height: 32px;
+    justify-content: center;
+    margin: -8px;
+    min-height: 32px;
+    min-width: 32px;
+    width: 32px;
+  }
+
+  .trailing-icon {
+    color: currentColor;
+    display: block;
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
   }
 
   /* Kind token mappings — solid */
@@ -181,11 +199,7 @@ styles.replaceSync(`
     padding-right: var(--spacing-3xs);
   }
 
-  :host([preset="similar-model"]) .icon {
-    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
-  }
-
-  /* Preset: premium-brand (trailing icon) */
+  /* Preset: premium-brand (trailing icon button) */
   :host([preset="premium-brand"]) {
     background-color: var(--color-content-extended-brand);
     color: var(--color-on-content-extended-on-brand);
@@ -196,11 +210,7 @@ styles.replaceSync(`
     padding-right: var(--spacing-3xs);
   }
 
-  :host([preset="premium-brand"]) .icon {
-    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
-  }
-
-  /* Preset: guaranteed-model (trailing icon) */
+  /* Preset: guaranteed-model (trailing icon button) */
   :host([preset="guaranteed-model"]) {
     background-color: var(--color-loyalty-gold);
     color: var(--color-global-white);
@@ -209,10 +219,6 @@ styles.replaceSync(`
   :host([preset="guaranteed-model"][icon]) {
     padding-left: var(--spacing-2xs);
     padding-right: var(--spacing-3xs);
-  }
-
-  :host([preset="guaranteed-model"]) .icon {
-    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
   }
 
   /* Preset: hot-offer-promo */
@@ -224,12 +230,12 @@ styles.replaceSync(`
 `);
 
 class OXBadge extends HTMLElement {
-  static observedAttributes = ['kind', 'variant', 'icon', 'icon-style', 'preset'];
+  static observedAttributes = ['kind', 'variant', 'icon', 'preset'];
 
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [baseStyles, styles];
+    this.shadowRoot.adoptedStyleSheets = [baseStyles, iconButtonStyles, styles];
   }
 
   connectedCallback() {
@@ -245,17 +251,23 @@ class OXBadge extends HTMLElement {
     const preset = this.getAttribute('preset');
     const trailing = preset && TRAILING_ICON_PRESETS.includes(preset);
 
-    const iconHtml = icon
+    const leadingIconHtml = icon
       ? `<span class="icon material-symbols-outlined" aria-hidden="true">${icon}</span>`
+      : '';
+
+    const trailingBtnHtml = icon
+      ? `<button type="button" class="trailing-btn icon-btn" aria-label="${icon}">
+           <span class="trailing-icon icon-btn-icon material-symbols-outlined" aria-hidden="true">${icon}</span>
+         </button>`
       : '';
 
     if (trailing) {
       this.shadowRoot.innerHTML = `
         <span class="label text-copy-small-heavy"><slot></slot></span>
-        ${iconHtml}`;
+        ${trailingBtnHtml}`;
     } else {
       this.shadowRoot.innerHTML = `
-        ${iconHtml}
+        ${leadingIconHtml}
         <span class="label text-copy-small-heavy"><slot></slot></span>`;
     }
   }
