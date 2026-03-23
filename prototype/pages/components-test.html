@@ -613,6 +613,9 @@
       <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Primary (default, no title)</p>
       <div class="col">
         <ox-banner kind="primary" icon="info">
+          <p class="text-copy-medium-regular">Short notice.</p>
+        </ox-banner>
+        <ox-banner kind="primary" icon="info">
           <p class="text-copy-medium-regular">Drivers must have held their driver's license for at least 1 year(s) for this vehicle</p>
         </ox-banner>
       </div>
@@ -626,23 +629,67 @@
 
       <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">All kinds</p>
       <div class="col">
-        <ox-banner kind="primary" icon="info">
-          <p class="text-copy-medium-regular">Primary banner</p>
+        <ox-banner kind="primary" icon="info" title="License requirement">
+          <p class="text-copy-medium-regular">Drivers must have held their driver's license for at least 1 year(s) for this vehicle category.</p>
+          <div slot="actions">
+            <ox-button size="small">Action</ox-button>
+            <ox-text-button size="large" underlined>Details</ox-text-button>
+          </div>
         </ox-banner>
-        <ox-banner kind="secondary" icon="info">
-          <p class="text-copy-medium-regular">Secondary banner</p>
+        <ox-banner kind="secondary" icon="info" title="Booking update">
+          <p class="text-copy-medium-regular">Your reservation has been updated with the new pick-up time. Please review the changes before confirming.</p>
+          <div slot="actions">
+            <ox-button size="small">Action</ox-button>
+            <ox-text-button size="large" underlined>Details</ox-text-button>
+          </div>
         </ox-banner>
-        <ox-banner kind="info" icon="info">
-          <p class="text-copy-medium-regular">Info banner</p>
+        <ox-banner kind="info" icon="info" title="Good to know">
+          <p class="text-copy-medium-regular">Your rental includes unlimited mileage and 24/7 roadside assistance at no extra charge.</p>
+          <div slot="actions">
+            <ox-button size="small">Action</ox-button>
+            <ox-text-button size="large" underlined>Details</ox-text-button>
+          </div>
         </ox-banner>
-        <ox-banner kind="success" icon="check_circle">
-          <p class="text-copy-medium-regular">Success banner</p>
+        <ox-banner kind="success" icon="check_circle" title="Booking confirmed">
+          <p class="text-copy-medium-regular">Your vehicle has been reserved. A confirmation email with all details has been sent to your inbox.</p>
+          <div slot="actions">
+            <ox-button size="small">Action</ox-button>
+            <ox-text-button size="large" underlined>Details</ox-text-button>
+          </div>
         </ox-banner>
-        <ox-banner kind="warning" icon="warning">
-          <p class="text-copy-medium-regular">Warning banner</p>
+        <ox-banner kind="warning" icon="warning" title="Deposit required">
+          <p class="text-copy-medium-regular">A security deposit of $200 will be held on your credit card at pick-up and released upon return.</p>
+          <div slot="actions">
+            <ox-button size="small">Action</ox-button>
+            <ox-text-button size="large" underlined>Details</ox-text-button>
+          </div>
         </ox-banner>
-        <ox-banner kind="error" icon="error">
-          <p class="text-copy-medium-regular">Error banner</p>
+        <ox-banner kind="error" icon="error" title="Payment failed">
+          <p class="text-copy-medium-regular">We couldn't process your payment. Please check your card details and try again or use a different method.</p>
+          <div slot="actions">
+            <ox-button size="small">Action</ox-button>
+            <ox-text-button size="large" underlined>Details</ox-text-button>
+          </div>
+        </ox-banner>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">With list items</p>
+      <div class="col">
+        <ox-banner kind="info" icon="info" title="What's included">
+          <p class="text-copy-medium-regular">Your rental comes with the following benefits at no extra cost.</p>
+          <ox-list-item icon="check_circle">Unlimited mileage</ox-list-item>
+          <ox-list-item icon="check_circle">24/7 roadside assistance</ox-list-item>
+          <ox-list-item icon="check_circle">Third party insurance</ox-list-item>
+        </ox-banner>
+        <ox-banner kind="warning" icon="warning" title="Before you go">
+          <p class="text-copy-medium-regular">Please make sure you have the following ready at pick-up.</p>
+          <ox-list-item icon="check">Valid driver's license held for 1+ years</ox-list-item>
+          <ox-list-item icon="check">Credit card in driver's name</ox-list-item>
+          <ox-list-item icon="check">Proof of return flight or address</ox-list-item>
+          <div slot="actions">
+            <ox-button size="small">View checklist</ox-button>
+            <ox-text-button size="large" underlined>Learn more</ox-text-button>
+          </div>
         </ox-banner>
       </div>
 
@@ -658,7 +705,7 @@
         <ox-banner kind="info" icon="info" title="Save 20% today">
           <p class="text-copy-medium-regular">Book now and get an exclusive online discount.</p>
           <div slot="actions">
-            <ox-button size="small" kind="info">Book now</ox-button>
+            <ox-button size="small">Book now</ox-button>
           </div>
         </ox-banner>
       </div>

@@ -1,13 +1,30 @@
 /* Banner component
    Flat grid: icon | body | actions | close.
    Container queries drive responsive stacking.
+   Actions slot reverses button order at >600px (DOM order 1,2,3 → visual 3,2,1)
+   so the primary CTA sits rightmost in wide banners, leftmost in narrow ones.
+   Recommended actions: one small pill <ox-button> + up to three <ox-text-button>.
+   Button kind defaults (auto-applied when kind is omitted):
+     primary/secondary/brand → brand <ox-button>, primary <ox-text-button>
+     info/accent/success/warning/error → matching kind for both
    API: <ox-banner kind="info" icon="info" title="Notice" dismissible>
           <p>Body text</p>
           <div slot="actions"><ox-button size="small">Action</ox-button></div>
         </ox-banner> */
 
 import { baseStyles } from './shared/base-styles.js';
-import { iconButtonStyles } from './shared/ox-icon-button-styles.js';
+import './ox-icon-button.js';
+
+const ACTION_KIND_MAP = {
+  primary:   { 'ox-button': 'brand', 'ox-text-button': 'primary' },
+  secondary: { 'ox-button': 'brand', 'ox-text-button': 'primary' },
+  brand:     { 'ox-button': 'brand', 'ox-text-button': 'primary' },
+  info:      { 'ox-button': 'info',  'ox-text-button': 'info' },
+  accent:    { 'ox-button': 'accent', 'ox-text-button': 'accent' },
+  success:   { 'ox-button': 'success', 'ox-text-button': 'success' },
+  warning:   { 'ox-button': 'warning', 'ox-text-button': 'warning' },
+  error:     { 'ox-button': 'error', 'ox-text-button': 'error' },
+};
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`
@@ -49,7 +66,6 @@ styles.replaceSync(`
     grid-row: 1;
     height: 24px;
     margin-inline-end: var(--spacing-xs);
-    margin-top: 2px;
     width: 24px;
   }
 
@@ -59,7 +75,7 @@ styles.replaceSync(`
 
   .body {
     display: grid;
-    gap: var(--spacing-3xs);
+    gap: var(--spacing-4xs);
     grid-column: 2;
     grid-row: 1;
     min-width: 0;
@@ -83,48 +99,39 @@ styles.replaceSync(`
     margin: 0;
   }
 
-  .title-row + .description {
-    margin-top: calc(-1 * var(--spacing-4xs));
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4xs);
+    margin: 0;
   }
 
-  .description {
+  .description ::slotted(*) {
     margin: 0;
   }
 
   .actions-slot {
     align-items: center;
-    column-gap: var(--spacing-3xs);
+    column-gap: var(--spacing-xs);
     display: flex;
     flex-wrap: wrap;
     grid-column: 3;
     grid-row: 1;
     margin-inline-start: var(--spacing-xs);
-    row-gap: var(--spacing-3xs);
+    row-gap: var(--spacing-xs);
+  }
+
+  .actions-slot ::slotted(*) {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
   }
 
   .close-btn {
     --icon-button-fg: var(--banner-icon-button-fg);
-    align-items: center;
-    border-radius: var(--radius-sm);
-    color: var(--banner-icon-button-fg);
-    display: inline-flex;
     grid-column: 4;
     grid-row: 1;
-    height: 48px;
-    justify-content: center;
-    margin-block: calc(-1 * var(--spacing-3xs));
-    margin-inline: var(--spacing-xs) calc(-1 * var(--spacing-3xs));
-    min-height: 48px;
-    min-width: 48px;
-    width: 48px;
-  }
-
-  .close-icon {
-    color: currentColor;
-    display: block;
-    font-size: 24px;
-    height: 24px;
-    width: 24px;
   }
 
   /* Kind token mappings */
@@ -188,8 +195,7 @@ styles.replaceSync(`
     }
 
     :host(:not([title])) .description {
-      align-items: center;
-      display: flex;
+      justify-content: center;
       min-height: 24px;
     }
 
@@ -203,16 +209,16 @@ styles.replaceSync(`
   }
 
   @container (min-width: 601px) {
-    .leading-icon {
-      margin-top: 0;
-    }
-
     .close-btn {
       align-self: center;
     }
 
     .actions-slot {
       justify-content: flex-end;
+    }
+
+    .actions-slot ::slotted(*) {
+      flex-direction: row-reverse;
     }
   }
 `);
@@ -223,7 +229,7 @@ class OXBanner extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [baseStyles, iconButtonStyles, styles];
+    this.shadowRoot.adoptedStyleSheets = [baseStyles, styles];
   }
 
   connectedCallback() {
@@ -242,6 +248,27 @@ class OXBanner extends HTMLElement {
     });
   }
 
+  _applyActionDefaults() {
+    const kind = this.getAttribute('kind') || 'primary';
+    const map = ACTION_KIND_MAP[kind];
+    if (!map) return;
+    for (const tag of ['ox-button', 'ox-text-button']) {
+      this.querySelectorAll(`[slot="actions"] ${tag}`).forEach(btn => {
+        if (!btn.hasAttribute('kind') || btn.hasAttribute('data-banner-kind')) {
+          btn.setAttribute('kind', map[tag]);
+          btn.setAttribute('data-banner-kind', '');
+        }
+      });
+    }
+  }
+
+  _applyListItemDefaults() {
+    this.querySelectorAll(':scope > ox-list-item').forEach(item => {
+      if (!item.hasAttribute('kind')) item.setAttribute('kind', 'primary');
+      if (!item.hasAttribute('size')) item.setAttribute('size', 'medium');
+    });
+  }
+
   render() {
     const icon = this.getAttribute('icon');
     const title = this.getAttribute('title');
@@ -256,9 +283,12 @@ class OXBanner extends HTMLElement {
       : '';
 
     const closeHtml = dismissible
-      ? `<button type="button" class="close-btn icon-btn" aria-label="Dismiss">
-           <span class="close-icon icon-btn-icon material-symbols-outlined" aria-hidden="true">close</span>
-         </button>`
+      ? `<ox-icon-button class="close-btn" icon="close" label="Dismiss"></ox-icon-button>`
+      : '';
+
+    const hasActions = this.querySelector('[slot="actions"]');
+    const actionsHtml = hasActions
+      ? '<div class="actions-slot"><slot name="actions"></slot></div>'
       : '';
 
     this.shadowRoot.innerHTML = `
@@ -267,8 +297,11 @@ class OXBanner extends HTMLElement {
         ${titleHtml}
         <div class="description"><slot></slot></div>
       </div>
-      <div class="actions-slot"><slot name="actions"></slot></div>
+      ${actionsHtml}
       ${closeHtml}`;
+
+    this._applyActionDefaults();
+    this._applyListItemDefaults();
   }
 }
 
