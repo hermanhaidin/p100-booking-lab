@@ -55,10 +55,9 @@ styles.replaceSync(`
 
   .label {
     min-width: 0;
-    overflow-wrap: anywhere;
     text-decoration: none;
     text-decoration-thickness: var(--stroke-sm);
-    white-space: normal;
+    white-space: nowrap;
   }
 
   :host([truncate]) .label {

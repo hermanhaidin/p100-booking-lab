@@ -2,7 +2,9 @@
    - Chips are button-like toggles/tabs with optional selected state.
    - Supports small/large sizes and solid/outlined variants.
    - Preset: dropdown (adds trailing keyboard_arrow_down icon).
-   API: <ox-chip size="small" variant="solid" icon="directions_car" selected disabled preset="dropdown" sublabel="...">Label</ox-chip> */
+   - Icon-only mode: auto-detected when icon is set and no slotted text. Renders as square chip.
+     Requires label attribute for accessibility (maps to aria-label on inner button).
+   API: <ox-chip size="small" variant="solid" icon="directions_car" selected disabled preset="dropdown" sublabel="..." label="...">Label</ox-chip> */
 
 import { baseStyles } from './shared/base-styles.js';
 
@@ -168,10 +170,35 @@ styles.replaceSync(`
     cursor: not-allowed;
     opacity: 0.3;
   }
+
+  /* Icon-only mode — square chip with centered icon, no text */
+  :host([icon-only]) .chip {
+    justify-content: center;
+    min-width: unset;
+    padding: 0;
+  }
+
+  :host([icon-only]:not([size])) .chip,
+  :host([icon-only][size="small"]) .chip {
+    height: 36px;
+    width: 36px;
+  }
+
+  :host([icon-only][size="large"]) .chip {
+    border-radius: var(--radius-md);
+    height: 52px;
+    width: 52px;
+  }
+
+  :host([icon-only]) .content,
+  :host([icon-only]) .label,
+  :host([icon-only]) .trailing-icon {
+    display: none;
+  }
 `);
 
 class OXChip extends HTMLElement {
-  static observedAttributes = ['size', 'variant', 'icon', 'selected', 'disabled', 'preset', 'sublabel'];
+  static observedAttributes = ['size', 'variant', 'icon', 'selected', 'disabled', 'preset', 'sublabel', 'label'];
 
   constructor() {
     super();
@@ -189,11 +216,21 @@ class OXChip extends HTMLElement {
 
   render() {
     const icon = this.getAttribute('icon');
+    const label = this.getAttribute('label') || '';
     const sublabel = this.getAttribute('sublabel');
     const preset = this.getAttribute('preset');
     const disabled = this.hasAttribute('disabled');
     const size = this.getAttribute('size') || 'small';
     const typoClass = 'text-copy-medium-regular-tight';
+    const isIconOnly = icon && !this.textContent.trim();
+
+    if (isIconOnly) {
+      this.setAttribute('icon-only', '');
+    } else {
+      this.removeAttribute('icon-only');
+    }
+
+    const ariaAttr = label ? ` aria-label="${label}"` : '';
 
     const iconHtml = icon
       ? `<span class="icon material-symbols-outlined" aria-hidden="true">${icon}</span>`
@@ -211,7 +248,7 @@ class OXChip extends HTMLElement {
       : `<span class="label"><slot></slot></span>`;
 
     this.shadowRoot.innerHTML = `
-      <button type="button" class="chip ${typoClass}" ${disabled ? 'disabled' : ''}>
+      <button type="button" class="chip ${typoClass}"${ariaAttr} ${disabled ? 'disabled' : ''}>
         ${iconHtml}
         ${labelContent}
         ${trailingHtml}

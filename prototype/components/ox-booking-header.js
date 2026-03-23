@@ -8,11 +8,10 @@
           step-title="Which protection package do you need?"
           variant="step"
           theme="option-light"
-          logo-src="../assets/logos/sixt_rent_the_car_on_dark.svg"
-        ></ox-booking-header> */
+        ></ox-booking-header>
+   Logo auto-selects on_dark (themed) or on_light (no theme); override with logo-src. */
 
 import { baseStyles } from './shared/base-styles.js';
-import { iconButtonStyles } from './shared/ox-icon-button-styles.js';
 import { layoutStyles } from './shared/layout-styles.js';
 
 const styles = new CSSStyleSheet();
@@ -85,8 +84,7 @@ styles.replaceSync(`
     max-width: 420px;
     min-height: 44px;
     min-width: 280px;
-    padding: var(--spacing-4xs);
-    padding-inline: var(--spacing-xs);
+    padding: var(--spacing-4xs) var(--spacing-xs);
     text-align: left;
     transition: box-shadow 150ms ease;
   }
@@ -100,7 +98,7 @@ styles.replaceSync(`
     box-shadow: inset 0 0 0 9999px var(--color-overlay-hover);
   }
 
-  :host([variant="step"]) .search-btn {
+  :host([variant="step"]) .search-row {
     display: none;
   }
 
@@ -113,7 +111,6 @@ styles.replaceSync(`
 
   .search-location,
   .search-dates {
-    color: var(--color-content-primary);
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -121,7 +118,6 @@ styles.replaceSync(`
   }
 
   .search-edit {
-    color: var(--color-content-primary);
     flex: 0 0 auto;
     font-size: 24px;
     height: 24px;
@@ -136,113 +132,34 @@ styles.replaceSync(`
     gap: var(--spacing-md);
   }
 
-  .util-text {
-    align-items: center;
-    color: var(--color-content-primary);
-    cursor: pointer;
-    display: inline-flex;
-    gap: var(--spacing-3xs);
-    text-decoration: none;
-  }
-
-  .util-text:visited { color: var(--color-content-primary); }
-
-  .util-text:focus-visible {
-    border-radius: var(--radius-sm);
-    outline: var(--stroke-lg) solid var(--color-overlay-focus);
-    outline-offset: var(--stroke-md);
-  }
-
-  .util-text-icon {
-    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
-  }
-
-  .util-text-label {
-    overflow-wrap: normal;
-    white-space: nowrap;
-  }
-
   .util-icon {
-    align-items: center;
-    border-radius: var(--radius-sm);
-    color: var(--color-content-primary);
     display: none;
-    height: 48px;
-    justify-content: center;
-    min-height: 48px;
-    min-width: 48px;
-    text-decoration: none;
-    width: 48px;
-  }
-
-  .util-icon:visited { color: var(--color-content-primary); }
-
-  .util-icon-person .util-icon-glyph {
-    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
-  }
-
-  .util-icon-glyph {
-    color: currentColor;
-    display: block;
-    font-size: 24px;
-    height: 24px;
-    width: 24px;
   }
 
   /* ---- Mobile (<650px) ---- */
   @media (max-width: 649px) {
-    :host {
-      --color-content-primary: var(--color-global-sixt-anthracite);
-      --color-surface-canvas: var(--color-global-white);
-      --color-surface-secondary-container: color-mix(in srgb, var(--color-global-white) 96%, var(--color-global-black) 4%);
-      background-color: var(--color-global-white);
-      color: var(--color-global-sixt-anthracite);
-    }
-
     .shell {
-      align-items: center;
       column-gap: var(--spacing-3xs);
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       height: auto;
-      padding-bottom: 0;
       padding-top: var(--spacing-xs);
       row-gap: var(--spacing-xs);
     }
 
     .back-btn {
-      align-items: center;
-      border-radius: var(--radius-sm);
-      color: var(--color-content-primary);
       display: inline-flex;
       grid-column: 1;
       grid-row: 1;
-      height: 48px;
-      justify-content: center;
       justify-self: start;
-      margin: -12px;
-      min-height: 48px;
-      min-width: 48px;
-      text-decoration: none;
-      width: 48px;
-    }
-
-    .back-icon {
-      color: currentColor;
-      display: block;
-      font-size: 24px;
-      height: 24px;
-      width: 24px;
     }
 
     .logo-link { display: none; }
 
     .utility-nav {
-      gap: var(--spacing-2xs);
       grid-column: 2;
       grid-row: 1;
       justify-self: end;
-      margin-left: 0;
     }
 
     .util-text { display: none; }
@@ -262,7 +179,6 @@ styles.replaceSync(`
       border-radius: var(--radius-md);
       color: var(--color-global-sixt-anthracite);
       height: 52px;
-      margin-right: 0;
       max-width: none;
       min-height: 52px;
       min-width: 0;
@@ -271,36 +187,13 @@ styles.replaceSync(`
     }
 
     .filter-btn {
-      align-items: center;
-      background-color: color-mix(in srgb, var(--color-global-white) 96%, var(--color-global-black) 4%);
-      border-radius: var(--radius-md);
-      color: var(--color-global-sixt-anthracite);
       display: inline-flex;
-      height: 52px;
-      justify-content: center;
-      min-height: 52px;
-      min-width: 52px;
-      width: 52px;
-    }
-
-    .filter-icon {
-      color: currentColor;
-      display: block;
-      font-size: 24px;
-      height: 24px;
-      width: 24px;
     }
 
     :host([variant="step"]) .title-row {
       display: block;
       grid-column: 1 / -1;
       grid-row: 2;
-    }
-
-    .search-location,
-    .search-dates,
-    .search-edit {
-      color: var(--color-global-sixt-anthracite);
     }
   }
 
@@ -316,8 +209,6 @@ styles.replaceSync(`
 
     .search-btn {
       flex: 1 1 auto;
-      margin-left: 0;
-      margin-right: 0;
       max-width: 560px;
       min-width: 0;
       width: 100%;
@@ -326,10 +217,6 @@ styles.replaceSync(`
 
   /* ---- Compact tablet (650-899): language icon, login text ---- */
   @media (min-width: 650px) and (max-width: 899px) {
-    .utility-nav {
-      gap: var(--spacing-2xs);
-    }
-
     .util-text-language {
       display: none;
     }
@@ -358,12 +245,19 @@ class OXBookingHeader extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [baseStyles, iconButtonStyles, layoutStyles, styles];
+    this.shadowRoot.adoptedStyleSheets = [baseStyles, layoutStyles, styles];
+    this._mql = window.matchMedia('(max-width: 649px)');
+    this._onBreakpoint = () => this._syncTheme();
   }
 
   connectedCallback() {
     this._syncTheme();
+    this._mql.addEventListener('change', this._onBreakpoint);
     this.render();
+  }
+
+  disconnectedCallback() {
+    this._mql.removeEventListener('change', this._onBreakpoint);
   }
 
   attributeChangedCallback(name) {
@@ -373,7 +267,7 @@ class OXBookingHeader extends HTMLElement {
 
   _syncTheme() {
     const theme = this.getAttribute('theme');
-    if (theme) {
+    if (theme && !this._mql.matches) {
       this.setAttribute('data-p100-theme', theme);
     } else {
       this.removeAttribute('data-p100-theme');
@@ -385,7 +279,10 @@ class OXBookingHeader extends HTMLElement {
     const location = this.getAttribute('location') || '';
     const dates = this.getAttribute('dates') || '';
     const stepTitle = this.getAttribute('step-title') || '';
-    const logoSrc = this.getAttribute('logo-src') || '../assets/logos/sixt_rent_the_car_on_dark.svg';
+    const defaultLogo = this.hasAttribute('theme')
+      ? '../assets/logos/sixt_rent_the_car_on_dark.svg'
+      : '../assets/logos/sixt_rent_the_car_on_light.svg';
+    const logoSrc = this.getAttribute('logo-src') || defaultLogo;
 
     const searchBtnHtml = location || dates ? `
       <button type="button" class="search-btn" aria-label="Trip context">
@@ -397,9 +294,7 @@ class OXBookingHeader extends HTMLElement {
       </button>` : '';
 
     const filterBtnHtml = `
-      <button type="button" class="filter-btn icon-btn" aria-label="Open filters">
-        <span class="filter-icon icon-btn-icon material-symbols-outlined" aria-hidden="true">filter_list</span>
-      </button>`;
+      <ox-chip class="filter-btn" icon="filter_list" label="Open filters" size="large"></ox-chip>`;
 
     const titleRowHtml = stepTitle
       ? `<div class="title-row"><h1 class="text-title-medium-heavy-caps">${stepTitle}</h1></div>`
@@ -407,9 +302,7 @@ class OXBookingHeader extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <div class="layout-shell shell">
-        <a href="${backHref}" class="back-btn icon-btn" aria-label="Go back">
-          <span class="back-icon icon-btn-icon material-symbols-outlined" aria-hidden="true">arrow_back_ios_new</span>
-        </a>
+        <ox-icon-button class="back-btn" icon="arrow_back_ios_new" label="Go back" href="${backHref}"></ox-icon-button>
         <a href="./home.html" class="logo-link" aria-label="Go to home">
           <img class="logo" src="${logoSrc}" alt="SIXT rent the car">
         </a>
@@ -418,20 +311,10 @@ class OXBookingHeader extends HTMLElement {
           ${filterBtnHtml}
         </div>
         <nav class="utility-nav" aria-label="Utility links">
-          <a href="#" class="util-text util-text-language text-copy-medium-heavy-tight">
-            <span class="material-symbols-outlined util-text-icon" aria-hidden="true">language</span>
-            <span class="util-text-label">EN | $</span>
-          </a>
-          <a href="#" class="util-text util-text-login text-copy-medium-heavy-tight">
-            <span class="material-symbols-outlined util-text-icon" aria-hidden="true">person</span>
-            <span class="util-text-label">Log in | Register</span>
-          </a>
-          <a href="#" class="util-icon util-icon-language icon-btn" aria-label="Language and currency">
-            <span class="util-icon-glyph icon-btn-icon material-symbols-outlined" aria-hidden="true">language</span>
-          </a>
-          <a href="#" class="util-icon util-icon-person icon-btn" aria-label="Log in or register">
-            <span class="util-icon-glyph icon-btn-icon material-symbols-outlined" aria-hidden="true">person</span>
-          </a>
+          <ox-text-button class="util-text util-text-language" icon="language" href="#" filled>EN | $</ox-text-button>
+          <ox-text-button class="util-text util-text-login" icon="person" href="#" filled>Log in | Register</ox-text-button>
+          <ox-icon-button class="util-icon util-icon-language" icon="language" label="Language and currency" href="#"></ox-icon-button>
+          <ox-icon-button class="util-icon util-icon-person" icon="person" label="Log in or register" href="#" filled></ox-icon-button>
         </nav>
         ${titleRowHtml}
       </div>`;
