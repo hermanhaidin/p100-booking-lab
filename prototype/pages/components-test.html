@@ -550,8 +550,169 @@
       </div>
     </div>
 
+    <!-- ========== RADIO BUTTON ========== -->
     <ox-separator size="large" contrast="medium"></ox-separator>
-    <p class="text-copy-medium-regular" style="color: var(--color-content-secondary); padding: var(--spacing-lg) 0;">End of component test page.</p>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-radio-button&gt;</h2>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">States</p>
+      <div class="row">
+        <label class="row-label text-copy-small-regular">Default</label>
+        <ox-radio-button value="a"></ox-radio-button>
+      </div>
+      <div class="row">
+        <label class="row-label text-copy-small-regular">Checked</label>
+        <ox-radio-button value="b" checked></ox-radio-button>
+      </div>
+      <div class="row">
+        <label class="row-label text-copy-small-regular">Disabled</label>
+        <ox-radio-button value="c" disabled></ox-radio-button>
+      </div>
+      <div class="row">
+        <label class="row-label text-copy-small-regular">Checked + disabled</label>
+        <ox-radio-button value="d" checked disabled></ox-radio-button>
+      </div>
+      <div class="row">
+        <label class="row-label text-copy-small-regular">Error</label>
+        <ox-radio-button value="e" error></ox-radio-button>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Interactive group (click to select)</p>
+      <div class="row" id="radioGroup1">
+        <ox-radio-button value="opt1" checked></ox-radio-button>
+        <span class="text-copy-medium-regular">Option 1</span>
+        <ox-radio-button value="opt2"></ox-radio-button>
+        <span class="text-copy-medium-regular">Option 2</span>
+        <ox-radio-button value="opt3"></ox-radio-button>
+        <span class="text-copy-medium-regular">Option 3</span>
+      </div>
+      <script type="module">
+        const group = document.getElementById('radioGroup1');
+        group.addEventListener('change', (e) => {
+          if (!e.detail) return;
+          group.querySelectorAll('ox-radio-button').forEach(rb => {
+            rb.toggleAttribute('checked', rb.getAttribute('value') === e.detail.value);
+          });
+        });
+      </script>
+    </div>
+
+    <!-- ========== BANNER ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-banner&gt;</h2>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Primary (default, no title)</p>
+      <div class="col">
+        <ox-banner kind="primary" icon="info">
+          <p class="text-copy-medium-regular">Drivers must have held their driver's license for at least 1 year(s) for this vehicle</p>
+        </ox-banner>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">With title</p>
+      <div class="col">
+        <ox-banner kind="info" icon="info" title="Good to know">
+          <p class="text-copy-medium-regular">Your rental includes unlimited mileage and 24/7 roadside assistance.</p>
+        </ox-banner>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">All kinds</p>
+      <div class="col">
+        <ox-banner kind="primary" icon="info">
+          <p class="text-copy-medium-regular">Primary banner</p>
+        </ox-banner>
+        <ox-banner kind="secondary" icon="info">
+          <p class="text-copy-medium-regular">Secondary banner</p>
+        </ox-banner>
+        <ox-banner kind="info" icon="info">
+          <p class="text-copy-medium-regular">Info banner</p>
+        </ox-banner>
+        <ox-banner kind="success" icon="check_circle">
+          <p class="text-copy-medium-regular">Success banner</p>
+        </ox-banner>
+        <ox-banner kind="warning" icon="warning">
+          <p class="text-copy-medium-regular">Warning banner</p>
+        </ox-banner>
+        <ox-banner kind="error" icon="error">
+          <p class="text-copy-medium-regular">Error banner</p>
+        </ox-banner>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Dismissible</p>
+      <div class="col">
+        <ox-banner kind="warning" icon="warning" title="Attention" dismissible>
+          <p class="text-copy-medium-regular">This banner can be dismissed. Click the X to close it.</p>
+        </ox-banner>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">With actions slot</p>
+      <div class="col">
+        <ox-banner kind="info" icon="info" title="Save 20% today">
+          <p class="text-copy-medium-regular">Book now and get an exclusive online discount.</p>
+          <div slot="actions">
+            <ox-button size="small" kind="info">Book now</ox-button>
+          </div>
+        </ox-banner>
+      </div>
+    </div>
+
+    <!-- ========== BOOKING OVERVIEW ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-booking-overview&gt;</h2>
+      <div style="max-width: 400px;">
+        <ox-booking-overview>
+          <ox-list-item icon="check" trailing-icon="info" trailing-label="More info">Third party insurance</ox-list-item>
+          <ox-list-item icon="check" trailing-icon="info" trailing-label="More info">24/7 Breakdown assistance</ox-list-item>
+          <ox-list-item icon="check" trailing-icon="info" trailing-label="More info">Tires suitable for winter</ox-list-item>
+          <ox-list-item icon="check">Unlimited kilometers</ox-list-item>
+          <ox-list-item icon="check">Booking option: Best price</ox-list-item>
+        </ox-booking-overview>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary); margin-top: var(--spacing-xs);">Custom title</p>
+      <div style="max-width: 400px;">
+        <ox-booking-overview title="What's included:">
+          <ox-list-item icon="check" kind="success">Free cancellation</ox-list-item>
+          <ox-list-item icon="check" kind="success">No hidden fees</ox-list-item>
+        </ox-booking-overview>
+      </div>
+    </div>
+
+    <!-- ========== BOOKING FOOTER ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-booking-footer&gt;</h2>
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Default theme</p>
+    </div>
+
+    <ox-booking-footer>
+      <nav slot="links" class="text-copy-medium-heavy-tight" style="display:flex;flex-wrap:wrap;column-gap:var(--spacing-xs);row-gap:var(--spacing-xs);">
+        <ox-link href="#">Help</ox-link>
+        <ox-link href="#">Rental information</ox-link>
+        <ox-link href="#">Privacy</ox-link>
+        <ox-link href="#">Terms &amp; conditions</ox-link>
+        <ox-link href="#">Cookie-Settings</ox-link>
+      </nav>
+      <p slot="copyright" class="text-copy-medium-regular-tight">&copy; Sixt 2026</p>
+    </ox-booking-footer>
+
+    <div class="section" style="padding-left: var(--spacing-xs);">
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">With option-light theme</p>
+    </div>
+
+    <ox-booking-footer theme="option-light">
+      <nav slot="links" class="text-copy-medium-heavy-tight" style="display:flex;flex-wrap:wrap;column-gap:var(--spacing-xs);row-gap:var(--spacing-xs);">
+        <ox-link href="#">Help</ox-link>
+        <ox-link href="#">Rental information</ox-link>
+        <ox-link href="#">Privacy</ox-link>
+        <ox-link href="#">Terms &amp; conditions</ox-link>
+      </nav>
+      <p slot="copyright" class="text-copy-medium-regular-tight">&copy; Sixt 2026</p>
+    </ox-booking-footer>
+
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <p class="text-copy-medium-regular" style="color: var(--color-content-secondary); padding: var(--spacing-lg) var(--spacing-xs);">End of component test page.</p>
 
   </main>
 

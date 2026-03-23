@@ -1,6 +1,10 @@
 import './shared/base-styles.js';
 
 import './ox-badge.js';
+import './ox-banner.js';
+import './ox-booking-footer.js';
+import './ox-booking-header.js';
+import './ox-booking-overview.js';
 import './ox-button.js';
 import './ox-chip.js';
 import './ox-floating-button.js';
@@ -8,5 +12,8 @@ import './ox-icon-button.js';
 import './ox-link.js';
 import './ox-list-item.js';
 import './ox-price.js';
+import './ox-protection-card.js';
+import './ox-protection-group.js';
+import './ox-radio-button.js';
 import './ox-separator.js';
 import './ox-text-button.js';

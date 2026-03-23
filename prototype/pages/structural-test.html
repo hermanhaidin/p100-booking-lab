@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Structural Components Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/all.css">
+  <style>
+    .test-section {
+      padding: var(--spacing-lg) 0;
+    }
+    .test-section-inner {
+      padding-inline: var(--spacing-xs);
+    }
+    .test-section h2 {
+      margin: 0 0 var(--spacing-xs);
+    }
+    .test-label {
+      color: var(--color-content-secondary);
+      margin: var(--spacing-xs) 0 var(--spacing-3xs);
+    }
+    .cards-grid {
+      display: grid;
+      gap: var(--spacing-xs);
+    }
+    @media (min-width: 900px) {
+      .cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== BOOKING HEADER: Default variant ========== -->
+  <div class="test-section">
+    <div class="test-section-inner">
+      <h2 class="text-title-small-heavy">&lt;ox-booking-header&gt; — default variant</h2>
+      <p class="test-label text-copy-small-regular">With search row (location + dates). Resize to see mobile/tablet/desktop.</p>
+    </div>
+  </div>
+
+  <ox-booking-header
+    back-href="#"
+    location="Munich Airport"
+    dates="Mar 16 | 12:00 PM - Mar 20 | 12:00 PM"
+    theme="option-light"
+  ></ox-booking-header>
+
+  <ox-separator size="large" contrast="medium"></ox-separator>
+
+  <!-- ========== BOOKING HEADER: Step variant ========== -->
+  <div class="test-section">
+    <div class="test-section-inner">
+      <h2 class="text-title-small-heavy">&lt;ox-booking-header&gt; — step variant</h2>
+      <p class="test-label text-copy-small-regular">Search hidden, step title shown on mobile. Used on protection/add-ons pages.</p>
+    </div>
+  </div>
+
+  <ox-booking-header
+    back-href="#"
+    variant="step"
+    step-title="Which protection package do you need?"
+    theme="option-light"
+  ></ox-booking-header>
+
+  <ox-separator size="large" contrast="medium"></ox-separator>
+
+  <!-- ========== BOOKING HEADER: No theme ========== -->
+  <div class="test-section">
+    <div class="test-section-inner">
+      <h2 class="text-title-small-heavy">&lt;ox-booking-header&gt; — no theme (light surface)</h2>
+      <p class="test-label text-copy-small-regular">Without option-light theme attribute.</p>
+    </div>
+  </div>
+
+  <ox-booking-header
+    back-href="#"
+    location="Berlin Central Station"
+    dates="Apr 1 | 10:00 AM - Apr 5 | 10:00 AM"
+  ></ox-booking-header>
+
+  <ox-separator size="large" contrast="medium"></ox-separator>
+
+  <!-- ========== PROTECTION CARD ========== -->
+  <div class="test-section">
+    <div class="test-section-inner">
+      <h2 class="text-title-small-heavy">&lt;ox-protection-card&gt;</h2>
+      <p class="test-label text-copy-small-regular">All 4 protection tiers. Click to select, use accordion on mobile (&le;899px).</p>
+    </div>
+
+    <div class="layout-shell">
+      <ox-protection-group class="cards-grid">
+        <ox-protection-card
+          option-id="none"
+          title="No extra protection"
+          stars="0"
+          deductible="Deductible: up to full vehicle value"
+          deductible-kind="error"
+          footer-text="Included"
+        >
+          <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about collision damages">Collision damages, scratches, bumps &amp; theft</ox-list-item>
+          <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about tire &amp; windshield">Tire, windshield &amp; windows</ox-list-item>
+          <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about interior damage">Interior damage (e.g. spills)</ox-list-item>
+          <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about roadside help">Roadside help for common mobility issues</ox-list-item>
+        </ox-protection-card>
+
+        <ox-protection-card
+          option-id="basic"
+          title="Basic Protection"
+          stars="1"
+          deductible="Deductible: up to $1,299.44"
+          deductible-kind="primary"
+          daily-price="32.49"
+        >
+          <ox-list-item slot="coverage" icon="check" trailing-icon="info" trailing-label="More about collision damages">Collision damages, scratches, bumps &amp; theft</ox-list-item>
+          <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about tire &amp; windshield">Tire, windshield &amp; windows</ox-list-item>
+          <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about interior damage">Interior damage (e.g. spills)</ox-list-item>
+          <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about roadside help">Roadside help for common mobility issues</ox-list-item>
+        </ox-protection-card>
+
+        <ox-protection-card
+          option-id="smart"
+          title="Smart Protection"
+          stars="2"
+          deductible="No deductible"
+          deductible-kind="success"
+          daily-price="48.73"
+          previous-price="81.22"
+          badge-text="-40% online discount"
+        >
+          <ox-list-item slot="coverage" icon="check" trailing-icon="info" trailing-label="More about collision damages">Collision damages, scratches, bumps &amp; theft</ox-list-item>
+          <ox-list-item slot="coverage" icon="check" trailing-icon="info" trailing-label="More about tire &amp; windshield">Tire, windshield &amp; windows</ox-list-item>
+          <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about interior damage">Interior damage (e.g. spills)</ox-list-item>
+          <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about roadside help">Roadside help for common mobility issues</ox-list-item>
+        </ox-protection-card>
+
+        <ox-protection-card
+          option-id="all"
+          title="All Inclusive Protection"
+          stars="3"
+          deductible="No deductible"
+          deductible-kind="success"
+          daily-price="55.23"
+          previous-price="110.45"
+          badge-text="-50% online discount"
+        >
+          <ox-list-item slot="coverage" icon="check" trailing-icon="info" trailing-label="More about collision damages">Collision damages, scratches, bumps &amp; theft</ox-list-item>
+          <ox-list-item slot="coverage" icon="check" trailing-icon="info" trailing-label="More about tire &amp; windshield">Tire, windshield &amp; windows</ox-list-item>
+          <ox-list-item slot="coverage" icon="check" trailing-icon="info" trailing-label="More about interior damage">Interior damage (e.g. spills)</ox-list-item>
+          <ox-list-item slot="coverage" icon="check" trailing-icon="info" trailing-label="More about roadside help">Roadside help for common mobility issues</ox-list-item>
+        </ox-protection-card>
+      </ox-protection-group>
+    </div>
+  </div>
+
+  <ox-separator size="large" contrast="medium"></ox-separator>
+
+  <!-- ========== PROTECTION CARD: Single card expanded ========== -->
+  <div class="test-section">
+    <div class="test-section-inner">
+      <h2 class="text-title-small-heavy">&lt;ox-protection-card&gt; — single card, expanded</h2>
+      <p class="test-label text-copy-small-regular">Shows all details visible at once.</p>
+    </div>
+    <div class="layout-shell" style="max-width: 400px;">
+      <ox-protection-card
+        option-id="smart-single"
+        title="Smart Protection"
+        stars="2"
+        deductible="No deductible"
+        deductible-kind="success"
+        daily-price="48.73"
+        previous-price="81.22"
+        badge-text="-40% online discount"
+        selected
+        expanded
+      >
+        <ox-list-item slot="coverage" icon="check" trailing-icon="info" trailing-label="More about collision damages">Collision damages, scratches, bumps &amp; theft</ox-list-item>
+        <ox-list-item slot="coverage" icon="check" trailing-icon="info" trailing-label="More about tire &amp; windshield">Tire, windshield &amp; windows</ox-list-item>
+        <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about interior damage">Interior damage (e.g. spills)</ox-list-item>
+        <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about roadside help">Roadside help for common mobility issues</ox-list-item>
+      </ox-protection-card>
+    </div>
+  </div>
+
+  <div style="padding: var(--spacing-xl) var(--spacing-xs);">
+    <p class="text-copy-medium-regular" style="color: var(--color-content-secondary);">End of structural test page.</p>
+  </div>
+
+  <script type="module" src="../components/index.js"></script>
+</body>
+</html>
