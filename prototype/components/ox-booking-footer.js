@@ -1,11 +1,9 @@
 /* Booking footer
    Legal links + copyright in a responsive shell.
    API: <ox-booking-footer theme="option-light">
-          <nav slot="links">
-            <ox-link>Help</ox-link>
-            <ox-link>Privacy</ox-link>
-          </nav>
-          <p slot="copyright">&copy; Sixt 2026</p>
+          <ox-link slot="link">Help</ox-link>
+          <ox-link slot="link">Privacy</ox-link>
+          <span slot="copyright">&copy; Sixt 2026</span>
         </ox-booking-footer> */
 
 import { baseStyles } from './shared/base-styles.js';
@@ -40,18 +38,6 @@ styles.replaceSync(`
     margin: 0;
   }
 
-  ::slotted(nav) {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: var(--spacing-xs);
-    row-gap: var(--spacing-xs);
-  }
-
-  ::slotted(p) {
-    color: var(--color-content-secondary);
-    margin: 0;
-  }
-
   @media (min-width: 900px) {
     .shell {
       align-items: start;
@@ -60,7 +46,7 @@ styles.replaceSync(`
       grid-template-columns: minmax(0, 1fr) auto;
     }
 
-    ::slotted(p) {
+    .copyright {
       justify-self: end;
       white-space: nowrap;
     }
@@ -97,8 +83,12 @@ class OXBookingFooter extends HTMLElement {
   render() {
     this.shadowRoot.innerHTML = `
       <div class="layout-shell shell">
-        <slot name="links"></slot>
-        <slot name="copyright"></slot>
+        <nav class="links text-copy-medium-heavy-tight" aria-label="Legal links">
+          <slot name="link"></slot>
+        </nav>
+        <p class="copyright text-copy-medium-regular-tight">
+          <slot name="copyright"></slot>
+        </p>
       </div>`;
   }
 }

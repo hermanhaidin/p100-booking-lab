@@ -54,7 +54,7 @@ styles.replaceSync(`
     text-align: center;
     text-decoration: none;
     transition: box-shadow 150ms ease, background-color 150ms ease-in-out, border-color 150ms ease, color 150ms ease, transform 150ms ease-in-out;
-    width: fit-content;
+    width: 100%;
   }
 
   :host(:not([size])) .btn,
