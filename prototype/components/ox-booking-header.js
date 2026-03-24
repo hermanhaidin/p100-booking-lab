@@ -1,6 +1,27 @@
 /* Booking header
    Responsive header with back button, logo, search context, step title, and utility nav.
-   Variants: default (search visible) | step (search hidden, title row on mobile).
+
+   Attributes:
+     back-href   — URL for the back arrow (mobile only, defaults to "#")
+     location    — pickup location text for the search pill
+     dates       — date/time range text for the search pill
+     step-title  — heading shown in the title row (mobile only, step variant)
+     variant     — "step" hides search row and shows title row on mobile;
+                   omit for default (search visible)
+     theme       — color theme (e.g. "option-light"); applied as data-p100-theme
+                   on tablet+ only, stripped on mobile to keep default colors
+     logo-src    — override logo path; auto-selects on_dark (themed) or on_light
+
+   Responsive behavior (three breakpoints):
+     Mobile (<650px):  back + utility icons row, search/title below, logo hidden
+     Tablet (650-899): logo + search + utility nav; language as icon, login as text
+     Desktop (≥900px): logo + search + full utility nav with all text labels
+
+   Utility nav visibility:
+     Mobile:         icons only (language + person)
+     Compact tablet: language icon + login text (person icon hidden)
+     Desktop:        all text buttons (icons hidden)
+
    API: <ox-booking-header
           back-href="./offer-list.html"
           location="Munich Airport"
@@ -8,14 +29,14 @@
           step-title="Which protection package do you need?"
           variant="step"
           theme="option-light"
-        ></ox-booking-header>
-   Logo auto-selects on_dark (themed) or on_light (no theme); override with logo-src. */
+        ></ox-booking-header> */
 
 import { baseStyles } from './shared/base-styles.js';
 import { layoutStyles } from './shared/layout-styles.js';
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`
+  /* --- Host --- */
   :host {
     background-color: var(--color-surface-canvas);
     color: var(--color-content-primary);
@@ -69,7 +90,7 @@ styles.replaceSync(`
     margin: 0;
   }
 
-  /* IBE search button */
+  /* --- Search pill (location + dates + edit icon) --- */
   .search-btn {
     align-items: center;
     background-color: var(--color-surface-secondary-container);
@@ -265,6 +286,7 @@ class OXBookingHeader extends HTMLElement {
     this.render();
   }
 
+  /* Theme only applies on tablet+ (≥650px); mobile always uses default colors. */
   _syncTheme() {
     const theme = this.getAttribute('theme');
     if (theme && !this._mql.matches) {
@@ -279,6 +301,7 @@ class OXBookingHeader extends HTMLElement {
     const location = this.getAttribute('location') || '';
     const dates = this.getAttribute('dates') || '';
     const stepTitle = this.getAttribute('step-title') || '';
+    /* Auto-select dark/light logo based on whether a theme is set. */
     const defaultLogo = this.hasAttribute('theme')
       ? '../assets/logos/sixt_rent_the_car_on_dark.svg'
       : '../assets/logos/sixt_rent_the_car_on_light.svg';

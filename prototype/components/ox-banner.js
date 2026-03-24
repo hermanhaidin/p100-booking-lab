@@ -1,20 +1,48 @@
 /* Banner component
-   Flat grid: icon | body | actions | close.
-   Container queries drive responsive stacking.
-   Actions slot reverses button order at >600px (DOM order 1,2,3 → visual 3,2,1)
-   so the primary CTA sits rightmost in wide banners, leftmost in narrow ones.
-   Recommended actions: one small pill <ox-button> + up to three <ox-text-button>.
-   Button kind defaults (auto-applied when kind is omitted):
-     primary/secondary/brand → brand <ox-button>, primary <ox-text-button>
-     info/accent/success/warning/error → matching kind for both
+   Flat 4-column grid: icon | body | actions | close.
+   Container queries drive responsive stacking (≤600px / >600px).
+
+   Attributes:
+     kind        — primary (default), secondary, brand, info, accent,
+                   success, warning, error
+     icon        — Material Symbols icon name (filled, 24px)
+     title       — bold heading text inside the body
+     dismissible — shows a close button (hides banner on click)
+     gradient    — brand-only; adds radial gradient background
+
+   Slots:
+     (default)        — body content (paragraphs, ox-list-item, etc.)
+     title-trailing   — inline trailing element in the title row (e.g. ox-price);
+                        auto-pushed to the trailing edge via margin-inline-start: auto
+     actions          — wrap buttons in <div slot="actions">; recommended:
+                        one small <ox-button> + up to three <ox-text-button>
+
+   Auto-applied defaults (when kind is omitted on slotted children):
+     actions buttons  — see ACTION_KIND_MAP below
+     title-trailing   — ox-price kind matches banner accent color (PRICE_KIND_MAP)
+     ox-list-item     — defaults to kind="primary" size="medium"
+
+   Brand banners automatically set data-p100-theme="option-light" for dark styling.
+
    API: <ox-banner kind="info" icon="info" title="Notice" dismissible>
           <p>Body text</p>
+          <ox-price slot="title-trailing" size="medium" currency="$" integer="12" decimal=".00"></ox-price>
           <div slot="actions"><ox-button size="small">Action</ox-button></div>
         </ox-banner> */
 
 import { baseStyles } from './shared/base-styles.js';
 import './ox-icon-button.js';
 
+/* Neutral banners (primary/secondary/brand) use primary-colored prices;
+   status banners propagate their kind so the price matches the accent. */
+const PRICE_KIND_MAP = {
+  primary: 'primary', secondary: 'primary', brand: 'primary',
+  info: 'info', accent: 'accent', success: 'success',
+  warning: 'warning', error: 'error',
+};
+
+/* Neutral banners get brand CTAs + primary text buttons;
+   status banners propagate their kind to both button types. */
 const ACTION_KIND_MAP = {
   primary:   { 'ox-button': 'brand', 'ox-text-button': 'primary' },
   secondary: { 'ox-button': 'brand', 'ox-text-button': 'primary' },
@@ -28,6 +56,7 @@ const ACTION_KIND_MAP = {
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`
+  /* --- Host & grid structure --- */
   :host {
     --banner-bg: var(--color-surface-secondary-container);
     --banner-fg: var(--color-content-primary);
@@ -57,6 +86,7 @@ styles.replaceSync(`
     z-index: 1;
   }
 
+  /* --- Leading icon --- */
   .leading-icon {
     color: var(--banner-leading-icon-fg);
     display: block;
@@ -73,6 +103,7 @@ styles.replaceSync(`
     display: none;
   }
 
+  /* --- Body, title, description --- */
   .body {
     display: grid;
     gap: var(--spacing-4xs);
@@ -94,6 +125,11 @@ styles.replaceSync(`
     display: none;
   }
 
+  /* --- Title-trailing slot (e.g. price) --- */
+  .title-trailing {
+    margin-inline-start: auto;
+  }
+
   .title {
     color: currentColor;
     margin: 0;
@@ -110,6 +146,7 @@ styles.replaceSync(`
     margin: 0;
   }
 
+  /* --- Actions slot --- */
   .actions-slot {
     align-items: center;
     column-gap: var(--spacing-xs);
@@ -128,10 +165,12 @@ styles.replaceSync(`
     gap: var(--spacing-xs);
   }
 
+  /* --- Close button --- */
   .close-btn {
     --icon-button-fg: var(--banner-icon-button-fg);
     grid-column: 4;
     grid-row: 1;
+    margin-inline-start: var(--spacing-xs);
   }
 
   /* Kind token mappings */
@@ -156,6 +195,15 @@ styles.replaceSync(`
     --banner-accent-fg: var(--color-content-primary);
     --banner-leading-icon-fg: var(--color-content-extended-brand);
     --banner-icon-button-fg: var(--color-content-primary);
+  }
+
+  :host([kind="brand"][gradient])::before {
+    background: var(--radial-gradient-brand-top-leading);
+    border-radius: inherit;
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
   }
 
   :host([kind="info"]) {
@@ -188,6 +236,7 @@ styles.replaceSync(`
     --banner-icon-button-fg: var(--color-content-extended-error);
   }
 
+  /* --- Responsive: narrow (≤600px) stacks actions below body --- */
   @container (max-width: 600px) {
     .leading-icon,
     .close-btn {
@@ -208,6 +257,7 @@ styles.replaceSync(`
     }
   }
 
+  /* --- Responsive: wide (>600px) keeps all elements in one row --- */
   @container (min-width: 601px) {
     .close-btn {
       align-self: center;
@@ -248,6 +298,7 @@ class OXBanner extends HTMLElement {
     });
   }
 
+  /* Auto-set kind on slotted action buttons to match the banner's kind. */
   _applyActionDefaults() {
     const kind = this.getAttribute('kind') || 'primary';
     const map = ACTION_KIND_MAP[kind];
@@ -262,6 +313,20 @@ class OXBanner extends HTMLElement {
     }
   }
 
+  /* Auto-set kind on slotted ox-price to match the banner's accent color. */
+  _applyPriceDefaults() {
+    const kind = this.getAttribute('kind') || 'primary';
+    const priceKind = PRICE_KIND_MAP[kind];
+    if (!priceKind) return;
+    this.querySelectorAll('[slot="title-trailing"] ox-price, ox-price[slot="title-trailing"]').forEach(price => {
+      if (!price.hasAttribute('kind') || price.hasAttribute('data-banner-kind')) {
+        price.setAttribute('kind', priceKind);
+        price.setAttribute('data-banner-kind', '');
+      }
+    });
+  }
+
+  /* Default direct-child ox-list-items to kind="primary" size="medium". */
   _applyListItemDefaults() {
     this.querySelectorAll(':scope > ox-list-item').forEach(item => {
       if (!item.hasAttribute('kind')) item.setAttribute('kind', 'primary');
@@ -270,6 +335,13 @@ class OXBanner extends HTMLElement {
   }
 
   render() {
+    const kind = this.getAttribute('kind');
+    if (kind === 'brand') {
+      this.setAttribute('data-p100-theme', 'option-light');
+    } else {
+      this.removeAttribute('data-p100-theme');
+    }
+
     const icon = this.getAttribute('icon');
     const title = this.getAttribute('title');
     const dismissible = this.hasAttribute('dismissible');
@@ -278,8 +350,13 @@ class OXBanner extends HTMLElement {
       ? `<span class="leading-icon material-symbols-outlined" aria-hidden="true">${icon}</span>`
       : '';
 
-    const titleHtml = title
-      ? `<div class="title-row"><p class="title text-copy-large-heavy">${title}</p></div>`
+    const hasTitleTrailing = this.querySelector('[slot="title-trailing"]');
+    const titleTrailingSlot = hasTitleTrailing
+      ? '<span class="title-trailing"><slot name="title-trailing"></slot></span>'
+      : '';
+
+    const titleHtml = (title || hasTitleTrailing)
+      ? `<div class="title-row"><p class="title text-copy-large-heavy">${title || ''}</p>${titleTrailingSlot}</div>`
       : '';
 
     const closeHtml = dismissible
@@ -301,6 +378,7 @@ class OXBanner extends HTMLElement {
       ${closeHtml}`;
 
     this._applyActionDefaults();
+    this._applyPriceDefaults();
     this._applyListItemDefaults();
   }
 }

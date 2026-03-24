@@ -161,10 +161,24 @@ class OXListItem extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    this._listen();
   }
 
   attributeChangedCallback() {
     this.render();
+    this._listen();
+  }
+
+  _listen() {
+    const btn = this.shadowRoot.querySelector('.trailing-btn');
+    if (!btn) return;
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.dispatchEvent(new CustomEvent('trailing-action', {
+        bubbles: true, composed: true,
+        detail: { label: this.getAttribute('trailing-label') || '' },
+      }));
+    });
   }
 
   render() {

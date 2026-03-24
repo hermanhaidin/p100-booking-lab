@@ -10,7 +10,7 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`
   :host {
     background-color: var(--color-surface-secondary-container);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     display: block;
     padding: var(--spacing-xs);
   }

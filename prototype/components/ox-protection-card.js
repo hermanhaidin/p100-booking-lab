@@ -1,12 +1,46 @@
 /* Protection card component
-   Complex card with radio, star rating, deductible, price, accordion.
-   Renders both mobile and desktop layouts; CSS media queries toggle visibility.
+   Selectable card with radio, star rating, deductible, price, and accordion.
+   Both mobile and desktop markup are rendered; CSS media queries toggle visibility.
+
+   Attributes:
+     option-id       — unique tier identifier (e.g. "none", "basic", "smart", "all")
+     title           — protection tier name
+     stars           — 0–3 star rating (filled vs. outline icons)
+     deductible      — deductible text (e.g. "No deductible", "€950 deductible")
+     deductible-kind — color intent: "primary" (default), "success", "error"
+     daily-price     — numeric daily price (formatted via Intl.NumberFormat)
+     previous-price  — strikethrough price (optional, shown when discounted)
+     price-suffix    — price label, defaults to "/ day"
+     badge-text      — promotional badge (e.g. "-40% online discount")
+     badge-kind      — badge color kind (defaults to "brand")
+     footer-text     — bold footer line below the price row
+     selected        — boolean; toggles radio + border highlight
+     expanded        — boolean; toggles accordion open state (mobile only)
+
+   Slots:
+     coverage — ox-list-item elements describing coverage details
+
+   Events (bubbles, composed):
+     protection-select  — { optionId } — fired on card click (not accordion)
+     protection-toggle  — { optionId, expanded } — fired on accordion chevron click
+
+   Layout strategy:
+     Two parallel DOM trees exist for mobile and desktop. On mobile (≤899px),
+     .mobile-top-row is shown and .summary is hidden. On desktop (≥900px),
+     the reverse. This avoids JS-driven layout shifts.
+     On mobile, .bottom uses max-height animation for accordion expand/collapse,
+     with staggered fade-in on slotted coverage items.
+
+   Group delegation:
+     When nested inside <ox-protection-group>, the card defers expansion
+     control to the group (_hasGroup check). Standalone cards self-manage.
+
    API: <ox-protection-card
           option-id="smart" title="Smart Protection" stars="2"
           deductible="No deductible" deductible-kind="success"
           daily-price="48.72" previous-price="81.20" price-suffix="/ day"
           badge-text="-40% online discount" badge-kind="brand"
-          selected expanded
+          footer-text="Most popular" selected expanded
         >
           <ox-list-item slot="coverage" icon="check">Collision damages</ox-list-item>
         </ox-protection-card> */
@@ -16,10 +50,11 @@ import { iconButtonStyles } from './shared/ox-icon-button-styles.js';
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`
+  /* --- Host & selection border --- */
   :host {
     background-color: var(--color-surface-container);
     border: 0;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     box-sizing: border-box;
     cursor: pointer;
     display: flex;
@@ -113,7 +148,7 @@ styles.replaceSync(`
     padding: var(--spacing-xs);
   }
 
-  /* --- Desktop layout elements --- */
+  /* --- Desktop layout (hidden on mobile) --- */
   .summary {
     display: block;
   }
@@ -173,9 +208,9 @@ styles.replaceSync(`
     align-items: center;
     column-gap: var(--spacing-3xs);
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     min-height: 24px;
-    row-gap: 0;
+    row-gap: var(--spacing-4xs);
   }
 
   .stars {
@@ -202,7 +237,7 @@ styles.replaceSync(`
     display: none;
   }
 
-  /* --- Accordion button (hidden by default, shown on mobile) --- */
+  /* --- Accordion chevron (48px target, -12px margin = 24px footprint) --- */
   .accordion-btn {
     align-items: center;
     border-radius: var(--radius-sm);
@@ -210,7 +245,7 @@ styles.replaceSync(`
     display: none;
     height: 48px;
     justify-content: center;
-    margin: calc(-1 * var(--spacing-3xs));
+    margin: -12px;
     min-height: 48px;
     min-width: 48px;
     width: 48px;
@@ -305,6 +340,7 @@ styles.replaceSync(`
     .title-stars {
       display: inline-flex;
       gap: var(--spacing-5xs);
+      margin-top: var(--spacing-4xs);
     }
 
     .title-stars .material-symbols-outlined {
@@ -337,6 +373,7 @@ styles.replaceSync(`
       opacity: 1;
     }
 
+    /* Staggered fade-in for slotted coverage items when accordion opens */
     ::slotted(:nth-child(1)) { opacity: 0; transform: translateY(-4px); transition: opacity 120ms ease, transform 120ms ease; }
     ::slotted(:nth-child(2)) { opacity: 0; transform: translateY(-4px); transition: opacity 120ms ease, transform 120ms ease; }
     ::slotted(:nth-child(3)) { opacity: 0; transform: translateY(-4px); transition: opacity 120ms ease, transform 120ms ease; }
@@ -410,6 +447,7 @@ class OXProtectionCard extends HTMLElement {
     this._listen();
   }
 
+  /* Fast-path: selected/expanded update DOM state without full re-render. */
   attributeChangedCallback(name) {
     if (name === 'selected') {
       this._syncRadios();
@@ -422,11 +460,13 @@ class OXProtectionCard extends HTMLElement {
     this.render();
   }
 
+  /* Sync both radio inputs (mobile + desktop) to match selected attribute. */
   _syncRadios() {
     const checked = this.hasAttribute('selected');
     this.shadowRoot.querySelectorAll('.radio-native').forEach(r => { r.checked = checked; });
   }
 
+  /* Toggle accordion open/close and update chevron icon + aria. */
   _syncExpansion() {
     const expanded = this.hasAttribute('expanded');
     const bottom = this.shadowRoot.querySelector('.bottom');
@@ -441,17 +481,14 @@ class OXProtectionCard extends HTMLElement {
     });
   }
 
+  /* When inside a group, the card defers expansion to the group coordinator. */
   get _hasGroup() {
     return !!this.closest('ox-protection-group');
   }
 
+  /* Click delegation: accordion chevron → toggle event; anything else → select event. */
   _listen() {
     this.shadowRoot.addEventListener('click', (e) => {
-      if (e.target.closest('[data-info]')) {
-        e.stopPropagation();
-        return;
-      }
-
       const toggleBtn = e.target.closest('.accordion-btn');
       if (toggleBtn) {
         e.stopPropagation();
@@ -482,6 +519,7 @@ class OXProtectionCard extends HTMLElement {
     return out.join('');
   }
 
+  /* Split a numeric amount into { integer, decimal } for ox-price rendering. */
   _priceParts(amount) {
     if (amount == null) return null;
     const num = Number(amount);

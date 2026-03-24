@@ -636,6 +636,20 @@
             <ox-text-button size="large" underlined>Details</ox-text-button>
           </div>
         </ox-banner>
+        <ox-banner kind="brand" icon="info" title="Exclusive offer">
+          <p class="text-copy-medium-regular">Upgrade to premium and enjoy complimentary extras on your next rental.</p>
+          <div slot="actions">
+            <ox-button size="small">Action</ox-button>
+            <ox-text-button size="large" underlined>Details</ox-text-button>
+          </div>
+        </ox-banner>
+        <ox-banner kind="brand" icon="info" title="Exclusive offer" gradient>
+          <p class="text-copy-medium-regular">Upgrade to premium and enjoy complimentary extras on your next rental.</p>
+          <div slot="actions">
+            <ox-button size="small">Action</ox-button>
+            <ox-text-button size="large" underlined>Details</ox-text-button>
+          </div>
+        </ox-banner>
         <ox-banner kind="secondary" icon="info" title="Booking update">
           <p class="text-copy-medium-regular">Your reservation has been updated with the new pick-up time. Please review the changes before confirming.</p>
           <div slot="actions">
@@ -707,6 +721,58 @@
           <div slot="actions">
             <ox-button size="small">Book now</ox-button>
           </div>
+        </ox-banner>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Close + actions combined</p>
+      <div class="col">
+        <ox-banner kind="info" icon="info" title="Upgrade available" dismissible>
+          <p class="text-copy-medium-regular">A premium vehicle is available at a reduced rate for your dates.</p>
+          <div slot="actions">
+            <ox-button size="small">Upgrade now</ox-button>
+            <ox-text-button size="large" underlined>Compare</ox-text-button>
+          </div>
+        </ox-banner>
+        <ox-banner kind="warning" icon="warning" title="Action needed" dismissible>
+          <p class="text-copy-medium-regular">Your driver's license expires within 30 days of your rental. Please verify your details.</p>
+          <div slot="actions">
+            <ox-button size="small">Verify</ox-button>
+          </div>
+        </ox-banner>
+        <ox-banner kind="error" icon="error" title="Payment issue" dismissible>
+          <p class="text-copy-medium-regular">We couldn't charge your card. Update your payment method to keep your reservation.</p>
+          <div slot="actions">
+            <ox-button size="small">Update payment</ox-button>
+            <ox-text-button size="large" underlined>Contact support</ox-text-button>
+          </div>
+        </ox-banner>
+        <ox-banner kind="brand" icon="info" title="Exclusive member offer" gradient dismissible>
+          <p class="text-copy-medium-regular">As a loyalty member you qualify for a free upgrade. Claim it before pick-up.</p>
+          <div slot="actions">
+            <ox-button size="small">Claim upgrade</ox-button>
+            <ox-text-button size="large" underlined>Terms</ox-text-button>
+          </div>
+        </ox-banner>
+      </div>
+    </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">With title-trailing price</p>
+      <div class="col">
+        <ox-banner kind="brand" icon="info" title="Exclusive offer" gradient>
+          <ox-price slot="title-trailing" size="medium" currency="$" integer="19" decimal=".99" suffix="/ day"></ox-price>
+          <p class="text-copy-medium-regular">Upgrade to premium and enjoy complimentary extras on your next rental.</p>
+          <div slot="actions">
+            <ox-button size="small">Upgrade</ox-button>
+          </div>
+        </ox-banner>
+        <ox-banner kind="success" icon="check_circle" title="You save">
+          <ox-price slot="title-trailing" size="medium" currency="$" integer="42" decimal=".00" suffix="total"></ox-price>
+          <p class="text-copy-medium-regular">Smart Protection discount applied to your booking.</p>
+        </ox-banner>
+        <ox-banner kind="info" icon="info" title="Add-on price">
+          <ox-price slot="title-trailing" size="medium" currency="$" integer="12" decimal=".00" suffix="/ day" sign="+"></ox-price>
+
+          <p class="text-copy-medium-regular">Additional driver can be added at pickup or online.</p>
         </ox-banner>
       </div>
     </div>
