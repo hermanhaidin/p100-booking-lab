@@ -29,6 +29,24 @@
         grid-template-columns: repeat(4, 1fr);
       }
     }
+    .offer-cards-grid {
+      display: grid;
+      gap: var(--spacing-xs);
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      max-width: 900px;
+    }
+    ox-offer-card {
+      aspect-ratio: 3 / 4;
+    }
+    .offer-banners-grid {
+      display: grid;
+      gap: var(--spacing-xs);
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      max-width: 900px;
+    }
+    .offer-banners-grid > * {
+      height: 300px;
+    }
   </style>
 </head>
 <body>
@@ -182,6 +200,162 @@
         <ox-list-item slot="coverage" icon="close" kind="secondary" trailing-icon="info" trailing-label="More about roadside help">Roadside help for common mobility issues</ox-list-item>
       </ox-protection-card>
     </div>
+  </div>
+
+  <ox-separator size="large" contrast="medium"></ox-separator>
+
+  <!-- ========== OFFER BANNER ========== -->
+  <div class="test-section">
+    <div class="test-section-inner">
+      <h2 class="text-title-small-heavy">&lt;ox-offer-banner&gt;</h2>
+      <p class="test-label text-copy-small-regular">Promotional image card. Hover to see zoom + outline effect.</p>
+      <div class="offer-banners-grid">
+        <ox-offer-banner
+          title="Upgrade to premium"
+          subtitle="Experience SIXT quality with added comfort and style"
+          cta-text="Learn more"
+          image="https://img.sixt.com/1600/d3432083-e83d-4ee3-9c2d-976cc32e1a19.jpg"
+          href="#"
+        ></ox-offer-banner>
+        <ox-offer-banner
+          title="SIXT+ subscription"
+          subtitle="Drive new. Drive more. Drive flexible."
+          cta-text="Explore plans"
+          image="https://img.sixt.com/1200/40b04825-ddf2-488f-8b24-0695abe88486.jpg"
+          href="#"
+        ></ox-offer-banner>
+        <ox-offer-banner
+          title="One-way rentals"
+          subtitle="Pick up in one city, drop off in another"
+          cta-text="Find routes"
+          image="https://img.sixt.com/1200/fcc0657b-7e9f-4fba-8aa3-772db517f57f.jpg"
+          href="#"
+        ></ox-offer-banner>
+      </div>
+    </div>
+  </div>
+
+  <ox-separator size="large" contrast="medium"></ox-separator>
+
+  <!-- ========== OFFER CARD ========== -->
+  <div class="test-section">
+    <div class="test-section-inner">
+      <h2 class="text-title-small-heavy">&lt;ox-offer-card&gt;</h2>
+      <p class="test-label text-copy-small-regular">Data-attribute-driven. Variant auto-detected from model-label. First card [active]. Hot offer &rarr; brand daily price + flame badge. Electric/Hybrid &rarr; bolt/power + range badges. Bottom badges (Special Car, 4WD) render after pricing.</p>
+      <div class="offer-cards-grid">
+        <ox-offer-card
+          title="VW Golf"
+          subtitle="Compact Sedan Automatic"
+          image="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-5d-grey-2024.png"
+          model-label="Or similar model"
+          specs="5 seats,3 suitcases,Automatic"
+          included="Unlimited kilometers"
+          daily-price="76.48"
+          total-price="463.03"
+          offer-index="0"
+          active
+        ></ox-offer-card>
+
+        <ox-offer-card
+          title="BMW 3 Series Touring"
+          subtitle="Full-size Elite Wagon Automatic"
+          image="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-3-sedan-4d-white-2023-JV.png"
+          model-label="Premium brand"
+          specs="5 seats,4 suitcases,Automatic"
+          badges="Hot offer"
+          included="Unlimited kilometers"
+          daily-price="107.64"
+          total-price="649.72"
+          offer-index="1"
+        ></ox-offer-card>
+
+        <ox-offer-card
+          title="Mercedes-Benz CLA"
+          subtitle="Midsize Elite Sedan Automatic"
+          image="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-cla-4d-sedan-white-2026.png"
+          model-label="Guaranteed model"
+          specs="Electric,431mi,5 seats,4 suitcases"
+          included="Unlimited kilometers"
+          daily-price="97.96"
+          total-price="587.06"
+          offer-index="2"
+        ></ox-offer-card>
+
+        <ox-offer-card
+          title="Citroen E-C3 Aircross"
+          subtitle="Midsize SUV Automatic"
+          image="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-5d-grey-2024.png"
+          model-label="Or similar model"
+          specs="Electric,190mi,5 seats,4 suitcases"
+          badges="Hot offer"
+          included="Unlimited kilometers"
+          daily-price="81.02"
+          total-price="485.53"
+          offer-index="3"
+        ></ox-offer-card>
+
+        <ox-offer-card
+          title="BMW M235 Gran Coupe"
+          subtitle="Midsize Elite Sedan Automatic"
+          image="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-3-sedan-4d-white-2023-JV.png"
+          model-label="Premium brand"
+          specs="5 seats,3 suitcases,Automatic"
+          badges="Special Car"
+          included="1,200 kilometers included"
+          daily-price="103.69"
+          total-price="626.07"
+          offer-index="4"
+        ></ox-offer-card>
+
+        <ox-offer-card
+          title="BMW X5 xDrive"
+          subtitle="Luxury Elite SUV Automatic"
+          image="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-3-sedan-4d-white-2023-JV.png"
+          model-label="Premium brand"
+          specs="5 seats,6 suitcases,Automatic"
+          badges="Hot offer,Four-Wheel Drive Guaranteed"
+          included="Unlimited kilometers"
+          daily-price="195.36"
+          total-price="1,175.40"
+          offer-index="5"
+        ></ox-offer-card>
+      </div>
+    </div>
+  </div>
+
+  <ox-separator size="large" contrast="medium"></ox-separator>
+
+  <!-- ========== OFFER DETAILS ========== -->
+  <div class="test-section">
+    <div class="test-section-inner">
+      <h2 class="text-title-small-heavy">&lt;ox-offer-details&gt;</h2>
+      <p class="test-label text-copy-small-regular">Fully responsive. &le;649px: stacked, mobile layout, back icon. 650–899px: stacked, desktop layout. 900–1199px: side-by-side. &ge;1200px: side-by-side, wider booking panel.</p>
+    </div>
+
+    <ox-offer-details
+      variant="premium"
+      title="BMW 3 Series"
+      subtitle="or similar luxury sedan"
+      image="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-3-sedan-4d-white-2023-JV.png"
+      daily-integer="71"
+      daily-decimal=".27"
+      daily-suffix="/ day"
+      total-integer="285"
+      total-decimal=".08"
+      total-suffix="total"
+      currency="$"
+      flexible-addon-integer="12"
+      flexible-addon-decimal=".00"
+      flexible-addon-suffix="/ day"
+      included="Unlimited kilometers included"
+      booking-option="best-price"
+    >
+      <ox-badge slot="model-badges" preset="premium-brand" icon="info">Premium brand</ox-badge>
+      <ox-badge slot="specs" preset="offer-spec" icon="person">5</ox-badge>
+      <ox-badge slot="specs" preset="offer-spec" icon="luggage">2</ox-badge>
+      <ox-badge slot="specs" preset="offer-spec" icon="ac_unit">A/C</ox-badge>
+      <ox-badge slot="specs" preset="offer-spec" icon="speed">Automatic</ox-badge>
+    </ox-offer-details>
   </div>
 
   <div style="padding: var(--spacing-xl) var(--spacing-xs);">
