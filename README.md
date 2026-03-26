@@ -1,6 +1,6 @@
 # p100 booking lab
 
-A shared playground for designers to prototype booking flow in the browser using Cursor.
+A shared playground for designers to prototype booking flow in the browser using an AI editor (Cursor, Claude Code, etc.).
 
 **Philosophy**: Fast experimentation over perfect implementation.
 
@@ -13,6 +13,9 @@ A shared playground for designers to prototype booking flow in the browser using
 
 
 ## Getting started
+
+<details>
+<summary><strong>First-time setup (install developer tools)</strong></summary>
 
 You only need to do this once on your computer.
 
@@ -27,6 +30,30 @@ Homebrew helps keep tools updated. Follow instructions on https://brew.sh/.
 ### 3. Install Node.js
 
 In Terminal run `brew install node`. Keep your tools updated with `brew update && brew upgrade`.
+
+</details>
+
+
+## How to work here
+
+You do NOT need to be an engineer.
+
+### With Claude Code (CLI)
+
+1. Download the project ZIP (or clone from GitHub)
+2. Open Terminal, `cd` into the project folder
+3. Run `npm install && npm run dev` (starts the preview at http://localhost:5173)
+4. In another terminal tab, run `claude`
+5. Describe what you want to build or change
+
+### With Cursor
+
+1. Unzip project
+2. Open folder in Cursor
+3. Run `npm install` and `npm run dev` from the built-in terminal
+4. Edit directly in `prototype/` (or create `experiments/` if you want isolation)
+
+If things get messy, start again from a fresh zip.
 
 
 ## Why plain HTML + CSS
@@ -50,19 +77,6 @@ This is a deliberate choice — our token names map directly to the P100 design 
 3. Component libraries (shadcn, etc.) — we define our own components to match sixt.com exactly
 
 
-## How to work here
-
-You do NOT need to be an engineer.
-
-Typical workflow:
-
-1. Unzip project
-2. Open folder in Cursor
-3. Run local preview via `npm install` and `npm run dev`
-4. Edit directly in `prototype/` (or create `experiments/` if you want isolation)
-5. If things get messy, start again from a fresh zip
-
-
 ## Project structure
 
 This repo separates reference material from experiments:
@@ -70,13 +84,16 @@ This repo separates reference material from experiments:
 - `sources/` - original crawled websites (read-only)
 - `prototype/` - working booking flow prototype
   - `prototype/base.html` — shared HTML boilerplate, starting point for new pages
+  - `prototype/components/` — Web Component definitions (`ox-*` custom elements)
+  - `prototype/styles/` — design tokens, typography utilities, page layout CSS
+  - `prototype/scripts/pages/` — page-level JavaScript
 - `experiments/` - redesign explorations
 
 ### Where to edit what
 
 - `prototype/styles/tokens.css` — design tokens (colors, spacing, radius, stroke, elevation, responsive type scales)
 - `prototype/styles/typography.css` — text utility classes (`text-*`)
-- `prototype/styles/components/*.css` — reusable components (button, chip, dialog, etc.)
+- `prototype/components/*.js` — Web Component definitions
 - `prototype/styles/pages/*.css` — page-specific composition and layout
 
 
@@ -87,7 +104,7 @@ Material Symbols loaded via CDN — no install needed.
 ### How to use icons
 
 1. Browse [fonts.google.com/icons](https://fonts.google.com/icons) and find an icon name (e.g. `arrow_forward`)
-2. Tell Cursor: "Add an `arrow_forward` icon next to the CTA"
+2. Tell your AI editor: "Add an `arrow_forward` icon next to the CTA"
 
 ### Custom icons
 
