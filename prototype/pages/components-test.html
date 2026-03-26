@@ -605,6 +605,106 @@
       </script>
     </div>
 
+    <!-- ========== CHOICE CARD ========== -->
+    <ox-separator size="large" contrast="medium"></ox-separator>
+    <div class="section">
+      <h2 class="text-title-small-heavy">&lt;ox-choice-card&gt; + &lt;ox-choice-card-group&gt;</h2>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary);">Stacked group (radio, click to select)</p>
+      <div style="max-width: 480px;">
+        <ox-choice-card-group id="bookingGroup">
+          <ox-choice-card value="best-price" selected meta-text="Included">
+            <span class="text-copy-large-heavy-tight">Best price</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">Free cancellation and rebooking within 24h</p>
+          </ox-choice-card>
+          <ox-choice-card value="stay-flexible" price="12.00" price-sign="+" price-suffix="/ day" badge-text="Popular">
+            <span class="text-copy-large-heavy-tight">Stay flexible</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">Free cancellation and rebooking any time before pickup</p>
+          </ox-choice-card>
+        </ox-choice-card-group>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary); margin-top: var(--spacing-xs);">Multiple groups — stacked, spacing between groups</p>
+      <div style="max-width: 480px;">
+        <ox-choice-card-group id="mileageGroup">
+          <ox-choice-card value="unlimited" selected meta-text="Included">
+            <span class="text-copy-large-heavy-tight">Unlimited kilometers</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">All kilometers included in the price</p>
+          </ox-choice-card>
+          <ox-choice-card value="limited" price="8.00" price-sign="−" price-suffix="/ day">
+            <span class="text-copy-large-heavy-tight">150 km per day</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">€0.29 per extra km</p>
+          </ox-choice-card>
+        </ox-choice-card-group>
+        <ox-choice-card-group id="driverGroup">
+          <ox-choice-card value="one-driver" selected meta-text="Included">
+            <span class="text-copy-large-heavy-tight">One driver</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">Only the main driver listed on the contract</p>
+          </ox-choice-card>
+          <ox-choice-card value="additional" price="5.00" price-sign="+" price-suffix="/ day">
+            <span class="text-copy-large-heavy-tight">Additional driver</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">Add a second authorized driver</p>
+          </ox-choice-card>
+        </ox-choice-card-group>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary); margin-top: var(--spacing-xs);">Single tile — [single] attr, full radius, static selected</p>
+      <div style="max-width: 480px;">
+        <ox-choice-card-group single>
+          <ox-choice-card value="mileage" static selected meta-text="Included">
+            <span class="text-copy-large-heavy-tight">Unlimited kilometers</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">All kilometers are included in the price</p>
+          </ox-choice-card>
+        </ox-choice-card-group>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary); margin-top: var(--spacing-xs);">3+ cards stacked</p>
+      <div style="max-width: 480px;">
+        <ox-choice-card-group id="threeCardGroup">
+          <ox-choice-card value="economy" selected price="8.00" price-sign="−" price-suffix="/ day">
+            <span class="text-copy-large-heavy-tight">Economy</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">100 km per day — €0.29 / extra km</p>
+          </ox-choice-card>
+          <ox-choice-card value="standard" meta-text="Included">
+            <span class="text-copy-large-heavy-tight">Standard</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">200 km per day — €0.19 / extra km</p>
+          </ox-choice-card>
+          <ox-choice-card value="unlimited" price="6.00" price-sign="+" price-suffix="/ day">
+            <span class="text-copy-large-heavy-tight">Unlimited</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">All kilometers included, no extra charges</p>
+          </ox-choice-card>
+        </ox-choice-card-group>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary); margin-top: var(--spacing-xs);">Disabled card</p>
+      <div style="max-width: 480px;">
+        <ox-choice-card-group>
+          <ox-choice-card value="enabled" selected meta-text="Included">
+            <span class="text-copy-large-heavy-tight">Available option</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">This option is selectable</p>
+          </ox-choice-card>
+          <ox-choice-card value="disabled" disabled meta-text="N/A">
+            <span class="text-copy-large-heavy-tight">Unavailable option</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">Not available for your booking dates</p>
+          </ox-choice-card>
+        </ox-choice-card-group>
+      </div>
+
+      <p class="text-copy-small-heavy" style="color: var(--color-content-secondary); margin-top: var(--spacing-xs);">With info button</p>
+      <div style="max-width: 480px;">
+        <ox-choice-card-group id="infoGroup">
+          <ox-choice-card value="pay-now" selected meta-text="Included" info>
+            <span class="text-copy-large-heavy-tight">Pay at pickup</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">Standard payment at the counter</p>
+          </ox-choice-card>
+          <ox-choice-card value="pay-online" price="3.00" price-sign="−" price-suffix="/ day" badge-text="Save" badge-kind="success" info>
+            <span class="text-copy-large-heavy-tight">Pay online now</span>
+            <p class="text-copy-small-regular" style="color: var(--color-content-secondary); margin: 0;">Prepay and save on your rental</p>
+          </ox-choice-card>
+        </ox-choice-card-group>
+      </div>
+    </div>
+
     <!-- ========== BANNER ========== -->
     <ox-separator size="large" contrast="medium"></ox-separator>
     <div class="section">
