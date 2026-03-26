@@ -31,18 +31,18 @@ choiceCardGroupStyles.replaceSync(`
 
   /* Stacked corner rounding */
   ox-choice-card-group:not([single]) > ox-choice-card:first-child {
-    border-top-left-radius: var(--radius-md);
-    border-top-right-radius: var(--radius-md);
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
   }
 
   ox-choice-card-group:not([single]) > ox-choice-card:last-child {
-    border-bottom-left-radius: var(--radius-md);
-    border-bottom-right-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-lg);
+    border-bottom-right-radius: var(--radius-lg);
   }
 
   /* Single-tile mode: full radius on each card */
   ox-choice-card-group[single] > ox-choice-card {
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
   }
 
   /* Spacing between groups */

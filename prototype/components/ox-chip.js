@@ -4,7 +4,8 @@
    - Preset: dropdown (adds trailing keyboard_arrow_down icon).
    - Icon-only mode: auto-detected when icon is set and no slotted text. Renders as square chip.
      Requires label attribute for accessibility (maps to aria-label on inner button).
-   API: <ox-chip size="small" variant="solid" icon="directions_car" selected disabled preset="dropdown" sublabel="..." label="...">Label</ox-chip> */
+   API: <ox-chip size="small" variant="solid" icon="directions_car" selected disabled preset="dropdown" sublabel="..." label="...">Label</ox-chip>
+        <ox-chip icon-src="../assets/icons/flame.svg">Custom icon</ox-chip> */
 
 import { baseStyles } from './shared/base-styles.js';
 
@@ -58,7 +59,8 @@ styles.replaceSync(`
     min-width: 72px;
   }
 
-  :host([icon]) .chip {
+  :host([icon]) .chip,
+  :host([icon-src]) .chip {
     padding-left: var(--spacing-2xs);
     padding-right: var(--spacing-xs);
   }
@@ -66,6 +68,10 @@ styles.replaceSync(`
   .icon {
     color: currentColor;
     flex: 0 0 auto;
+  }
+
+  img.icon {
+    object-fit: contain;
   }
 
   :host(:not([size])) .icon,
@@ -198,7 +204,7 @@ styles.replaceSync(`
 `);
 
 class OXChip extends HTMLElement {
-  static observedAttributes = ['size', 'variant', 'icon', 'selected', 'disabled', 'preset', 'sublabel', 'label'];
+  static observedAttributes = ['size', 'variant', 'icon', 'icon-src', 'selected', 'disabled', 'preset', 'sublabel', 'label'];
 
   constructor() {
     super();
@@ -216,13 +222,15 @@ class OXChip extends HTMLElement {
 
   render() {
     const icon = this.getAttribute('icon');
+    const iconSrc = this.getAttribute('icon-src');
     const label = this.getAttribute('label') || '';
     const sublabel = this.getAttribute('sublabel');
     const preset = this.getAttribute('preset');
     const disabled = this.hasAttribute('disabled');
     const size = this.getAttribute('size') || 'small';
     const typoClass = 'text-copy-medium-regular-tight';
-    const isIconOnly = icon && !this.textContent.trim();
+    const hasIcon = icon || iconSrc;
+    const isIconOnly = hasIcon && !this.textContent.trim();
 
     if (isIconOnly) {
       this.setAttribute('icon-only', '');
@@ -232,9 +240,12 @@ class OXChip extends HTMLElement {
 
     const ariaAttr = label ? ` aria-label="${label}"` : '';
 
-    const iconHtml = icon
-      ? `<span class="icon material-symbols-outlined" aria-hidden="true">${icon}</span>`
-      : '';
+    let iconHtml = '';
+    if (iconSrc) {
+      iconHtml = `<img class="icon" src="${iconSrc}" alt="" aria-hidden="true">`;
+    } else if (icon) {
+      iconHtml = `<span class="icon material-symbols-outlined" aria-hidden="true">${icon}</span>`;
+    }
 
     const trailingHtml = preset === 'dropdown'
       ? `<span class="trailing-icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>`

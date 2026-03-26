@@ -10,6 +10,8 @@
      title            — vehicle name
      subtitle         — model description
      image            — vehicle image URL
+     model-label      — "Premium brand" | "Or similar model" | "Guaranteed model"
+     specs            — comma-separated, e.g. "5 seats,4 suitcases,Automatic"
      daily-integer, daily-decimal, daily-suffix — daily price parts
      total-integer, total-decimal, total-suffix — total price parts
      currency         — defaults to "$"
@@ -18,18 +20,13 @@
      mileage-title, mileage-subtitle, mileage-included-label
      booking-option   — best-price | stay-flexible (current selection)
 
-   Slots:
-     model-badges — badges in the media bottom (model label, electric, hybrid)
-     specs        — spec ox-badge elements in media bottom
-
    Events (bubbles, composed):
      offer-details-close         — close button clicked
      offer-details-next          — continue/next button clicked
      offer-details-option-change — { bookingOption } — booking option radio changed
 
-   API: <ox-offer-details variant="premium" title="BMW 3 Series" ...>
-          <ox-badge slot="model-badges" preset="premium-brand" icon="info">Premium brand</ox-badge>
-          <ox-badge slot="specs" preset="offer-spec" icon="person">5</ox-badge>
+   API: <ox-offer-details variant="premium" title="BMW 3 Series"
+          model-label="Premium brand" specs="5 seats,4 suitcases,Automatic" ...>
         </ox-offer-details> */
 
 import { baseStyles } from './shared/base-styles.js';
@@ -303,7 +300,6 @@ styles.replaceSync(`
       width: calc(100% + (var(--spacing-xs) * 2));
     }
 
-    .specs ::slotted(*) { max-width: 100%; }
   }
 
   /* Responsive: tablet and up (>= 900px) */
@@ -370,6 +366,7 @@ styles.replaceSync(`
 class OXOfferDetails extends HTMLElement {
   static observedAttributes = [
     'variant', 'title', 'subtitle', 'image',
+    'model-label', 'specs', 'min-age',
     'daily-integer', 'daily-decimal', 'daily-suffix',
     'total-integer', 'total-decimal', 'total-suffix',
     'currency', 'included',
@@ -408,6 +405,41 @@ class OXOfferDetails extends HTMLElement {
     for (const card of cards) {
       card.toggleAttribute('selected', card.getAttribute('value') === value);
     }
+  }
+
+  _esc(str) {
+    return String(str ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  _getSpecBadge(spec) {
+    const seatMatch = spec.match(/^(\d+)\s+seats$/i);
+    if (seatMatch) return { icon: 'person', label: `${seatMatch[1]} Seats` };
+
+    const suitcaseMatch = spec.match(/^(\d+)\s+suitcases$/i);
+    if (suitcaseMatch) return { icon: 'travel_luggage_and_bags', label: `${suitcaseMatch[1]} Suitcase(s)` };
+
+    const bagsMatch = spec.match(/^(\d+)\s+bags$/i);
+    if (bagsMatch) return { icon: 'travel_luggage_and_bags', label: `${bagsMatch[1]} Bag(s)` };
+
+    if (/^automatic$/i.test(spec)) return { icon: 'hdr_auto', label: 'Automatic' };
+    if (/^manual$/i.test(spec)) return { icon: 'auto_transmission', label: 'Manual' };
+    if (/^electric$/i.test(spec)) return { icon: 'bolt', label: 'Electric' };
+    if (/^hybrid$/i.test(spec)) return { icon: 'power', label: 'Hybrid' };
+    if (/^\d+mi$/i.test(spec)) return { icon: 'battery_charging_full', label: spec };
+    if (/^cables included$/i.test(spec)) return { icon: 'cable', label: 'Cables included' };
+    if (/^minimum age/i.test(spec)) return { icon: 'id_card', label: spec };
+
+    return { icon: 'info', label: spec };
+  }
+
+  _getModelPreset(modelLabel) {
+    if (modelLabel === 'Premium brand') return 'premium-brand';
+    if (modelLabel === 'Guaranteed model') return 'guaranteed-model';
+    return 'similar-model';
   }
 
   _listen() {
@@ -466,6 +498,37 @@ class OXOfferDetails extends HTMLElement {
     const included = this._attr('included');
     const bookingOption = this._attr('booking-option', 'best-price');
 
+    const modelLabel = this._attr('model-label');
+    const specsRaw = this._attr('specs');
+    const minAge = this._attr('min-age');
+    const specs = specsRaw ? specsRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+    const isElectric = specs.some(s => /^electric$/i.test(s));
+    const isHybrid = specs.some(s => /^hybrid$/i.test(s));
+
+    let modelBadgesHtml = modelLabel
+      ? `<ox-badge preset="${this._getModelPreset(modelLabel)}" icon="info">${this._esc(modelLabel)}</ox-badge>`
+      : '';
+    if (isElectric) {
+      modelBadgesHtml += `<ox-badge preset="offer-spec" icon="bolt" filled>Electric</ox-badge>`;
+    } else if (isHybrid) {
+      modelBadgesHtml += `<ox-badge preset="offer-spec" icon="power" filled>Hybrid</ox-badge>`;
+    }
+
+    const detailSpecs = specs.filter(s => !/^(electric|hybrid)$/i.test(s));
+    if (isElectric) {
+      detailSpecs.push('Automatic');
+      detailSpecs.push('Cables included');
+    }
+    if (minAge) {
+      detailSpecs.push(`Minimum age of the youngest driver: ${minAge}`);
+    }
+
+    const specBadgesHtml = detailSpecs.map(spec => {
+      const badge = this._getSpecBadge(spec);
+      return `<ox-badge preset="offer-spec" icon="${this._esc(badge.icon)}" filled>${this._esc(badge.label)}</ox-badge>`;
+    }).join('');
+
     this.shadowRoot.innerHTML = `
       <section class="media" aria-label="Vehicle details">
         <ox-icon-button class="close-btn close-back" icon="arrow_back_ios_new" label="Go back" data-close></ox-icon-button>
@@ -478,8 +541,8 @@ class OXOfferDetails extends HTMLElement {
           ${image ? `<img src="${image}" alt="${title}">` : ''}
         </div>
         <div class="media-bottom">
-          <div class="model-badges"><slot name="model-badges"></slot></div>
-          <div class="specs"><slot name="specs"></slot></div>
+          <div class="model-badges">${modelBadgesHtml}</div>
+          <div class="specs">${specBadgesHtml}</div>
           ${included ? `
           <div class="included-strip">
             <span class="material-symbols-outlined" aria-hidden="true">check</span>
