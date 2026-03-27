@@ -12,6 +12,11 @@ A shared playground for designers to prototype booking flow in the browser using
 3. This is not a production code
 
 
+## Current scope
+
+The prototype mocks a single happy path: Munich Airport, fixed dates, USD currency. Data files are structured to support multiple locations in the future (see CLAUDE.md for details).
+
+
 ## Getting started
 
 <details>
