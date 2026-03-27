@@ -1,3 +1,5 @@
+/* Migrated to Web Component: prototype/components/ox-carousel.js */
+
 /* Shared carousel shell API
    - Transport/UI primitives only (viewport, track, controls).
    - Slide/card presentation stays in page or card-specific CSS. */

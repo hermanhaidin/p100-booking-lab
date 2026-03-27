@@ -79,7 +79,7 @@ customElements.define('ox-example', OxExample);
 
 - Components live in `prototype/components/`, one `.js` file per component
 - Shared constructable stylesheets in `prototype/components/shared/`:
-  - `base-styles.js` — typography utility classes + icon utilities (adopted by all components)
+  - `base-styles.js` — typography utility classes + icon utilities including `filled` attribute support (adopted by all components)
   - `layout-styles.js` — layout-shell horizontal centering (for full-width components)
   - `ox-icon-button-styles.js` — shared interaction styles for icon buttons
 - Design tokens (CSS custom properties on `:root`) inherit into Shadow DOM automatically — never embed token values in component files
@@ -104,6 +104,7 @@ All components are registered via `prototype/components/index.js`.
 | `ox-booking-header` | ox-booking-header.js | `<ox-booking-header location="Munich Airport" dates="Mar 26 – Mar 30" variant="step" step-title="Protection"></ox-booking-header>` |
 | `ox-booking-overview` | ox-booking-overview.js | `<ox-booking-overview title="Your booking overview:"><ox-list-item icon="check">Item</ox-list-item></ox-booking-overview>` |
 | `ox-button` | ox-button.js | `<ox-button kind="brand" size="large" variant="solid" icon="arrow_forward" href="./next.html">Continue</ox-button>` |
+| `ox-carousel` | ox-carousel.js | `<ox-carousel cards-per-view="1" cards-per-view-md="2" gap="xs" prev-label="Previous" next-label="Next" dot-label="Go to slide {n}"><article>Slide</article></ox-carousel>` |
 | `ox-chip` | ox-chip.js | `<ox-chip size="small" icon="tune" preset="dropdown" selected>Filters</ox-chip>` |
 | `ox-choice-card` | ox-choice-card.js | `<ox-choice-card value="best-price" selected>Best price</ox-choice-card>` |
 | `ox-choice-card-group` | ox-choice-card-group.js | `<ox-choice-card-group><ox-choice-card value="a">A</ox-choice-card></ox-choice-card-group>` |
@@ -308,13 +309,13 @@ To add a new location:
 
 | Page | Status | Notes |
 |------|--------|-------|
-| home | Not migrated | Uses old CSS contracts — needs migration to Web Components |
+| home | Done | Web Components + ox-carousel |
 | offer-list | Done | Web Components |
 | protection | Done | Web Components |
 | add-ons | Not built | Reference in `sources/sixt/crawl-2026-03/states/add-ons-*` |
 | review-booking | Not built | Reference in `sources/sixt/crawl-2026-03/states/review-booking-*` |
 
-When building new pages, always use Web Components. When touching the home page, migrate CSS contracts to Web Components.
+When building new pages, always use Web Components. All existing pages have been migrated.
 
 
 ## Operating model

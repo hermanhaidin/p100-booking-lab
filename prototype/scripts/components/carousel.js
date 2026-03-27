@@ -1,3 +1,4 @@
+/* Migrated to Web Component: prototype/components/ox-carousel.js */
 (function initCarouselHelper(global) {
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 

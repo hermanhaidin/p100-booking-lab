@@ -5,20 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Booking Prototype - Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-  <link rel="stylesheet" href="../styles/tokens.css">
-  <link rel="stylesheet" href="../styles/fonts.css">
-  <link rel="stylesheet" href="../styles/layout.css">
-  <link rel="stylesheet" href="../styles/base.css">
-  <link rel="stylesheet" href="../styles/typography.css">
-  <link rel="stylesheet" href="../styles/components/button.css">
-  <link rel="stylesheet" href="../styles/components/chip.css">
-  <link rel="stylesheet" href="../styles/components/text-button.css">
-  <link rel="stylesheet" href="../styles/components/link.css">
-  <link rel="stylesheet" href="../styles/components/icon-button.css">
-  <link rel="stylesheet" href="../styles/components/floating-button.css">
-  <link rel="stylesheet" href="../styles/components/carousel.css">
-  <link rel="stylesheet" href="../styles/components/price.css">
-  <link rel="stylesheet" href="../styles/pages/home.css">
+  <link rel="stylesheet" href="../styles/all.css">
+  <script type="module" src="../components/index.js"></script>
 </head>
 <body>
   <main>
@@ -28,48 +16,23 @@
         <div class="layout-shell">
           <div class="utility-bar">
             <div class="brand-group">
-              <button type="button" class="icon-button icon-button--large icon-button--on-brand" aria-label="Open menu">
-                <span class="material-symbols-outlined icon-button__icon" aria-hidden="true">menu</span>
-              </button>
+              <ox-icon-button kind="on-brand" size="large" icon="menu" label="Open menu"></ox-icon-button>
               <img class="brand-logo" src="../assets/logos/sixt_rent_the_car_on_dark.svg" alt="SIXT rent the car">
             </div>
             <nav class="utility-links" aria-label="Utility links">
-              <a href="#" class="text-button text-button--large text-button--primary text-copy-medium-heavy-tight text-button--with-leading-icon">
-                <span class="material-symbols-outlined text-button__icon--leading" aria-hidden="true">help_center</span>
-                <span class="text-button__label">Help</span>
-              </a>
-              <a href="#" class="text-button text-button--large text-button--primary text-copy-medium-heavy-tight text-button--with-leading-icon">
-                <span class="material-symbols-outlined text-button__icon--leading" aria-hidden="true">directions_car</span>
-                <span class="text-button__label">Manage bookings</span>
-              </a>
-              <a href="#" class="text-button text-button--large text-button--primary text-copy-medium-heavy-tight text-button--with-leading-icon">
-                <span class="material-symbols-outlined text-button__icon--leading" aria-hidden="true">language</span>
-                <span class="text-button__label">EN | $</span>
-              </a>
-              <a href="#" class="text-button text-button--large text-button--primary text-copy-medium-heavy-tight text-button--with-leading-icon">
-                <span class="material-symbols-outlined text-button__icon--leading" aria-hidden="true">person</span>
-                <span class="text-button__label">Log in | Register</span>
-              </a>
+              <ox-text-button kind="primary" size="large" icon="help_center" href="#" filled>Help</ox-text-button>
+              <ox-text-button kind="primary" size="large" icon="directions_car" href="#" filled>Manage bookings</ox-text-button>
+              <ox-text-button kind="primary" size="large" icon="language" href="#" filled>EN | $</ox-text-button>
+              <ox-text-button kind="primary" size="large" icon="person" href="#" filled>Log in | Register</ox-text-button>
             </nav>
           </div>
 
           <section class="search-shell" aria-label="Search context">
             <div class="booking-chips" role="tablist" aria-label="Booking mode">
-              <button type="button" class="chip chip--small is-active text-copy-medium-regular-tight" data-chip="cars">
-                <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">directions_car</span>
-                <span class="chip__label">Cars</span>
-              </button>
-              <button type="button" class="chip chip--small text-copy-medium-regular-tight" data-chip="trucks">
-                <span class="material-symbols-outlined chip__icon chip__icon--filled" aria-hidden="true">local_shipping</span>
-                <span class="chip__label">Trucks</span>
-              </button>
-              <button type="button" class="chip chip--small text-copy-medium-regular-tight" data-chip="subscription">
-                <span class="material-symbols-outlined chip__icon chip__icon--outline" aria-hidden="true">update</span>
-                <span class="chip__label">Subscription</span>
-              </button>
-              <a class="booking-link text-button text-button--small text-button--primary text-button--underlined text-copy-small-heavy-tight" href="#">
-                <span class="text-button__label">View / edit my booking</span>
-              </a>
+              <ox-chip size="small" icon="directions_car" filled selected data-chip="cars">Cars</ox-chip>
+              <ox-chip size="small" icon="local_shipping" filled data-chip="trucks">Trucks</ox-chip>
+              <ox-chip size="small" icon="update" data-chip="subscription">Subscription</ox-chip>
+              <ox-text-button kind="primary" size="small" underlined href="#" class="booking-link">View / edit my booking</ox-text-button>
             </div>
 
             <form class="search-grid" id="homeSearchForm" action="./offer-list.html" method="get">
@@ -82,14 +45,9 @@
                 </span>
               </label>
 
-              <a class="corp-link text-button text-button--small text-button--primary text-button--underlined text-copy-small-heavy-tight" href="#">
-                <span class="text-button__label">Apply corporate rate</span>
-              </a>
+              <ox-text-button kind="primary" size="small" underlined href="#" class="corp-link">Apply corporate rate</ox-text-button>
 
-              <button type="button" class="secondary-button search-return-location text-button text-button--large text-button--secondary text-copy-large-regular text-button--with-leading-icon">
-                <span class="material-symbols-outlined text-button__icon--leading" aria-hidden="true">add</span>
-                <span class="text-button__label">Different return location</span>
-              </button>
+              <ox-text-button kind="secondary" size="large" icon="add" class="secondary-button search-return-location">Different return location</ox-text-button>
 
               <label class="field">
                 <span class="field-label text-copy-small-heavy">Pickup date</span>
@@ -113,12 +71,8 @@
                 </span>
               </label>
 
-              <button id="showCarsButton" class="button button--large button--brand text-copy-large-heavy-tight" type="submit">
-                <span class="button__label">Show cars</span>
-              </button>
-              <a class="booking-link booking-link-mobile text-button text-button--small text-button--primary text-button--underlined text-copy-small-heavy-tight" href="#">
-                <span class="text-button__label">View / edit my booking</span>
-              </a>
+              <ox-button id="showCarsButton" kind="brand" size="large" href="./offer-list.html">Show cars</ox-button>
+              <ox-text-button kind="primary" size="small" underlined href="#" class="booking-link booking-link-mobile">View / edit my booking</ox-text-button>
             </form>
           </section>
         </div>
@@ -161,7 +115,7 @@
           <div class="promo-card-content">
             <h3 class="text-title-large-heavy-caps">SIXT ONE: Turn Rentals Into Rewards</h3>
             <p class="text-copy-large-regular">Join SIXT ONE now to unlock savings and exclusive rewards!</p>
-            <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Learn more</span></a>
+            <ox-button kind="primary" size="small" variant="outlined" href="#">Learn more</ox-button>
           </div>
         </article>
 
@@ -169,7 +123,7 @@
           <div class="promo-card-content">
             <h3 class="text-title-medium-heavy-caps">Start Your Week in Style</h3>
             <p class="text-copy-large-regular">Save on week start rentals.</p>
-            <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Book now</span></a>
+            <ox-button kind="primary" size="small" variant="outlined" href="#">Book now</ox-button>
           </div>
         </article>
 
@@ -177,7 +131,7 @@
           <div class="promo-card-content">
             <h3 class="text-title-medium-heavy-caps">Save on Luxury Vehicles</h3>
             <p class="text-copy-large-regular">Book now and drive first class.</p>
-            <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Book now</span></a>
+            <ox-button kind="primary" size="small" variant="outlined" href="#">Book now</ox-button>
           </div>
         </article>
 
@@ -185,7 +139,7 @@
           <div class="promo-card-content">
             <h3 class="text-title-medium-heavy-caps">Book and Manage Your Rentals in One Place</h3>
             <p class="text-copy-large-regular">Get the most out of SIXT in our app.</p>
-            <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Download the SIXT APP</span></a>
+            <ox-button kind="primary" size="small" variant="outlined" href="#">Download the SIXT APP</ox-button>
           </div>
         </article>
 
@@ -193,7 +147,7 @@
           <div class="promo-card-content">
             <h3 class="text-title-medium-heavy-caps">Business Travel in Style</h3>
             <p class="text-copy-large-regular">Become a corporate customer and enjoy exclusive rental car benefits.</p>
-            <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Register now</span></a>
+            <ox-button kind="primary" size="small" variant="outlined" href="#">Register now</ox-button>
           </div>
         </article>
       </div>
@@ -202,292 +156,168 @@
     <section class="placeholder-section dark offers-carousel-section" aria-label="Offers placeholder" data-p100-theme="option-light">
       <div class="layout-shell placeholder-shell offers-carousel-shell">
         <h2 class="text-display-medium-heavy-caps">The perfect car for your next trip from Munich Airport</h2>
-        <div class="carousel" data-offers-carousel>
-          <div class="carousel__viewport">
-            <div class="carousel__track">
-              <article class="offer-carousel-card">
-                <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-5d-grey-2024.png" alt="VW Golf">
-                <div class="offer-carousel-content">
-                  <div class="offer-carousel-top">
-                    <p class="offer-carousel-title text-title-small-heavy-caps">VW Golf <span class="text-copy-medium-regular">or similar</span></p>
-                    <p class="offer-carousel-subtitle text-copy-medium-regular">Compact Sedan Manual</p>
-                  </div>
-                  <div class="offer-carousel-bottom">
-                    <p class="price price--large price--heavy">
-                      <span class="price__prefix text-copy-medium-heavy-tight">from</span>
-                      <span class="price__currency text-copy-medium-heavy-tight">$</span>
-                      <span class="price__integer text-title-small-heavy">71</span>
-                      <span class="price__decimal text-copy-medium-heavy-tight">.27</span>
-                      <span class="price__suffix text-copy-medium-heavy-tight">/ day</span>
-                    </p>
-                    <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Book now</span></a>
-                  </div>
-                </div>
-              </article>
-              <article class="offer-carousel-card">
-                <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-t-roc-suv-4d-white-2022-JV.png" alt="VW T-Roc">
-                <div class="offer-carousel-content">
-                  <div class="offer-carousel-top">
-                    <p class="offer-carousel-title text-title-small-heavy-caps">VW T-Roc <span class="text-copy-medium-regular">or similar</span></p>
-                    <p class="offer-carousel-subtitle text-copy-medium-regular">Compact SUV Manual</p>
-                  </div>
-                  <div class="offer-carousel-bottom">
-                    <p class="price price--large price--heavy">
-                      <span class="price__prefix text-copy-medium-heavy-tight">from</span>
-                      <span class="price__currency text-copy-medium-heavy-tight">$</span>
-                      <span class="price__integer text-title-small-heavy">75</span>
-                      <span class="price__decimal text-copy-medium-heavy-tight">.47</span>
-                      <span class="price__suffix text-copy-medium-heavy-tight">/ day</span>
-                    </p>
-                    <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Book now</span></a>
-                  </div>
-                </div>
-              </article>
-              <article class="offer-carousel-card">
-                <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-variant-stw-4d-grey-2022.png" alt="VW Golf Variant">
-                <div class="offer-carousel-content">
-                  <div class="offer-carousel-top">
-                    <p class="offer-carousel-title text-title-small-heavy-caps">VW Golf Variant <span class="text-copy-medium-regular">or similar</span></p>
-                    <p class="offer-carousel-subtitle text-copy-medium-regular">Compact Wagon Manual</p>
-                  </div>
-                  <div class="offer-carousel-bottom">
-                    <p class="price price--large price--heavy">
-                      <span class="price__prefix text-copy-medium-heavy-tight">from</span>
-                      <span class="price__currency text-copy-medium-heavy-tight">$</span>
-                      <span class="price__integer text-title-small-heavy">77</span>
-                      <span class="price__decimal text-copy-medium-heavy-tight">.03</span>
-                      <span class="price__suffix text-copy-medium-heavy-tight">/ day</span>
-                    </p>
-                    <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Book now</span></a>
-                  </div>
-                </div>
-              </article>
-              <article class="offer-carousel-card">
-                <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-t-roc-convertible-white-open-2023.png" alt="VW T-Roc Cabriolet">
-                <div class="offer-carousel-content">
-                  <div class="offer-carousel-top">
-                    <p class="offer-carousel-title text-title-small-heavy-caps">VW T-Roc Cabriolet <span class="text-copy-medium-regular">or similar</span></p>
-                    <p class="offer-carousel-subtitle text-copy-medium-regular">Compact Convertible Manual</p>
-                  </div>
-                  <div class="offer-carousel-bottom">
-                    <p class="price price--large price--heavy">
-                      <span class="price__prefix text-copy-medium-heavy-tight">from</span>
-                      <span class="price__currency text-copy-medium-heavy-tight">$</span>
-                      <span class="price__integer text-title-small-heavy">80</span>
-                      <span class="price__decimal text-copy-medium-heavy-tight">.44</span>
-                      <span class="price__suffix text-copy-medium-heavy-tight">/ day</span>
-                    </p>
-                    <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Book now</span></a>
-                  </div>
-                </div>
-              </article>
-              <article class="offer-carousel-card">
-                <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-2-active-tourer-van-4d-black-2022-JV.png" alt="BMW 2 Series Active Tourer">
-                <div class="offer-carousel-content">
-                  <div class="offer-carousel-top">
-                    <p class="offer-carousel-title text-title-small-heavy-caps">BMW 2 Series Active Tourer <span class="text-copy-medium-regular">or similar</span></p>
-                    <p class="offer-carousel-subtitle text-copy-medium-regular">Compact Elite Van Automatic</p>
-                  </div>
-                  <div class="offer-carousel-bottom">
-                    <p class="price price--large price--heavy">
-                      <span class="price__prefix text-copy-medium-heavy-tight">from</span>
-                      <span class="price__currency text-copy-medium-heavy-tight">$</span>
-                      <span class="price__integer text-title-small-heavy">95</span>
-                      <span class="price__decimal text-copy-medium-heavy-tight">.64</span>
-                      <span class="price__suffix text-copy-medium-heavy-tight">/ day</span>
-                    </p>
-                    <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Book now</span></a>
-                  </div>
-                </div>
-              </article>
-              <article class="offer-carousel-card">
-                <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-4-2d-coupe-grey-2021.png" alt="BMW 4 Series Coupe">
-                <div class="offer-carousel-content">
-                  <div class="offer-carousel-top">
-                    <p class="offer-carousel-title text-title-small-heavy-caps">BMW 4 Series Coupe <span class="text-copy-medium-regular">or similar</span></p>
-                    <p class="offer-carousel-subtitle text-copy-medium-regular">Full-size Elite Coupe Automatic</p>
-                  </div>
-                  <div class="offer-carousel-bottom">
-                    <p class="price price--large price--heavy">
-                      <span class="price__prefix text-copy-medium-heavy-tight">from</span>
-                      <span class="price__currency text-copy-medium-heavy-tight">$</span>
-                      <span class="price__integer text-title-small-heavy">130</span>
-                      <span class="price__decimal text-copy-medium-heavy-tight">.22</span>
-                      <span class="price__suffix text-copy-medium-heavy-tight">/ day</span>
-                    </p>
-                    <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Book now</span></a>
-                  </div>
-                </div>
-              </article>
+        <ox-carousel class="offers-carousel" cards-per-view="1" cards-per-view-md="2" prev-label="Previous offer" next-label="Next offer" dot-label="Go to offer {n}">
+          <article class="offer-carousel-card">
+            <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-5d-grey-2024.png" alt="VW Golf">
+            <div class="offer-carousel-content">
+              <div class="offer-carousel-top">
+                <p class="offer-carousel-title text-title-small-heavy-caps">VW Golf <span class="text-copy-medium-regular">or similar</span></p>
+                <p class="offer-carousel-subtitle text-copy-medium-regular">Compact Sedan Manual</p>
+              </div>
+              <div class="offer-carousel-bottom">
+                <ox-price kind="primary" size="large" prefix="from" currency="$" integer="71" decimal=".27" suffix="/ day"></ox-price>
+                <ox-button kind="primary" size="small" variant="outlined" href="#">Book now</ox-button>
+              </div>
             </div>
-            <div class="carousel__arrows">
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous offer">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
-              </button>
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next offer">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
-              </button>
+          </article>
+          <article class="offer-carousel-card">
+            <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-t-roc-suv-4d-white-2022-JV.png" alt="VW T-Roc">
+            <div class="offer-carousel-content">
+              <div class="offer-carousel-top">
+                <p class="offer-carousel-title text-title-small-heavy-caps">VW T-Roc <span class="text-copy-medium-regular">or similar</span></p>
+                <p class="offer-carousel-subtitle text-copy-medium-regular">Compact SUV Manual</p>
+              </div>
+              <div class="offer-carousel-bottom">
+                <ox-price kind="primary" size="large" prefix="from" currency="$" integer="75" decimal=".47" suffix="/ day"></ox-price>
+                <ox-button kind="primary" size="small" variant="outlined" href="#">Book now</ox-button>
+              </div>
             </div>
-          </div>
-          <div class="carousel__controls">
-            <div class="carousel__dots">
-              <button type="button" class="carousel__dot is-active" data-carousel-dot="0" aria-label="Go to offer 1"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="1" aria-label="Go to offer 2"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="2" aria-label="Go to offer 3"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="3" aria-label="Go to offer 4"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="4" aria-label="Go to offer 5"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="5" aria-label="Go to offer 6"></button>
+          </article>
+          <article class="offer-carousel-card">
+            <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-variant-stw-4d-grey-2022.png" alt="VW Golf Variant">
+            <div class="offer-carousel-content">
+              <div class="offer-carousel-top">
+                <p class="offer-carousel-title text-title-small-heavy-caps">VW Golf Variant <span class="text-copy-medium-regular">or similar</span></p>
+                <p class="offer-carousel-subtitle text-copy-medium-regular">Compact Wagon Manual</p>
+              </div>
+              <div class="offer-carousel-bottom">
+                <ox-price kind="primary" size="large" prefix="from" currency="$" integer="77" decimal=".03" suffix="/ day"></ox-price>
+                <ox-button kind="primary" size="small" variant="outlined" href="#">Book now</ox-button>
+              </div>
             </div>
-            <div class="carousel__arrows-row">
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous offer">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
-              </button>
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next offer">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
-              </button>
+          </article>
+          <article class="offer-carousel-card">
+            <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-t-roc-convertible-white-open-2023.png" alt="VW T-Roc Cabriolet">
+            <div class="offer-carousel-content">
+              <div class="offer-carousel-top">
+                <p class="offer-carousel-title text-title-small-heavy-caps">VW T-Roc Cabriolet <span class="text-copy-medium-regular">or similar</span></p>
+                <p class="offer-carousel-subtitle text-copy-medium-regular">Compact Convertible Manual</p>
+              </div>
+              <div class="offer-carousel-bottom">
+                <ox-price kind="primary" size="large" prefix="from" currency="$" integer="80" decimal=".44" suffix="/ day"></ox-price>
+                <ox-button kind="primary" size="small" variant="outlined" href="#">Book now</ox-button>
+              </div>
             </div>
-          </div>
-          <p class="offers-carousel-disclaimer text-copy-small-regular">*The prices were calculated for a prepaid rental at Munich Airport based on the provided search parameters. Our prices are dynamic, fluctuate daily and this offer is not guaranteed.</p>
-        </div>
+          </article>
+          <article class="offer-carousel-card">
+            <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-2-active-tourer-van-4d-black-2022-JV.png" alt="BMW 2 Series Active Tourer">
+            <div class="offer-carousel-content">
+              <div class="offer-carousel-top">
+                <p class="offer-carousel-title text-title-small-heavy-caps">BMW 2 Series Active Tourer <span class="text-copy-medium-regular">or similar</span></p>
+                <p class="offer-carousel-subtitle text-copy-medium-regular">Compact Elite Van Automatic</p>
+              </div>
+              <div class="offer-carousel-bottom">
+                <ox-price kind="primary" size="large" prefix="from" currency="$" integer="95" decimal=".64" suffix="/ day"></ox-price>
+                <ox-button kind="primary" size="small" variant="outlined" href="#">Book now</ox-button>
+              </div>
+            </div>
+          </article>
+          <article class="offer-carousel-card">
+            <img src="https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-4-2d-coupe-grey-2021.png" alt="BMW 4 Series Coupe">
+            <div class="offer-carousel-content">
+              <div class="offer-carousel-top">
+                <p class="offer-carousel-title text-title-small-heavy-caps">BMW 4 Series Coupe <span class="text-copy-medium-regular">or similar</span></p>
+                <p class="offer-carousel-subtitle text-copy-medium-regular">Full-size Elite Coupe Automatic</p>
+              </div>
+              <div class="offer-carousel-bottom">
+                <ox-price kind="primary" size="large" prefix="from" currency="$" integer="130" decimal=".22" suffix="/ day"></ox-price>
+                <ox-button kind="primary" size="small" variant="outlined" href="#">Book now</ox-button>
+              </div>
+            </div>
+          </article>
+        </ox-carousel>
+        <p class="offers-carousel-disclaimer text-copy-small-regular">*The prices were calculated for a prepaid rental at Munich Airport based on the provided search parameters. Our prices are dynamic, fluctuate daily and this offer is not guaranteed.</p>
       </div>
     </section>
 
     <section class="placeholder-section more-sixt-section" aria-label="More SIXT">
       <div class="layout-shell placeholder-shell more-sixt-shell">
         <h2 class="text-display-medium-heavy-caps">More SIXT</h2>
-        <div class="carousel more-sixt-carousel" data-more-sixt-carousel>
-          <div class="carousel__viewport">
-            <div class="carousel__track more-sixt-carousel-track">
-              <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/421f0424-a73a-4c84-a078-02627d2c2aba.png')">
-                <div class="more-sixt-card-content">
-                  <p class="more-sixt-card-title text-title-medium-heavy-caps">Faster Bookings. Instant Rewards.</p>
-                  <p class="more-sixt-card-subtitle text-copy-large-regular">Earn, skip the counter, redeem - all in one app.</p>
-                  <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Get the SIXT App</span></a>
-                </div>
-              </article>
-              <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/e6ef81b3-f070-4729-9da8-868feae7bd5b.png')">
-                <div class="more-sixt-card-content">
-                  <p class="more-sixt-card-title text-title-medium-heavy-caps">SIXT ONE. Loyalty Rewarded.</p>
-                  <p class="more-sixt-card-subtitle text-copy-large-regular">You're ONE membership away from discounts and priority service.</p>
-                  <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Join for free</span></a>
-                </div>
-              </article>
-              <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/81451aba-068f-4d67-984f-a215847520f9.jpg')">
-                <div class="more-sixt-card-content">
-                  <p class="more-sixt-card-title text-title-medium-heavy-caps">SIXT Business</p>
-                  <p class="more-sixt-card-subtitle text-copy-large-regular">Business travel and fleet solutions for all businesses.</p>
-                  <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Register now</span></a>
-                </div>
-              </article>
-              <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/d684ac6a-79d7-4971-99c2-550b5e82c091.jpg')">
-                <div class="more-sixt-card-content">
-                  <p class="more-sixt-card-title text-title-medium-heavy-caps">SIXT+ Car Subscription</p>
-                  <p class="more-sixt-card-subtitle text-copy-large-regular">The better way of owning a car.</p>
-                  <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Learn more</span></a>
-                </div>
-              </article>
-              <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/16780f8c-3337-4ffc-afd1-89866775e759.jpg')">
-                <div class="more-sixt-card-content">
-                  <p class="more-sixt-card-title text-title-medium-heavy-caps">SIXT Ride</p>
-                  <p class="more-sixt-card-subtitle text-copy-large-regular">Sit back with your personal chauffeur.</p>
-                  <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Learn more</span></a>
-                </div>
-              </article>
-              <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/88421872-45ef-4b07-aa33-f901b604086e.png')">
-                <div class="more-sixt-card-content">
-                  <p class="more-sixt-card-title text-title-medium-heavy-caps">SIXT Share</p>
-                  <p class="more-sixt-card-subtitle text-copy-large-regular">On-the-go flexibility with premium car sharing.</p>
-                  <a href="#" class="button button--small button--primary button--outlined text-copy-medium-heavy-tight"><span class="button__label">Learn more</span></a>
-                </div>
-              </article>
+        <ox-carousel class="more-sixt-carousel" cards-per-view="1" cards-per-view-sm="2" cards-per-view-md="3" gap="2xs" prev-label="Previous More SIXT card" next-label="Next More SIXT card" dot-label="Go to More SIXT card {n}">
+          <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/421f0424-a73a-4c84-a078-02627d2c2aba.png')">
+            <div class="more-sixt-card-content">
+              <p class="more-sixt-card-title text-title-medium-heavy-caps">Faster Bookings. Instant Rewards.</p>
+              <p class="more-sixt-card-subtitle text-copy-large-regular">Earn, skip the counter, redeem - all in one app.</p>
+              <ox-button kind="primary" size="small" variant="outlined" href="#">Get the SIXT App</ox-button>
             </div>
-            <div class="carousel__arrows">
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous More SIXT card">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
-              </button>
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next More SIXT card">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
-              </button>
+          </article>
+          <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/e6ef81b3-f070-4729-9da8-868feae7bd5b.png')">
+            <div class="more-sixt-card-content">
+              <p class="more-sixt-card-title text-title-medium-heavy-caps">SIXT ONE. Loyalty Rewarded.</p>
+              <p class="more-sixt-card-subtitle text-copy-large-regular">You're ONE membership away from discounts and priority service.</p>
+              <ox-button kind="primary" size="small" variant="outlined" href="#">Join for free</ox-button>
             </div>
-          </div>
-          <div class="carousel__controls">
-            <div class="carousel__dots">
-              <button type="button" class="carousel__dot is-active" data-carousel-dot="0" aria-label="Go to More SIXT card 1"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="1" aria-label="Go to More SIXT card 2"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="2" aria-label="Go to More SIXT card 3"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="3" aria-label="Go to More SIXT card 4"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="4" aria-label="Go to More SIXT card 5"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="5" aria-label="Go to More SIXT card 6"></button>
+          </article>
+          <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/81451aba-068f-4d67-984f-a215847520f9.jpg')">
+            <div class="more-sixt-card-content">
+              <p class="more-sixt-card-title text-title-medium-heavy-caps">SIXT Business</p>
+              <p class="more-sixt-card-subtitle text-copy-large-regular">Business travel and fleet solutions for all businesses.</p>
+              <ox-button kind="primary" size="small" variant="outlined" href="#">Register now</ox-button>
             </div>
-            <div class="carousel__arrows-row">
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous More SIXT card">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
-              </button>
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next More SIXT card">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
-              </button>
+          </article>
+          <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/d684ac6a-79d7-4971-99c2-550b5e82c091.jpg')">
+            <div class="more-sixt-card-content">
+              <p class="more-sixt-card-title text-title-medium-heavy-caps">SIXT+ Car Subscription</p>
+              <p class="more-sixt-card-subtitle text-copy-large-regular">The better way of owning a car.</p>
+              <ox-button kind="primary" size="small" variant="outlined" href="#">Learn more</ox-button>
             </div>
-          </div>
-        </div>
+          </article>
+          <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/16780f8c-3337-4ffc-afd1-89866775e759.jpg')">
+            <div class="more-sixt-card-content">
+              <p class="more-sixt-card-title text-title-medium-heavy-caps">SIXT Ride</p>
+              <p class="more-sixt-card-subtitle text-copy-large-regular">Sit back with your personal chauffeur.</p>
+              <ox-button kind="primary" size="small" variant="outlined" href="#">Learn more</ox-button>
+            </div>
+          </article>
+          <article class="more-sixt-card" data-p100-theme="option-light" style="background-image:url('https://img.sixt.com/600/88421872-45ef-4b07-aa33-f901b604086e.png')">
+            <div class="more-sixt-card-content">
+              <p class="more-sixt-card-title text-title-medium-heavy-caps">SIXT Share</p>
+              <p class="more-sixt-card-subtitle text-copy-large-regular">On-the-go flexibility with premium car sharing.</p>
+              <ox-button kind="primary" size="small" variant="outlined" href="#">Learn more</ox-button>
+            </div>
+          </article>
+        </ox-carousel>
       </div>
     </section>
 
     <section class="placeholder-section dark testimonial-section" aria-label="Testimonials" data-p100-theme="option-light">
       <div class="layout-shell placeholder-shell testimonial-shell">
-        <div class="carousel testimonial-carousel" data-testimonial-carousel>
-          <div class="carousel__viewport">
-            <div class="carousel__track">
-              <article class="testimonial-card">
-                <blockquote class="testimonial-quote">
-                  <p class="text-display-small-regular">"SIXT is the only rental company I've never had an issue with. Seriously... they've turned me into a lifelong client."</p>
-                  <cite class="text-copy-medium-heavy">- P., Los Angeles</cite>
-                </blockquote>
-              </article>
-              <article class="testimonial-card">
-                <blockquote class="testimonial-quote">
-                  <p class="text-display-small-regular">"Seamless experience online, car handover and car return. The staff in the Munich branch are very friendly and competent."</p>
-                  <cite class="text-copy-medium-heavy">- Mahmoud F., Munich</cite>
-                </blockquote>
-              </article>
-              <article class="testimonial-card">
-                <blockquote class="testimonial-quote">
-                  <p class="text-display-small-regular">"One of the best hire car pick up experiences I've had. Great service and a good car."</p>
-                  <cite class="text-copy-medium-heavy">- Dave W., Paris</cite>
-                </blockquote>
-              </article>
-              <article class="testimonial-card">
-                <blockquote class="testimonial-quote">
-                  <p class="text-display-small-regular">"Very easy rental experience...so important when driving in another country. Car was great and no hidden fees."</p>
-                  <cite class="text-copy-medium-heavy">- Lisa R., Rome</cite>
-                </blockquote>
-              </article>
-            </div>
-            <div class="carousel__arrows">
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous testimonial">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
-              </button>
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next testimonial">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
-              </button>
-            </div>
-          </div>
-          <div class="carousel__controls">
-            <div class="carousel__dots">
-              <button type="button" class="carousel__dot is-active" data-carousel-dot="0" aria-label="Go to testimonial 1"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="1" aria-label="Go to testimonial 2"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="2" aria-label="Go to testimonial 3"></button>
-              <button type="button" class="carousel__dot" data-carousel-dot="3" aria-label="Go to testimonial 4"></button>
-            </div>
-            <div class="carousel__arrows-row">
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-prev aria-label="Previous testimonial">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_left</span>
-              </button>
-              <button type="button" class="carousel__arrow floating-button floating-button--medium floating-button--icon-only" data-carousel-next aria-label="Next testimonial">
-                <span class="material-symbols-outlined floating-button__icon" aria-hidden="true">chevron_right</span>
-              </button>
-            </div>
-          </div>
-        </div>
+        <ox-carousel class="testimonial-carousel" cards-per-view="1" gap="0" prev-label="Previous testimonial" next-label="Next testimonial" dot-label="Go to testimonial {n}">
+          <article class="testimonial-card">
+            <blockquote class="testimonial-quote">
+              <p class="text-display-small-regular">"SIXT is the only rental company I've never had an issue with. Seriously... they've turned me into a lifelong client."</p>
+              <cite class="text-copy-medium-heavy">- P., Los Angeles</cite>
+            </blockquote>
+          </article>
+          <article class="testimonial-card">
+            <blockquote class="testimonial-quote">
+              <p class="text-display-small-regular">"Seamless experience online, car handover and car return. The staff in the Munich branch are very friendly and competent."</p>
+              <cite class="text-copy-medium-heavy">- Mahmoud F., Munich</cite>
+            </blockquote>
+          </article>
+          <article class="testimonial-card">
+            <blockquote class="testimonial-quote">
+              <p class="text-display-small-regular">"One of the best hire car pick up experiences I've had. Great service and a good car."</p>
+              <cite class="text-copy-medium-heavy">- Dave W., Paris</cite>
+            </blockquote>
+          </article>
+          <article class="testimonial-card">
+            <blockquote class="testimonial-quote">
+              <p class="text-display-small-regular">"Very easy rental experience...so important when driving in another country. Car was great and no hidden fees."</p>
+              <cite class="text-copy-medium-heavy">- Lisa R., Rome</cite>
+            </blockquote>
+          </article>
+        </ox-carousel>
       </div>
     </section>
 
@@ -499,142 +329,132 @@
         </div>
           <div class="seo-links-content text-copy-medium-heavy-tight">
           <div class="seo-links-chip-row" role="tablist" aria-label="SEO categories">
-            <button type="button" class="chip chip--small is-active text-copy-medium-regular-tight" role="tab" aria-selected="true" aria-controls="seo-panel-airports" id="seo-tab-airports" data-seo-tab="airports">
-              <span class="chip__label">US Airport locations</span>
-            </button>
-            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-us-cities" id="seo-tab-us-cities" data-seo-tab="us-cities">
-              <span class="chip__label">US cities</span>
-            </button>
-            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-worldwide" id="seo-tab-worldwide" data-seo-tab="worldwide">
-              <span class="chip__label">Worldwide</span>
-            </button>
-            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-most-booked" id="seo-tab-most-booked" data-seo-tab="most-booked">
-              <span class="chip__label">Most booked outside US</span>
-            </button>
-            <button type="button" class="chip chip--small text-copy-medium-regular-tight" role="tab" aria-selected="false" aria-controls="seo-panel-fleet" id="seo-tab-fleet" data-seo-tab="fleet">
-              <span class="chip__label">Fleet &amp; services</span>
-            </button>
+            <ox-chip size="small" selected role="tab" aria-selected="true" aria-controls="seo-panel-airports" id="seo-tab-airports" data-seo-tab="airports">US Airport locations</ox-chip>
+            <ox-chip size="small" role="tab" aria-selected="false" aria-controls="seo-panel-us-cities" id="seo-tab-us-cities" data-seo-tab="us-cities">US cities</ox-chip>
+            <ox-chip size="small" role="tab" aria-selected="false" aria-controls="seo-panel-worldwide" id="seo-tab-worldwide" data-seo-tab="worldwide">Worldwide</ox-chip>
+            <ox-chip size="small" role="tab" aria-selected="false" aria-controls="seo-panel-most-booked" id="seo-tab-most-booked" data-seo-tab="most-booked">Most booked outside US</ox-chip>
+            <ox-chip size="small" role="tab" aria-selected="false" aria-controls="seo-panel-fleet" id="seo-tab-fleet" data-seo-tab="fleet">Fleet &amp; services</ox-chip>
           </div>
 
           <div class="seo-links-panel is-active" role="tabpanel" id="seo-panel-airports" aria-labelledby="seo-tab-airports" data-seo-panel="airports">
             <div class="seo-links-grid">
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Atlanta Airport (ATL)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Baltimore/Washington Airport (BWI)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Boston Airport (BOS)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Charlotte Airport (CLT)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Chicago Airport (ORD)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Dallas/Fort Worth Airport (DFW)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Denver Airport (DEN)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Fort Lauderdale Airport (FLL)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Fort Myers Airport (RSW)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Honolulu Airport (HNL)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Houston Airport (IAH)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Jacksonville Airport (JAX)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Las Vegas Airport (LAS)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Los Angeles Airport (LAX)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Miami Airport (MIA)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">New York Airport (JFK)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Newark Airport (EWR)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Orlando Airport (MCO)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Phoenix Airport (PHX)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Portland Airport (PDX)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">San Diego Airport (SAN)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">San Francisco Airport (SFO)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Seattle Airport (SEA)</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Tampa Airport (TPA)</a>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Atlanta Airport (ATL)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Baltimore/Washington Airport (BWI)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Boston Airport (BOS)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Charlotte Airport (CLT)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Chicago Airport (ORD)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Dallas/Fort Worth Airport (DFW)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Denver Airport (DEN)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Fort Lauderdale Airport (FLL)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Fort Myers Airport (RSW)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Honolulu Airport (HNL)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Houston Airport (IAH)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Jacksonville Airport (JAX)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Las Vegas Airport (LAS)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Los Angeles Airport (LAX)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Miami Airport (MIA)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">New York Airport (JFK)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Newark Airport (EWR)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Orlando Airport (MCO)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Phoenix Airport (PHX)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Portland Airport (PDX)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">San Diego Airport (SAN)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">San Francisco Airport (SFO)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Seattle Airport (SEA)</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Tampa Airport (TPA)</ox-link>
             </div>
-            <a href="#" class="seo-link seo-link-cta link link--large link--primary link--underlined text-copy-medium-heavy">Airport Car Rental Worldwide</a>
+            <ox-link href="#" kind="primary" underlined class="seo-link seo-link-cta">Airport Car Rental Worldwide</ox-link>
           </div>
 
           <div class="seo-links-panel" role="tabpanel" id="seo-panel-us-cities" aria-labelledby="seo-tab-us-cities" data-seo-panel="us-cities" hidden>
             <div class="seo-links-grid">
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Atlanta</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Boston</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Chicago</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Dallas</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Denver</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Fort Lauderdale</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Honolulu</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Houston</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Las Vegas</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Los Angeles</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Maui</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Miami</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">New York City</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Orlando</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Philadelphia</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Phoenix</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Portland</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">San Diego</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">San Francisco</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Seattle</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Tampa</a>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Atlanta</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Boston</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Chicago</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Dallas</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Denver</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Fort Lauderdale</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Honolulu</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Houston</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Las Vegas</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Los Angeles</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Maui</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Miami</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">New York City</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Orlando</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Philadelphia</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Phoenix</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Portland</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">San Diego</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">San Francisco</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Seattle</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Tampa</ox-link>
             </div>
-            <a href="#" class="seo-link seo-link-cta link link--large link--primary link--underlined text-copy-medium-heavy">See all US locations</a>
+            <ox-link href="#" kind="primary" underlined class="seo-link seo-link-cta">See all US locations</ox-link>
           </div>
 
           <div class="seo-links-panel" role="tabpanel" id="seo-panel-worldwide" aria-labelledby="seo-tab-worldwide" data-seo-panel="worldwide" hidden>
             <div class="seo-links-grid">
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Amsterdam</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Barcelona</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Dubai</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Dublin</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Edinburgh</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">France</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Germany</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Italy</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">London</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Madrid</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Malaga</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Munich</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Nice</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Palma de Mallorca</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Paris</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Portugal</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Reykjavik</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Rome</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Scotland</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Switzerland</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Zagreb</a>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Amsterdam</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Barcelona</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Dubai</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Dublin</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Edinburgh</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">France</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Germany</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Italy</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">London</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Madrid</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Malaga</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Munich</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Nice</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Palma de Mallorca</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Paris</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Portugal</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Reykjavik</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Rome</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Scotland</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Switzerland</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Zagreb</ox-link>
             </div>
-            <a href="#" class="seo-link seo-link-cta link link--large link--primary link--underlined text-copy-medium-heavy">All locations worldwide</a>
+            <ox-link href="#" kind="primary" underlined class="seo-link seo-link-cta">All locations worldwide</ox-link>
           </div>
 
           <div class="seo-links-panel" role="tabpanel" id="seo-panel-most-booked" aria-labelledby="seo-tab-most-booked" data-seo-panel="most-booked" hidden>
             <div class="seo-links-grid">
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Germany - Frankfurt Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Germany - Munich Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Cyprus - Larnaca Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Kosovo - Pristina Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Greece - Athens International Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Italy - Bergamo Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Greece - Crete Heraklion Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Greece - Thessaloniki Port</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Portugal - Lisbon Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Italy - Milan Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">France - Paris CDG Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">France - Nice Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">UK - London Heathrow Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">UAE - Dubai International Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Croatia - Zagreb Airport</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Switzerland - Geneva Airport</a>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Germany - Frankfurt Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Germany - Munich Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Cyprus - Larnaca Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Kosovo - Pristina Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Greece - Athens International Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Italy - Bergamo Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Greece - Crete Heraklion Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Greece - Thessaloniki Port</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Portugal - Lisbon Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Italy - Milan Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">France - Paris CDG Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">France - Nice Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">UK - London Heathrow Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">UAE - Dubai International Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Croatia - Zagreb Airport</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Switzerland - Geneva Airport</ox-link>
             </div>
           </div>
 
           <div class="seo-links-panel" role="tabpanel" id="seo-panel-fleet" aria-labelledby="seo-tab-fleet" data-seo-panel="fleet" hidden>
             <div class="seo-links-grid">
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Fleet Guide</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Convertible Car Rental</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Luxury Car Rental</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Minivan Rental</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Passenger Van Rental</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">SUV Rental</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Car Rental Coupons</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Car Rental Under 25</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Car Rental without Credit Cards</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Long-Term Car Rental</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">One-Way Car Rental</a>
-              <a href="#" class="seo-link link link--large link--primary text-copy-medium-heavy link--truncate">Car Rental Services</a>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Fleet Guide</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Convertible Car Rental</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Luxury Car Rental</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Minivan Rental</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Passenger Van Rental</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">SUV Rental</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Car Rental Coupons</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Car Rental Under 25</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Car Rental without Credit Cards</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Long-Term Car Rental</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">One-Way Car Rental</ox-link>
+              <ox-link href="#" kind="primary" truncate class="seo-link">Car Rental Services</ox-link>
             </div>
           </div>
         </div>
@@ -649,11 +469,11 @@
           <img src="../assets/logos/sixt_rent_the_car_on_dark.svg" alt="SIXT rent the car">
         </a>
         <div class="home-footer-social" aria-label="Social links">
-          <a href="#" class="home-footer-social-icon icon-button icon-button--large icon-button--primary" aria-label="Instagram">
-            <img class="icon-button__icon" src="../assets/icons/logo_instagram.svg" alt="">
+          <a href="#" class="home-footer-social-icon" aria-label="Instagram">
+            <img src="../assets/icons/logo_instagram.svg" alt="">
           </a>
-          <a href="#" class="home-footer-social-icon icon-button icon-button--large icon-button--primary" aria-label="LinkedIn">
-            <img class="icon-button__icon" src="../assets/icons/logo_linkedin.svg" alt="">
+          <a href="#" class="home-footer-social-icon" aria-label="LinkedIn">
+            <img src="../assets/icons/logo_linkedin.svg" alt="">
           </a>
         </div>
       </div>
@@ -662,33 +482,33 @@
         <section class="home-footer-column" aria-label="Our programs">
           <p class="text-copy-large-heavy-tight">Our programs</p>
           <ul class="text-copy-medium-heavy-tight">
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">SIXT+ Car Subscription</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">SIXT ride</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">Car rental deals</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">SIXT ONE rewards program</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">SIXT app</a></li>
+            <li><ox-link href="#" kind="primary">SIXT+ Car Subscription</ox-link></li>
+            <li><ox-link href="#" kind="primary">SIXT ride</ox-link></li>
+            <li><ox-link href="#" kind="primary">Car rental deals</ox-link></li>
+            <li><ox-link href="#" kind="primary">SIXT ONE rewards program</ox-link></li>
+            <li><ox-link href="#" kind="primary">SIXT app</ox-link></li>
           </ul>
         </section>
 
         <section class="home-footer-column" aria-label="SIXT for business">
           <p class="text-copy-large-heavy-tight">SIXT for business</p>
           <ul class="text-copy-medium-heavy-tight">
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">Register my business</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">Travel agencies</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">Business Car Rental</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">Business car alternatives</a></li>
+            <li><ox-link href="#" kind="primary">Register my business</ox-link></li>
+            <li><ox-link href="#" kind="primary">Travel agencies</ox-link></li>
+            <li><ox-link href="#" kind="primary">Business Car Rental</ox-link></li>
+            <li><ox-link href="#" kind="primary">Business car alternatives</ox-link></li>
           </ul>
         </section>
 
         <section class="home-footer-column" aria-label="About us">
           <p class="text-copy-large-heavy-tight">About us</p>
           <ul class="text-copy-medium-heavy-tight">
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">SIXT group</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">SIXT Magazine</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">SIXT News</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">Investor Relations</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">Careers</a></li>
-            <li><a href="#" class="home-footer-link link link--large link--primary text-copy-medium-heavy">Regine Sixt Children's Aid Foundation</a></li>
+            <li><ox-link href="#" kind="primary">SIXT group</ox-link></li>
+            <li><ox-link href="#" kind="primary">SIXT Magazine</ox-link></li>
+            <li><ox-link href="#" kind="primary">SIXT News</ox-link></li>
+            <li><ox-link href="#" kind="primary">Investor Relations</ox-link></li>
+            <li><ox-link href="#" kind="primary">Careers</ox-link></li>
+            <li><ox-link href="#" kind="primary">Regine Sixt Children's Aid Foundation</ox-link></li>
           </ul>
         </section>
       </div>
@@ -704,23 +524,22 @@
 
       <div class="home-footer-legal" aria-label="Legal links">
         <div class="home-footer-legal-links text-copy-medium-heavy-tight">
-          <a href="#" class="link link--large link--primary text-copy-medium-heavy">Help</a>
-          <a href="#" class="link link--large link--primary text-copy-medium-heavy">Rental information</a>
-          <a href="#" class="link link--large link--primary text-copy-medium-heavy">SIXT for business</a>
-          <a href="#" class="link link--large link--primary text-copy-medium-heavy">SIXT partners</a>
-          <a href="#" class="link link--large link--primary text-copy-medium-heavy">SIXT Magazine</a>
-          <a href="#" class="link link--large link--primary text-copy-medium-heavy">Privacy</a>
-          <a href="#" class="link link--large link--primary text-copy-medium-heavy">Do not share or sell my personal information</a>
-          <a href="#" class="link link--large link--primary text-copy-medium-heavy">Terms &amp; conditions</a>
-          <a href="#" class="link link--large link--primary text-copy-medium-heavy">Customers with disabilities</a>
-          <a href="#" class="link link--large link--primary text-copy-medium-heavy">Cookie-Settings</a>
+          <ox-link href="#" kind="primary">Help</ox-link>
+          <ox-link href="#" kind="primary">Rental information</ox-link>
+          <ox-link href="#" kind="primary">SIXT for business</ox-link>
+          <ox-link href="#" kind="primary">SIXT partners</ox-link>
+          <ox-link href="#" kind="primary">SIXT Magazine</ox-link>
+          <ox-link href="#" kind="primary">Privacy</ox-link>
+          <ox-link href="#" kind="primary">Do not share or sell my personal information</ox-link>
+          <ox-link href="#" kind="primary">Terms &amp; conditions</ox-link>
+          <ox-link href="#" kind="primary">Customers with disabilities</ox-link>
+          <ox-link href="#" kind="primary">Cookie-Settings</ox-link>
         </div>
         <span class="home-footer-copyright text-copy-medium-regular-tight">&copy; Sixt 2026</span>
       </div>
     </div>
   </footer>
 
-  <script src="../scripts/components/carousel.js"></script>
-  <script src="../scripts/pages/home.js"></script>
+  <script type="module" src="../scripts/pages/home.js"></script>
 </body>
 </html>

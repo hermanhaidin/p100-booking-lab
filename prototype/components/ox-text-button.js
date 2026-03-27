@@ -201,7 +201,7 @@ class OXTextButton extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <${tag} class="btn ${typoClass}" ${attrs.join(' ')}>
         ${leadingHtml}
-        <span class="label"><slot></slot></span>
+        <span class="label" part="label"><slot></slot></span>
         ${trailingHtml}
       </${tag}>`;
   }

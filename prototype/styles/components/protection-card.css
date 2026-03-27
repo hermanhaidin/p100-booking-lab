@@ -1,3 +1,5 @@
+/* Migrated to Web Component: prototype/components/ox-protection-card.js */
+
 /* Shared protection-card component API
    - Base card state uses 1px border overlay; selected state switches to 2px.
    - Mobile (`<=899px`) uses accordion details; desktop (`>=900px`) is always expanded.

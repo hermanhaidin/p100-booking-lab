@@ -1,3 +1,5 @@
+/* Migrated to Web Component: prototype/components/ox-list-item.js */
+
 /* Shared list-item component API
    - Structure: .list-item > icon + label + optional trailing icon-button
    - Kinds mirror text-button/icon-button token semantics

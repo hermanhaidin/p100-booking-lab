@@ -1,3 +1,5 @@
+/* Migrated to Web Component: prototype/components/ox-radio-button.js */
+
 /* Shared radio-button primitive
    - Scope: control-only visual/interaction behavior for native radio inputs.
    - Out of scope: labels, cards, and domain-specific layout presets. */

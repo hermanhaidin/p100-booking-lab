@@ -1,3 +1,5 @@
+/* Migrated to Web Component: prototype/components/ox-offer-card.js */
+
 /* Shared offer-card component API
    - Cards present vehicle rental offers after pickup location and dates are selected.
    - Card shell is split into top content, centered media, and bottom content.

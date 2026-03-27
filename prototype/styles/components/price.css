@@ -1,3 +1,5 @@
+/* Migrated to Web Component: prototype/components/ox-price.js */
+
 /* Shared price component API
    - Prices are composable from optional parts: prefix, sign, currency, integer, decimal, suffix.
    - Default market is EN + USD with left currency; use .price--currency-right for regional swaps.

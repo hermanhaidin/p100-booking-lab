@@ -1,3 +1,5 @@
+/* Migrated to Web Component: prototype/components/ox-banner.js */
+
 /* Banner component API
    - Flat grid: icon | body | actions | close — all direct children of .banner.
    - Absent elements collapse their auto track to 0 (column-gap is 0; margins create spacing).

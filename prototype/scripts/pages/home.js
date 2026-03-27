@@ -1,39 +1,5 @@
-(function initHomeCarousels() {
-  const carouselApi = window.P100Carousel;
-  if (!carouselApi) {
-    return;
-  }
-
-  const getMoreSixtCardsPerView = () => {
-    if (window.matchMedia("(min-width: 900px)").matches) {
-      return 3;
-    }
-    if (window.matchMedia("(min-width: 650px)").matches) {
-      return 2;
-    }
-    return 1;
-  };
-
-  const carouselConfigs = [
-    {
-      selector: "[data-offers-carousel]",
-      cardSelector: ".offer-carousel-card",
-      getCardsPerView: () => (window.matchMedia("(min-width: 900px)").matches ? 2 : 1),
-    },
-    {
-      selector: "[data-more-sixt-carousel]",
-      cardSelector: ".more-sixt-card",
-      getCardsPerView: getMoreSixtCardsPerView,
-    },
-    {
-      selector: "[data-testimonial-carousel]",
-      cardSelector: ".testimonial-card",
-      getCardsPerView: () => 1,
-    },
-  ];
-
-  carouselApi.initCarousels(carouselConfigs);
-})();
+/* Home page orchestration
+   - SEO link tab switching (ox-chip selected attribute + panel visibility) */
 
 (function initSeoLinkTabs() {
   const tabButtons = Array.from(document.querySelectorAll("[data-seo-tab]"));
@@ -55,7 +21,7 @@
     tabButtons.forEach((button) => {
       const key = button.dataset.seoTab;
       const isActive = key === activeKey;
-      button.classList.toggle("is-active", isActive);
+      button.toggleAttribute("selected", isActive);
       button.setAttribute("aria-selected", isActive ? "true" : "false");
     });
 

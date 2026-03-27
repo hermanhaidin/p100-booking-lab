@@ -1,3 +1,5 @@
+/* Migrated to Web Component: prototype/components/ox-booking-header.js */
+
 /* Booking header contract.
    Required slots: __shell + __utility-nav.
    Optional slots: __search-row, __title-row.

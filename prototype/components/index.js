@@ -6,6 +6,7 @@ import './ox-booking-footer.js';
 import './ox-booking-header.js';
 import './ox-booking-overview.js';
 import './ox-button.js';
+import './ox-carousel.js';
 import './ox-choice-card.js';
 import './ox-choice-card-group.js';
 import './ox-chip.js';
