@@ -391,7 +391,7 @@ main {
 
 .offers-carousel-disclaimer {
   color: var(--color-content-secondary);
-  margin: 0;
+  margin: var(--spacing-xs) 0 0;
   text-align: center;
 }
 
@@ -411,11 +411,6 @@ main {
   margin: 0 0 var(--spacing-md);
   text-align: center;
 }
-
-.more-sixt-carousel {
-  gap: var(--spacing-md);
-}
-
 
 .more-sixt-card {
   aspect-ratio: 2 / 3;
@@ -645,7 +640,7 @@ main {
 .seo-links-grid {
   display: grid;
   column-gap: var(--spacing-xs);
-  row-gap: var(--spacing-xs);
+  row-gap: var(--spacing-sm);
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -657,7 +652,7 @@ main {
 }
 
 .seo-link-cta {
-  margin-top: var(--spacing-md);
+  margin-top: var(--spacing-lg);
   width: fit-content;
 }
 
@@ -693,11 +688,7 @@ main {
 .home-footer-social {
   align-items: center;
   display: inline-flex;
-  gap: var(--spacing-2xs);
-}
-
-.home-footer-social-icon img {
-  filter: brightness(0) invert(1);
+  gap: var(--spacing-md);
 }
 
 .home-footer-columns {
@@ -710,13 +701,13 @@ main {
 
 .home-footer-column p {
   color: var(--color-content-secondary);
-  margin: 0 0 var(--spacing-xs);
+  margin: 0 0 var(--spacing-sm);
 }
 
 .home-footer-column ul {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -931,6 +922,10 @@ main {
 }
 
 @media (max-width: 649px) {
+  .promo-campaigns {
+    padding-bottom: var(--spacing-xl);
+  }
+
   .promo-card,
   .promo-card-featured {
     aspect-ratio: 3 / 4;

@@ -15,6 +15,13 @@ styles.replaceSync(`
 
   :host([hidden]) { display: none; }
 
+  :host([truncate]) {
+    display: block;
+    overflow-x: clip;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   a {
     color: var(--link-fg);
     cursor: pointer;
@@ -34,12 +41,7 @@ styles.replaceSync(`
   a:visited { color: var(--link-fg); }
 
   :host([truncate]) a {
-    display: block;
-    overflow-x: hidden;
-    overflow-y: visible;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
+    display: inline;
   }
 
   /* Kind tokens */
@@ -64,9 +66,11 @@ styles.replaceSync(`
 
   /* Underline: default no underline at rest, underline on hover */
   :host(:not([underlined])) a { text-decoration: none; }
-  :host(:not([underlined])) a:is(:hover, :active) { text-decoration: underline; }
+  :host(:not([underlined]):hover) a,
+  :host(:not([underlined]):active) a { text-decoration: underline; }
   :host([underlined]) a { text-decoration: underline; }
-  :host([underlined]) a:is(:hover, :active) { text-decoration: none; }
+  :host([underlined]:hover) a,
+  :host([underlined]:active) a { text-decoration: none; }
 
   a:active { opacity: 0.6; }
 

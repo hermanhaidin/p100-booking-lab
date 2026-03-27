@@ -3,7 +3,9 @@
    - on-* variants are foreground colors for filled backgrounds
    - Touch target exceeds icon size; negative margins collapse layout footprint to icon dimensions.
      Small: 16px icon, 32px target, -8px margin. Large: 24px icon, 48px target, -12px margin.
-   API: <ox-icon-button kind="primary" size="large" icon="close" label="Close"></ox-icon-button> */
+   - Custom SVG icons: use icon-src attribute instead of icon for non-Material-Symbols icons.
+   API: <ox-icon-button kind="primary" size="large" icon="close" label="Close"></ox-icon-button>
+        <ox-icon-button icon-src="../assets/icons/logo_instagram.svg" label="Instagram" href="#"></ox-icon-button> */
 
 import { baseStyles } from './shared/base-styles.js';
 import { iconButtonStyles } from './shared/ox-icon-button-styles.js';
@@ -59,6 +61,22 @@ styles.replaceSync(`
     width: var(--icon-button-icon-size);
   }
 
+  img.icon {
+    object-fit: contain;
+  }
+
+  /* Invert dark SVG icons to white on on-* kind backgrounds */
+  :host([kind="on-primary"]) img.icon,
+  :host([kind="on-secondary"]) img.icon,
+  :host([kind="on-brand"]) img.icon,
+  :host([kind="on-info"]) img.icon,
+  :host([kind="on-accent"]) img.icon,
+  :host([kind="on-success"]) img.icon,
+  :host([kind="on-warning"]) img.icon,
+  :host([kind="on-error"]) img.icon {
+    filter: brightness(0) invert(1);
+  }
+
   /* Kind tokens */
   :host([kind="primary"]),
   :host(:not([kind])) { --icon-button-fg: var(--color-content-primary); }
@@ -82,7 +100,7 @@ styles.replaceSync(`
 `);
 
 class OXIconButton extends HTMLElement {
-  static observedAttributes = ['kind', 'size', 'icon', 'label', 'disabled', 'href'];
+  static observedAttributes = ['kind', 'size', 'icon', 'icon-src', 'label', 'disabled', 'href'];
 
   constructor() {
     super();
@@ -100,6 +118,7 @@ class OXIconButton extends HTMLElement {
 
   render() {
     const icon = this.getAttribute('icon') || '';
+    const iconSrc = this.getAttribute('icon-src');
     const label = this.getAttribute('label') || '';
     const href = this.getAttribute('href');
     const disabled = this.hasAttribute('disabled');
@@ -114,9 +133,16 @@ class OXIconButton extends HTMLElement {
       if (disabled) attrs.push('disabled');
     }
 
+    let iconHtml;
+    if (iconSrc) {
+      iconHtml = `<img class="icon icon-btn-icon" src="${iconSrc}" alt="" aria-hidden="true">`;
+    } else {
+      iconHtml = `<span class="icon icon-btn-icon material-symbols-outlined" aria-hidden="true">${icon}</span>`;
+    }
+
     this.shadowRoot.innerHTML = `
       <${tag} class="btn icon-btn" ${attrs.join(' ')}>
-        <span class="icon icon-btn-icon material-symbols-outlined" aria-hidden="true">${icon}</span>
+        ${iconHtml}
       </${tag}>`;
   }
 }
