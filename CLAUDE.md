@@ -247,7 +247,6 @@ Use media queries for layout/composition changes. Do not use them to rebuild typ
   - `prototype/scripts/pages/` — page-level orchestration scripts
   - `prototype/styles/tokens.css` — design tokens
   - `prototype/styles/typography.css` — text utility classes
-  - `prototype/styles/components/` — legacy CSS component contracts (being replaced by Web Components)
   - `prototype/styles/pages/` — page-specific layout CSS
   - `prototype/data/` — content data files (markdown)
   - `prototype/assets/` — images, logos, custom SVGs
@@ -301,8 +300,7 @@ To add a new location:
 3. Add `<script type="module" src="../components/index.js"></script>` for all Web Components
 4. Create page-specific CSS in `prototype/styles/pages/{page-name}.css`
 5. Create page script in `prototype/scripts/pages/{page-name}.js`
-6. Use Web Components — do NOT use old CSS contract classes from `prototype/styles/components/`
-7. Reference `offer-list.html` and `protection.html` as examples of the correct pattern
+6. Reference `offer-list.html` and `protection.html` as examples of the correct pattern
 
 
 ## Migration status
