@@ -103,14 +103,14 @@ All components are registered via `prototype/components/index.js`.
 | `ox-booking-footer` | ox-booking-footer.js | `<ox-booking-footer><ox-link slot="link">Help</ox-link><span slot="copyright">&copy; Sixt 2026</span></ox-booking-footer>` |
 | `ox-booking-header` | ox-booking-header.js | `<ox-booking-header location="Munich Airport" dates="Mar 26 – Mar 30" variant="step" step-title="Protection"></ox-booking-header>` |
 | `ox-booking-overview` | ox-booking-overview.js | `<ox-booking-overview title="Your booking overview:"><ox-list-item icon="check">Item</ox-list-item></ox-booking-overview>` |
-| `ox-button` | ox-button.js | `<ox-button kind="brand" size="large" variant="solid" icon="arrow_forward">Continue</ox-button>` |
+| `ox-button` | ox-button.js | `<ox-button kind="brand" size="large" variant="solid" icon="arrow_forward" href="./next.html">Continue</ox-button>` |
 | `ox-chip` | ox-chip.js | `<ox-chip size="small" icon="tune" preset="dropdown" selected>Filters</ox-chip>` |
 | `ox-choice-card` | ox-choice-card.js | `<ox-choice-card value="best-price" selected>Best price</ox-choice-card>` |
 | `ox-choice-card-group` | ox-choice-card-group.js | `<ox-choice-card-group><ox-choice-card value="a">A</ox-choice-card></ox-choice-card-group>` |
 | `ox-floating-button` | ox-floating-button.js | `<ox-floating-button size="medium" content="icon-only" icon="chevron_left" label="Previous"></ox-floating-button>` |
 | `ox-icon-button` | ox-icon-button.js | `<ox-icon-button kind="primary" size="large" icon="close" label="Close"></ox-icon-button>` |
 | `ox-link` | ox-link.js | `<ox-link href="#" kind="primary" underlined>Link text</ox-link>` |
-| `ox-list-item` | ox-list-item.js | `<ox-list-item kind="primary" size="medium" icon="check" trailing-icon="info">Label</ox-list-item>` |
+| `ox-list-item` | ox-list-item.js | `<ox-list-item kind="primary" size="medium" icon="check" trailing-icon="info" trailing-label="More info">Label</ox-list-item>` |
 | `ox-offer-banner` | ox-offer-banner.js | `<ox-offer-banner title="Headline" subtitle="Body" cta-text="Learn more" image="url" href="#"></ox-offer-banner>` |
 | `ox-offer-card` | ox-offer-card.js | `<ox-offer-card variant="premium" title="BMW 3 Series" image="url" daily-price="71.27" specs="..."></ox-offer-card>` |
 | `ox-offer-details` | ox-offer-details.js | `<ox-offer-details variant="default" title="Vehicle name" image="url"></ox-offer-details>` |
@@ -119,7 +119,7 @@ All components are registered via `prototype/components/index.js`.
 | `ox-protection-group` | ox-protection-group.js | `<ox-protection-group><ox-protection-card ...></ox-protection-card></ox-protection-group>` |
 | `ox-radio-button` | ox-radio-button.js | `<ox-radio-button value="smart" checked disabled error></ox-radio-button>` |
 | `ox-separator` | ox-separator.js | `<ox-separator orientation="horizontal" size="small" contrast="low"></ox-separator>` |
-| `ox-text-button` | ox-text-button.js | `<ox-text-button kind="primary" size="large" icon="help_center" underlined>Label</ox-text-button>` |
+| `ox-text-button` | ox-text-button.js | `<ox-text-button kind="primary" size="large" icon="help_center" trailing-icon="arrow_forward" underlined>Label</ox-text-button>` |
 
 Check each component file's header comment for the full attribute API.
 
@@ -260,6 +260,37 @@ Material Symbols loaded via Google Fonts CDN in `prototype/base.html`. Always st
 - Add the `filled` boolean attribute to switch to filled style (FILL 1) — CSS-driven, no per-component JS
 - Custom SVGs live in `prototype/assets/icons/`, use `{category}-{name}.svg` naming
 - Icon utilities available inside Web Components via the shared `baseStyles`
+
+
+## Data files
+
+Content data lives in `prototype/data/`. Each page's data is self-contained in a single markdown file.
+
+### Naming convention
+
+- `{page}-{location-slug}.md` for location-specific data (e.g. `offer-list-munich-airport.md`)
+- `{page}-assets.md` for page-specific image URLs not yet embedded in content files (e.g. `home-assets.md`)
+
+### Offer list data structure
+
+Each offer-list file is self-contained with:
+- Metadata (studio background URL)
+- Search context (location, dates, currency)
+- Page headline and quick filters
+- Offers with inline image URLs, specs, pricing, badges
+- Banner with image, title, subtitle, CTA
+- Footer disclaimer and links
+
+### Current scope
+
+The prototype mocks a single happy path: Munich Airport, fixed dates (Mar 16–20), USD currency. Pick-up location and trip dates are not yet configurable in the UI.
+
+### Multi-location support (planned)
+
+To add a new location:
+1. Create `offer-list-{location-slug}.md` with location-specific offers and images
+2. Update the `data-content-src` attribute in the HTML to point to the new file
+3. Each file is fully self-contained — no shared asset maps needed
 
 
 ## Creating new pages

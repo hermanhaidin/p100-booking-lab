@@ -8,7 +8,6 @@
   const mobileDetailsOverlay = document.createElement('div');
   const mobileDetailsSheet = document.createElement('div');
   let offersData = [];
-  let assetsMap = new Map();
   let bannerData = null;
   let selectedOfferIndex = null;
   let lastTriggerElement = null;
@@ -21,18 +20,6 @@
   };
 
   // --- Parsing helpers (unchanged from original) ---
-
-  const parseAssets = (markdown) => {
-    const assets = new Map();
-    const lines = markdown.split('\n');
-    for (const line of lines) {
-      const match = line.match(/^-\s*(.*?):\s*(https?:\/\/\S+)\s*$/);
-      if (match) {
-        assets.set(match[1].trim(), match[2].trim());
-      }
-    }
-    return assets;
-  };
 
   const parseOfferBlock = (block) => {
     const lines = block.split('\n').map((l) => l.trim()).filter(Boolean);
@@ -69,10 +56,12 @@
     const titleMatch = markdown.match(/## Banner[\s\S]*?- \*\*Title\*\*: `([^`]+)`/);
     const subtitleMatch = markdown.match(/## Banner[\s\S]*?- \*\*Subtitle\*\*: `([^`]+)`/);
     const ctaMatch = markdown.match(/## Banner[\s\S]*?- \*\*CTA\*\*: `([^`]+)`/);
+    const imageMatch = markdown.match(/## Banner[\s\S]*?- \*\*Image\*\*:\s*(https?:\/\/\S+)/);
     return {
       title: titleMatch ? titleMatch[1] : '',
       subtitle: subtitleMatch ? subtitleMatch[1] : '',
       cta: ctaMatch ? ctaMatch[1] : '',
+      image: imageMatch ? imageMatch[1] : '',
     };
   };
 
@@ -344,16 +333,16 @@
 
     sequence.forEach((item, index) => {
       if (item.type === 'offer') {
-        const imageUrl = assetsMap.get(item.offer.Title) || '';
+        const imageUrl = item.offer.Image || '';
         elements.push(renderOfferCard(item.offer, imageUrl, item.offerIndex));
       } else if (item.type === 'banner' && bannerData) {
-        const bannerImage = assetsMap.get('Banner') || '';
+        const bannerImage = bannerData.image || '';
         elements.push(renderOfferBanner(bannerData, bannerImage));
       }
 
       if (inlineInsertIndex === index + 1 && selectedOfferIndex !== null) {
         const selectedOffer = offersData[selectedOfferIndex];
-        const selectedImage = selectedOffer ? assetsMap.get(selectedOffer.Title) || '' : '';
+        const selectedImage = selectedOffer ? selectedOffer.Image || '' : '';
         if (selectedOffer) {
           const slot = document.createElement('div');
           slot.className = 'offer-list-details-slot';
@@ -370,7 +359,7 @@
 
     if (isMobile && selectedOfferIndex !== null) {
       const selectedOffer = offersData[selectedOfferIndex];
-      const selectedImage = selectedOffer ? assetsMap.get(selectedOffer.Title) || '' : '';
+      const selectedImage = selectedOffer ? selectedOffer.Image || '' : '';
       if (selectedOffer) {
         mobileDetailsSheet.replaceChildren(renderOfferDetails(selectedOffer, selectedImage));
       } else {
@@ -489,18 +478,11 @@
   // --- Data loading ---
 
   const fetchAndPrepareData = async () => {
-    const [contentResponse, assetsResponse] = await Promise.all([
-      fetch(grid.dataset.contentSrc),
-      fetch(grid.dataset.assetsSrc),
-    ]);
-    if (!contentResponse.ok || !assetsResponse.ok) return;
-    const [contentMarkdown, assetsMarkdown] = await Promise.all([
-      contentResponse.text(),
-      assetsResponse.text(),
-    ]);
-    offersData = parseOffers(contentMarkdown);
-    bannerData = parseBanner(contentMarkdown);
-    assetsMap = parseAssets(assetsMarkdown);
+    const response = await fetch(grid.dataset.contentSrc);
+    if (!response.ok) return;
+    const markdown = await response.text();
+    offersData = parseOffers(markdown);
+    bannerData = parseBanner(markdown);
   };
 
   // --- Bootstrap ---

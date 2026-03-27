@@ -1,5 +1,9 @@
 # Offer list content
 
+## Metadata
+
+- **Studio background**: https://img.sixt.com/1600/6f09b0e8-6820-4ac0-bedd-5797e9814c18.jpg
+
 ## Search context (header)
 
 - **Location**: `Munich Airport`
@@ -28,6 +32,7 @@
 
 - **Offer 1**
     - Title: `BMW 3 Series Touring`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-3-stw-black-2023.png
     - Subtitle: `Full-size Elite Wagon Automatic`
     - Model label: `Premium brand`
     - Badges: `Hot offer`
@@ -38,6 +43,7 @@
 
 - **Offer 2**
     - Title: `VW Golf`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-5d-grey-2024.png
     - Subtitle: `Compact Sedan Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -48,6 +54,7 @@
 
 - **Offer 3**
     - Title: `VW T-Roc`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-t-roc-suv-4d-white-2022-JV.png
     - Subtitle: `Compact SUV Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -62,12 +69,14 @@
 - **Title**: `Get up to 15% Off Your Car Rental`
 - **Subtitle**: `Save in style.`
 - **CTA**: `Apply discount`
+- **Image**: https://img.sixt.com/1600/d3432083-e83d-4ee3-9c2d-976cc32e1a19.jpg
 
 
 ## Offers (continued)
 
 - **Offer 4**
     - Title: `Cupra Formentor`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/cupra-formentor-suv-grey-2025.png
     - Subtitle: `Midsize SUV Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -78,6 +87,7 @@
 
 - **Offer 5**
     - Title: `VW Golf`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-5d-grey-2024.png
     - Subtitle: `Compact Sedan Manual`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -88,6 +98,7 @@
 
 - **Offer 6**
     - Title: `VW T-Roc`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-t-roc-suv-4d-white-2022-JV.png
     - Subtitle: `Compact SUV Manual`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -98,6 +109,7 @@
 
 - **Offer 7**
     - Title: `VW Golf Variant`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-variant-stw-4d-grey-2022.png
     - Subtitle: `Compact Wagon Manual`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -108,6 +120,7 @@
 
 - **Offer 8**
     - Title: `Citroen E-C3 Aircross`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/citroen-c3-aircross-5d-white-2025.png
     - Subtitle: `Midsize SUV Automatic`
     - Model label: `Or similar model`
     - Badges: `Hot offer`
@@ -118,6 +131,7 @@
 
 - **Offer 9**
     - Title: `VW T-Roc Cabriolet`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-t-roc-convertible-white-open-2023.png
     - Subtitle: `Compact Convertible Manual`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -128,6 +142,7 @@
 
 - **Offer 10**
     - Title: `VW Golf Variant`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-golf-variant-stw-4d-grey-2022.png
     - Subtitle: `Compact Wagon Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -138,6 +153,7 @@
 
 - **Offer 11**
     - Title: `Cupra Formentor`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/cupra-formentor-suv-grey-2025.png
     - Subtitle: `Midsize SUV Manual`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -148,6 +164,7 @@
 
 - **Offer 12**
     - Title: `Cupra Tavascan`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/cupra-tavascan-suv-silver-2024.png
     - Subtitle: `Standard SUV Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -158,6 +175,7 @@
 
 - **Offer 13**
     - Title: `VW T-Roc Cabriolet`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-t-roc-convertible-white-open-2023.png
     - Subtitle: `Compact Convertible Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -168,6 +186,7 @@
 
 - **Offer 14**
     - Title: `Skoda Elroq`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/skoda-elroq-suv-grey-2025.png
     - Subtitle: `Midsize SUV Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -178,6 +197,7 @@
 
 - **Offer 15**
     - Title: `BMW 1 Series`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-1-hatch-4d-black-2025.png
     - Subtitle: `Compact Elite Sedan Automatic`
     - Model label: `Premium brand`
     - Badges: N/A
@@ -188,6 +208,7 @@
 
 - **Offer 16**
     - Title: `Skoda Octavia Estate`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/skoda-octavia-combi-stw-black-2025.png
     - Subtitle: `Midsize Wagon Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -198,6 +219,7 @@
 
 - **Offer 17**
     - Title: `VW ID.7 Tourer`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-id7-stationwagon-grey-2025.png
     - Subtitle: `Premium Wagon Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -208,6 +230,7 @@
 
 - **Offer 18**
     - Title: `Audi Q2`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/audi-q2-suv-silver-2021.png
     - Subtitle: `Compact Elite SUV Automatic`
     - Model label: `Premium brand`
     - Badges: N/A
@@ -218,6 +241,7 @@
 
 - **Offer 19**
     - Title: `Audi A3 Sedan`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/audi-a3-4d-grey-2021.png
     - Subtitle: `Midsize Elite Sedan Automatic`
     - Model label: `Premium brand`
     - Badges: `Hot offer`
@@ -228,6 +252,7 @@
 
 - **Offer 20**
     - Title: `VW Tiguan`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-tiguan-suv-black-2024.png
     - Subtitle: `Standard SUV Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -238,6 +263,7 @@
 
 - **Offer 21**
     - Title: `BMW 2 Series Active Tourer`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-2-active-tourer-van-4d-black-2022-JV.png
     - Subtitle: `Compact Elite Van Automatic`
     - Model label: `Premium brand`
     - Badges: N/A
@@ -248,6 +274,7 @@
 
 - **Offer 22**
     - Title: `Mercedes-Benz CLA`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-cla-4d-sedan-white-2026.png
     - Subtitle: `Midsize Elite Sedan Automatic`
     - Model label: `Guaranteed model`
     - Badges: N/A
@@ -258,6 +285,7 @@
 
 - **Offer 23**
     - Title: `VW Touran`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-touran-van-grey-2021.png
     - Subtitle: `Midsize Van Automatic`
     - Model label: `Or similar model`
     - Badges: `5+2 Seater`
@@ -268,6 +296,7 @@
 
 - **Offer 24**
     - Title: `VW Passat Estate`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-passat-stw-silver-2024.png
     - Subtitle: `Standard Wagon Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -278,6 +307,7 @@
 
 - **Offer 25**
     - Title: `BMW M235 Gran Coupe`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-m235i-grancoupe-4d-blue-2023.png
     - Subtitle: `Midsize Elite Sedan Automatic`
     - Model label: `Premium brand`
     - Badges: `Special Car`
@@ -288,6 +318,7 @@
 
 - **Offer 26**
     - Title: `BMW 3 Series`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-3-sedan-4d-white-2023-JV.png
     - Subtitle: `Full-size Elite Sedan Automatic`
     - Model label: `Premium brand`
     - Badges: N/A
@@ -298,6 +329,7 @@
 
 - **Offer 27**
     - Title: `VW Tayron`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-tayron-suv-grey-2025.png
     - Subtitle: `Premium SUV Automatic`
     - Model label: `Or similar model`
     - Badges: `5+2 Seater`
@@ -308,6 +340,7 @@
 
 - **Offer 28**
     - Title: `VW Tayron`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-tayron-suv-grey-2025.png
     - Subtitle: `Premium SUV Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -318,6 +351,7 @@
 
 - **Offer 29**
     - Title: `BMW X1`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x1-m35-suv-black-2025.png
     - Subtitle: `Full-size Elite SUV Automatic`
     - Model label: `Premium brand`
     - Badges: N/A
@@ -328,6 +362,7 @@
 
 - **Offer 30**
     - Title: `BMW M340 Touring`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-m340i-kombi-schwarz-2020.png
     - Subtitle: `Full-size Elite Wagon Automatic`
     - Model label: `Premium brand`
     - Badges: `Special Car`
@@ -338,6 +373,7 @@
 
 - **Offer 31**
     - Title: `Mercedes-Benz E-Class`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-e-class-4d-silver-2024.png
     - Subtitle: `Premium Elite Sedan Automatic`
     - Model label: `Premium brand`
     - Badges: `Hot offer`
@@ -348,6 +384,7 @@
 
 - **Offer 32**
     - Title: `BMW X3`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x3-suv-silver-2025.png
     - Subtitle: `Premium Elite SUV Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -358,6 +395,7 @@
 
 - **Offer 33**
     - Title: `Audi A6 Avant`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/audi-a6-avant-stw-silver-2025.png
     - Subtitle: `Premium Elite Wagon Automatic`
     - Model label: `Premium brand`
     - Badges: `Hot offer`
@@ -368,6 +406,7 @@
 
 - **Offer 34**
     - Title: `BMW 4 Series Coupe`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-4-2d-coupe-grey-2021.png
     - Subtitle: `Full-size Elite Coupe Automatic`
     - Model label: `Premium brand`
     - Badges: N/A
@@ -378,6 +417,7 @@
 
 - **Offer 35**
     - Title: `BMW 4 Series Convertible`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-4-convertible-2d-black-2023-JV.png
     - Subtitle: `Full-size Elite Convertible Automatic`
     - Model label: `Premium brand`
     - Badges: N/A
@@ -388,6 +428,7 @@
 
 - **Offer 36**
     - Title: `VW Caddy Maxi`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-caddy-maxi-silver-2021.png
     - Subtitle: `Standard Van Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -398,6 +439,7 @@
 
 - **Offer 37**
     - Title: `BMW X3 M50`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x3-m50-suv-black-2025.png
     - Subtitle: `Premium Elite SUV Automatic`
     - Model label: `Premium brand`
     - Badges: `Special Car`
@@ -408,6 +450,7 @@
 
 - **Offer 38**
     - Title: `Mercedes-Benz CLE`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-cle-2d-white-open-2024.png
     - Subtitle: `Premium Elite Convertible Automatic`
     - Model label: `Premium brand`
     - Badges: N/A
@@ -418,6 +461,7 @@
 
 - **Offer 39**
     - Title: `VW Touareg`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/vw-touareg-suv-black-2024.png
     - Subtitle: `Luxury SUV Automatic`
     - Model label: `Or similar model`
     - Badges: `Four-Wheel Drive Guaranteed`
@@ -428,6 +472,7 @@
 
 - **Offer 40**
     - Title: `Porsche Macan 4 Electric`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/porsche-macan-suv-white-2025.png
     - Subtitle: `Premium Elite SUV Automatic`
     - Model label: `Guaranteed model`
     - Badges: `Sports & Luxury Car`
@@ -438,6 +483,7 @@
 
 - **Offer 41**
     - Title: `Porsche Taycan`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/porsche-taycan-coupe-2d-silver-2022-JV.png
     - Subtitle: `Premium Elite Gran Coupe Automatic`
     - Model label: `Guaranteed model`
     - Badges: `Sports & Luxury Car`
@@ -448,6 +494,7 @@
 
 - **Offer 42**
     - Title: `Nissan Primastar`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/nissan-primastar-van-white-2022.png
     - Subtitle: `Luxury Van Manual`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -458,6 +505,7 @@
 
 - **Offer 43**
     - Title: `BMW X5 xDrive`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x5-m60-suv-grey-2025.png
     - Subtitle: `Luxury Elite SUV Automatic`
     - Model label: `Premium brand`
     - Badges: `Hot offer`, `Four-Wheel Drive Guaranteed`
@@ -468,6 +516,7 @@
 
 - **Offer 44**
     - Title: `BMW X7`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x7-m60-suv-grey-2025.png
     - Subtitle: `Extraordinary SUV Automatic`
     - Model label: `Premium brand`
     - Badges: `Special Car`
@@ -478,6 +527,7 @@
 
 - **Offer 45**
     - Title: `Opel Zafira Life`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/opel-zafira-life-mpv-grey-2024.png
     - Subtitle: `Luxury Van Automatic`
     - Model label: `Or similar model`
     - Badges: N/A
@@ -488,6 +538,7 @@
 
 - **Offer 46**
     - Title: `BMW X5 M60`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x5-m60-suv-grey-2025.png
     - Subtitle: `Luxury Elite SUV Automatic`
     - Model label: `Premium brand`
     - Badges: `Sports & Luxury Car`
@@ -498,6 +549,7 @@
 
 - **Offer 47**
     - Title: `BMW 7 Series Model xDrive`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-7-sedan-4d-black-2023-JV.png
     - Subtitle: `Extraordinary Sedan Automatic`
     - Model label: `Premium brand`
     - Badges: `Four-Wheel Drive Guaranteed`
@@ -508,6 +560,7 @@
 
 - **Offer 48**
     - Title: `BMW M850 Coupe`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-8-gran-coupe-grey-2022.png
     - Subtitle: `Extraordinary Coupe Automatic`
     - Model label: `Guaranteed model`
     - Badges: `Sports & Luxury Car`
@@ -518,6 +571,7 @@
 
 - **Offer 49**
     - Title: `BMW X4M`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x4-m40i-5d-schwarz-2019.png
     - Subtitle: `Premium Elite SUV Automatic`
     - Model label: `Guaranteed model`
     - Badges: `Sports & Luxury Car`
@@ -528,6 +582,7 @@
 
 - **Offer 50**
     - Title: `Mercedes-Benz Vito Tourer`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-vito-van-black-2020.png
     - Subtitle: `Luxury Elite Van Automatic`
     - Model label: `Premium brand`
     - Badges: N/A
@@ -538,6 +593,7 @@
 
 - **Offer 51**
     - Title: `Mercedes-Benz V-Class Long`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-v-class-extralong-van-black-2024.png
     - Subtitle: `Premium Elite Van Automatic`
     - Model label: `Premium brand`
     - Badges: `Special Car`
@@ -548,6 +604,7 @@
 
 - **Offer 52**
     - Title: `Porsche Cayenne`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/porsche-cayenne-s-hybrid-suv-4d-black-2024.png
     - Subtitle: `Luxury Elite SUV Automatic`
     - Model label: `Premium brand`
     - Badges: `Sports & Luxury Car`
@@ -558,6 +615,7 @@
 
 - **Offer 53**
     - Title: `Mercedes-Benz S-Class Long`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-s-long-sedan-4d-silver-2021-JV.png
     - Subtitle: `Extraordinary Sedan Automatic`
     - Model label: `Guaranteed model`
     - Badges: `Special Car`
@@ -568,6 +626,7 @@
 
 - **Offer 54**
     - Title: `BMW X7 M60`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-x7-m60-suv-grey-2025.png
     - Subtitle: `Extraordinary SUV Automatic`
     - Model label: `Guaranteed model`
     - Badges: `Sports & Luxury Car`
@@ -578,6 +637,7 @@
 
 - **Offer 55**
     - Title: `Mercedes-AMG GT 63`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/mb-gt-s-coupe-2d-grey-2024.png
     - Subtitle: `Full-size Elite Coupe Automatic`
     - Model label: `Guaranteed model`
     - Badges: `Sports & Luxury Car`
@@ -588,6 +648,7 @@
 
 - **Offer 56**
     - Title: `Porsche 911 Carrera`
+    - Image: https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/porsche-911-carrera-4s-coupe-2d-silver-2019-JV.png
     - Subtitle: `Midsize Elite Coupe Automatic`
     - Model label: `Guaranteed model`
     - Badges: `Sports & Luxury Car`

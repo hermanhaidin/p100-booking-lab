@@ -3,7 +3,12 @@
    - Underline interaction targets label only, never icons
    - Touch target exceeds content height; negative vertical margins collapse layout footprint.
      Small: 36px target, -8px margin. Large: 48px target, -12px margin.
-   API: <ox-text-button kind="primary" size="large" icon="help_center" underlined>Label</ox-text-button> */
+   - trailing-icon: icon after the label (e.g. arrow_forward)
+   - truncate: clips label text with ellipsis
+   - href: renders as <a> instead of <button> for navigation
+   - disabled: disables interaction
+   API: <ox-text-button kind="primary" size="large" icon="help_center" underlined>Label</ox-text-button>
+        <ox-text-button kind="brand" trailing-icon="arrow_forward" href="./next.html">Continue</ox-text-button> */
 
 import { baseStyles } from './shared/base-styles.js';
 

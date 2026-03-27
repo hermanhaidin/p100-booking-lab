@@ -3,7 +3,10 @@
    - Kind: primary|secondary|brand|info|accent|success|warning|error|error-alt (default brand)
    - Variant: solid|outlined (default solid)
    - Size: small|large (default large)
-   API: <ox-button kind="brand" size="large" variant="solid" icon="arrow_forward" disabled>Label</ox-button> */
+   - truncate: clips label text with ellipsis
+   - href: renders as <a> instead of <button> for navigation
+   API: <ox-button kind="brand" size="large" variant="solid" icon="arrow_forward" disabled>Label</ox-button>
+        <ox-button kind="brand" href="./protection.html" icon="arrow_forward">Continue</ox-button> */
 
 import { baseStyles } from './shared/base-styles.js';
 
