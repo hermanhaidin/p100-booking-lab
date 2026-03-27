@@ -1,6 +1,11 @@
 /* Horizontal carousel with slotted children as slides.
    Auto-generates dot pagination and prev/next arrow controls.
    Supports responsive cards-per-view via breakpoint attributes.
+
+   Default gap between slides is responsive and matches layout-shell gutter widths:
+   <650px  12px (2xs) · 650–1199px  16px (xs) · >=1200px  24px (md).
+   Override with the gap attribute (static) or --carousel-gap custom property.
+
    API: <ox-carousel cards-per-view="1" cards-per-view-md="2" gap="xs"
           prev-label="Previous" next-label="Next" dot-label="Go to slide {n}">
           <article>Slide 1</article>
@@ -11,10 +16,22 @@ import { baseStyles } from './shared/base-styles.js';
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`
+  /* Responsive gap defaults match layout-shell gutter widths:
+     <650px  12px (2xs) · 650–1199px  16px (xs) · >=1200px  24px (md)
+     Override per-instance with the gap attribute or --carousel-gap custom property. */
   :host {
+    --_carousel-gap-default: var(--spacing-2xs);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
+  }
+
+  @media (min-width: 650px) {
+    :host { --_carousel-gap-default: var(--spacing-xs); }
+  }
+
+  @media (min-width: 1200px) {
+    :host { --_carousel-gap-default: var(--spacing-md); }
   }
 
   :host([hidden]) { display: none; }
@@ -27,13 +44,13 @@ styles.replaceSync(`
 
   .track {
     display: flex;
-    gap: var(--carousel-gap, var(--spacing-xs));
+    gap: var(--carousel-gap, var(--_carousel-gap-attr, var(--_carousel-gap-default)));
     transition: transform 320ms ease;
     will-change: transform;
   }
 
   ::slotted(*) {
-    flex: 0 0 100%;
+    flex: 0 0 var(--_card-basis, 100%);
     min-width: 0;
   }
 
@@ -197,22 +214,20 @@ class OxCarousel extends HTMLElement {
     const nextLabel = this.getAttribute('next-label') || 'Next';
 
     this.shadowRoot.innerHTML = `
-      <div class="carousel">
-        <div class="viewport" part="viewport">
-          <div class="track" part="track">
-            <slot></slot>
-          </div>
-          <div class="arrows-overlay">
-            <ox-floating-button size="medium" content="icon-only" icon="chevron_left" label="${prevLabel}" class="arrow-prev"></ox-floating-button>
-            <ox-floating-button size="medium" content="icon-only" icon="chevron_right" label="${nextLabel}" class="arrow-next"></ox-floating-button>
-          </div>
+      <div class="viewport" part="viewport">
+        <div class="track" part="track">
+          <slot></slot>
         </div>
-        <div class="controls" part="controls">
-          <div class="dots" part="dots"></div>
-          <div class="arrows-row">
-            <ox-floating-button size="medium" content="icon-only" icon="chevron_left" label="${prevLabel}" class="arrow-prev"></ox-floating-button>
-            <ox-floating-button size="medium" content="icon-only" icon="chevron_right" label="${nextLabel}" class="arrow-next"></ox-floating-button>
-          </div>
+        <div class="arrows-overlay">
+          <ox-floating-button size="medium" content="icon-only" icon="chevron_left" label="${prevLabel}" class="arrow-prev"></ox-floating-button>
+          <ox-floating-button size="medium" content="icon-only" icon="chevron_right" label="${nextLabel}" class="arrow-next"></ox-floating-button>
+        </div>
+      </div>
+      <div class="controls" part="controls">
+        <div class="dots" part="dots"></div>
+        <div class="arrows-row">
+          <ox-floating-button size="medium" content="icon-only" icon="chevron_left" label="${prevLabel}" class="arrow-prev"></ox-floating-button>
+          <ox-floating-button size="medium" content="icon-only" icon="chevron_right" label="${nextLabel}" class="arrow-next"></ox-floating-button>
         </div>
       </div>
     `;
@@ -221,9 +236,13 @@ class OxCarousel extends HTMLElement {
   }
 
   _applyGap() {
-    const gap = this.getAttribute('gap') || 'xs';
-    const token = SPACING_TOKENS[gap] || `var(--spacing-${gap})`;
-    this.style.setProperty('--carousel-gap', token);
+    const gap = this.getAttribute('gap');
+    if (gap) {
+      const token = SPACING_TOKENS[gap] || `var(--spacing-${gap})`;
+      this.style.setProperty('--_carousel-gap-attr', token);
+    } else {
+      this.style.removeProperty('--_carousel-gap-attr');
+    }
   }
 
   /* ---- Listener management ---- */
@@ -327,9 +346,15 @@ class OxCarousel extends HTMLElement {
     this._maxIndex = Math.max(0, cards.length - this._cardsPerView);
     this._currentIndex = clamp(this._currentIndex, 0, this._maxIndex);
 
-    const firstCard = cards[0];
-    const cardWidth = firstCard.getBoundingClientRect().width;
-    this._slideStep = cardWidth + this._getTrackGap();
+    /* Size slotted cards so N cards + (N-1) gaps fill the viewport exactly. */
+    const n = this._cardsPerView;
+    const viewport = this.shadowRoot.querySelector('.viewport');
+    const track = this.shadowRoot.querySelector('.track');
+    const gap = this._getTrackGap();
+    const cardWidth = (viewport.clientWidth - (n - 1) * gap) / n;
+    track.style.setProperty('--_card-basis', `${cardWidth}px`);
+
+    this._slideStep = cardWidth + gap;
 
     this._renderDots();
     this._applyTransform();

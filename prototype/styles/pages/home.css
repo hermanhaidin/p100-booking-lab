@@ -283,7 +283,8 @@ main {
   width: 100%;
 }
 
-.promo-card-content > .button {
+.promo-card-content > ox-button {
+  align-self: flex-start;
   margin-top: var(--spacing-3xs);
 }
 
@@ -328,8 +329,6 @@ main {
 .offer-carousel-card {
   background-color: var(--color-surface-container);
   border-radius: var(--radius-lg);
-  flex: 0 0 100%;
-  min-width: 0;
   overflow: hidden;
   position: relative;
 }
@@ -374,6 +373,7 @@ main {
 
 .offer-carousel-top,
 .offer-carousel-bottom {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-3xs);
@@ -422,8 +422,6 @@ main {
   background-position: center;
   background-size: cover;
   border-radius: var(--radius-lg);
-  flex: 0 0 100%;
-  min-width: 0;
   overflow: hidden;
   position: relative;
 }
@@ -465,35 +463,8 @@ main {
   margin-top: var(--spacing-4xs);
 }
 
-@media (min-width: 650px) and (max-width: 899px) {
-  .more-sixt-carousel {
-    --carousel-gap: var(--spacing-xs);
-  }
-
-  .more-sixt-card {
-    flex-basis: calc((100% - var(--spacing-xs)) / 2);
-  }
-}
-
-@media (min-width: 900px) and (max-width: 1199px) {
-  .more-sixt-carousel {
-    --carousel-gap: var(--spacing-xs);
-  }
-
-  .more-sixt-card {
-    flex-basis: calc((100% - var(--spacing-xs) * 2) / 3);
-  }
-}
-
-@media (min-width: 1200px) {
-  .more-sixt-carousel {
-    --carousel-gap: var(--spacing-md);
-  }
-
-  .more-sixt-card {
-    flex-basis: calc((100% - var(--spacing-md) * 2) / 3);
-  }
-}
+/* ox-carousel handles responsive card sizing + gap internally
+   (matches layout-shell gutters: 12px <650, 16px 650–1199, 24px >=1200). */
 
 .media-grid {
   display: grid;
@@ -587,11 +558,8 @@ main {
 .testimonial-card {
   align-items: center;
   display: flex;
-  flex: 0 0 100%;
   justify-content: center;
-  min-width: 0;
   padding: 0;
-  width: 100%;
 }
 
 .testimonial-quote {
@@ -1099,13 +1067,8 @@ main {
     gap: var(--spacing-3xl);
   }
 
-  .offers-carousel {
-    --carousel-gap: var(--spacing-md);
-  }
-
   .offer-carousel-card {
     aspect-ratio: 3 / 2;
-    flex-basis: calc((100% - var(--spacing-md)) / 2);
   }
 
   .testimonial-card {
@@ -1160,10 +1123,6 @@ main {
 }
 
 @media (min-width: 900px) and (max-width: 1199px) {
-  .offer-carousel-card {
-    flex-basis: calc((100% - var(--spacing-xs)) / 2);
-  }
-
   .testimonial-card {
     aspect-ratio: 21 / 9;
     padding: 0;
