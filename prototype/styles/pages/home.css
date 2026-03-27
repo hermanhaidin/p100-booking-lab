@@ -1,159 +1,17 @@
-.home-header {
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 2;
-}
-
-.utility-bar {
-  align-items: center;
-  display: flex;
-  gap: var(--spacing-sm);
-  justify-content: space-between;
-  height: 64px;
-}
-
-.brand-group {
-  align-items: center;
-  display: flex;
-  gap: var(--spacing-2xs);
-}
-
-.brand-logo {
-  height: var(--spacing-lg);
-  max-width: 200px;
-  width: auto;
-}
-
-.utility-links {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-md);
-}
-
-.utility-links ox-text-button {
-  --text-button-fg: var(--color-on-content-extended-on-brand);
-}
-
-.search-shell {
-  background-color: var(--color-surface-container);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--elevation-large);
-  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
-  overflow: hidden;
-  padding: var(--spacing-xs);
-  width: 100%;
-}
-
-.booking-chips {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-3xs);
-  margin-bottom: var(--spacing-xs);
-}
-
-.booking-link {
-  margin-left: auto;
-}
-
-.booking-link-mobile {
-  display: none;
-  margin-left: 0;
-}
-
-.search-grid {
-  align-items: end;
-  column-gap: var(--spacing-xs);
-  display: grid;
-  row-gap: var(--spacing-2xs);
-  grid-template-columns: 2fr auto 1fr 1fr auto;
-}
-
-/* Search-only text-button variant: field-height aligned */
-.search-return-location {
-  align-self: end;
-  height: 52px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-5xs);
-}
-
-.field-label {
-  color: var(--color-content-primary);
-}
-
-.field-value {
-  align-items: center;
-  border: var(--stroke-sm) solid var(--color-content-tertiary);
-  border-radius: var(--radius-md);
-  color: var(--color-content-primary);
-  display: flex;
-  gap: var(--spacing-2xs);
-  height: 52px;
-  padding: var(--spacing-2xs);
-  padding-inline: var(--spacing-2xs);
-  white-space: nowrap;
-}
-
-.field-value .material-symbols-outlined {
-  color: var(--color-content-primary);
-  font-size: 24px;
-}
-
-.field-part-date .material-symbols-outlined {
-  font-size: 24px;
-  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
-}
-
-.pickup-icon-search {
-  display: none;
-}
-
-.field-value-split {
-  gap: 0;
-  padding: 0;
-}
-
-.field-part {
-  align-items: center;
-  color: var(--color-content-primary);
-  display: inline-flex;
-  flex: 1 1 50%;
-  height: 100%;
-}
-
-.field-part-date {
-  gap: var(--spacing-2xs);
-  padding: 0 var(--spacing-2xs);
-}
-
-.field-part-time {
-  border-left: var(--stroke-sm) solid var(--color-content-tertiary);
-  padding: 0 var(--spacing-2xs);
-}
-
-.field-value::placeholder {
-  color: var(--color-content-primary);
-}
-
-.corp-link {
-  align-self: flex-start;
-  grid-column: 1;
-  grid-row: 2;
-}
-
 main {
   background-color: var(--color-surface-canvas);
 }
 
 .hero {
   position: relative;
+}
+
+.hero-content {
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 64px;
+  z-index: 2;
 }
 
 .hero-image {
@@ -656,123 +514,6 @@ main {
   width: fit-content;
 }
 
-.home-footer {
-  background-color: var(--color-surface-canvas);
-  color: var(--color-content-primary);
-  margin-top: 0;
-  padding-block: var(--spacing-xl);
-}
-
-.home-footer-shell {
-  width: 100%;
-}
-
-.home-footer-top {
-  align-items: center;
-  display: flex;
-  gap: var(--spacing-xs);
-  justify-content: space-between;
-}
-
-.home-footer-brand {
-  display: inline-flex;
-  width: fit-content;
-}
-
-.home-footer-brand img {
-  display: block;
-  height: 36px;
-  width: auto;
-}
-
-.home-footer-social {
-  align-items: center;
-  display: inline-flex;
-  gap: var(--spacing-md);
-}
-
-.home-footer-columns {
-  column-gap: var(--spacing-lg);
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  margin-top: var(--spacing-xl);
-  row-gap: var(--spacing-xl);
-}
-
-.home-footer-column p {
-  color: var(--color-content-secondary);
-  margin: 0 0 var(--spacing-sm);
-}
-
-.home-footer-column ul {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.home-footer-badges {
-  display: flex;
-  gap: var(--spacing-xs);
-  margin-top: var(--spacing-xl);
-}
-
-.home-footer-badge-link {
-  display: inline-flex;
-}
-
-.home-footer-badge-link img {
-  display: block;
-  height: 40px;
-  width: auto;
-}
-
-.home-footer-legal {
-  align-items: flex-start;
-  color: var(--color-content-primary);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-  margin-top: var(--spacing-xl);
-}
-
-.home-footer-legal-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
-}
-
-.home-footer-copyright {
-  color: var(--color-content-secondary);
-}
-
-@media (min-width: 650px) and (max-width: 899px) {
-  .home-footer-columns {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 900px) {
-  .home-footer-columns {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .home-footer-legal {
-    align-items: start;
-    column-gap: var(--spacing-xl);
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-
-  .home-footer-copyright {
-    align-self: start;
-    justify-self: end;
-    white-space: nowrap;
-  }
-}
-
 @media (min-width: 900px) and (max-width: 1199px) {
   .offers-carousel-section h2,
   .more-sixt-section h2 {
@@ -804,116 +545,12 @@ main {
   .usp-strip-shell {
     gap: var(--spacing-lg);
   }
-
-  .search-grid {
-    grid-template-columns: 1fr 1fr auto;
-  }
-
-  .search-grid > .field:first-of-type {
-    grid-column: 1 / span 2;
-    grid-row: 1;
-  }
-
-  .secondary-button {
-    grid-column: 3;
-    grid-row: 1;
-    justify-self: stretch;
-    width: 100%;
-  }
-
-  .search-grid > .field:nth-of-type(2) {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .search-grid > .field:nth-of-type(3) {
-    grid-column: 2;
-    grid-row: 2;
-  }
-
-  .corp-link {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  #showCarsButton {
-    grid-column: 3;
-    grid-row: 2;
-    justify-self: stretch;
-    width: 100%;
-  }
 }
 
 @media (max-width: 899px) {
-  .search-shell {
-    width: 100%;
-  }
-
-  .utility-links {
-    justify-content: flex-end;
-  }
-
-  .utility-links ox-text-button:nth-child(1),
-  .utility-links ox-text-button:nth-child(2) {
-    display: none;
-  }
-
-  .search-grid {
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
-    row-gap: var(--spacing-xs);
-  }
-
-  .booking-chips .booking-link {
-    display: none;
-  }
-
-  .search-grid > .field:first-of-type {
-    order: 1;
-  }
-
-  .search-grid > .field:first-of-type .field-label {
-    display: none;
-  }
-
-  .pickup-icon-flight {
-    display: none;
-  }
-
-  .pickup-icon-search {
-    display: inline-flex;
-  }
-
-  .search-grid > .field:nth-of-type(2),
-  .search-grid > .field:nth-of-type(3),
-  .secondary-button {
-    display: none;
-  }
-
-  #showCarsButton {
-    order: 2;
-    width: 100%;
-  }
-
-  .booking-link-mobile {
-    align-self: center;
-    display: inline-flex;
-    height: auto;
-    order: 3;
-  }
-
-  .corp-link {
-    align-self: center;
-    grid-column: auto;
-    grid-row: auto;
-    order: 4;
-  }
-
   .hero-image {
     min-height: 680px;
   }
-
 
   .media-grid,
   .media-grid-large {
@@ -954,16 +591,6 @@ main {
     flex-direction: column;
   }
 
-  .utility-links ox-text-button:nth-child(1),
-  .utility-links ox-text-button:nth-child(2) {
-    display: inline-flex;
-  }
-
-  .utility-links ox-text-button::part(label) {
-    display: none;
-  }
-
-
   .offer-carousel-card {
     aspect-ratio: 1 / 1;
   }
@@ -1002,19 +629,6 @@ main {
 }
 
 @media (min-width: 650px) and (max-width: 899px) {
-  .search-shell {
-    width: 100%;
-  }
-
-  .utility-links ox-text-button:nth-child(1),
-  .utility-links ox-text-button:nth-child(2) {
-    display: inline-flex;
-  }
-
-  .utility-links ox-text-button:nth-child(-n+3)::part(label) {
-    display: none;
-  }
-
   .seo-links-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -1052,10 +666,6 @@ main {
   .hero-image {
     aspect-ratio: 25 / 9;
     min-height: auto;
-  }
-
-  #showCarsButton {
-    min-width: 200px;
   }
 
   .usp-strip-shell {

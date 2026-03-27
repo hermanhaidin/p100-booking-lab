@@ -12,71 +12,15 @@
   <main>
     <section class="hero" aria-label="Hero">
       <div class="hero-image"></div>
-      <header class="home-header">
-        <div class="layout-shell">
-          <div class="utility-bar">
-            <div class="brand-group">
-              <ox-icon-button kind="on-brand" size="large" icon="menu" label="Open menu"></ox-icon-button>
-              <img class="brand-logo" src="../assets/logos/sixt_rent_the_car_on_dark.svg" alt="SIXT rent the car">
-            </div>
-            <nav class="utility-links" aria-label="Utility links">
-              <ox-text-button kind="primary" size="large" icon="help_center" href="#" filled>Help</ox-text-button>
-              <ox-text-button kind="primary" size="large" icon="directions_car" href="#" filled>Manage bookings</ox-text-button>
-              <ox-text-button kind="primary" size="large" icon="language" href="#" filled>EN | $</ox-text-button>
-              <ox-text-button kind="primary" size="large" icon="person" href="#" filled>Log in | Register</ox-text-button>
-            </nav>
-          </div>
-
-          <section class="search-shell" aria-label="Search context">
-            <div class="booking-chips" role="tablist" aria-label="Booking mode">
-              <ox-chip size="small" icon="directions_car" filled selected data-chip="cars">Cars</ox-chip>
-              <ox-chip size="small" icon="local_shipping" filled data-chip="trucks">Trucks</ox-chip>
-              <ox-chip size="small" icon="update" data-chip="subscription">Subscription</ox-chip>
-              <ox-text-button kind="primary" size="small" underlined href="#" class="booking-link">View / edit my booking</ox-text-button>
-            </div>
-
-            <form class="search-grid" id="homeSearchForm" action="./offer-list.html" method="get">
-              <label class="field">
-                <span class="field-label text-copy-small-heavy">Pickup &amp; return</span>
-                <span class="field-value text-copy-large-regular">
-                  <span class="material-symbols-outlined pickup-icon pickup-icon-flight" aria-hidden="true">flight</span>
-                  <span class="material-symbols-outlined pickup-icon pickup-icon-search" aria-hidden="true">search</span>
-                  Munich Airport
-                </span>
-              </label>
-
-              <ox-text-button kind="primary" size="small" underlined href="#" class="corp-link">Apply corporate rate</ox-text-button>
-
-              <ox-text-button kind="secondary" size="large" icon="add" class="secondary-button search-return-location">Different return location</ox-text-button>
-
-              <label class="field">
-                <span class="field-label text-copy-small-heavy">Pickup date</span>
-                <span class="field-value field-value-split text-copy-large-regular">
-                  <span class="field-part field-part-date">
-                    <span class="material-symbols-outlined" aria-hidden="true">calendar_today</span>
-                    Mar 16
-                  </span>
-                  <span class="field-part field-part-time">12:00 PM</span>
-                </span>
-              </label>
-
-              <label class="field">
-                <span class="field-label text-copy-small-heavy">Return date</span>
-                <span class="field-value field-value-split text-copy-large-regular">
-                  <span class="field-part field-part-date">
-                    <span class="material-symbols-outlined" aria-hidden="true">calendar_today</span>
-                    Mar 20
-                  </span>
-                  <span class="field-part field-part-time">12:00 PM</span>
-                </span>
-              </label>
-
-              <ox-button id="showCarsButton" kind="brand" size="large" href="./offer-list.html">Show cars</ox-button>
-              <ox-text-button kind="primary" size="small" underlined href="#" class="booking-link booking-link-mobile">View / edit my booking</ox-text-button>
-            </form>
-          </section>
-        </div>
-      </header>
+      <ox-home-header></ox-home-header>
+      <div class="layout-shell hero-content">
+        <ox-home-ibe
+          action="./offer-list.html"
+          location="Munich Airport"
+          pickup-date="Mar 16" pickup-time="12:00 PM"
+          return-date="Mar 20" return-time="12:00 PM"
+        ></ox-home-ibe>
+      </div>
       <div class="hero-band">
         <h1 class="text-display-large-heavy-caps">Member-only Rates With SIXT ONE</h1>
         <p class="hero-subline text-copy-large-heavy">Premium car rental at prices you'll love. Worldwide.</p>
@@ -462,79 +406,7 @@
     </section>
   </main>
 
-  <footer class="home-footer" data-p100-theme="option-light">
-    <div class="layout-shell home-footer-shell">
-      <div class="home-footer-top">
-        <a href="#" class="home-footer-brand" aria-label="SIXT homepage">
-          <img src="../assets/logos/sixt_rent_the_car_on_dark.svg" alt="SIXT rent the car">
-        </a>
-        <div class="home-footer-social" aria-label="Social links">
-          <ox-icon-button kind="on-primary" icon-src="../assets/icons/logo_instagram.svg" label="Instagram" href="#"></ox-icon-button>
-          <ox-icon-button kind="on-primary" icon-src="../assets/icons/logo_linkedin.svg" label="LinkedIn" href="#"></ox-icon-button>
-        </div>
-      </div>
-
-      <div class="home-footer-columns">
-        <section class="home-footer-column" aria-label="Our programs">
-          <p class="text-copy-large-heavy-tight">Our programs</p>
-          <ul class="text-copy-medium-heavy-tight">
-            <li><ox-link href="#" kind="primary">SIXT+ Car Subscription</ox-link></li>
-            <li><ox-link href="#" kind="primary">SIXT ride</ox-link></li>
-            <li><ox-link href="#" kind="primary">Car rental deals</ox-link></li>
-            <li><ox-link href="#" kind="primary">SIXT ONE rewards program</ox-link></li>
-            <li><ox-link href="#" kind="primary">SIXT app</ox-link></li>
-          </ul>
-        </section>
-
-        <section class="home-footer-column" aria-label="SIXT for business">
-          <p class="text-copy-large-heavy-tight">SIXT for business</p>
-          <ul class="text-copy-medium-heavy-tight">
-            <li><ox-link href="#" kind="primary">Register my business</ox-link></li>
-            <li><ox-link href="#" kind="primary">Travel agencies</ox-link></li>
-            <li><ox-link href="#" kind="primary">Business Car Rental</ox-link></li>
-            <li><ox-link href="#" kind="primary">Business car alternatives</ox-link></li>
-          </ul>
-        </section>
-
-        <section class="home-footer-column" aria-label="About us">
-          <p class="text-copy-large-heavy-tight">About us</p>
-          <ul class="text-copy-medium-heavy-tight">
-            <li><ox-link href="#" kind="primary">SIXT group</ox-link></li>
-            <li><ox-link href="#" kind="primary">SIXT Magazine</ox-link></li>
-            <li><ox-link href="#" kind="primary">SIXT News</ox-link></li>
-            <li><ox-link href="#" kind="primary">Investor Relations</ox-link></li>
-            <li><ox-link href="#" kind="primary">Careers</ox-link></li>
-            <li><ox-link href="#" kind="primary">Regine Sixt Children's Aid Foundation</ox-link></li>
-          </ul>
-        </section>
-      </div>
-
-      <div class="home-footer-badges" aria-label="App downloads">
-        <a href="#" class="home-footer-badge-link" aria-label="Download on the App Store">
-          <img src="../assets/utils/app_store_black_en.svg" alt="Download on the App Store">
-        </a>
-        <a href="#" class="home-footer-badge-link" aria-label="Get it on Google Play">
-          <img src="../assets/utils/google_play_en.svg" alt="Get it on Google Play">
-        </a>
-      </div>
-
-      <div class="home-footer-legal" aria-label="Legal links">
-        <div class="home-footer-legal-links text-copy-medium-heavy-tight">
-          <ox-link href="#" kind="primary">Help</ox-link>
-          <ox-link href="#" kind="primary">Rental information</ox-link>
-          <ox-link href="#" kind="primary">SIXT for business</ox-link>
-          <ox-link href="#" kind="primary">SIXT partners</ox-link>
-          <ox-link href="#" kind="primary">SIXT Magazine</ox-link>
-          <ox-link href="#" kind="primary">Privacy</ox-link>
-          <ox-link href="#" kind="primary">Do not share or sell my personal information</ox-link>
-          <ox-link href="#" kind="primary">Terms &amp; conditions</ox-link>
-          <ox-link href="#" kind="primary">Customers with disabilities</ox-link>
-          <ox-link href="#" kind="primary">Cookie-Settings</ox-link>
-        </div>
-        <span class="home-footer-copyright text-copy-medium-regular-tight">&copy; Sixt 2026</span>
-      </div>
-    </div>
-  </footer>
+  <ox-home-footer></ox-home-footer>
 
   <script type="module" src="../scripts/pages/home.js"></script>
 </body>
