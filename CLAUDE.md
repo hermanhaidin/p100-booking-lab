@@ -268,8 +268,18 @@ Content data lives in `prototype/data/`. Each page's data is self-contained in a
 
 ### Naming convention
 
-- `{page}-{location-slug}.md` for location-specific data (e.g. `offer-list-munich-airport.md`)
-- `{page}-assets.md` for page-specific image URLs not yet embedded in content files (e.g. `home-assets.md`)
+- `{page}-{location-slug}.md` for location-specific pages (e.g. `offer-list-munich-airport.md`)
+- `{page}.md` for global pages (e.g. `home.md`)
+- Each file is fully self-contained — content text and image URLs together
+
+### Current data files
+
+| File | Page |
+|------|------|
+| `home.md` | Home |
+| `offer-list-munich-airport.md` | Offer list |
+| `protection-munich-airport.md` | Protection |
+| `add-ons-munich-airport.md` | Add-ons |
 
 ### Offer list data structure
 
@@ -293,6 +303,28 @@ To add a new location:
 3. Each file is fully self-contained — no shared asset maps needed
 
 
+## Pricing logic
+
+All prices in the funnel are derived at runtime from the selected offer's daily price and total price. **Never hardcode price values in HTML or data files** — they are computed from these formulas.
+
+### Booking options (`offer-list.js`)
+
+- **Stay flexible** surcharge: +5% of daily price per day (added to both daily and total display)
+- **Limited mileage** extra km charge: 0.5% of daily price per km
+
+### Protection packages (`protection.js`)
+
+Calculated from the total rental price passed in from offer-list (via URL param):
+
+| Package | Daily price | Displayed discount |
+|---------|------------|-------------------|
+| Basic | 5% of total | — |
+| Smart | 7.5% of total | −40% (original shown as `smartDaily / 0.6`) |
+| All Inclusive | 8.5% of total | −50% (original shown as `allInclusiveDaily / 0.5`) |
+
+- **Basic deductible**: 2× total rental price
+
+
 ## Creating new pages
 
 1. Copy `prototype/base.html` as your starting point
@@ -309,8 +341,8 @@ To add a new location:
 |------|--------|-------|
 | home | Done | Web Components + ox-carousel |
 | offer-list | Done | Web Components |
-| protection | Done | Web Components |
-| add-ons | Not built | Reference in `sources/sixt/crawl-2026-03/states/add-ons-*` |
+| protection | Done | Web Components. Data: `prototype/data/protection-munich-airport.md` |
+| add-ons | Not built | Data: `prototype/data/add-ons-munich-airport.md`. Reference in `sources/sixt/crawl-2026-03/states/add-ons-*` |
 | review-booking | Not built | Reference in `sources/sixt/crawl-2026-03/states/review-booking-*` |
 
 When building new pages, always use Web Components. All existing pages have been migrated.
