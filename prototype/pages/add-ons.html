@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Booking Prototype - Add-ons</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/all.css">
+  <script type="module" src="../components/index.js"></script>
+  <script type="module" src="../scripts/pages/add-ons.js"></script>
+</head>
+<body>
+  <ox-booking-header back-href="./protection.html" variant="step" step-title="Which add-ons do you need?" theme="option-light"></ox-booking-header>
+
+  <main class="addons-main">
+    <section class="layout-shell addons-top" aria-label="Add-ons summary">
+      <div class="addons-top__heading">
+        <ox-icon-button class="addons-top__back" icon="arrow_back_ios_new" label="Go back to protection" href="./protection.html" size="large"></ox-icon-button>
+        <h1 class="text-title-medium-heavy-caps">Which add-ons do you need?</h1>
+      </div>
+      <div class="addons-top__summary" aria-live="polite">
+        <div class="addons-top__summary-main">
+          <div class="addons-top__total-row">
+            <p class="addons-top__total-label text-copy-medium-heavy">Total:</p>
+            <ox-price id="addonsTotalTop" size="large" currency="$" integer="936" decimal=".75"></ox-price>
+          </div>
+          <ox-text-button class="addons-price-details" underlined>Price details</ox-text-button>
+        </div>
+        <ox-button id="addonsContinueTop" kind="brand" href="./review-booking.html">Continue</ox-button>
+      </div>
+    </section>
+
+    <ox-separator contrast="low" class="addons-divider" aria-hidden="true"></ox-separator>
+
+    <section class="layout-shell addons-content" aria-label="Add-on options">
+      <ox-banner kind="primary" icon="info" id="addonsNotice" class="addons-notice" role="status">
+        <p class="text-copy-medium-regular">Drivers must have held their driver's license for at least 1 year(s) for this vehicle</p>
+      </ox-banner>
+
+      <div class="addons-layout">
+        <div id="addonsCards" class="addons-cards"></div>
+        <aside aria-label="Your booking overview">
+          <ox-booking-overview class="addons-overview" id="addonsOverview">
+            <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about third party insurance">Third party insurance</ox-list-item>
+            <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about breakdown assistance">24/7 Breakdown assistance</ox-list-item>
+            <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about winter tires">Tires suitable for winter</ox-list-item>
+            <ox-list-item icon="check" id="addonsMileageLabel">Unlimited kilometers</ox-list-item>
+            <ox-list-item icon="check" id="addonsProtectionLabel" hidden></ox-list-item>
+            <ox-list-item icon="check" id="addonsBookingOptionLabel">Booking option: Best price - Pay now, cancel and rebook for a fee</ox-list-item>
+          </ox-booking-overview>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div class="addons-mobile-summary" aria-live="polite">
+    <div class="addons-mobile-summary__price">
+      <ox-price id="addonsTotalMobile" size="large" currency="$" integer="936" decimal=".75"></ox-price>
+      <ox-text-button class="addons-price-details" underlined>Price details</ox-text-button>
+    </div>
+    <ox-button id="addonsContinueMobile" kind="brand" href="./review-booking.html">Continue</ox-button>
+  </div>
+
+  <ox-booking-footer theme="option-light">
+    <ox-link slot="link" href="#">Help</ox-link>
+    <ox-link slot="link" href="#">Rental information</ox-link>
+    <ox-link slot="link" href="#">SIXT for business</ox-link>
+    <ox-link slot="link" href="#">SIXT partners</ox-link>
+    <ox-link slot="link" href="#">SIXT Magazine</ox-link>
+    <ox-link slot="link" href="#">Privacy</ox-link>
+    <ox-link slot="link" href="#">Do not share or sell my personal information</ox-link>
+    <ox-link slot="link" href="#">Terms &amp; conditions</ox-link>
+    <ox-link slot="link" href="#">Customers with disabilities</ox-link>
+    <ox-link slot="link" href="#">Cookie-Settings</ox-link>
+    <span slot="copyright">&copy; Sixt 2026</span>
+  </ox-booking-footer>
+</body>
+</html>

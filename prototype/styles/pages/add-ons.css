@@ -1,0 +1,242 @@
+.addons-main {
+  background-color: var(--color-surface-canvas);
+}
+
+.addons-top {
+  align-items: center;
+  display: grid;
+  gap: var(--spacing-sm);
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding-block: var(--spacing-2xs);
+}
+
+.addons-top__heading {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-xs);
+  min-width: 0;
+}
+
+.addons-top__heading h1 {
+  margin: 0;
+}
+
+.addons-top__summary {
+  align-items: center;
+  column-gap: var(--spacing-xs);
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.addons-top__summary-main {
+  display: grid;
+  justify-items: end;
+  row-gap: var(--spacing-3xs);
+}
+
+.addons-top__total-row {
+  align-items: baseline;
+  column-gap: var(--spacing-4xs);
+  display: inline-flex;
+}
+
+.addons-top__total-label {
+  margin: 0;
+  white-space: nowrap;
+}
+
+ox-text-button.addons-price-details {
+  justify-self: end;
+}
+
+#addonsContinueTop,
+#addonsContinueMobile {
+  width: 200px;
+}
+
+.addons-divider {
+  margin: 0;
+  margin-bottom: calc(-1 * var(--stroke-sm));
+  margin-inline: calc(50% - 50vw);
+  width: 100vw;
+}
+
+.addons-content {
+  padding-block: var(--spacing-sm) var(--spacing-lg);
+}
+
+.addons-notice {
+  margin-bottom: var(--spacing-sm);
+}
+
+.addons-layout {
+  display: block;
+}
+
+.addons-cards {
+  display: grid;
+  gap: var(--spacing-2xs);
+}
+
+.addons-overview {
+  margin-top: var(--spacing-xs);
+  position: sticky;
+  top: var(--spacing-xs);
+}
+
+.addons-mobile-summary {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .addons-top {
+    display: block;
+    padding-block: var(--spacing-xs);
+  }
+
+  .addons-top__summary {
+    display: none;
+  }
+
+  .addons-content {
+    padding-top: var(--spacing-xs);
+    padding-bottom: var(--spacing-xs);
+  }
+
+  .addons-notice {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .addons-layout {
+    gap: var(--spacing-xs);
+  }
+
+  .addons-overview {
+    margin-bottom: calc(var(--addons-mobile-summary-height, 85px));
+    position: static;
+  }
+
+  .addons-mobile-summary {
+    align-items: center;
+    background-color: var(--color-surface-canvas);
+    border-top: var(--stroke-sm) solid color-mix(in srgb, var(--color-content-secondary) 10%, transparent);
+    bottom: 0;
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: minmax(0, 1fr) auto;
+    left: 0;
+    padding: var(--spacing-xs);
+    position: fixed;
+    right: 0;
+    z-index: 20;
+  }
+
+  .addons-mobile-summary__price {
+    align-items: start;
+    display: grid;
+    gap: var(--spacing-3xs);
+    justify-items: start;
+    text-align: left;
+  }
+
+  .addons-mobile-summary__price ox-price {
+    margin: 0;
+  }
+
+  .addons-mobile-summary__price ox-text-button {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 649px) {
+  .addons-top__heading {
+    display: none;
+  }
+
+  .addons-top {
+    display: none;
+  }
+
+  .addons-divider {
+    display: none;
+  }
+}
+
+@media (min-width: 650px) and (max-width: 899px) {
+  .addons-top {
+    padding-block: var(--spacing-sm);
+  }
+
+  .addons-content {
+    padding-block: var(--spacing-xs);
+  }
+
+  .addons-notice {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .addons-layout {
+    display: grid;
+    gap: var(--spacing-xs);
+  }
+
+  .addons-overview {
+    margin-top: 0;
+  }
+
+  .addons-mobile-summary {
+    padding-inline: var(--spacing-lg);
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+  .addons-top {
+    padding-block: var(--spacing-xs);
+  }
+
+  .addons-content {
+    padding-block: var(--spacing-xs);
+  }
+
+  .addons-notice {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .addons-layout {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: minmax(0, 1fr) 300px;
+  }
+
+  .addons-overview {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .addons-top {
+    padding-block: var(--spacing-xs);
+  }
+
+  .addons-top__summary {
+    column-gap: var(--spacing-md);
+  }
+
+  .addons-content {
+    padding-block: var(--spacing-md);
+  }
+
+  .addons-notice {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .addons-layout {
+    display: grid;
+    gap: var(--spacing-md);
+    grid-template-columns: minmax(0, 1fr) 340px;
+  }
+
+  .addons-overview {
+    margin-top: 0;
+  }
+}

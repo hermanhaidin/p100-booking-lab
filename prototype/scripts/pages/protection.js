@@ -176,10 +176,37 @@ const syncNotice = () => {
   notice.hidden = minimumAge < 21;
 };
 
+const buildContinueHref = () => {
+  const options = getOptions();
+  const selectedOption = options.find((o) => o.id === state.selectedId);
+  const protectionTotal =
+    selectedOption && selectedOption.daily !== null
+      ? selectedOption.daily * rentalDays
+      : 0;
+  const grandTotal = total + protectionTotal;
+  const nextParams = new URLSearchParams();
+  nextParams.set("total", grandTotal.toFixed(2));
+  nextParams.set("daily", String(offerDaily));
+  nextParams.set("rentalDays", String(rentalDays));
+  nextParams.set("bookingOption", bookingOption);
+  nextParams.set("mileageType", mileageType);
+  if (mileageIncludedKm) nextParams.set("mileageIncludedKm", mileageIncludedKm);
+  if (mileageExtraPerKm) nextParams.set("mileageExtraPerKm", mileageExtraPerKm);
+  if (state.selectedId) nextParams.set("protectionPackage", state.selectedId);
+  return `./add-ons.html?${nextParams.toString()}`;
+};
+
 const syncContinueState = () => {
   const disabled = !state.selectedId;
-  continueTop.toggleAttribute("disabled", disabled);
-  continueMobile.toggleAttribute("disabled", disabled);
+  const href = disabled ? null : buildContinueHref();
+  for (const btn of [continueTop, continueMobile]) {
+    btn.toggleAttribute("disabled", disabled);
+    if (href) {
+      btn.setAttribute("href", href);
+    } else {
+      btn.removeAttribute("href");
+    }
+  }
 };
 
 const syncBookingOptionLabel = () => {

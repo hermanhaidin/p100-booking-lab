@@ -98,6 +98,7 @@ All components are registered via `prototype/components/index.js`.
 
 | Tag | File | Usage example |
 |-----|------|---------------|
+| `ox-add-on-card` | ox-add-on-card.js | `<ox-add-on-card addon-id="gps" title="GPS" price="10.91" price-suffix="/ day" icon="directions_car" details="Description..." control-type="switch"></ox-add-on-card>` |
 | `ox-badge` | ox-badge.js | `<ox-badge kind="brand" variant="solid" icon="star" preset="hot-offer-promo">Hot offer</ox-badge>` |
 | `ox-banner` | ox-banner.js | `<ox-banner kind="info" icon="info" title="Heading" dismissible>Body text</ox-banner>` |
 | `ox-booking-footer` | ox-booking-footer.js | `<ox-booking-footer><ox-link slot="link">Help</ox-link><span slot="copyright">&copy; Sixt 2026</span></ox-booking-footer>` |
@@ -120,6 +121,8 @@ All components are registered via `prototype/components/index.js`.
 | `ox-protection-group` | ox-protection-group.js | `<ox-protection-group><ox-protection-card ...></ox-protection-card></ox-protection-group>` |
 | `ox-radio-button` | ox-radio-button.js | `<ox-radio-button value="smart" checked disabled error></ox-radio-button>` |
 | `ox-separator` | ox-separator.js | `<ox-separator orientation="horizontal" size="small" contrast="low"></ox-separator>` |
+| `ox-stepper` | ox-stepper.js | `<ox-stepper value="0" min="0" max="5" disabled></ox-stepper>` |
+| `ox-switch` | ox-switch.js | `<ox-switch checked disabled></ox-switch>` |
 | `ox-text-button` | ox-text-button.js | `<ox-text-button kind="primary" size="large" icon="help_center" trailing-icon="arrow_forward" underlined>Label</ox-text-button>` |
 
 Check each component file's header comment for the full attribute API.
@@ -342,7 +345,7 @@ Calculated from the total rental price passed in from offer-list (via URL param)
 | home | Done | Web Components + ox-carousel |
 | offer-list | Done | Web Components |
 | protection | Done | Web Components. Data: `prototype/data/protection-munich-airport.md` |
-| add-ons | Not built | Data: `prototype/data/add-ons-munich-airport.md`. Reference in `sources/sixt/crawl-2026-03/states/add-ons-*` |
+| add-ons | Done | Web Components. Data: `prototype/data/add-ons-munich-airport.md` |
 | review-booking | Not built | Reference in `sources/sixt/crawl-2026-03/states/review-booking-*` |
 
 When building new pages, always use Web Components. All existing pages have been migrated.
