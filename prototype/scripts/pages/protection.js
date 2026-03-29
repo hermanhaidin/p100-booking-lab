@@ -193,6 +193,7 @@ const buildContinueHref = () => {
   if (mileageIncludedKm) nextParams.set("mileageIncludedKm", mileageIncludedKm);
   if (mileageExtraPerKm) nextParams.set("mileageExtraPerKm", mileageExtraPerKm);
   if (state.selectedId) nextParams.set("protectionPackage", state.selectedId);
+  if (minimumAge >= 21) nextParams.set("minimumAge", String(minimumAge));
   return `./add-ons.html?${nextParams.toString()}`;
 };
 

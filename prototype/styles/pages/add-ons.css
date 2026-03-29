@@ -31,7 +31,7 @@
 .addons-top__summary-main {
   display: grid;
   justify-items: end;
-  row-gap: var(--spacing-3xs);
+  row-gap: 0;
 }
 
 .addons-top__total-row {
@@ -75,7 +75,7 @@ ox-text-button.addons-price-details {
 
 .addons-cards {
   display: grid;
-  gap: var(--spacing-2xs);
+  gap: var(--spacing-xs);
 }
 
 .addons-overview {
@@ -204,8 +204,8 @@ ox-text-button.addons-price-details {
 
   .addons-layout {
     display: grid;
-    gap: var(--spacing-xs);
-    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: var(--spacing-2xl);
+    grid-template-columns: minmax(0, 1fr) 320px;
   }
 
   .addons-overview {
@@ -232,8 +232,8 @@ ox-text-button.addons-price-details {
 
   .addons-layout {
     display: grid;
-    gap: var(--spacing-md);
-    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: var(--spacing-3xl);
+    grid-template-columns: minmax(0, 1fr) 400px;
   }
 
   .addons-overview {

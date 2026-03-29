@@ -113,6 +113,28 @@ const syncNotice = () => {
   if (notice) notice.hidden = minimumAge < 21;
 };
 
+const buildBackHref = () => {
+  const backParams = new URLSearchParams();
+  const offerTotal = offerDaily * rentalDays;
+  backParams.set("total", offerTotal.toFixed(2));
+  backParams.set("daily", String(offerDaily));
+  backParams.set("rentalDays", String(rentalDays));
+  backParams.set("bookingOption", bookingOption);
+  backParams.set("mileageType", mileageType);
+  if (mileageIncludedKm) backParams.set("mileageIncludedKm", mileageIncludedKm);
+  if (mileageExtraPerKm) backParams.set("mileageExtraPerKm", mileageExtraPerKm);
+  if (minimumAge >= 21) backParams.set("minimumAge", String(minimumAge));
+  return `./protection.html?${backParams.toString()}`;
+};
+
+const syncBackLinks = () => {
+  const href = buildBackHref();
+  const header = document.querySelector("ox-booking-header");
+  if (header) header.setAttribute("back-href", href);
+  const backBtn = document.querySelector(".addons-top__back");
+  if (backBtn) backBtn.setAttribute("href", href);
+};
+
 const syncBookingOptionLabel = () => {
   if (!bookingOptionLabel) return;
   bookingOptionLabel.textContent =
@@ -204,6 +226,7 @@ window.addEventListener("resize", scheduleMobileSummarySync);
 renderCards();
 syncTotals();
 syncNotice();
+syncBackLinks();
 syncBookingOptionLabel();
 syncMileageLabel();
 syncProtectionLabel();

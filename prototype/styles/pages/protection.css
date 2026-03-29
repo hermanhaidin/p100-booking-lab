@@ -32,7 +32,7 @@
 .protection-top__summary-main {
   display: grid;
   justify-items: end;
-  row-gap: var(--spacing-3xs);
+  row-gap: 0;
 }
 
 .protection-top__total-row {
