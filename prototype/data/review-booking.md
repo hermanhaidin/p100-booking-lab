@@ -92,7 +92,7 @@
 - **Method 1**
     - ID: `credit-card`
     - Label: `Credit or debit card`
-    - Trailing icons: card brand logos (Visa, Mastercard, Amex)
+    - Trailing icon: `credit_card` (material symbol)
     - Expanded content (form fields):
         - Card number:
             - Label: `Card number`
@@ -135,14 +135,14 @@
 - **Method 2**
     - ID: `paypal`
     - Label: `PayPal`
-    - Trailing icon: PayPal logo
+    - Trailing icon: `payment_paypal_glyph_color.svg` (custom SVG)
     - Expanded content (text only):
         - `After clicking "Pay and book", you'll be redirected to PayPal to complete your payment. Please be aware that the renter needs to be the PayPal account holder. Additionally, a credit or debit card must be presented in the renter's name at pickup to secure the rental.`
 
 - **Method 3**
     - ID: `apple-pay`
     - Label: `Apple Pay`
-    - Trailing icon: Apple Pay mark
+    - Trailing icon: `payment_apple_pay_color.svg` (custom SVG)
     - Expanded content (text only):
         - `By selecting "Pay and book", you'll complete your payment securely through Apple Pay. Please be aware that a credit or debit card must be presented in the renter's name at pickup to secure the rental.`
 
