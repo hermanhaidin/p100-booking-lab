@@ -57,12 +57,13 @@
         - Autocomplete: `tel-country-code`
         - Required: yes
         - Default: `🇺🇸 +1`
-        - Most popular: `🇺🇸 United States +1`, `🇬🇧 United Kingdom +44`, `🇨🇭 Switzerland +41`, `🇪🇸 Spain +34`, `🇳🇱 Netherlands +31`, `🇮🇹 Italy +39`, `🇩🇪 Germany +49`, `🇫🇷 France +33`
+        - Most popular: `🇺🇸 United States +1`, `🇬🇧 United Kingdom +44`, `🇨🇭 Switzerland +41`, `🇪🇸 Spain +34`, `🇳🇱 Netherlands +31`, `🇮🇹 Italy +39`, `🇩🇪 Germany +49`, `🇫🇷 France +33`, `🇨🇦 Canada +1`, `🇧🇪 Belgium +32`, `🇦🇹 Austria +43`
         - Behavior: full alphabetical list shown on open; typing filters results
     - Phone number:
         - Label: `Phone number`
         - Input type: `tel`
         - Autocomplete: `tel-national`
+        - Max length: 15
         - Required: yes
         - Layout: remaining width after country code
 
@@ -70,6 +71,14 @@
     - Label: `I am 23 years of age or older`
     - Input type: `checkbox`
     - Checked by default: yes
+
+- **Date of birth** (visible only when age checkbox is unchecked)
+    - Label: `Date of birth`
+    - Input type: `text`
+    - Autocomplete: `bday`
+    - Format: `DD/MM/YYYY`
+    - Required: yes (when visible)
+    - Layout: half width (left)
 
 - **Notice** (banner)
     - Icon: `info`
@@ -89,33 +98,38 @@
             - Label: `Card number`
             - Input type: `text`
             - Autocomplete: `cc-number`
+            - Max length: 16 digits
+            - Format: groups of 4 digits separated by spaces (e.g. `5168 1111 5168 1111`, auto-formatted)
             - Required: yes
             - Layout: full width
-        - Cardholder name (first):
-            - Label: `First name`
+        - Cardholder name:
+            - Label: `Cardholder name`
             - Input type: `text`
-            - Autocomplete: `cc-given-name`
+            - Autocomplete: `cc-name`
             - Required: yes
-            - Layout: half width (left)
-        - Cardholder name (last):
-            - Label: `Last name`
-            - Input type: `text`
-            - Autocomplete: `cc-family-name`
-            - Required: yes
-            - Layout: half width (right)
+            - Layout: full width
         - Expiration date:
             - Label: `Expiration date`
             - Input type: `text`
             - Autocomplete: `cc-exp`
+            - Format: `MM/YY` (slash is auto-inserted after two digits)
             - Required: yes
             - Layout: half width (left)
         - CVV:
             - Label: `CVV`
             - Input type: `text`
             - Autocomplete: `cc-csc`
+            - Max length: 4
             - Required: yes
             - Trailing icon: `help` (tooltip)
             - Layout: half width (right)
+    - Accepted card icons (in order):
+        - `payment_american_express_color.svg` (custom SVG)
+        - `payment_mastercard_color.svg` (custom SVG)
+        - `payment_discover_color.svg` (custom SVG)
+        - `payment_jcb_color.svg` (custom SVG)
+        - `payment_visa_color.svg` (custom SVG)
+        - `payment_diners_club_color.svg` (custom SVG)
     - Notice: `Please be aware that a credit or debit card must be presented at pickup to secure your rental. The renter needs to be the card holder.`
 
 - **Method 2**
@@ -169,6 +183,7 @@
     - Label: `Zip`
     - Input type: `text`
     - Autocomplete: `postal-code`
+    - Max length: 10
     - Required: yes
     - Layout: half width (left)
 
@@ -183,9 +198,9 @@
     - Label: `State`
     - Input type: `combobox`
     - Autocomplete: `address-level1`
-    - Required: yes (when country has states/regions)
+    - Required: yes
     - Layout: full width
-    - Note: visibility may depend on selected country
+    - Visible only when country is `United States`
 
 
 ## Flight number
@@ -196,6 +211,7 @@
     - Label: `Flight number (optional)`
     - Input type: `text`
     - Autocomplete: `off`
+    - Max length: 10
     - Required: no
     - Layout: full width
 
