@@ -283,6 +283,7 @@ Content data lives in `prototype/data/`. Each page's data is self-contained in a
 | `offer-list-munich-airport.md` | Offer list |
 | `protection-munich-airport.md` | Protection |
 | `add-ons-munich-airport.md` | Add-ons |
+| `review-booking.md` | Review booking |
 
 ### Offer list data structure
 
@@ -346,7 +347,7 @@ Calculated from the total rental price passed in from offer-list (via URL param)
 | offer-list | Done | Web Components |
 | protection | Done | Web Components. Data: `prototype/data/protection-munich-airport.md` |
 | add-ons | Done | Web Components. Data: `prototype/data/add-ons-munich-airport.md` |
-| review-booking | Not built | Reference in `sources/sixt/crawl-2026-03/states/review-booking-*` |
+| review-booking | Not built | Data: `prototype/data/review-booking.md`. Reference in `sources/sixt/crawl-2026-03/states/review-booking-*` |
 
 When building new pages, always use Web Components. All existing pages have been migrated.
 
