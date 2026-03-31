@@ -388,31 +388,32 @@ if (fieldCountry) {
 
 /* --- Credit card auto-formatting --- */
 
-const formatCardNumber = (input) => {
-  if (!input) return;
-  const el = input.shadowRoot?.querySelector("input") || input;
+/* Auto-format helpers — use host-level listeners that query the current
+   native input each time, so they survive shadow DOM re-renders. */
 
-  const handler = () => {
-    const raw = el.value.replace(/\D/g, "").slice(0, 16);
+const formatCardNumber = (host) => {
+  if (!host) return;
+  host.addEventListener("input", () => {
+    const el = host.shadowRoot?.querySelector("input");
+    if (!el) return;
+    const cursorPos = el.selectionStart;
+    const oldValue = el.value;
+    const raw = oldValue.replace(/\D/g, "").slice(0, 16);
     const groups = raw.match(/.{1,4}/g) || [];
     const formatted = groups.join(" ");
-    if (el.value !== formatted) {
-      const cursorPos = el.selectionStart;
+    if (oldValue !== formatted) {
       el.value = formatted;
-      /* Try to restore cursor position sensibly */
-      const newPos = Math.min(cursorPos + (formatted.length - el.value.length), formatted.length);
+      const newPos = Math.min(cursorPos + (formatted.length - oldValue.length), formatted.length);
       el.setSelectionRange(newPos, newPos);
     }
-  };
-
-  el.addEventListener("input", handler);
+  });
 };
 
-const formatExpiry = (input) => {
-  if (!input) return;
-  const el = input.shadowRoot?.querySelector("input") || input;
-
-  const handler = () => {
+const formatExpiry = (host) => {
+  if (!host) return;
+  host.addEventListener("input", () => {
+    const el = host.shadowRoot?.querySelector("input");
+    if (!el) return;
     let raw = el.value.replace(/\D/g, "").slice(0, 4);
     if (raw.length >= 3) {
       raw = raw.slice(0, 2) + "/" + raw.slice(2);
@@ -420,16 +421,14 @@ const formatExpiry = (input) => {
     if (el.value !== raw) {
       el.value = raw;
     }
-  };
-
-  el.addEventListener("input", handler);
+  });
 };
 
-const formatDob = (input) => {
-  if (!input) return;
-  const el = input.shadowRoot?.querySelector("input") || input;
-
-  const handler = () => {
+const formatDob = (host) => {
+  if (!host) return;
+  host.addEventListener("input", () => {
+    const el = host.shadowRoot?.querySelector("input");
+    if (!el) return;
     let raw = el.value.replace(/\D/g, "").slice(0, 8);
     if (raw.length >= 5) {
       raw = raw.slice(0, 2) + "/" + raw.slice(2, 4) + "/" + raw.slice(4);
@@ -439,9 +438,7 @@ const formatDob = (input) => {
     if (el.value !== raw) {
       el.value = raw;
     }
-  };
-
-  el.addEventListener("input", handler);
+  });
 };
 
 /* --- Form validation --- */
@@ -564,24 +561,42 @@ const validateForm = () => {
 const touchedFields = new WeakSet();
 
 document.addEventListener("focusin", (e) => {
-  const tf = e.target.closest("ox-text-field");
-  if (tf) touchedFields.add(tf);
+  const field = e.target.closest("ox-text-field") || e.target.closest("ox-combobox");
+  if (field) touchedFields.add(field);
 });
 
 document.addEventListener("focusout", (e) => {
   const tf = e.target.closest("ox-text-field");
-  if (!tf || !touchedFields.has(tf)) return;
+  if (tf && touchedFields.has(tf)) {
+    const native = tf.shadowRoot?.querySelector("input");
+    const val = native?.value?.trim() || "";
+    const isRequired = tf.hasAttribute("required");
 
-  const native = tf.shadowRoot?.querySelector("input");
-  const val = native?.value?.trim() || "";
-  const isRequired = tf.hasAttribute("required");
+    if (isRequired && !val) {
+      setFieldError(tf, "Invalid entry or required field");
+    } else if (tf === fieldEmail && val && !isValidEmail(val)) {
+      setFieldError(tf, "Enter a valid email");
+    } else if (tf === fieldDob && val && !isValidDob(val)) {
+      setFieldError(tf, "Enter a valid date of birth");
+    }
+    return;
+  }
 
-  if (isRequired && !val) {
-    setFieldError(tf, "Invalid entry or required field");
-  } else if (tf === fieldEmail && val && !isValidEmail(val)) {
-    setFieldError(tf, "Enter a valid email");
-  } else if (tf === fieldDob && val && !isValidDob(val)) {
-    setFieldError(tf, "Enter a valid date of birth");
+  const combo = e.target.closest("ox-combobox");
+  if (combo && touchedFields.has(combo)) {
+    const isRequired = combo.hasAttribute("required");
+    const val = combo.getAttribute("value");
+    if (isRequired && !val) {
+      setFieldError(combo, "Invalid entry or required field");
+    }
+  }
+});
+
+/* Clear combobox errors on selection */
+document.addEventListener("change", (e) => {
+  const combo = e.target.closest("ox-combobox");
+  if (combo && combo.hasAttribute("error") && combo.getAttribute("value")) {
+    clearFieldError(combo);
   }
 });
 
@@ -599,7 +614,12 @@ if (payAndBook) {
 
 /* --- Init --- */
 
+let initialized = false;
+
 const init = () => {
+  if (initialized) return;
+  initialized = true;
+
   syncTotals();
   syncSummaries();
   syncLabels();
@@ -607,33 +627,39 @@ const init = () => {
   syncBackLinks();
   initComboboxes();
 
-  /* Deferred: set up auto-formatting after custom elements upgrade */
-  requestAnimationFrame(() => {
-    formatCardNumber(fieldCardNumber);
-    formatExpiry(fieldExpiry);
-    formatDob(fieldDob);
+  /* Host-level auto-formatting — survives shadow DOM re-renders */
+  formatCardNumber(fieldCardNumber);
+  formatExpiry(fieldExpiry);
+  formatDob(fieldDob);
 
-    /* Block space key in card number field */
-    const cardNumInput = fieldCardNumber?.shadowRoot?.querySelector("input");
-    if (cardNumInput) {
-      cardNumInput.addEventListener("keydown", (e) => {
+  /* Deferred: set up native-input-dependent features after first render */
+  requestAnimationFrame(() => {
+
+    /* Block space key in card number field — delegate via shadowRoot */
+    if (fieldCardNumber) {
+      fieldCardNumber.shadowRoot.addEventListener("keydown", (e) => {
         if (e.key === " ") e.preventDefault();
       });
     }
 
     /* CVV masking — show dots instead of digits */
-    const cvvInput = fieldCvv?.shadowRoot?.querySelector("input");
-    if (cvvInput) {
-      cvvInput.style.webkitTextSecurity = "disc";
-      cvvInput.style.textSecurity = "disc";
-    }
+    const applyCvvMask = () => {
+      const cvvInput = fieldCvv?.shadowRoot?.querySelector("input");
+      if (cvvInput) {
+        cvvInput.style.webkitTextSecurity = "disc";
+        cvvInput.style.textSecurity = "disc";
+      }
+    };
+    applyCvvMask();
+    if (fieldCvv) new MutationObserver(applyCvvMask).observe(fieldCvv.shadowRoot, { childList: true });
 
-    /* Phone number — accept only digits */
-    const phoneInput = fieldPhone?.shadowRoot?.querySelector("input");
-    if (phoneInput) {
-      phoneInput.addEventListener("input", () => {
-        const raw = phoneInput.value.replace(/\D/g, "");
-        if (phoneInput.value !== raw) phoneInput.value = raw;
+    /* Phone number — accept only digits, delegate via host */
+    if (fieldPhone) {
+      fieldPhone.addEventListener("input", () => {
+        const el = fieldPhone.shadowRoot?.querySelector("input");
+        if (!el) return;
+        const raw = el.value.replace(/\D/g, "");
+        if (el.value !== raw) el.value = raw;
       });
     }
 
