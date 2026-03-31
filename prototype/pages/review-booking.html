@@ -10,7 +10,7 @@
   <script type="module" src="../scripts/pages/review-booking.js"></script>
 </head>
 <body>
-  <ox-booking-header back-href="./add-ons.html" variant="step" step-title="REVIEW YOUR BOOKING"></ox-booking-header>
+  <ox-booking-header back-href="./add-ons.html" variant="step" step-title="REVIEW YOUR BOOKING" theme="option-light"></ox-booking-header>
 
   <main class="review-main">
     <!-- Top bar (desktop only): heading + total + price details -->
@@ -34,7 +34,7 @@
     <section class="layout-shell review-mobile-summary">
       <ox-booking-summary id="reviewMobileSummary"
         vehicle-title="BMW 3 Series Touring"
-        vehicle-subtitle="or similar | GWAR"
+        vehicle-subtitle="or similar"
         vehicle-image=""
         studio-bg="https://img.sixt.com/1600/6f09b0e8-6820-4ac0-bedd-5797e9814c18.jpg"
         pickup-location="Munich Airport"
@@ -69,14 +69,14 @@
                 <ox-text-field id="fieldLastName" label="Last name" type="text" autocomplete="family-name" required></ox-text-field>
               </div>
               <div class="review-fields__row review-fields__phone-row">
-                <ox-combobox id="fieldCountryCode" label="Country" required></ox-combobox>
+                <ox-combobox id="fieldCountryCode" label="Country" required dropdown-width="400px"></ox-combobox>
                 <ox-text-field id="fieldPhone" label="Phone number" type="tel" autocomplete="tel-national" maxlength="15" required></ox-text-field>
               </div>
-              <label class="review-checkbox-row">
+              <div class="review-checkbox-row" id="ageCheckboxRow">
                 <ox-checkbox id="ageCheckbox" checked value="age-23"></ox-checkbox>
                 <span class="text-copy-medium-regular">I am 23 years of age or older</span>
-              </label>
-              <ox-text-field id="fieldDob" label="Date of birth" type="text" autocomplete="bday" required hidden></ox-text-field>
+              </div>
+              <ox-text-field id="fieldDob" label="Date of birth" type="text" autocomplete="bday" maxlength="10" required hidden></ox-text-field>
               <ox-banner kind="primary" icon="info">
                 <p class="text-copy-medium-regular">Drivers must have held their driver's license for at least 1 year(s) for this vehicle</p>
               </ox-banner>
@@ -103,7 +103,7 @@
                     <img src="../assets/icons/payment_visa_color.svg" alt="Visa">
                     <img src="../assets/icons/payment_diners_club_color.svg" alt="Diners Club">
                   </div>
-                  <p class="text-copy-small-regular review-cc-notice">Please be aware that a credit or debit card must be presented at pickup to secure your rental. The renter needs to be the card holder.</p>
+                  <p class="text-copy-medium-regular review-cc-notice">Please be aware that a credit or debit card must be presented at pickup to secure your rental. The renter needs to be the card holder.</p>
                 </div>
               </ox-payment-method>
               <ox-payment-method value="paypal" label="PayPal" trailing-icon-src="../assets/icons/payment_paypal_glyph_color.svg">
@@ -114,8 +114,8 @@
               </ox-payment-method>
             </ox-payment-method-group>
             <div class="review-pay-later">
-              <ox-text-button kind="brand" underlined>No payment method on hand?</ox-text-button>
-              <p class="review-pay-later-row text-copy-small-regular">Switch to Pay Later and have free cancellation included for just $ 0.00 more. <span class="material-symbols-outlined review-pay-later-info" aria-hidden="true">info</span></p>
+              <p class="review-pay-later-title text-copy-medium-heavy">No payment method on hand?</p>
+              <p class="review-pay-later-row text-copy-small-regular">Switch to Pay Later and have free cancellation included for just $ 0.00 more. <ox-icon-button kind="primary" size="small" icon="info" label="More info"></ox-icon-button></p>
             </div>
           </section>
 
@@ -174,7 +174,7 @@
         <aside class="review-sidebar" aria-label="Booking summary">
           <ox-booking-summary id="reviewSidebar"
             vehicle-title="BMW 3 Series Touring"
-            vehicle-subtitle="or similar | GWAR"
+            vehicle-subtitle="or similar"
             vehicle-image=""
             studio-bg="https://img.sixt.com/1600/6f09b0e8-6820-4ac0-bedd-5797e9814c18.jpg"
             pickup-location="Munich Airport"
@@ -197,7 +197,7 @@
     </section>
   </main>
 
-  <ox-booking-footer>
+  <ox-booking-footer theme="option-light">
     <ox-link slot="link" href="#">Help</ox-link>
     <ox-link slot="link" href="#">Rental information</ox-link>
     <ox-link slot="link" href="#">SIXT for business</ox-link>

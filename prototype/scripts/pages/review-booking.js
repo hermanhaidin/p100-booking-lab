@@ -44,8 +44,8 @@ const mileageIncludedKm = params.get("mileageIncludedKm") || "";
 const mileageExtraPerKm = params.get("mileageExtraPerKm") || "";
 const protectionPackage = params.get("protectionPackage") || "";
 const vehicleTitle = params.get("vehicleTitle") || "BMW 3 Series Touring";
-const vehicleSubtitle = params.get("vehicleSubtitle") || "or similar | GWAR";
-const vehicleImage = params.get("vehicleImage") || "";
+const vehicleSubtitle = params.get("vehicleSubtitle") || "or similar";
+const vehicleImage = params.get("vehicleImage") || "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/752x500/bmw-3-stw-black-2023.png";
 const studioBg = params.get("studioBg") || "https://img.sixt.com/1600/6f09b0e8-6820-4ac0-bedd-5797e9814c18.jpg";
 
 let addonsData = [];
@@ -186,7 +186,7 @@ const buildBackHref = () => {
   if (mileageExtraPerKm) backParams.set("mileageExtraPerKm", mileageExtraPerKm);
   if (protectionPackage) backParams.set("protectionPackage", protectionPackage);
   if (vehicleTitle !== "BMW 3 Series Touring") backParams.set("vehicleTitle", vehicleTitle);
-  if (vehicleSubtitle !== "or similar | GWAR") backParams.set("vehicleSubtitle", vehicleSubtitle);
+  if (vehicleSubtitle !== "or similar") backParams.set("vehicleSubtitle", vehicleSubtitle);
   if (vehicleImage) backParams.set("vehicleImage", vehicleImage);
   if (addonsData.length) backParams.set("addons", JSON.stringify(addonsData));
   return `./add-ons.html?${backParams.toString()}`;
@@ -201,73 +201,73 @@ const syncBackLinks = () => {
 /* --- Country code combobox --- */
 
 const POPULAR_COUNTRY_CODES = [
-  { value: "+1", label: "United States +1", leading: "🇺🇸", group: "Most popular" },
-  { value: "+44", label: "United Kingdom +44", leading: "🇬🇧", group: "Most popular" },
-  { value: "+41", label: "Switzerland +41", leading: "🇨🇭", group: "Most popular" },
-  { value: "+34", label: "Spain +34", leading: "🇪🇸", group: "Most popular" },
-  { value: "+31", label: "Netherlands +31", leading: "🇳🇱", group: "Most popular" },
-  { value: "+39", label: "Italy +39", leading: "🇮🇹", group: "Most popular" },
-  { value: "+49", label: "Germany +49", leading: "🇩🇪", group: "Most popular" },
-  { value: "+33", label: "France +33", leading: "🇫🇷", group: "Most popular" },
-  { value: "+1-CA", label: "Canada +1", leading: "🇨🇦", group: "Most popular" },
-  { value: "+32", label: "Belgium +32", leading: "🇧🇪", group: "Most popular" },
-  { value: "+43", label: "Austria +43", leading: "🇦🇹", group: "Most popular" },
+  { value: "+1", label: "United States +1", displayValue: "+1", leading: "🇺🇸", group: "Most popular" },
+  { value: "+44", label: "United Kingdom +44", displayValue: "+44", leading: "🇬🇧", group: "Most popular" },
+  { value: "+41", label: "Switzerland +41", displayValue: "+41", leading: "🇨🇭", group: "Most popular" },
+  { value: "+34", label: "Spain +34", displayValue: "+34", leading: "🇪🇸", group: "Most popular" },
+  { value: "+31", label: "Netherlands +31", displayValue: "+31", leading: "🇳🇱", group: "Most popular" },
+  { value: "+39", label: "Italy +39", displayValue: "+39", leading: "🇮🇹", group: "Most popular" },
+  { value: "+49", label: "Germany +49", displayValue: "+49", leading: "🇩🇪", group: "Most popular" },
+  { value: "+33", label: "France +33", displayValue: "+33", leading: "🇫🇷", group: "Most popular" },
+  { value: "+1-CA", label: "Canada +1", displayValue: "+1", leading: "🇨🇦", group: "Most popular" },
+  { value: "+32", label: "Belgium +32", displayValue: "+32", leading: "🇧🇪", group: "Most popular" },
+  { value: "+43", label: "Austria +43", displayValue: "+43", leading: "🇦🇹", group: "Most popular" },
 ];
 
 const ALL_COUNTRY_CODES = [
-  { value: "+93", label: "Afghanistan +93", leading: "🇦🇫" },
-  { value: "+355", label: "Albania +355", leading: "🇦🇱" },
-  { value: "+213", label: "Algeria +213", leading: "🇩🇿" },
-  { value: "+61", label: "Australia +61", leading: "🇦🇺" },
-  { value: "+43-all", label: "Austria +43", leading: "🇦🇹" },
-  { value: "+32-all", label: "Belgium +32", leading: "🇧🇪" },
-  { value: "+55", label: "Brazil +55", leading: "🇧🇷" },
-  { value: "+359", label: "Bulgaria +359", leading: "🇧🇬" },
-  { value: "+1-CA-all", label: "Canada +1", leading: "🇨🇦" },
-  { value: "+56", label: "Chile +56", leading: "🇨🇱" },
-  { value: "+86", label: "China +86", leading: "🇨🇳" },
-  { value: "+57", label: "Colombia +57", leading: "🇨🇴" },
-  { value: "+385", label: "Croatia +385", leading: "🇭🇷" },
-  { value: "+420", label: "Czech Republic +420", leading: "🇨🇿" },
-  { value: "+45", label: "Denmark +45", leading: "🇩🇰" },
-  { value: "+20", label: "Egypt +20", leading: "🇪🇬" },
-  { value: "+358", label: "Finland +358", leading: "🇫🇮" },
-  { value: "+33-all", label: "France +33", leading: "🇫🇷" },
-  { value: "+49-all", label: "Germany +49", leading: "🇩🇪" },
-  { value: "+30", label: "Greece +30", leading: "🇬🇷" },
-  { value: "+36", label: "Hungary +36", leading: "🇭🇺" },
-  { value: "+354", label: "Iceland +354", leading: "🇮🇸" },
-  { value: "+91", label: "India +91", leading: "🇮🇳" },
-  { value: "+62", label: "Indonesia +62", leading: "🇮🇩" },
-  { value: "+353", label: "Ireland +353", leading: "🇮🇪" },
-  { value: "+972", label: "Israel +972", leading: "🇮🇱" },
-  { value: "+39-all", label: "Italy +39", leading: "🇮🇹" },
-  { value: "+81", label: "Japan +81", leading: "🇯🇵" },
-  { value: "+82", label: "South Korea +82", leading: "🇰🇷" },
-  { value: "+352", label: "Luxembourg +352", leading: "🇱🇺" },
-  { value: "+60", label: "Malaysia +60", leading: "🇲🇾" },
-  { value: "+52", label: "Mexico +52", leading: "🇲🇽" },
-  { value: "+31-all", label: "Netherlands +31", leading: "🇳🇱" },
-  { value: "+64", label: "New Zealand +64", leading: "🇳🇿" },
-  { value: "+47", label: "Norway +47", leading: "🇳🇴" },
-  { value: "+48", label: "Poland +48", leading: "🇵🇱" },
-  { value: "+351", label: "Portugal +351", leading: "🇵🇹" },
-  { value: "+40", label: "Romania +40", leading: "🇷🇴" },
-  { value: "+7", label: "Russia +7", leading: "🇷🇺" },
-  { value: "+966", label: "Saudi Arabia +966", leading: "🇸🇦" },
-  { value: "+65", label: "Singapore +65", leading: "🇸🇬" },
-  { value: "+421", label: "Slovakia +421", leading: "🇸🇰" },
-  { value: "+386", label: "Slovenia +386", leading: "🇸🇮" },
-  { value: "+27", label: "South Africa +27", leading: "🇿🇦" },
-  { value: "+34-all", label: "Spain +34", leading: "🇪🇸" },
-  { value: "+46", label: "Sweden +46", leading: "🇸🇪" },
-  { value: "+41-all", label: "Switzerland +41", leading: "🇨🇭" },
-  { value: "+66", label: "Thailand +66", leading: "🇹🇭" },
-  { value: "+90", label: "Turkey +90", leading: "🇹🇷" },
-  { value: "+380", label: "Ukraine +380", leading: "🇺🇦" },
-  { value: "+971", label: "United Arab Emirates +971", leading: "🇦🇪" },
-  { value: "+44-all", label: "United Kingdom +44", leading: "🇬🇧" },
-  { value: "+1-all", label: "United States +1", leading: "🇺🇸" },
+  { value: "+93", label: "Afghanistan +93", displayValue: "+93", leading: "🇦🇫" },
+  { value: "+355", label: "Albania +355", displayValue: "+355", leading: "🇦🇱" },
+  { value: "+213", label: "Algeria +213", displayValue: "+213", leading: "🇩🇿" },
+  { value: "+61", label: "Australia +61", displayValue: "+61", leading: "🇦🇺" },
+  { value: "+43-all", label: "Austria +43", displayValue: "+43", leading: "🇦🇹" },
+  { value: "+32-all", label: "Belgium +32", displayValue: "+32", leading: "🇧🇪" },
+  { value: "+55", label: "Brazil +55", displayValue: "+55", leading: "🇧🇷" },
+  { value: "+359", label: "Bulgaria +359", displayValue: "+359", leading: "🇧🇬" },
+  { value: "+1-CA-all", label: "Canada +1", displayValue: "+1", leading: "🇨🇦" },
+  { value: "+56", label: "Chile +56", displayValue: "+56", leading: "🇨🇱" },
+  { value: "+86", label: "China +86", displayValue: "+86", leading: "🇨🇳" },
+  { value: "+57", label: "Colombia +57", displayValue: "+57", leading: "🇨🇴" },
+  { value: "+385", label: "Croatia +385", displayValue: "+385", leading: "🇭🇷" },
+  { value: "+420", label: "Czech Republic +420", displayValue: "+420", leading: "🇨🇿" },
+  { value: "+45", label: "Denmark +45", displayValue: "+45", leading: "🇩🇰" },
+  { value: "+20", label: "Egypt +20", displayValue: "+20", leading: "🇪🇬" },
+  { value: "+358", label: "Finland +358", displayValue: "+358", leading: "🇫🇮" },
+  { value: "+33-all", label: "France +33", displayValue: "+33", leading: "🇫🇷" },
+  { value: "+49-all", label: "Germany +49", displayValue: "+49", leading: "🇩🇪" },
+  { value: "+30", label: "Greece +30", displayValue: "+30", leading: "🇬🇷" },
+  { value: "+36", label: "Hungary +36", displayValue: "+36", leading: "🇭🇺" },
+  { value: "+354", label: "Iceland +354", displayValue: "+354", leading: "🇮🇸" },
+  { value: "+91", label: "India +91", displayValue: "+91", leading: "🇮🇳" },
+  { value: "+62", label: "Indonesia +62", displayValue: "+62", leading: "🇮🇩" },
+  { value: "+353", label: "Ireland +353", displayValue: "+353", leading: "🇮🇪" },
+  { value: "+972", label: "Israel +972", displayValue: "+972", leading: "🇮🇱" },
+  { value: "+39-all", label: "Italy +39", displayValue: "+39", leading: "🇮🇹" },
+  { value: "+81", label: "Japan +81", displayValue: "+81", leading: "🇯🇵" },
+  { value: "+82", label: "South Korea +82", displayValue: "+82", leading: "🇰🇷" },
+  { value: "+352", label: "Luxembourg +352", displayValue: "+352", leading: "🇱🇺" },
+  { value: "+60", label: "Malaysia +60", displayValue: "+60", leading: "🇲🇾" },
+  { value: "+52", label: "Mexico +52", displayValue: "+52", leading: "🇲🇽" },
+  { value: "+31-all", label: "Netherlands +31", displayValue: "+31", leading: "🇳🇱" },
+  { value: "+64", label: "New Zealand +64", displayValue: "+64", leading: "🇳🇿" },
+  { value: "+47", label: "Norway +47", displayValue: "+47", leading: "🇳🇴" },
+  { value: "+48", label: "Poland +48", displayValue: "+48", leading: "🇵🇱" },
+  { value: "+351", label: "Portugal +351", displayValue: "+351", leading: "🇵🇹" },
+  { value: "+40", label: "Romania +40", displayValue: "+40", leading: "🇷🇴" },
+  { value: "+7", label: "Russia +7", displayValue: "+7", leading: "🇷🇺" },
+  { value: "+966", label: "Saudi Arabia +966", displayValue: "+966", leading: "🇸🇦" },
+  { value: "+65", label: "Singapore +65", displayValue: "+65", leading: "🇸🇬" },
+  { value: "+421", label: "Slovakia +421", displayValue: "+421", leading: "🇸🇰" },
+  { value: "+386", label: "Slovenia +386", displayValue: "+386", leading: "🇸🇮" },
+  { value: "+27", label: "South Africa +27", displayValue: "+27", leading: "🇿🇦" },
+  { value: "+34-all", label: "Spain +34", displayValue: "+34", leading: "🇪🇸" },
+  { value: "+46", label: "Sweden +46", displayValue: "+46", leading: "🇸🇪" },
+  { value: "+41-all", label: "Switzerland +41", displayValue: "+41", leading: "🇨🇭" },
+  { value: "+66", label: "Thailand +66", displayValue: "+66", leading: "🇹🇭" },
+  { value: "+90", label: "Turkey +90", displayValue: "+90", leading: "🇹🇷" },
+  { value: "+380", label: "Ukraine +380", displayValue: "+380", leading: "🇺🇦" },
+  { value: "+971", label: "United Arab Emirates +971", displayValue: "+971", leading: "🇦🇪" },
+  { value: "+44-all", label: "United Kingdom +44", displayValue: "+44", leading: "🇬🇧" },
+  { value: "+1-all", label: "United States +1", displayValue: "+1", leading: "🇺🇸" },
 ];
 
 const COUNTRY_CODE_OPTIONS = [...POPULAR_COUNTRY_CODES, ...ALL_COUNTRY_CODES];
@@ -351,6 +351,19 @@ const initComboboxes = () => {
 
 /* --- Age checkbox toggle --- */
 
+const ageCheckboxRow = document.getElementById("ageCheckboxRow");
+
+if (ageCheckboxRow && ageCheckbox) {
+  ageCheckboxRow.addEventListener("click", (e) => {
+    if (e.target.closest("ox-checkbox")) return;
+    const input = ageCheckbox.shadowRoot?.querySelector("input");
+    if (input && !input.disabled) {
+      input.checked = !input.checked;
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  });
+}
+
 if (ageCheckbox) {
   ageCheckbox.addEventListener("change", (e) => {
     const checked = e.detail?.checked ?? ageCheckbox.hasAttribute("checked");
@@ -396,6 +409,25 @@ const formatExpiry = (input) => {
   const handler = () => {
     let raw = el.value.replace(/\D/g, "").slice(0, 4);
     if (raw.length >= 3) {
+      raw = raw.slice(0, 2) + "/" + raw.slice(2);
+    }
+    if (el.value !== raw) {
+      el.value = raw;
+    }
+  };
+
+  el.addEventListener("input", handler);
+};
+
+const formatDob = (input) => {
+  if (!input) return;
+  const el = input.shadowRoot?.querySelector("input") || input;
+
+  const handler = () => {
+    let raw = el.value.replace(/\D/g, "").slice(0, 8);
+    if (raw.length >= 5) {
+      raw = raw.slice(0, 2) + "/" + raw.slice(2, 4) + "/" + raw.slice(4);
+    } else if (raw.length >= 3) {
       raw = raw.slice(0, 2) + "/" + raw.slice(2);
     }
     if (el.value !== raw) {
@@ -521,6 +553,7 @@ const init = () => {
   requestAnimationFrame(() => {
     formatCardNumber(fieldCardNumber);
     formatExpiry(fieldExpiry);
+    formatDob(fieldDob);
   });
 };
 

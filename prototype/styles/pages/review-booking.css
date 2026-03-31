@@ -91,6 +91,7 @@ ox-text-button.review-price-details {
   cursor: pointer;
   display: inline-flex;
   gap: var(--spacing-3xs);
+  margin-left: var(--spacing-3xs);
 }
 
 .review-pay-later {
@@ -105,10 +106,9 @@ ox-text-button.review-price-details {
   gap: var(--spacing-4xs);
 }
 
-.review-pay-later-info {
-  color: var(--color-content-secondary);
-  font-size: 16px;
-  vertical-align: middle;
+.review-pay-later-title {
+  color: var(--color-content-extended-brand);
+  margin: 0;
 }
 
 /* Payment card icons row */
@@ -116,7 +116,7 @@ ox-text-button.review-price-details {
   align-items: center;
   display: flex;
   gap: var(--spacing-3xs);
-  margin-top: var(--spacing-3xs);
+  margin-top: var(--spacing-4xs);
 }
 
 .review-card-icons img {
@@ -126,7 +126,7 @@ ox-text-button.review-price-details {
 
 .review-cc-notice {
   color: var(--color-content-secondary);
-  margin: var(--spacing-3xs) 0 0;
+  margin: 0;
 }
 
 /* --- Total & fine print --- */
@@ -221,6 +221,10 @@ ox-text-button.review-price-details {
     padding-block: var(--spacing-sm);
   }
 
+  .review-top__summary {
+    display: none;
+  }
+
   .review-content {
     padding-block: var(--spacing-xs);
   }
@@ -243,6 +247,7 @@ ox-text-button.review-price-details {
   }
 
   .review-sidebar {
+    align-self: start;
     margin-top: 0;
   }
 }
@@ -264,6 +269,7 @@ ox-text-button.review-price-details {
   }
 
   .review-sidebar {
+    align-self: start;
     margin-top: 0;
   }
 }

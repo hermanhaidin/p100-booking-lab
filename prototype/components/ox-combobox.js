@@ -1,7 +1,7 @@
-/* Combobox — dropdown selector with search
-   Dropdown with search/filter for country codes, countries, states.
-   Options set programmatically via setOptions().
-   API: <ox-combobox label="Country" value="US" required></ox-combobox> */
+/* Combobox — dropdown selector with inline filtering
+   Type in the field to filter options. Options set programmatically via setOptions().
+   Each option can have a displayValue for compact display in the field.
+   API: <ox-combobox label="Country" value="US" required dropdown-width="400px"></ox-combobox> */
 
 import { baseStyles } from './shared/base-styles.js';
 
@@ -24,18 +24,23 @@ styles.replaceSync(`
     display: flex;
     gap: var(--spacing-3xs);
     height: 52px;
-    padding: 0 var(--spacing-xs);
+    padding: 0 var(--spacing-2xs);
     position: relative;
     transition: border-color 150ms ease;
   }
 
   .field:focus-within {
+    border-color: transparent;
     outline: var(--stroke-lg) solid var(--color-overlay-focus);
-    outline-offset: var(--stroke-md);
+    outline-offset: 0;
   }
 
   :host([error]) .field {
     border-color: var(--color-content-extended-error);
+  }
+
+  :host([error]) .field:focus-within {
+    border-color: transparent;
   }
 
   :host([disabled]) .field {
@@ -44,38 +49,70 @@ styles.replaceSync(`
     pointer-events: none;
   }
 
+  .leading {
+    align-items: center;
+    align-self: center;
+    display: flex;
+    flex: 0 0 auto;
+    height: 24px;
+    justify-content: center;
+    width: 24px;
+  }
+
+  .field:not(.has-value) .leading {
+    display: none;
+  }
+
+  .content {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    height: 100%;
+  }
+
+  .native {
+    background: transparent;
+    border: 0;
+    box-sizing: border-box;
+    caret-color: var(--color-overlay-focus);
+    color: var(--color-content-primary);
+    cursor: pointer;
+    height: 100%;
+    outline: none;
+    overflow: hidden;
+    padding: 20px 0 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  :host([open]) .native {
+    cursor: text;
+  }
+
   .label {
     color: var(--color-content-secondary);
-    left: var(--spacing-xs);
+    left: 0;
     pointer-events: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     transform-origin: left top;
-    transition: transform 150ms ease;
+    transition: top 150ms ease, transform 150ms ease, color 150ms ease;
   }
 
-  .field.has-value .label {
-    transform: translateY(-130%) scale(0.75);
-  }
-
-  .leading {
-    flex: 0 0 auto;
-    padding-top: 10px;
-  }
-
-  .display {
+  /* Float label up: on focus, when has value, or when open */
+  .field:focus-within .label,
+  .native:not(:placeholder-shown) + .label,
+  :host([open]) .label {
     color: var(--color-content-primary);
-    flex: 1;
-    overflow: hidden;
-    padding-top: 10px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    top: var(--spacing-4xs);
+    transform: scale(0.75);
   }
 
-  .field:not(.has-value) .display,
-  .field:not(.has-value) .leading {
-    display: none;
+  /* Keep label primary when field has value after blur */
+  .native:not(:placeholder-shown) + .label {
+    color: var(--color-content-primary);
   }
 
   .arrow {
@@ -107,26 +144,6 @@ styles.replaceSync(`
 
   :host([open]) .dropdown {
     display: block;
-  }
-
-  .search-wrap {
-    background-color: var(--color-surface-container);
-    padding: var(--spacing-3xs);
-    position: sticky;
-    top: 0;
-    z-index: 1;
-  }
-
-  .search {
-    background-color: var(--color-surface-secondary-container);
-    border: 0;
-    border-radius: var(--radius-sm);
-    box-sizing: border-box;
-    color: var(--color-content-primary);
-    height: 40px;
-    outline: none;
-    padding: 0 var(--spacing-xs);
-    width: 100%;
   }
 
   .group-heading {
@@ -186,7 +203,7 @@ styles.replaceSync(`
 `);
 
 class OxCombobox extends HTMLElement {
-  static observedAttributes = ['label', 'value', 'required', 'error', 'error-text', 'disabled', 'name'];
+  static observedAttributes = ['label', 'value', 'required', 'error', 'error-text', 'disabled', 'name', 'dropdown-width'];
 
   _options = [];
   _selectedOption = null;
@@ -214,6 +231,7 @@ class OxCombobox extends HTMLElement {
       this._syncError();
     } else {
       this.render();
+      this._listen();
     }
   }
 
@@ -233,15 +251,18 @@ class OxCombobox extends HTMLElement {
   _syncDisplay() {
     const field = this.shadowRoot.querySelector('.field');
     const leading = this.shadowRoot.querySelector('.leading');
-    const display = this.shadowRoot.querySelector('.display');
+    const native = this.shadowRoot.querySelector('.native');
     if (!field) return;
 
     if (this._selectedOption) {
       field.classList.add('has-value');
       if (leading) leading.textContent = this._selectedOption.leading || '';
-      if (display) display.textContent = this._selectedOption.label || '';
+      if (native && !this.hasAttribute('open')) {
+        native.value = this._selectedOption.displayValue || this._selectedOption.label || '';
+      }
     } else {
       field.classList.remove('has-value');
+      if (native && !this.hasAttribute('open')) native.value = '';
     }
 
     /* Update aria-selected in dropdown */
@@ -262,18 +283,31 @@ class OxCombobox extends HTMLElement {
   }
 
   _open() {
+    if (this.hasAttribute('open')) return;
     this.setAttribute('open', '');
     document.addEventListener('click', this._onOutsideClick);
-    requestAnimationFrame(() => {
-      const search = this.shadowRoot.querySelector('.search');
-      if (search) { search.value = ''; search.focus(); }
-      this._filterOptions('');
-    });
+    const native = this.shadowRoot.querySelector('.native');
+    if (native) {
+      native.removeAttribute('readonly');
+      native.value = '';
+      requestAnimationFrame(() => native.focus());
+    }
+    this._filterOptions('');
   }
 
   _close() {
+    if (!this.hasAttribute('open')) return;
     this.removeAttribute('open');
     document.removeEventListener('click', this._onOutsideClick);
+    const native = this.shadowRoot.querySelector('.native');
+    if (native) {
+      native.setAttribute('readonly', '');
+      if (this._selectedOption) {
+        native.value = this._selectedOption.displayValue || this._selectedOption.label || '';
+      } else {
+        native.value = '';
+      }
+    }
   }
 
   _toggle() {
@@ -291,7 +325,11 @@ class OxCombobox extends HTMLElement {
     this.dispatchEvent(new CustomEvent('change', {
       bubbles: true,
       composed: true,
-      detail: { value, label: this._selectedOption?.label || '' },
+      detail: {
+        value,
+        label: this._selectedOption?.label || '',
+        displayValue: this._selectedOption?.displayValue || this._selectedOption?.label || '',
+      },
     }));
   }
 
@@ -326,18 +364,32 @@ class OxCombobox extends HTMLElement {
 
   _listen() {
     const field = this.shadowRoot.querySelector('.field');
-    if (field) {
-      field.addEventListener('click', (e) => {
+    const native = this.shadowRoot.querySelector('.native');
+    const arrow = this.shadowRoot.querySelector('.arrow');
+
+    if (arrow) {
+      arrow.addEventListener('click', (e) => {
         e.stopPropagation();
         this._toggle();
       });
     }
 
-    const search = this.shadowRoot.querySelector('.search');
-    if (search) {
-      search.addEventListener('input', () => this._filterOptions(search.value));
-      search.addEventListener('click', (e) => e.stopPropagation());
-      search.addEventListener('keydown', (e) => {
+    if (field) {
+      field.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!this.hasAttribute('open')) {
+          this._open();
+        }
+      });
+    }
+
+    if (native) {
+      native.addEventListener('input', () => {
+        if (this.hasAttribute('open')) {
+          this._filterOptions(native.value);
+        }
+      });
+      native.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') this._close();
       });
     }
@@ -352,6 +404,7 @@ class OxCombobox extends HTMLElement {
     /* Prevent dropdown clicks from closing */
     const dropdown = this.shadowRoot.querySelector('.dropdown');
     if (dropdown) {
+      dropdown.addEventListener('mousedown', (e) => e.preventDefault());
       dropdown.addEventListener('click', (e) => e.stopPropagation());
     }
   }
@@ -361,6 +414,7 @@ class OxCombobox extends HTMLElement {
     const hasError = this.hasAttribute('error');
     const errorText = this.getAttribute('error-text') || '';
     const errorHidden = !(hasError && errorText);
+    const dropdownWidth = this.getAttribute('dropdown-width');
 
     /* Build option HTML grouped */
     let optionsHtml = '';
@@ -391,18 +445,19 @@ class OxCombobox extends HTMLElement {
     const selected = this._selectedOption;
     const hasValue = !!selected;
     const fieldClass = `field${hasValue ? ' has-value' : ''}`;
+    const displayValue = selected ? (selected.displayValue || selected.label || '') : '';
+    const dropdownStyle = dropdownWidth ? ` style="width: ${dropdownWidth}; right: auto;"` : '';
 
     this.shadowRoot.innerHTML = `
-      <div class="${fieldClass}" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">
-        <span class="leading">${selected?.leading || ''}</span>
-        <span class="display text-copy-medium-regular">${selected?.label || ''}</span>
-        <label class="label text-copy-medium-regular">${label}</label>
+      <div class="${fieldClass}" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+        <span class="leading text-copy-xlarge-regular">${selected?.leading || ''}</span>
+        <div class="content">
+          <input class="native text-copy-large-regular" placeholder=" " readonly value="${displayValue}" autocomplete="off">
+          <label class="label text-copy-large-regular">${label}</label>
+        </div>
         <span class="arrow material-symbols-outlined" aria-hidden="true">expand_more</span>
       </div>
-      <div class="dropdown" role="listbox">
-        <div class="search-wrap">
-          <input class="search text-copy-medium-regular" type="text" placeholder="Search..." aria-label="Search options">
-        </div>
+      <div class="dropdown" role="listbox"${dropdownStyle}>
         <div class="options">${optionsHtml}</div>
       </div>
       <div class="error-row" ${errorHidden ? 'hidden' : ''}>

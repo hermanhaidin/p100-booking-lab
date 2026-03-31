@@ -57,7 +57,7 @@ styles.replaceSync(`
 
   .native:focus-visible + .control {
     outline: var(--stroke-lg) solid var(--color-overlay-focus);
-    outline-offset: var(--stroke-md);
+    outline-offset: 0;
   }
 
   .native:disabled + .control {
@@ -83,11 +83,11 @@ styles.replaceSync(`
   }
 
   .check-icon {
-    color: var(--color-on-content-primary);
+    color: var(--color-on-content-on-primary);
     display: none;
-    font-size: 16px;
-    height: 16px;
-    width: 16px;
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
   }
 
   .native:checked + .control .check-icon {
@@ -140,6 +140,7 @@ class OxCheckbox extends HTMLElement {
         input.dispatchEvent(new Event('change', { bubbles: true }));
       }
     });
+
   }
 
   render() {

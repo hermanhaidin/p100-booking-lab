@@ -4,7 +4,7 @@
 
    Attributes:
      vehicle-title    — vehicle name
-     vehicle-subtitle — "or similar | GWAR"
+     vehicle-subtitle — "or similar"
      vehicle-image    — car image URL
      studio-bg        — dark studio background image URL
      pickup-location  — pickup location name
@@ -19,7 +19,7 @@
 
    API: <ox-booking-summary
           vehicle-title="BMW 3 Series Touring"
-          vehicle-subtitle="or similar | GWAR"
+          vehicle-subtitle="or similar"
           vehicle-image="https://example.com/car.png"
           studio-bg="https://img.sixt.com/..."
           pickup-location="Munich Airport"
@@ -47,30 +47,38 @@ styles.replaceSync(`
 
   :host([hidden]) { display: none; }
 
-  /* Vehicle hero image area */
-  .vehicle-hero {
+  /* Vehicle header — compact thumb + text */
+  .vehicle-header {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-3xs);
+    padding: var(--spacing-xs);
+  }
+
+  .vehicle-thumb {
     align-items: center;
     background-color: var(--color-global-black);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    border-radius: var(--radius-sm);
     display: flex;
+    flex-shrink: 0;
+    height: 52px;
     justify-content: center;
-    min-height: 180px;
-    padding: var(--spacing-xs);
-    position: relative;
+    overflow: hidden;
+    width: 64px;
   }
 
-  .vehicle-img {
+  .vehicle-thumb-img {
     display: block;
-    max-height: 140px;
+    max-height: 100%;
     max-width: 100%;
     object-fit: contain;
-    position: relative;
   }
 
-  .vehicle-info {
-    padding: var(--spacing-xs);
+  .vehicle-text {
+    min-width: 0;
   }
 
   .vehicle-title, .vehicle-subtitle {
@@ -95,21 +103,50 @@ styles.replaceSync(`
     margin: 0 0 var(--spacing-3xs);
   }
 
-  .location-row {
+  /* Timeline pickup/return */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .timeline-item {
     display: flex;
     gap: var(--spacing-3xs);
   }
 
-  .location-row + .location-row {
-    margin-top: var(--spacing-3xs);
+  .timeline-track {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 24px;
   }
 
-  .location-label {
+  .timeline-icon {
+    color: var(--color-content-secondary);
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+  }
+
+  .timeline-line {
+    background-color: color-mix(in srgb, var(--color-content-secondary) 25%, transparent);
+    flex: 1;
+    margin-block: var(--spacing-5xs);
+    min-height: var(--spacing-3xs);
+    width: var(--stroke-sm);
+  }
+
+  .timeline-content p {
     margin: 0;
   }
 
-  .location-info p {
-    margin: 0;
+  .timeline-label {
+    color: var(--color-content-secondary);
+  }
+
+  .timeline-item:last-child .timeline-content {
+    padding-bottom: 0;
   }
 
   .pay-row {
@@ -263,7 +300,7 @@ class OxBookingSummary extends HTMLElement {
     const totalPrice      = this.getAttribute('total-price') || '';
     const totalSecondary  = this.getAttribute('total-secondary') || '';
 
-    const heroBgStyle = studioBg
+    const thumbBgStyle = studioBg
       ? `background-image: url('${studioBg}');`
       : '';
 
@@ -285,28 +322,39 @@ class OxBookingSummary extends HTMLElement {
 
       <!-- Full content (always visible on desktop, toggle on mobile) -->
       <div class="full">
-        <div class="vehicle-hero" style="${heroBgStyle}">
-          <img class="vehicle-img" src="${vehicleImage}" alt="${vehicleTitle}">
-        </div>
-        <div class="vehicle-info">
-          <p class="text-copy-large-heavy-tight vehicle-title">${vehicleTitle}</p>
-          <p class="text-copy-small-regular vehicle-subtitle">${vehicleSubtitle}</p>
+        <div class="vehicle-header">
+          <div class="vehicle-thumb" style="${thumbBgStyle}">
+            <img class="vehicle-thumb-img" src="${vehicleImage}" alt="${vehicleTitle}">
+          </div>
+          <div class="vehicle-text">
+            <p class="text-copy-large-heavy-tight vehicle-title">${vehicleTitle}</p>
+            <p class="text-copy-small-regular vehicle-subtitle">${vehicleSubtitle}</p>
+          </div>
         </div>
         <hr class="divider">
         <div class="section">
           <p class="section-heading text-copy-medium-heavy-tight">Pickup and return</p>
-          <div class="location-row">
-            <div class="location-info">
-              <p class="location-label text-copy-small-heavy">Pickup</p>
-              <p class="text-copy-medium-regular">${pickupLocation}</p>
-              <p class="text-copy-small-regular">${pickupDate}</p>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-track">
+                <span class="material-symbols-outlined timeline-icon" filled>store</span>
+                <div class="timeline-line"></div>
+              </div>
+              <div class="timeline-content">
+                <p class="text-copy-small-regular timeline-label">Pickup</p>
+                <p class="text-copy-medium-heavy">${pickupLocation}</p>
+                <p class="text-copy-small-regular">${pickupDate}</p>
+              </div>
             </div>
-          </div>
-          <div class="location-row">
-            <div class="location-info">
-              <p class="location-label text-copy-small-heavy">Return</p>
-              <p class="text-copy-medium-regular">${returnLocation}</p>
-              <p class="text-copy-small-regular">${returnDate}</p>
+            <div class="timeline-item">
+              <div class="timeline-track">
+                <span class="material-symbols-outlined timeline-icon" filled>store</span>
+              </div>
+              <div class="timeline-content">
+                <p class="text-copy-small-regular timeline-label">Return</p>
+                <p class="text-copy-medium-heavy">${returnLocation}</p>
+                <p class="text-copy-small-regular">${returnDate}</p>
+              </div>
             </div>
           </div>
         </div>

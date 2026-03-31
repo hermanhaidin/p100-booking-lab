@@ -65,6 +65,7 @@ styles.replaceSync(`
   :host([selected]) .expanded {
     max-height: 600px;
     opacity: 1;
+    overflow: visible;
     padding-top: var(--spacing-xs);
   }
 `);

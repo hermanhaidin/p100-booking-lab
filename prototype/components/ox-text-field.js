@@ -25,9 +25,9 @@ styles.replaceSync(`
   }
 
   .field:focus-within {
-    border-color: var(--color-content-primary);
+    border-color: transparent;
     outline: var(--stroke-lg) solid var(--color-overlay-focus);
-    outline-offset: var(--stroke-md);
+    outline-offset: 0;
   }
 
   :host([error]) .field {
@@ -35,7 +35,7 @@ styles.replaceSync(`
   }
 
   :host([error]) .field:focus-within {
-    border-color: var(--color-content-extended-error);
+    border-color: transparent;
   }
 
   :host([disabled]) .field {
@@ -46,47 +46,65 @@ styles.replaceSync(`
   .native {
     background: transparent;
     border: 0;
+    border-radius: inherit;
     box-sizing: border-box;
+    caret-color: var(--color-overlay-focus);
     color: var(--color-content-primary);
     height: 100%;
     outline: none;
-    padding: 20px var(--spacing-xs) 4px;
+    padding: 20px var(--spacing-2xs) 4px;
     width: 100%;
   }
 
   :host([trailing-icon]) .native {
-    padding-right: calc(var(--spacing-xs) + 24px + var(--spacing-3xs));
+    padding-right: calc(var(--spacing-2xs) + 24px + var(--spacing-3xs));
+  }
+
+  .leading {
+    align-items: center;
+    display: flex;
+    height: 24px;
+    justify-content: center;
+    left: var(--spacing-2xs);
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+  }
+
+  :host([leading-icon]) .native {
+    padding-left: calc(var(--spacing-2xs) + 24px + var(--spacing-3xs));
+  }
+
+  :host([leading-icon]) .label {
+    left: calc(var(--spacing-2xs) + 24px + var(--spacing-3xs));
   }
 
   .label {
     color: var(--color-content-secondary);
-    left: var(--spacing-xs);
+    left: var(--spacing-2xs);
     pointer-events: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     transform-origin: left top;
-    transition: transform 150ms ease, color 150ms ease;
-  }
-
-  .field:focus-within .label {
-    color: var(--color-content-primary);
+    transition: top 150ms ease, transform 150ms ease, color 150ms ease;
   }
 
   .field:focus-within .label,
   .native:not(:placeholder-shown) + .label {
-    transform: translateY(-130%) scale(0.75);
+    color: var(--color-content-primary);
+    top: var(--spacing-4xs);
+    transform: scale(0.75);
   }
 
   .trailing {
-    color: var(--color-content-secondary);
-    font-size: 24px;
-    height: 24px;
     position: absolute;
-    right: var(--spacing-xs);
+    right: var(--spacing-2xs);
     top: 50%;
     transform: translateY(-50%);
-    width: 24px;
+    z-index: 1;
   }
 
   .error-row {
@@ -113,7 +131,7 @@ class OxTextField extends HTMLElement {
   static observedAttributes = [
     'label', 'type', 'autocomplete', 'maxlength', 'required',
     'error', 'error-text', 'trailing-icon', 'trailing-label',
-    'value', 'disabled', 'name',
+    'leading-icon', 'value', 'disabled', 'name',
   ];
 
   constructor() {
@@ -193,6 +211,7 @@ class OxTextField extends HTMLElement {
     const name = this.getAttribute('name') || '';
     const trailingIcon = this.getAttribute('trailing-icon');
     const trailingLabel = this.getAttribute('trailing-label') || '';
+    const leadingIcon = this.getAttribute('leading-icon');
     const hasError = this.hasAttribute('error');
     const errorText = this.getAttribute('error-text') || '';
 
@@ -200,16 +219,21 @@ class OxTextField extends HTMLElement {
     const mlAttr = maxlength ? ` maxlength="${maxlength}"` : '';
     const nameAttr = name ? ` name="${name}"` : '';
 
+    const leadingHtml = leadingIcon
+      ? `<span class="leading material-symbols-outlined">${leadingIcon}</span>`
+      : '';
+
     const trailingHtml = trailingIcon
-      ? `<span class="trailing material-symbols-outlined" aria-hidden="true" title="${trailingLabel}">${trailingIcon}</span>`
+      ? `<ox-icon-button class="trailing" kind="primary" size="large" icon="${trailingIcon}" label="${trailingLabel}"></ox-icon-button>`
       : '';
 
     const errorHidden = !(hasError && errorText);
 
     this.shadowRoot.innerHTML = `
       <div class="field">
-        <input class="native text-copy-medium-regular" type="${type}" placeholder=" "${acAttr}${mlAttr}${nameAttr} value="${value}" ${disabled ? 'disabled' : ''}>
-        <label class="label text-copy-medium-regular">${label}</label>
+        ${leadingHtml}
+        <input class="native text-copy-large-regular" type="${type}" placeholder=" "${acAttr}${mlAttr}${nameAttr} value="${value}" ${disabled ? 'disabled' : ''}>
+        <label class="label text-copy-large-regular">${label}</label>
         ${trailingHtml}
       </div>
       <div class="error-row" ${errorHidden ? 'hidden' : ''}>
