@@ -70,6 +70,9 @@ const fieldCardName = document.getElementById("fieldCardName");
 const fieldFirstName = document.getElementById("fieldFirstName");
 const fieldLastName = document.getElementById("fieldLastName");
 const fieldExpiry = document.getElementById("fieldExpiry");
+const fieldEmail = document.getElementById("fieldEmail");
+const fieldPhone = document.getElementById("fieldPhone");
+const fieldCvv = document.getElementById("fieldCvv");
 const payAndBook = document.getElementById("payAndBook");
 const cancellationFee = document.getElementById("cancellationFee");
 const paymentGroup = document.getElementById("paymentGroup");
@@ -443,6 +446,22 @@ const formatDob = (input) => {
 
 /* --- Form validation --- */
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const isValidEmail = (value) => EMAIL_RE.test(value.trim());
+
+const isValidDob = (value) => {
+  const parts = value.split("/");
+  if (parts.length !== 3) return false;
+  const [dd, mm, yyyy] = parts.map(Number);
+  if (!dd || !mm || !yyyy) return false;
+  if (mm < 1 || mm > 12) return false;
+  if (dd < 1 || dd > 31) return false;
+  const currentYear = new Date().getFullYear();
+  if (yyyy < 1900 || yyyy > currentYear) return false;
+  return true;
+};
+
 const REQUIRED_FIELDS = [
   "fieldEmail", "fieldFirstName", "fieldLastName", "fieldPhone",
 ];
@@ -450,6 +469,16 @@ const REQUIRED_FIELDS = [
 const REQUIRED_CC_FIELDS = [
   "fieldCardNumber", "fieldCardName", "fieldExpiry", "fieldCvv",
 ];
+
+const setFieldError = (field, message) => {
+  field.setAttribute("error", "");
+  field.setAttribute("error-text", message);
+};
+
+const clearFieldError = (field) => {
+  field.removeAttribute("error");
+  field.removeAttribute("error-text");
+};
 
 const validateForm = () => {
   let firstError = null;
@@ -481,12 +510,16 @@ const validateForm = () => {
     const currentValue = nativeInput?.value || value;
 
     if (!currentValue.trim()) {
-      field.setAttribute("error", "");
-      field.setAttribute("error-text", "Invalid entry or required field");
+      setFieldError(field, "Invalid entry or required field");
+      if (!firstError) firstError = field;
+    } else if (id === "fieldEmail" && !isValidEmail(currentValue)) {
+      setFieldError(field, "Enter a valid email");
+      if (!firstError) firstError = field;
+    } else if (id === "fieldDob" && !isValidDob(currentValue)) {
+      setFieldError(field, "Enter a valid date of birth");
       if (!firstError) firstError = field;
     } else {
-      field.removeAttribute("error");
-      field.removeAttribute("error-text");
+      clearFieldError(field);
     }
   }
 
@@ -494,24 +527,20 @@ const validateForm = () => {
   for (const combo of [fieldCountryCode, fieldCountry]) {
     if (!combo || combo.hidden) continue;
     if (!combo.getAttribute("value")) {
-      combo.setAttribute("error", "");
-      combo.setAttribute("error-text", "Invalid entry or required field");
+      setFieldError(combo, "Invalid entry or required field");
       if (!firstError) firstError = combo;
     } else {
-      combo.removeAttribute("error");
-      combo.removeAttribute("error-text");
+      clearFieldError(combo);
     }
   }
 
   /* Validate state if visible */
   if (fieldState && !fieldState.hidden) {
     if (!fieldState.getAttribute("value")) {
-      fieldState.setAttribute("error", "");
-      fieldState.setAttribute("error-text", "Invalid entry or required field");
+      setFieldError(fieldState, "Invalid entry or required field");
       if (!firstError) firstError = fieldState;
     } else {
-      fieldState.removeAttribute("error");
-      fieldState.removeAttribute("error-text");
+      clearFieldError(fieldState);
     }
   }
 
@@ -529,6 +558,32 @@ const validateForm = () => {
 
   return true;
 };
+
+/* --- Blur validation for required fields --- */
+
+const touchedFields = new WeakSet();
+
+document.addEventListener("focusin", (e) => {
+  const tf = e.target.closest("ox-text-field");
+  if (tf) touchedFields.add(tf);
+});
+
+document.addEventListener("focusout", (e) => {
+  const tf = e.target.closest("ox-text-field");
+  if (!tf || !touchedFields.has(tf)) return;
+
+  const native = tf.shadowRoot?.querySelector("input");
+  const val = native?.value?.trim() || "";
+  const isRequired = tf.hasAttribute("required");
+
+  if (isRequired && !val) {
+    setFieldError(tf, "Invalid entry or required field");
+  } else if (tf === fieldEmail && val && !isValidEmail(val)) {
+    setFieldError(tf, "Enter a valid email");
+  } else if (tf === fieldDob && val && !isValidDob(val)) {
+    setFieldError(tf, "Enter a valid date of birth");
+  }
+});
 
 /* --- Pay and Book CTA --- */
 
@@ -563,6 +618,37 @@ const init = () => {
     if (cardNumInput) {
       cardNumInput.addEventListener("keydown", (e) => {
         if (e.key === " ") e.preventDefault();
+      });
+    }
+
+    /* CVV masking — show dots instead of digits */
+    const cvvInput = fieldCvv?.shadowRoot?.querySelector("input");
+    if (cvvInput) {
+      cvvInput.style.webkitTextSecurity = "disc";
+      cvvInput.style.textSecurity = "disc";
+    }
+
+    /* Phone number — accept only digits */
+    const phoneInput = fieldPhone?.shadowRoot?.querySelector("input");
+    if (phoneInput) {
+      phoneInput.addEventListener("input", () => {
+        const raw = phoneInput.value.replace(/\D/g, "");
+        if (phoneInput.value !== raw) phoneInput.value = raw;
+      });
+    }
+
+    /* Clear error on 2+ chars typed — delegated via composed input events */
+    const allTextFields = document.querySelectorAll("ox-text-field");
+    for (const tf of allTextFields) {
+      tf.addEventListener("input", (e) => {
+        const val = (e.detail?.value || "").trim();
+        if (tf.hasAttribute("error") && val.length >= 2) {
+          if (tf === fieldEmail) {
+            if (isValidEmail(val)) clearFieldError(tf);
+          } else {
+            clearFieldError(tf);
+          }
+        }
       });
     }
 

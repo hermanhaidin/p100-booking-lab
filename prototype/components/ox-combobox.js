@@ -36,11 +36,13 @@ styles.replaceSync(`
   }
 
   :host([error]) .field {
-    border-color: var(--color-content-extended-error);
+    border-color: transparent;
+    outline: var(--stroke-lg) solid var(--color-content-extended-error);
+    outline-offset: 0;
   }
 
   :host([error]) .field:focus-within {
-    border-color: transparent;
+    outline-color: var(--color-overlay-focus);
   }
 
   :host([disabled]) .field {
@@ -59,7 +61,8 @@ styles.replaceSync(`
     width: 24px;
   }
 
-  .field:not(.has-value) .leading {
+  .field:not(.has-value) .leading,
+  .leading:empty {
     display: none;
   }
 
@@ -116,7 +119,7 @@ styles.replaceSync(`
   }
 
   .arrow {
-    color: var(--color-content-secondary);
+    color: var(--color-content-primary);
     flex: 0 0 auto;
     transition: transform 150ms ease;
   }
@@ -197,6 +200,7 @@ styles.replaceSync(`
   .error-icon {
     flex: 0 0 auto;
     font-size: 16px;
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
     height: 16px;
     width: 16px;
   }
@@ -322,6 +326,8 @@ class OxCombobox extends HTMLElement {
     this.setAttribute('value', value);
     this._syncSelection();
     this._close();
+    const native = this.shadowRoot.querySelector('.native');
+    if (native) native.blur();
     this.dispatchEvent(new CustomEvent('change', {
       bubbles: true,
       composed: true,
@@ -462,7 +468,7 @@ class OxCombobox extends HTMLElement {
       </div>
       <div class="error-row" ${errorHidden ? 'hidden' : ''}>
         <span class="error-icon material-symbols-outlined">error</span>
-        <span class="error-text text-copy-small-heavy">${errorText}</span>
+        <span class="error-text text-copy-small-regular">${errorText}</span>
       </div>`;
 
     this._syncDisplay();
