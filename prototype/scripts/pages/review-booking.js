@@ -66,6 +66,9 @@ const fieldCountryCode = document.getElementById("fieldCountryCode");
 const fieldCountry = document.getElementById("fieldCountry");
 const fieldState = document.getElementById("fieldState");
 const fieldCardNumber = document.getElementById("fieldCardNumber");
+const fieldCardName = document.getElementById("fieldCardName");
+const fieldFirstName = document.getElementById("fieldFirstName");
+const fieldLastName = document.getElementById("fieldLastName");
 const fieldExpiry = document.getElementById("fieldExpiry");
 const payAndBook = document.getElementById("payAndBook");
 const cancellationFee = document.getElementById("cancellationFee");
@@ -554,6 +557,43 @@ const init = () => {
     formatCardNumber(fieldCardNumber);
     formatExpiry(fieldExpiry);
     formatDob(fieldDob);
+
+    /* Block space key in card number field */
+    const cardNumInput = fieldCardNumber?.shadowRoot?.querySelector("input");
+    if (cardNumInput) {
+      cardNumInput.addEventListener("keydown", (e) => {
+        if (e.key === " ") e.preventDefault();
+      });
+    }
+
+    /* Auto-fill cardholder name from driver first + last name */
+    const cardNameInput = fieldCardName?.shadowRoot?.querySelector("input");
+    const firstNameInput = fieldFirstName?.shadowRoot?.querySelector("input");
+    const lastNameInput = fieldLastName?.shadowRoot?.querySelector("input");
+
+    if (cardNameInput && firstNameInput && lastNameInput) {
+      let cardNameManuallyEdited = false;
+
+      const syncCardholderName = () => {
+        if (cardNameManuallyEdited) return;
+        const first = firstNameInput.value.trim();
+        const last = lastNameInput.value.trim();
+        const combined = [first, last].filter(Boolean).join(" ");
+        cardNameInput.value = combined;
+        fieldCardName.setAttribute("value", combined);
+      };
+
+      firstNameInput.addEventListener("input", syncCardholderName);
+      lastNameInput.addEventListener("input", syncCardholderName);
+
+      cardNameInput.addEventListener("input", () => {
+        if (cardNameInput.value.trim() === "") {
+          cardNameManuallyEdited = false;
+        } else {
+          cardNameManuallyEdited = true;
+        }
+      });
+    }
   });
 };
 

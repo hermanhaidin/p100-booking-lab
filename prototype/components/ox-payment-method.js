@@ -68,6 +68,10 @@ styles.replaceSync(`
     overflow: visible;
     padding-top: var(--spacing-xs);
   }
+
+  .expanded ::slotted(p) {
+    margin: 0;
+  }
 `);
 
 class OxPaymentMethod extends HTMLElement {
@@ -134,7 +138,7 @@ class OxPaymentMethod extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <div class="row">
         <ox-radio-button value="${value}" ${selected ? 'checked' : ''}></ox-radio-button>
-        <span class="label text-copy-medium-heavy">${label}</span>
+        <span class="label text-copy-large-heavy-tight">${label}</span>
         ${trailingHtml}
       </div>
       <div class="expanded">
