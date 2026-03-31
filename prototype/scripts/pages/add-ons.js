@@ -127,6 +127,36 @@ const buildBackHref = () => {
   return `./protection.html?${backParams.toString()}`;
 };
 
+const buildContinueHref = () => {
+  let addonTotal = 0;
+  const selectedAddons = [];
+  for (const addon of ADDONS) {
+    const s = state.addons[addon.id];
+    if (s && s.selected) {
+      addonTotal += getAddonCost(addon, s.quantity);
+      selectedAddons.push({ id: addon.id, title: addon.title, quantity: s.quantity });
+    }
+  }
+  const grandTotal = total + addonTotal;
+  const fwdParams = new URLSearchParams();
+  fwdParams.set("total", grandTotal.toFixed(2));
+  fwdParams.set("daily", String(offerDaily));
+  fwdParams.set("rentalDays", String(rentalDays));
+  fwdParams.set("bookingOption", bookingOption);
+  fwdParams.set("mileageType", mileageType);
+  if (mileageIncludedKm) fwdParams.set("mileageIncludedKm", mileageIncludedKm);
+  if (mileageExtraPerKm) fwdParams.set("mileageExtraPerKm", mileageExtraPerKm);
+  if (protectionPackage) fwdParams.set("protectionPackage", protectionPackage);
+  if (selectedAddons.length) fwdParams.set("addons", JSON.stringify(selectedAddons));
+  return `./review-booking.html?${fwdParams.toString()}`;
+};
+
+const syncContinueLinks = () => {
+  const href = buildContinueHref();
+  if (continueTop) continueTop.setAttribute("href", href);
+  if (continueMobile) continueMobile.setAttribute("href", href);
+};
+
 const syncBackLinks = () => {
   const href = buildBackHref();
   const header = document.querySelector("ox-booking-header");
@@ -215,6 +245,7 @@ cardsRoot.addEventListener("addon-change", (event) => {
   state.addons[addonId] = { selected, quantity };
   syncTotals();
   syncBookingOverview();
+  syncContinueLinks();
   scheduleMobileSummarySync();
 });
 
@@ -231,4 +262,5 @@ syncBookingOptionLabel();
 syncMileageLabel();
 syncProtectionLabel();
 syncBookingOverview();
+syncContinueLinks();
 scheduleMobileSummarySync();

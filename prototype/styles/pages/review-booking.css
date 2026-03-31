@@ -1,0 +1,269 @@
+.review-main {
+  background-color: var(--color-surface-canvas);
+}
+
+.review-top {
+  align-items: center;
+  display: grid;
+  gap: var(--spacing-sm);
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding-block: var(--spacing-2xs);
+}
+
+.review-top__heading {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-xs);
+  min-width: 0;
+}
+
+.review-top__heading h1 {
+  margin: 0;
+}
+
+.review-top__summary {
+  display: grid;
+  justify-items: end;
+  row-gap: 0;
+}
+
+.review-top__total-row {
+  align-items: baseline;
+  column-gap: var(--spacing-4xs);
+  display: inline-flex;
+}
+
+.review-top__total-label {
+  margin: 0;
+  white-space: nowrap;
+}
+
+ox-text-button.review-price-details {
+  justify-self: end;
+}
+
+.review-divider {
+  margin: 0;
+  margin-bottom: calc(-1 * var(--stroke-sm));
+  margin-inline: calc(50% - 50vw);
+  width: 100vw;
+}
+
+.review-content {
+  padding-block: var(--spacing-sm) var(--spacing-lg);
+}
+
+.review-layout {
+  display: block;
+}
+
+/* --- Form sections --- */
+
+.review-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.review-section:last-child {
+  margin-bottom: 0;
+}
+
+.review-section__title {
+  margin: 0 0 var(--spacing-xs);
+}
+
+.review-fields {
+  display: grid;
+  gap: var(--spacing-xs);
+}
+
+.review-fields__row {
+  display: grid;
+  gap: var(--spacing-xs);
+  grid-template-columns: 1fr 1fr;
+}
+
+.review-fields__phone-row {
+  grid-template-columns: 140px 1fr;
+}
+
+.review-checkbox-row {
+  align-items: center;
+  cursor: pointer;
+  display: inline-flex;
+  gap: var(--spacing-3xs);
+}
+
+.review-pay-later {
+  display: grid;
+  gap: var(--spacing-4xs);
+  margin-top: var(--spacing-xs);
+}
+
+.review-pay-later-row {
+  align-items: center;
+  display: inline-flex;
+  gap: var(--spacing-4xs);
+}
+
+.review-pay-later-info {
+  color: var(--color-content-secondary);
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+/* Payment card icons row */
+.review-card-icons {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-3xs);
+  margin-top: var(--spacing-3xs);
+}
+
+.review-card-icons img {
+  height: 24px;
+  width: auto;
+}
+
+.review-cc-notice {
+  color: var(--color-content-secondary);
+  margin: var(--spacing-3xs) 0 0;
+}
+
+/* --- Total & fine print --- */
+
+.review-total__amounts {
+  display: grid;
+  gap: var(--spacing-4xs);
+  margin-bottom: var(--spacing-3xs);
+}
+
+.review-total__secondary {
+  color: var(--color-content-secondary);
+  margin: 0;
+}
+
+.review-fine-print {
+  margin-top: var(--spacing-md);
+}
+
+.review-fine-print p,
+.review-fine-print ul {
+  margin: 0 0 var(--spacing-3xs);
+}
+
+.review-fine-print ul {
+  padding-left: var(--spacing-sm);
+}
+
+.review-fine-print li {
+  margin-bottom: var(--spacing-4xs);
+}
+
+#payAndBook {
+  margin-top: var(--spacing-md);
+  width: 100%;
+}
+
+/* --- Sidebar --- */
+
+.review-sidebar {
+  position: sticky;
+  top: var(--spacing-xs);
+}
+
+/* --- Mobile compact summary --- */
+.review-mobile-summary {
+  display: none;
+}
+
+/* ---- Mobile (<650px) ---- */
+@media (max-width: 649px) {
+  .review-top {
+    display: none;
+  }
+
+  .review-divider {
+    display: none;
+  }
+
+  .review-content {
+    padding-top: var(--spacing-xs);
+    padding-bottom: var(--spacing-xs);
+  }
+
+  .review-fields__row:not(.review-fields__phone-row) {
+    grid-template-columns: 1fr;
+  }
+
+  .review-section {
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+/* ---- Tablet (650-899px) ---- */
+@media (max-width: 899px) {
+  .review-mobile-summary {
+    display: block;
+    padding-block: var(--spacing-xs);
+  }
+
+  .review-sidebar {
+    display: none;
+  }
+
+  .review-layout {
+    display: block;
+  }
+}
+
+@media (min-width: 650px) and (max-width: 899px) {
+  .review-top {
+    padding-block: var(--spacing-sm);
+  }
+
+  .review-content {
+    padding-block: var(--spacing-xs);
+  }
+}
+
+/* ---- Desktop (900-1199px) ---- */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .review-top {
+    padding-block: var(--spacing-xs);
+  }
+
+  .review-content {
+    padding-block: var(--spacing-xs);
+  }
+
+  .review-layout {
+    display: grid;
+    gap: var(--spacing-2xl);
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+
+  .review-sidebar {
+    margin-top: 0;
+  }
+}
+
+/* ---- Desktop (≥1200px) ---- */
+@media (min-width: 1200px) {
+  .review-top {
+    padding-block: var(--spacing-xs);
+  }
+
+  .review-content {
+    padding-block: var(--spacing-md);
+  }
+
+  .review-layout {
+    display: grid;
+    gap: var(--spacing-3xl);
+    grid-template-columns: minmax(0, 1fr) 400px;
+  }
+
+  .review-sidebar {
+    margin-top: 0;
+  }
+}
