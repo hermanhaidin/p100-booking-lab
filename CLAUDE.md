@@ -30,216 +30,6 @@ Open `http://localhost:5173/prototype/pages/home.html` to browse the prototype.
 - Backend services, databases, or authentication
 
 
-## Web Component pattern
-
-Every component follows this exact structure. Copy it when creating new components.
-
-```javascript
-/* Component description
-   API: <ox-example kind="primary" size="large" disabled>Label</ox-example> */
-
-import { baseStyles } from './shared/base-styles.js';
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`
-  :host {
-    display: inline-flex;
-    /* Use tokens, never hardcode values */
-  }
-  :host([hidden]) { display: none; }
-  /* Variants via :host([attribute]) selectors */
-`);
-
-class OxExample extends HTMLElement {
-  static observedAttributes = ['kind', 'size', 'disabled'];
-
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [baseStyles, styles];
-  }
-
-  connectedCallback() { this.render(); }
-  attributeChangedCallback() { this.render(); }
-
-  render() {
-    const kind = this.getAttribute('kind') || 'primary';
-    this.shadowRoot.innerHTML = `
-      <button class="example text-copy-medium-heavy">
-        <slot></slot>
-      </button>
-    `;
-  }
-}
-
-customElements.define('ox-example', OxExample);
-```
-
-### Key conventions
-
-- Components live in `prototype/components/`, one `.js` file per component
-- Shared constructable stylesheets in `prototype/components/shared/`:
-  - `base-styles.js` — typography utility classes + icon utilities including `filled` attribute support (adopted by all components)
-  - `layout-styles.js` — layout-shell horizontal centering (for full-width components)
-  - `ox-icon-button-styles.js` — shared interaction styles for icon buttons
-- Design tokens (CSS custom properties on `:root`) inherit into Shadow DOM automatically — never embed token values in component files
-- All styling via `:host` and `:host([attribute])` selectors
-- Typography classes applied inside shadow DOM templates (e.g. `class="text-copy-medium-heavy"`)
-- Components own their typography internally — consumers should not need to pass typography classes
-- Custom events use `{ bubbles: true, composed: true }` to cross shadow boundaries
-- Light DOM coordinators (ox-protection-group, ox-choice-card-group) skip Shadow DOM intentionally — they manage child component state
-- Register the element at bottom of file: `customElements.define('ox-name', ClassName)`
-- Add the import to `prototype/components/index.js`
-
-
-## Component inventory
-
-All components are registered via `prototype/components/index.js`.
-
-| Tag | File | Usage example |
-|-----|------|---------------|
-| `ox-add-on-card` | ox-add-on-card.js | `<ox-add-on-card addon-id="gps" title="GPS" price="10.91" price-suffix="/ day" icon="directions_car" details="Description..." control-type="switch"></ox-add-on-card>` |
-| `ox-badge` | ox-badge.js | `<ox-badge kind="brand" variant="solid" icon="star" preset="hot-offer-promo">Hot offer</ox-badge>` |
-| `ox-banner` | ox-banner.js | `<ox-banner kind="info" icon="info" title="Heading" dismissible>Body text</ox-banner>` |
-| `ox-booking-footer` | ox-booking-footer.js | `<ox-booking-footer><ox-link slot="link">Help</ox-link><span slot="copyright">&copy; Sixt 2026</span></ox-booking-footer>` |
-| `ox-booking-header` | ox-booking-header.js | `<ox-booking-header location="Munich Airport" dates="Mar 26 – Mar 30" variant="step" step-title="Protection"></ox-booking-header>` |
-| `ox-booking-overview` | ox-booking-overview.js | `<ox-booking-overview title="Your booking overview:"><ox-list-item icon="check">Item</ox-list-item></ox-booking-overview>` |
-| `ox-button` | ox-button.js | `<ox-button kind="brand" size="large" variant="solid" icon="arrow_forward" href="./next.html">Continue</ox-button>` |
-| `ox-carousel` | ox-carousel.js | `<ox-carousel cards-per-view="1" cards-per-view-md="2" gap="xs" prev-label="Previous" next-label="Next" dot-label="Go to slide {n}"><article>Slide</article></ox-carousel>` |
-| `ox-chip` | ox-chip.js | `<ox-chip size="small" icon="tune" preset="dropdown" selected>Filters</ox-chip>` |
-| `ox-choice-card` | ox-choice-card.js | `<ox-choice-card value="best-price" selected>Best price</ox-choice-card>` |
-| `ox-choice-card-group` | ox-choice-card-group.js | `<ox-choice-card-group><ox-choice-card value="a">A</ox-choice-card></ox-choice-card-group>` |
-| `ox-floating-button` | ox-floating-button.js | `<ox-floating-button size="medium" content="icon-only" icon="chevron_left" label="Previous"></ox-floating-button>` |
-| `ox-icon-button` | ox-icon-button.js | `<ox-icon-button kind="primary" size="large" icon="close" label="Close"></ox-icon-button>` |
-| `ox-link` | ox-link.js | `<ox-link href="#" kind="primary" underlined>Link text</ox-link>` |
-| `ox-list-item` | ox-list-item.js | `<ox-list-item kind="primary" size="medium" icon="check" trailing-icon="info" trailing-label="More info">Label</ox-list-item>` |
-| `ox-offer-banner` | ox-offer-banner.js | `<ox-offer-banner title="Headline" subtitle="Body" cta-text="Learn more" image="url" href="#"></ox-offer-banner>` |
-| `ox-offer-card` | ox-offer-card.js | `<ox-offer-card variant="premium" title="BMW 3 Series" image="url" daily-price="71.27" specs="..."></ox-offer-card>` |
-| `ox-offer-details` | ox-offer-details.js | `<ox-offer-details variant="default" title="Vehicle name" image="url"></ox-offer-details>` |
-| `ox-price` | ox-price.js | `<ox-price kind="brand" size="large" currency="$" integer="71" decimal=".27" suffix="/ day"></ox-price>` |
-| `ox-protection-card` | ox-protection-card.js | `<ox-protection-card option-id="smart" title="Smart" stars="2" deductible="€950"></ox-protection-card>` |
-| `ox-protection-group` | ox-protection-group.js | `<ox-protection-group><ox-protection-card ...></ox-protection-card></ox-protection-group>` |
-| `ox-radio-button` | ox-radio-button.js | `<ox-radio-button value="smart" checked disabled error></ox-radio-button>` |
-| `ox-separator` | ox-separator.js | `<ox-separator orientation="horizontal" size="small" contrast="low"></ox-separator>` |
-| `ox-stepper` | ox-stepper.js | `<ox-stepper value="0" min="0" max="5" disabled></ox-stepper>` |
-| `ox-switch` | ox-switch.js | `<ox-switch checked disabled></ox-switch>` |
-| `ox-text-button` | ox-text-button.js | `<ox-text-button kind="primary" size="large" icon="help_center" trailing-icon="arrow_forward" underlined>Label</ox-text-button>` |
-
-Check each component file's header comment for the full attribute API.
-
-
-## Design tokens
-
-Use `prototype/styles/tokens.css` and `prototype/styles/typography.css` as the source of truth. This repo is design-system-driven. Prefer reuse and consistency over ad-hoc styling.
-
-### Core principle
-
-1. Never hardcode design values when a token or typography utility already exists
-2. Always prefer semantic tokens over raw values
-3. Keep page CSS focused on layout/composition, not redefining shared style primitives
-
-### Colors
-
-Use semantic tokens from `tokens.css`. Do not use hex/rgb/hsl directly in component/page CSS.
-
-**Text & icons**
-- primary `--color-content-primary` — main text and icons
-- secondary `--color-content-secondary` — muted text, dividers, strikethrough prices
-- tertiary `--color-content-tertiary` — disabled fills, card strokes
-
-**Surfaces**
-- canvas `--color-surface-canvas` — page background
-- container `--color-surface-container` — card background, text fields
-- secondary-canvas `--color-surface-secondary-canvas` — alternate page background
-- secondary-container `--color-surface-secondary-container` — secondary buttons, chips, default banners
-
-**Brand**
-- brand `--color-content-extended-brand` — primary CTA fill, promo prices, marketing labels
-- soft-brand `--color-content-extended-soft-brand` — subtle brand background for badges and banners
-- Text on brand fill: `--color-on-content-extended-on-brand` (white in prime theme)
-
-**Status** — each has three intensities: soft (background), base (icon/text), strong (text on soft fill)
-- success: `--color-content-extended-{soft-success, success, strong-success}`
-- error: `--color-content-extended-{soft-error, error, strong-error}`
-- warning: `--color-content-extended-{soft-warning, warning, strong-warning}`
-- info: `--color-content-extended-{soft-info, info, strong-info}`
-
-Use extended colors sparingly — keep SIXT's clean premium look.
-
-**Overlays**
-- hover `--color-overlay-hover`, pressed `--color-overlay-pressed`, dimming `--color-overlay-dimming`
-
-**Theming** — default is prime light (`:root`). Other themes (prime dark, option, accent) activate via `data-p100-theme` attribute. Token values adapt automatically.
-
-### Typography
-
-Typography is utility-class based. Classes are defined in `typography.css` and made available inside Shadow DOM via the shared `baseStyles` constructable stylesheet.
-
-**Required behavior:**
-- In page HTML: apply text styling via classes from `typography.css` (e.g. `text-copy-large-regular`, `text-display-large-heavy-caps`)
-- In Web Components: apply the same typography classes inside the shadow DOM `render()` template (e.g. `<span class="label text-copy-medium-heavy-tight">`)
-- Components own their typography internally. Consumers should not need to pass typography classes.
-- Font-size responsiveness is handled in `tokens.css`; do not recreate responsive font logic
-
-**Prohibited outside `typography.css`** — do not set raw font declarations in component/page CSS:
-- `font-family`
-- `font-size`
-- `font-weight`
-- `line-height`
-- `letter-spacing`
-- `text-transform` (for typography intent)
-
-Do not define new `.text-*` utility classes outside `prototype/styles/typography.css`.
-
-**If a style is missing:** add/extend definitions in `prototype/styles/typography.css` first, then use that class.
-
-### Spacing
-
-Use `--spacing-{size}`:
-- 5xs (2px), 4xs (4px), 3xs (8px), 2xs (12px), xs (16px)
-- sm (20px), md (24px), lg (32px), xl (40px), 2xl (48px)
-- 3xl–6xl (64–160px)
-
-### Radius
-
-Use `--radius-{size}`: xs (4px), sm (8px), md (12px), lg (16px), xl (24px), pill (160px)
-
-### Component sizes
-
-Not covered by `tokens.css` — use these canonical values:
-- Large button: height 52px, min-width 128px
-- Small/pill button: height 36px, min-width 96px
-- Text field: height 52px
-- Badge: height 24px
-- Checkbox/radio control: 24px
-- Switch/toggle: 56x32px, knob 24px
-- Dialog width: full-width on mobile, 560px on desktop
-- Icons: 16px (small), 24px (default), 32px (large)
-
-### Elevation
-
-- `--elevation-small` — buttons, chips
-- `--elevation-medium` — cards, dropdowns, tooltips
-- `--elevation-large` — dialogs, drawers, sheets
-
-### Stroke
-
-- sm (1px) — dividers, card borders
-- md (2px) — button strokes
-- lg (3px) — focus rings, active fields
-- xl (4px) — heavy separators
-
-### Layout breakpoints
-
-- xs: up to 649px — mobile, 6 cols, 16px margin
-- sm: 650–899px — portrait tablet, 12 cols, 32px margin
-- md: 900–1199px — landscape tablet, 12 cols, 32px margin
-- lg: 1200–1599px — laptop, 12 cols, 80px margin
-- xl: 1600px+ — desktop, 12 cols, centered, max-width 1440px
-
-Use media queries for layout/composition changes. Do not use them to rebuild typography utilities.
-
-
 ## Project structure
 
 - `sources/` — original crawled websites (read-only, never modify)
@@ -255,101 +45,23 @@ Use media queries for layout/composition changes. Do not use them to rebuild typ
   - `prototype/assets/` — images, logos, custom SVGs
 - `experiments/` — isolated redesign explorations (optional)
 
-### Icons
 
-Material Symbols loaded via Google Fonts CDN in `prototype/base.html`. Always start new pages from `base.html`.
+## Style enforcement
 
-- Default icon style is **outlined** (FILL 0)
-- Add the `filled` boolean attribute to switch to filled style (FILL 1) — CSS-driven, no per-component JS
-- Custom SVGs live in `prototype/assets/icons/`, use `{category}-{name}.svg` naming
-- Icon utilities available inside Web Components via the shared `baseStyles`
-
-
-## Data files
-
-Content data lives in `prototype/data/`. Each page's data is self-contained in a single markdown file.
-
-### Naming convention
-
-- `{page}-{location-slug}.md` for location-specific pages (e.g. `offer-list-munich-airport.md`)
-- `{page}.md` for global pages (e.g. `home.md`)
-- Each file is fully self-contained — content text and image URLs together
-
-### Current data files
-
-| File | Page |
-|------|------|
-| `home.md` | Home |
-| `offer-list-munich-airport.md` | Offer list |
-| `protection-munich-airport.md` | Protection |
-| `add-ons-munich-airport.md` | Add-ons |
-| `review-booking.md` | Review booking |
-
-### Offer list data structure
-
-Each offer-list file is self-contained with:
-- Metadata (studio background URL)
-- Search context (location, dates, currency)
-- Page headline and quick filters
-- Offers with inline image URLs, specs, pricing, badges
-- Banner with image, title, subtitle, CTA
-- Footer disclaimer and links
-
-### Current scope
-
-The prototype mocks a single happy path: Munich Airport, fixed dates (Mar 16–20), USD currency. Pick-up location and trip dates are not yet configurable in the UI.
-
-### Multi-location support (planned)
-
-To add a new location:
-1. Create `offer-list-{location-slug}.md` with location-specific offers and images
-2. Update the `data-content-src` attribute in the HTML to point to the new file
-3. Each file is fully self-contained — no shared asset maps needed
-
-
-## Pricing logic
-
-All prices in the funnel are derived at runtime from the selected offer's daily price and total price. **Never hardcode price values in HTML or data files** — they are computed from these formulas.
-
-### Booking options (`offer-list.js`)
-
-- **Stay flexible** surcharge: +5% of daily price per day (added to both daily and total display)
-- **Limited mileage** extra km charge: 0.5% of daily price per km
-
-### Protection packages (`protection.js`)
-
-Calculated from the total rental price passed in from offer-list (via URL param):
-
-| Package | Daily price | Displayed discount |
-|---------|------------|-------------------|
-| Basic | 5% of total | — |
-| Smart | 7.5% of total | −40% (original shown as `smartDaily / 0.6`) |
-| All Inclusive | 8.5% of total | −50% (original shown as `allInclusiveDaily / 0.5`) |
-
-- **Basic deductible**: 2× total rental price
-
-
-## Creating new pages
-
-1. Copy `prototype/base.html` as your starting point
-2. Add `<link rel="stylesheet" href="../styles/all.css">` for global styles
-3. Add `<script type="module" src="../components/index.js"></script>` for all Web Components
-4. Create page-specific CSS in `prototype/styles/pages/{page-name}.css`
-5. Create page script in `prototype/scripts/pages/{page-name}.js`
-6. Reference `offer-list.html` and `protection.html` as examples of the correct pattern
+1. Reuse existing token + typography utilities first
+2. If missing, extend `tokens.css` or `typography.css` — never add raw values inline
+3. Keep page CSS scoped to structure and layout; components own their own typography
 
 
 ## Migration status
 
-| Page | Status | Notes |
-|------|--------|-------|
-| home | Done | Web Components + ox-carousel |
-| offer-list | Done | Web Components |
-| protection | Done | Web Components. Data: `prototype/data/protection-munich-airport.md` |
-| add-ons | Done | Web Components. Data: `prototype/data/add-ons-munich-airport.md` |
-| review-booking | Not built | Data: `prototype/data/review-booking.md`. Reference in `sources/sixt/crawl-2026-03/states/review-booking-*` |
-
-When building new pages, always use Web Components. All existing pages have been migrated.
+| Page | Status |
+|------|--------|
+| home | Done |
+| offer-list | Done |
+| protection | Done |
+| add-ons | Done |
+| review-booking | Done |
 
 
 ## Operating model
@@ -362,12 +74,10 @@ When instructions conflict, follow this priority:
 3. README.md
 
 
-## Practical enforcement for agents
+## See also
 
-When editing styles:
-1. Reuse existing token + typography utilities first
-2. If missing, extend shared system files (`tokens.css` or `typography.css`) intentionally
-3. Keep page/component CSS scoped to structure, states, and layout
-4. Avoid introducing raw visual constants that bypass the system
-5. In Web Components, apply typography classes inside the shadow DOM `render()` template
-6. When migrating from plain HTML to Web Components, remove any external negative-margin or typography overrides that the component now handles internally
+Detailed reference in `.claude/rules/`:
+- `component-pattern.md` — Web Component boilerplate, key conventions, icons
+- `design-tokens.md` — colors, typography, spacing, breakpoints, enforcement
+- `component-inventory.md` — full component table (35 components)
+- `data-and-content.md` — data files, pricing logic, creating new pages
