@@ -408,6 +408,80 @@
 
   <ox-home-footer></ox-home-footer>
 
+  <ox-bottomsheet id="dialog-demo"
+    heading="Choose your preferred rental plan"
+    subtitle="Compare all available options and select the one that works best for your trip, budget, and coverage needs.">
+
+    <ox-icon-button slot="head-actions" icon="ios_share" label="Share" data-demo-action hidden></ox-icon-button>
+    <ox-icon-button slot="head-actions" icon="more_vert" label="More options" data-demo-action hidden></ox-icon-button>
+
+    <div style="display:flex;flex-direction:column;gap:0;">
+
+      <!-- Size -->
+      <fieldset style="border:0;padding:0;margin:0;">
+        <legend class="text-copy-medium-heavy" style="margin-bottom:var(--spacing-3xs)">Size</legend>
+        <div style="display:flex;align-items:center;gap:var(--spacing-sm);flex-wrap:wrap;">
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-radio-button value="" checked data-demo-size></ox-radio-button>Responsive
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-radio-button value="medium" data-demo-size></ox-radio-button>Medium
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-radio-button value="small" data-demo-size></ox-radio-button>Small
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-small-title></ox-checkbox>Force small title
+          </span>
+        </div>
+      </fieldset>
+
+      <ox-separator size="small" contrast="low" style="margin:var(--spacing-sm) 0;"></ox-separator>
+
+      <!-- Header -->
+      <fieldset style="border:0;padding:0;margin:0;">
+        <legend class="text-copy-medium-heavy" style="margin-bottom:var(--spacing-3xs)">Header</legend>
+        <div style="display:flex;gap:var(--spacing-sm) var(--spacing-lg);flex-wrap:wrap;">
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox checked data-demo-show-title></ox-checkbox>Title
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox checked data-demo-show-subtitle></ox-checkbox>Subtitle
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-show-back></ox-checkbox>Back button
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-show-actions></ox-checkbox>Trailing icons
+          </span>
+        </div>
+      </fieldset>
+
+      <ox-separator size="small" contrast="low" style="margin:var(--spacing-sm) 0;"></ox-separator>
+
+      <!-- Footer -->
+      <fieldset style="border:0;padding:0;margin:0;">
+        <legend class="text-copy-medium-heavy" style="margin-bottom:var(--spacing-3xs)">Footer</legend>
+        <div style="display:flex;gap:var(--spacing-sm) var(--spacing-lg);flex-wrap:wrap;">
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox checked data-demo-btn-primary></ox-checkbox>Primary CTA
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-btn-secondary></ox-checkbox>Secondary
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-btn-secondary2></ox-checkbox>Second secondary
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-btn-text></ox-checkbox>Text button
+          </span>
+        </div>
+      </fieldset>
+
+    </div>
+
+  </ox-bottomsheet>
+
   <script type="module" src="../scripts/pages/home.js"></script>
 </body>
 </html>

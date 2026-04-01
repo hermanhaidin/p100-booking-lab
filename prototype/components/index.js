@@ -1,12 +1,14 @@
 import './shared/base-styles.js';
 
 import './ox-add-on-card.js';
+import './ox-bottomsheet.js';
 import './ox-badge.js';
 import './ox-banner.js';
 import './ox-booking-footer.js';
 import './ox-booking-header.js';
 import './ox-booking-overview.js';
 import './ox-button.js';
+import './ox-checkbox.js';
 import './ox-carousel.js';
 import './ox-choice-card.js';
 import './ox-choice-card-group.js';
