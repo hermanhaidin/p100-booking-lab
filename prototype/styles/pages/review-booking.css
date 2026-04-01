@@ -131,18 +131,26 @@ ox-text-button.review-price-details {
 
 /* --- Total & fine print --- */
 
-.review-total__amounts {
-  display: grid;
-  gap: var(--spacing-4xs);
-  margin-bottom: var(--spacing-3xs);
+.review-total__row {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4xs);
 }
 
-.review-total__secondary {
-  color: var(--color-content-secondary);
+.review-total__row h2,
+.review-total__row p {
   margin: 0;
 }
 
+.review-total__amount-label {
+  align-items: center;
+  display: inline-flex;
+  gap: var(--spacing-4xs);
+}
+
 .review-fine-print {
+  color: var(--color-content-secondary);
   margin-top: var(--spacing-md);
 }
 
@@ -162,6 +170,12 @@ ox-text-button.review-price-details {
 #payAndBook {
   margin-top: var(--spacing-md);
   width: 100%;
+}
+
+@media (min-width: 650px) {
+  #payAndBook {
+    width: 50%;
+  }
 }
 
 /* --- Sidebar --- */

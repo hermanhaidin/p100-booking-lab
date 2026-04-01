@@ -51,7 +51,7 @@ styles.replaceSync(`
   .vehicle-header {
     align-items: center;
     display: flex;
-    gap: var(--spacing-3xs);
+    gap: var(--spacing-xs);
     padding: var(--spacing-xs);
   }
 
@@ -89,10 +89,8 @@ styles.replaceSync(`
     color: var(--color-content-secondary);
   }
 
-  .divider {
-    border: 0;
-    border-top: var(--stroke-sm) solid color-mix(in srgb, var(--color-content-secondary) 10%, transparent);
-    margin: 0;
+  ox-separator {
+    margin: 0 var(--spacing-xs);
   }
 
   .section {
@@ -100,13 +98,14 @@ styles.replaceSync(`
   }
 
   .section-heading {
-    margin: 0 0 var(--spacing-3xs);
+    margin: 0 0 var(--spacing-xs);
   }
 
   /* Timeline pickup/return */
   .timeline {
     display: flex;
     flex-direction: column;
+    gap: var(--spacing-xs);
   }
 
   .timeline-item {
@@ -123,16 +122,18 @@ styles.replaceSync(`
   }
 
   .timeline-icon {
-    color: var(--color-content-secondary);
-    font-size: 20px;
-    height: 20px;
-    width: 20px;
+    color: var(--color-content-primary);
+    font-size: 24px;
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+    height: 24px;
+    width: 24px;
   }
 
   .timeline-line {
-    background-color: color-mix(in srgb, var(--color-content-secondary) 25%, transparent);
+    background-color: var(--color-content-primary);
     flex: 1;
     margin-block: var(--spacing-5xs);
+    margin-bottom: calc(-1 * var(--spacing-xs) + var(--spacing-5xs));
     min-height: var(--spacing-3xs);
     width: var(--stroke-sm);
   }
@@ -150,15 +151,15 @@ styles.replaceSync(`
   }
 
   .pay-row {
-    align-items: center;
+    align-items: baseline;
     display: flex;
     gap: var(--spacing-3xs);
   }
 
-  .pay-helper {
-    color: var(--color-content-secondary);
-    margin: var(--spacing-4xs) 0 0;
+  .pay-badge {
+    color: var(--color-content-extended-brand);
   }
+
 
   .included-list {
     display: grid;
@@ -331,44 +332,44 @@ class OxBookingSummary extends HTMLElement {
             <p class="text-copy-small-regular vehicle-subtitle">${vehicleSubtitle}</p>
           </div>
         </div>
-        <hr class="divider">
+        <ox-separator contrast="low"></ox-separator>
         <div class="section">
-          <p class="section-heading text-copy-medium-heavy-tight">Pickup and return</p>
+          <p class="section-heading text-copy-large-heavy-tight">Pickup and return</p>
           <div class="timeline">
             <div class="timeline-item">
               <div class="timeline-track">
-                <span class="material-symbols-outlined timeline-icon" filled>store</span>
+                <span class="material-symbols-outlined timeline-icon">store</span>
                 <div class="timeline-line"></div>
               </div>
               <div class="timeline-content">
                 <p class="text-copy-small-regular timeline-label">Pickup</p>
                 <p class="text-copy-medium-heavy">${pickupLocation}</p>
-                <p class="text-copy-small-regular">${pickupDate}</p>
+                <p class="text-copy-medium-regular">${pickupDate}</p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-track">
-                <span class="material-symbols-outlined timeline-icon" filled>store</span>
+                <span class="material-symbols-outlined timeline-icon">store</span>
               </div>
               <div class="timeline-content">
                 <p class="text-copy-small-regular timeline-label">Return</p>
                 <p class="text-copy-medium-heavy">${returnLocation}</p>
-                <p class="text-copy-small-regular">${returnDate}</p>
+                <p class="text-copy-medium-regular">${returnDate}</p>
               </div>
             </div>
           </div>
         </div>
-        <hr class="divider">
+        <ox-separator contrast="low"></ox-separator>
         <div class="section">
-          <div class="pay-row">
-            <span class="text-copy-medium-regular">${paymentLabel}</span>
-            ${paymentBadge ? `<ox-badge kind="brand" variant="solid">${paymentBadge}</ox-badge>` : ''}
+          <div class="pay-row section-heading">
+            <span class="text-copy-large-heavy-tight">${paymentLabel}</span>
+            ${paymentBadge ? `<span class="pay-badge text-copy-small-heavy-caps">${paymentBadge}</span>` : ''}
           </div>
-          <p class="text-copy-small-regular pay-helper">Lowest price available for your rental</p>
+          <ox-list-item size="medium" icon="check">Lowest price available for your rental</ox-list-item>
         </div>
-        <hr class="divider">
+        <ox-separator contrast="low"></ox-separator>
         <div class="section">
-          <p class="section-heading text-copy-medium-heavy-tight">What's included</p>
+          <p class="section-heading text-copy-large-heavy-tight">What's included</p>
           <div class="included-list"><slot></slot></div>
         </div>
       </div>

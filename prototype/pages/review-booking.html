@@ -46,9 +46,9 @@
         total-price="$1,171.07"
         total-secondary="€992.01"
       >
-        <ox-list-item icon="check">Third party insurance</ox-list-item>
-        <ox-list-item icon="check">24/7 Breakdown assistance</ox-list-item>
-        <ox-list-item icon="check">Tires suitable for winter</ox-list-item>
+        <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about third party insurance">Third party insurance</ox-list-item>
+        <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about breakdown assistance">24/7 Breakdown assistance</ox-list-item>
+        <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about winter tires">Tires suitable for winter</ox-list-item>
         <ox-list-item icon="check" id="mobileMileageLabel">Unlimited kilometers</ox-list-item>
         <ox-list-item icon="check" id="mobileProtectionLabel" hidden></ox-list-item>
       </ox-booking-summary>
@@ -147,16 +147,21 @@
 
           <!-- Total + fine print -->
           <section class="review-section review-total-section" id="totalSection">
-            <h2 class="text-copy-xlarge-heavy-tight review-section__title">Total</h2>
-            <p class="text-copy-medium-heavy">Amount you will pay</p>
-            <div class="review-total__amounts">
+            <div class="review-total__row">
+              <h2 class="text-copy-xlarge-heavy-tight">Total</h2>
               <ox-price id="reviewTotalMain" size="large" currency="$" integer="1,171" decimal=".07"></ox-price>
-              <p id="reviewTotalEur" class="text-copy-medium-regular review-total__secondary">€992.01</p>
+            </div>
+            <div class="review-total__row">
+              <div class="review-total__amount-label">
+                <p class="text-copy-medium-heavy">Amount you will pay</p>
+                <ox-icon-button kind="primary" size="small" icon="info" label="More info about amount you will pay"></ox-icon-button>
+              </div>
+              <ox-price id="reviewTotalEur" size="medium" kind="primary" currency="€" integer="992" decimal=".01"></ox-price>
             </div>
             <ox-text-button class="review-price-details" underlined>Price details</ox-text-button>
             <div class="review-fine-print text-copy-small-regular">
               <p>Refundable deposit: An additional € 500 security deposit will be blocked on your card at the pickup counter and released within a few days of the vehicle's return.</p>
-              <p class="text-copy-small-heavy-caps">IMPORTANT INFORMATION about your PREPAID reservation:</p>
+              <p class="text-copy-small-regular">IMPORTANT INFORMATION about your PREPAID reservation:</p>
               <p>Prepaid rates are subject to the following cancellation, rebooking, and no-show policies. Please note that the charges listed below will never exceed the total prepaid amount:</p>
               <ul>
                 <li id="cancellationFee">Booking cancellation: An amount of $98.24 will be charged to cancel the booking (possible until the agreed pickup time). Any remaining prepaid amount over $98.24 will be refunded.</li>
@@ -186,9 +191,9 @@
             total-price="$1,171.07"
             total-secondary="€992.01"
           >
-            <ox-list-item icon="check">Third party insurance</ox-list-item>
-            <ox-list-item icon="check">24/7 Breakdown assistance</ox-list-item>
-            <ox-list-item icon="check">Tires suitable for winter</ox-list-item>
+            <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about third party insurance">Third party insurance</ox-list-item>
+            <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about breakdown assistance">24/7 Breakdown assistance</ox-list-item>
+            <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about winter tires">Tires suitable for winter</ox-list-item>
             <ox-list-item icon="check" id="sidebarMileageLabel">Unlimited kilometers</ox-list-item>
             <ox-list-item icon="check" id="sidebarProtectionLabel" hidden></ox-list-item>
           </ox-booking-summary>
