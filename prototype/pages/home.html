@@ -408,6 +408,97 @@
 
   <ox-home-footer></ox-home-footer>
 
+  <ox-dialog id="dialog-demo"
+    heading="Choose your preferred rental plan"
+    subtitle="Compare all available options and select the one that works best for your trip, budget, and coverage needs.">
+
+    <ox-icon-button slot="head-actions" icon="ios_share" label="Share" data-demo-action hidden></ox-icon-button>
+    <ox-icon-button slot="head-actions" icon="more_vert" label="More options" data-demo-action hidden></ox-icon-button>
+
+    <ox-segmented-control slot="head-bar-content" data-demo-segmented-ctrl hidden>
+      <button value="one">One</button>
+      <button value="two">Two</button>
+      <button value="three">Three</button>
+    </ox-segmented-control>
+
+    <!-- Page 1: Configurator -->
+    <div data-demo-page="config" style="display:flex;flex-direction:column;gap:0;">
+
+      <!-- Size -->
+      <fieldset style="border:0;padding:0;margin:0;">
+        <legend class="text-copy-medium-heavy" style="margin-bottom:var(--spacing-3xs)">Size</legend>
+        <div style="display:flex;align-items:center;gap:var(--spacing-sm);flex-wrap:wrap;">
+          <ox-segmented-control data-demo-size-ctrl>
+            <button value="full">Full</button>
+            <button value="" aria-selected="true">Responsive</button>
+            <button value="medium">Medium</button>
+            <button value="small">Small</button>
+          </ox-segmented-control>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-tall></ox-checkbox>Tall
+          </span>
+        </div>
+      </fieldset>
+
+      <ox-separator size="small" contrast="low" style="margin:var(--spacing-sm) 0;"></ox-separator>
+
+      <!-- Header -->
+      <fieldset style="border:0;padding:0;margin:0;">
+        <legend class="text-copy-medium-heavy" style="margin-bottom:var(--spacing-3xs)">Header</legend>
+        <div style="display:flex;gap:var(--spacing-sm) var(--spacing-lg);flex-wrap:wrap;">
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox checked data-demo-show-title></ox-checkbox>Title
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox checked data-demo-show-subtitle></ox-checkbox>Subtitle
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-small-title></ox-checkbox>Force small title
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-show-actions></ox-checkbox>Trailing icons
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-segmented></ox-checkbox>Segmented control
+          </span>
+        </div>
+      </fieldset>
+
+      <ox-separator size="small" contrast="low" style="margin:var(--spacing-sm) 0;"></ox-separator>
+
+      <!-- Footer -->
+      <fieldset style="border:0;padding:0;margin:0;">
+        <legend class="text-copy-medium-heavy" style="margin-bottom:var(--spacing-3xs)">Footer</legend>
+        <div style="display:flex;gap:var(--spacing-sm) var(--spacing-lg);flex-wrap:wrap;">
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox checked data-demo-btn-primary></ox-checkbox>Primary CTA
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-btn-secondary></ox-checkbox>Secondary
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-btn-secondary2></ox-checkbox>Second secondary
+          </span>
+          <span class="text-copy-medium-regular" data-demo-label style="display:inline-flex;align-items:center;gap:var(--spacing-3xs);cursor:pointer;">
+            <ox-checkbox data-demo-btn-text></ox-checkbox>Text button
+          </span>
+        </div>
+      </fieldset>
+
+    </div>
+
+    <!-- Page 2: Detail / confirmation -->
+    <div data-demo-page="detail" style="display:none;flex-direction:column;gap:var(--spacing-xs);">
+      <p class="text-copy-medium-regular" style="margin:0;color:var(--color-content-secondary)">
+        This is the second page of the dialog flow. The close button became a back button, and the content swapped — but the dialog stayed open the entire time.
+      </p>
+      <ox-list-item icon="check" kind="primary">Your rental plan has been selected</ox-list-item>
+      <ox-list-item icon="check" kind="primary">Protection package included</ox-list-item>
+      <ox-list-item icon="check" kind="primary">Free cancellation up to 48h before pick-up</ox-list-item>
+    </div>
+
+  </ox-dialog>
+
   <script type="module" src="../scripts/pages/home.js"></script>
 </body>
 </html>
