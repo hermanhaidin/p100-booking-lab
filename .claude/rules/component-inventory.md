@@ -18,6 +18,7 @@ All components are registered via `prototype/components/index.js`. Check each co
 | `ox-choice-card` | ox-choice-card.js | `<ox-choice-card value="best-price" selected>Best price</ox-choice-card>` |
 | `ox-choice-card-group` | ox-choice-card-group.js | `<ox-choice-card-group><ox-choice-card value="a">A</ox-choice-card></ox-choice-card-group>` |
 | `ox-combobox` | ox-combobox.js | `<ox-combobox label="Country" value="US" required dropdown-width="400px"></ox-combobox>` |
+| `ox-dialog` | ox-dialog.js | `<ox-dialog heading="Title" subtitle="..." size="small|medium|full" open><div slot="body">...</div><div slot="footer">...</div></ox-dialog>` |
 | `ox-floating-button` | ox-floating-button.js | `<ox-floating-button size="medium" content="icon-only" icon="chevron_left" label="Previous"></ox-floating-button>` |
 | `ox-home-footer` | ox-home-footer.js | `<ox-home-footer></ox-home-footer>` |
 | `ox-home-header` | ox-home-header.js | `<ox-home-header logo-src="../assets/logos/sixt_rent_the_car_on_dark.svg"></ox-home-header>` |
@@ -25,6 +26,7 @@ All components are registered via `prototype/components/index.js`. Check each co
 | `ox-icon-button` | ox-icon-button.js | `<ox-icon-button kind="primary" size="large" icon="close" label="Close"></ox-icon-button>` |
 | `ox-link` | ox-link.js | `<ox-link href="#" kind="primary" underlined>Link text</ox-link>` |
 | `ox-list-item` | ox-list-item.js | `<ox-list-item kind="primary" size="medium" icon="check" trailing-icon="info" trailing-label="More info">Label</ox-list-item>` |
+| `ox-navbar` | ox-navbar.js | `<ox-navbar heading="Title" subtitle="..." leading="back|close|none" collapsed no-sticky></ox-navbar>` |
 | `ox-offer-banner` | ox-offer-banner.js | `<ox-offer-banner title="Headline" subtitle="Body" cta-text="Learn more" image="url" href="#"></ox-offer-banner>` |
 | `ox-offer-card` | ox-offer-card.js | `<ox-offer-card variant="premium" title="BMW 3 Series" image="url" daily-price="71.27" specs="..."></ox-offer-card>` |
 | `ox-offer-details` | ox-offer-details.js | `<ox-offer-details variant="default" title="Vehicle name" image="url"></ox-offer-details>` |
@@ -34,6 +36,7 @@ All components are registered via `prototype/components/index.js`. Check each co
 | `ox-protection-card` | ox-protection-card.js | `<ox-protection-card option-id="smart" title="Smart" stars="2" deductible="€950"></ox-protection-card>` |
 | `ox-protection-group` | ox-protection-group.js | `<ox-protection-group><ox-protection-card ...></ox-protection-card></ox-protection-group>` |
 | `ox-radio-button` | ox-radio-button.js | `<ox-radio-button value="smart" checked disabled error></ox-radio-button>` |
+| `ox-segmented-control` | ox-segmented-control.js | `<ox-segmented-control><button value="a">Label A</button><button value="b">Label B</button></ox-segmented-control>` |
 | `ox-separator` | ox-separator.js | `<ox-separator orientation="horizontal" size="small" contrast="low"></ox-separator>` |
 | `ox-stepper` | ox-stepper.js | `<ox-stepper value="0" min="0" max="5" disabled></ox-stepper>` |
 | `ox-switch` | ox-switch.js | `<ox-switch checked disabled></ox-switch>` |
