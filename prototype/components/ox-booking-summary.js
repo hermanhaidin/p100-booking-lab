@@ -171,15 +171,9 @@ styles.replaceSync(`
     align-items: center;
     cursor: pointer;
     display: none;
-    gap: var(--spacing-3xs);
-    grid-template-columns: 60px 1fr auto;
+    gap: var(--spacing-xs);
+    grid-template-columns: 64px 1fr auto;
     padding: var(--spacing-xs);
-  }
-
-  .compact-img {
-    height: 40px;
-    object-fit: contain;
-    width: 60px;
   }
 
   .compact-info {
@@ -207,29 +201,21 @@ styles.replaceSync(`
   }
 
   .compact-toggle {
-    align-items: center;
-    background: none;
-    border: 0;
-    color: var(--color-content-primary);
-    cursor: pointer;
-    display: inline-flex;
-    gap: var(--spacing-4xs);
-    padding: 0;
-  }
-
-  .compact-arrow {
-    font-size: 16px;
-    transition: transform 200ms ease;
-  }
-
-  :host([expanded]) .compact-arrow {
-    transform: rotate(180deg);
+    pointer-events: none;
   }
 
   /* --- Responsive --- */
   @media (max-width: 899px) {
     .compact-bar {
       display: grid;
+    }
+
+    .vehicle-header {
+      display: none;
+    }
+
+    .vehicle-sep {
+      display: none;
     }
 
     .full {
@@ -305,19 +291,25 @@ class OxBookingSummary extends HTMLElement {
       ? `background-image: url('${studioBg}');`
       : '';
 
+    // Parse "$1,171.07" → { currency: "$", integer: "1,171", decimal: ".07" }
+    const priceMatch = totalPrice.match(/^([^0-9]*)([0-9,]+)(\.[0-9]+)?$/);
+    const priceCurrency = priceMatch ? priceMatch[1] : '';
+    const priceInteger  = priceMatch ? priceMatch[2] : totalPrice;
+    const priceDecimal  = priceMatch ? (priceMatch[3] || '') : '';
+
     this.shadowRoot.innerHTML = `
       <!-- Compact bar (mobile only) -->
       <div class="compact-bar">
-        <img class="compact-img" src="${vehicleImage}" alt="">
+        <div class="vehicle-thumb" style="${thumbBgStyle}">
+          <img class="vehicle-thumb-img" src="${vehicleImage}" alt="">
+        </div>
         <div class="compact-info">
-          <span class="compact-title text-copy-medium-heavy-tight">${vehicleTitle}</span>
+          <span class="compact-title text-copy-large-heavy-tight">${vehicleTitle}</span>
           <span class="compact-subtitle text-copy-small-regular">${vehicleSubtitle}</span>
         </div>
         <div class="compact-trailing">
-          <span class="compact-price text-copy-large-heavy-tight">${totalPrice}</span>
-          <button type="button" class="compact-toggle text-copy-small-heavy">
-            Details <span class="material-symbols-outlined compact-arrow">expand_more</span>
-          </button>
+          <ox-price size="large" currency="${priceCurrency}" integer="${priceInteger}" decimal="${priceDecimal}"></ox-price>
+          <ox-text-button class="compact-toggle" size="small" underlined trailing-icon="${this.hasAttribute('expanded') ? 'expand_less' : 'expand_more'}">Details</ox-text-button>
         </div>
       </div>
 
@@ -332,7 +324,7 @@ class OxBookingSummary extends HTMLElement {
             <p class="text-copy-small-regular vehicle-subtitle">${vehicleSubtitle}</p>
           </div>
         </div>
-        <ox-separator contrast="low"></ox-separator>
+        <ox-separator class="vehicle-sep" contrast="low"></ox-separator>
         <div class="section">
           <p class="section-heading text-copy-large-heavy-tight">Pickup and return</p>
           <div class="timeline">
