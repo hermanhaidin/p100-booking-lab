@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Booking Prototype - Review Booking</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/all.css">
+  <script type="module" src="../components/index.js"></script>
+  <script type="module" src="../scripts/pages/review-booking.js"></script>
+</head>
+<body>
+  <ox-booking-header back-href="./add-ons.html" variant="step" step-title="REVIEW YOUR BOOKING" theme="option-light"></ox-booking-header>
+
+  <main class="review-main">
+    <!-- Top bar (desktop only): heading + total + price details -->
+    <section class="layout-shell review-top" aria-label="Review booking summary">
+      <div class="review-top__heading">
+        <ox-icon-button class="review-top__back" icon="arrow_back_ios_new" label="Back to add-ons" href="./add-ons.html" size="large"></ox-icon-button>
+        <h1 class="text-title-medium-heavy-caps">Review your booking</h1>
+      </div>
+      <div class="review-top__summary" aria-live="polite">
+        <div class="review-top__total-row">
+          <p class="review-top__total-label text-copy-medium-heavy">Total:</p>
+          <ox-price id="reviewTotalTop" size="large" currency="$" integer="1,171" decimal=".07"></ox-price>
+        </div>
+        <ox-text-button class="review-price-details" underlined>Price details</ox-text-button>
+      </div>
+    </section>
+
+    <ox-separator contrast="low" class="review-divider" aria-hidden="true"></ox-separator>
+
+    <!-- Mobile compact summary (<900px) -->
+    <section class="layout-shell review-mobile-summary">
+      <ox-booking-summary id="reviewMobileSummary"
+        vehicle-title="BMW 3 Series Touring"
+        vehicle-subtitle="or similar"
+        vehicle-image=""
+        studio-bg="https://img.sixt.com/1600/6f09b0e8-6820-4ac0-bedd-5797e9814c18.jpg"
+        pickup-location="Munich Airport"
+        pickup-date="Mon, Mar 16, 2026 | 12:00 PM"
+        return-location="Munich Airport"
+        return-date="Fri, Mar 20, 2026 | 12:00 PM"
+        payment-label="Pay now"
+        payment-badge="BEST PRICE"
+        total-price="$1,171.07"
+        total-secondary="€992.01"
+      >
+        <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about third party insurance">Third party insurance</ox-list-item>
+        <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about breakdown assistance">24/7 Breakdown assistance</ox-list-item>
+        <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about winter tires">Tires suitable for winter</ox-list-item>
+        <ox-list-item icon="check" id="mobileMileageLabel">Unlimited kilometers</ox-list-item>
+        <ox-list-item icon="check" id="mobileProtectionLabel" hidden></ox-list-item>
+      </ox-booking-summary>
+    </section>
+
+    <section class="layout-shell review-content">
+      <div class="review-layout">
+        <!-- LEFT COLUMN: Form -->
+        <div class="review-form">
+
+          <!-- Driver details -->
+          <section class="review-section" id="driverDetails">
+            <h2 class="text-copy-xlarge-heavy-tight review-section__title">Driver details</h2>
+            <div class="review-fields">
+              <ox-text-field id="fieldEmail" label="Email" type="email" autocomplete="email" required></ox-text-field>
+              <div class="review-fields__row">
+                <ox-text-field id="fieldFirstName" label="First name" type="text" autocomplete="given-name" required></ox-text-field>
+                <ox-text-field id="fieldLastName" label="Last name" type="text" autocomplete="family-name" required></ox-text-field>
+              </div>
+              <div class="review-fields__row review-fields__phone-row">
+                <ox-combobox id="fieldCountryCode" label="Country" required dropdown-width="400px"></ox-combobox>
+                <ox-text-field id="fieldPhone" label="Phone number" type="tel" autocomplete="tel-national" maxlength="15" required></ox-text-field>
+              </div>
+              <div class="review-checkbox-row" id="ageCheckboxRow">
+                <ox-checkbox id="ageCheckbox" checked value="age-23"></ox-checkbox>
+                <span class="text-copy-medium-regular">I am 23 years of age or older</span>
+              </div>
+              <ox-text-field id="fieldDob" label="Date of birth" type="text" autocomplete="bday" maxlength="10" required hidden></ox-text-field>
+              <ox-banner kind="primary" icon="info">
+                <p class="text-copy-medium-regular">Drivers must have held their driver's license for at least 1 year(s) for this vehicle</p>
+              </ox-banner>
+            </div>
+          </section>
+
+          <!-- Payment methods -->
+          <section class="review-section" id="paymentMethods">
+            <ox-separator contrast="low" class="review-section-sep"></ox-separator>
+            <h2 class="text-copy-xlarge-heavy-tight review-section__title">Payment methods</h2>
+            <ox-payment-method-group id="paymentGroup">
+              <ox-payment-method value="credit-card" label="Credit or debit card" trailing-icon="credit_card">
+                <div class="review-fields" id="ccFields">
+                  <ox-text-field id="fieldCardNumber" label="Card number" type="text" autocomplete="cc-number" maxlength="19" required></ox-text-field>
+                  <ox-text-field id="fieldCardName" label="Cardholder name" type="text" autocomplete="cc-name" required></ox-text-field>
+                  <div class="review-fields__row">
+                    <ox-text-field id="fieldExpiry" label="Expiration date" type="text" autocomplete="cc-exp" maxlength="5" required></ox-text-field>
+                    <ox-text-field id="fieldCvv" label="CVV" type="text" autocomplete="cc-csc" maxlength="4" trailing-icon="info" required></ox-text-field>
+                  </div>
+                  <div class="review-card-icons">
+                    <img src="../assets/icons/payment_american_express_color.svg" alt="American Express">
+                    <img src="../assets/icons/payment_mastercard_color.svg" alt="Mastercard">
+                    <img src="../assets/icons/payment_discover_color.svg" alt="Discover">
+                    <img src="../assets/icons/payment_jcb_color.svg" alt="JCB">
+                    <img src="../assets/icons/payment_visa_color.svg" alt="Visa">
+                    <img src="../assets/icons/payment_diners_club_color.svg" alt="Diners Club">
+                  </div>
+                  <p class="text-copy-medium-regular review-cc-notice">Please be aware that a credit or debit card must be presented at pickup to secure your rental. The renter needs to be the card holder.</p>
+                </div>
+              </ox-payment-method>
+              <ox-payment-method value="paypal" label="PayPal" trailing-icon-src="../assets/icons/payment_paypal_glyph_color.svg">
+                <p class="text-copy-medium-regular">After clicking "Pay and book", you'll be redirected to PayPal to complete your payment. Please be aware that the renter needs to be the PayPal account holder. Additionally, a credit or debit card must be presented in the renter's name at pickup to secure the rental.</p>
+              </ox-payment-method>
+              <ox-payment-method value="apple-pay" label="Apple Pay" trailing-icon-src="../assets/icons/payment_apple_pay_color.svg">
+                <p class="text-copy-medium-regular">By selecting "Pay and book", you'll complete your payment securely through Apple Pay. Please be aware that a credit or debit card must be presented in the renter's name at pickup to secure the rental.</p>
+              </ox-payment-method>
+            </ox-payment-method-group>
+            <div class="review-pay-later" id="payLaterInPayment">
+              <p class="review-pay-later-title text-copy-medium-heavy">No payment method on hand?</p>
+              <p class="review-pay-later-row text-copy-small-regular"><ox-text-button kind="primary" underlined>Switch to Pay Later</ox-text-button><span class="text-copy-medium-regular"> and have free cancellation included for just <span id="nudgePriceInPayment">$0.00</span> more.</span> <ox-icon-button kind="primary" size="small" icon="info" label="More info"></ox-icon-button></p>
+            </div>
+          </section>
+
+          <!-- Invoice address -->
+          <section class="review-section" id="invoiceAddress">
+            <ox-separator contrast="low" class="review-section-sep"></ox-separator>
+            <h2 class="text-copy-xlarge-heavy-tight review-section__title">Invoice address</h2>
+            <div class="review-fields">
+              <ox-text-field id="fieldCompany" label="Company (optional)" type="text" autocomplete="organization"></ox-text-field>
+              <ox-combobox id="fieldCountry" label="Country" required></ox-combobox>
+              <ox-text-field id="fieldStreet" label="Street address" type="text" autocomplete="street-address" required></ox-text-field>
+              <div class="review-fields__row">
+                <ox-text-field id="fieldZip" label="Zip" type="text" autocomplete="postal-code" maxlength="10" required></ox-text-field>
+                <ox-text-field id="fieldCity" label="City" type="text" autocomplete="address-level2" required></ox-text-field>
+              </div>
+              <ox-combobox id="fieldState" label="State" required hidden></ox-combobox>
+            </div>
+          </section>
+
+          <!-- Flight number -->
+          <section class="review-section" id="flightSection">
+            <ox-separator contrast="low" class="review-section-sep"></ox-separator>
+            <h2 class="text-copy-xlarge-heavy-tight review-section__title">Flight number</h2>
+            <div class="review-fields">
+              <ox-banner kind="primary" icon="info">
+                <p class="text-copy-medium-regular">Add your flight number so we can track delays and have your car ready when you land. No need to worry or call ahead if your flight is running late.</p>
+              </ox-banner>
+              <ox-text-field id="fieldFlight" label="Flight number (optional)" type="text" autocomplete="off" maxlength="10"></ox-text-field>
+            </div>
+          </section>
+
+          <!-- Total + fine print -->
+          <section class="review-section review-total-section" id="totalSection">
+            <ox-separator contrast="low" class="review-section-sep"></ox-separator>
+            <div class="review-total__row">
+              <h2 class="text-copy-xlarge-heavy-tight">Total</h2>
+              <ox-price id="reviewTotalMain" size="large" currency="$" integer="1,171" decimal=".07"></ox-price>
+            </div>
+            <div class="review-total__row">
+              <div class="review-total__amount-label">
+                <p class="text-copy-medium-heavy">Amount you will pay</p>
+                <ox-icon-button kind="primary" size="small" icon="info" label="More info about amount you will pay"></ox-icon-button>
+              </div>
+              <ox-price id="reviewTotalEur" size="medium" kind="primary" currency="€" integer="992" decimal=".01"></ox-price>
+            </div>
+            <ox-text-button class="review-price-details" underlined>Price details</ox-text-button>
+            <div id="reviewNudgeWrap" hidden>
+              <ox-separator contrast="low" class="review-nudge-sep"></ox-separator>
+              <div class="review-pay-later review-pay-later--nudge">
+                <p class="review-pay-later-title text-copy-medium-heavy">Want to save <span id="nudgePriceInTotal">$0.00</span>?</p>
+                <p class="review-pay-later-row"><ox-text-button kind="primary" underlined>Switch to Pay Now</ox-text-button><span class="text-copy-medium-regular"> and save on your total.</span> <ox-icon-button kind="primary" size="small" icon="info" label="More info"></ox-icon-button></p>
+              </div>
+              <ox-separator contrast="low" class="review-nudge-sep"></ox-separator>
+            </div>
+            <div class="review-fine-print text-copy-small-regular">
+              <p>Refundable deposit: An additional € 500 security deposit will be blocked on your card at the pickup counter and released within a few days of the vehicle's return.</p>
+              <div id="prepaidDetails">
+                <p>IMPORTANT INFORMATION about your PREPAID reservation:</p>
+                <p>Prepaid rates are subject to the following cancellation, rebooking, and no-show policies. Please note that the charges listed below will never exceed the total prepaid amount:</p>
+                <ul>
+                  <li id="cancellationFee">Booking cancellation: An amount of $98.24 will be charged to cancel the booking (possible until the agreed pickup time). Any remaining prepaid amount over $98.24 will be refunded.</li>
+                  <li>No show: No refund will be issued in case of failure to pick up your vehicle (no show) or cancellation after scheduled pick up time.</li>
+                  <li>No refund for unused rental days: No refund or credit will be issued for any unused rental days (due to late pickup or early return) once the vehicle has been picked up.</li>
+                </ul>
+              </div>
+              <p id="consentBestPrice">I have read and accept the <ox-link href="#" kind="secondary" underlined>Rental Information</ox-link>, the <ox-link href="#" kind="secondary" underlined>Terms and Conditions</ox-link>, and the <ox-link href="#" kind="secondary" underlined>Privacy Policy</ox-link> and acknowledge that I am booking a prepaid rate, where the total reservation rental price is immediately charged to the payment method I provide.</p>
+              <p id="consentFlexible" hidden>I have read and accept the <ox-link href="#" kind="secondary" underlined>Rental Information</ox-link>, the <ox-link href="#" kind="secondary" underlined>Terms and Conditions</ox-link>, and the <ox-link href="#" kind="secondary" underlined>Privacy Policy</ox-link>.</p>
+              <p id="marketingBestPrice">After completing your reservation, we may send you information about our own similar services by email and text message. You can object to this at any time free of charge by sending an email to sixtcard@sixt.com</p>
+              <p id="marketingFlexible" hidden>After booking, we may send you information about our own similar services by email, text message, and WhatsApp. You can opt out any time free of charge by sending an email to sixtcard@sixt.com.</p>
+            </div>
+            <ox-button id="payAndBook" kind="brand" size="large">Pay and Book</ox-button>
+          </section>
+        </div>
+
+        <!-- RIGHT COLUMN: Sidebar -->
+        <aside class="review-sidebar" aria-label="Booking summary">
+          <ox-booking-summary id="reviewSidebar"
+            vehicle-title="BMW 3 Series Touring"
+            vehicle-subtitle="or similar"
+            vehicle-image=""
+            studio-bg="https://img.sixt.com/1600/6f09b0e8-6820-4ac0-bedd-5797e9814c18.jpg"
+            pickup-location="Munich Airport"
+            pickup-date="Mon, Mar 16, 2026 | 12:00 PM"
+            return-location="Munich Airport"
+            return-date="Fri, Mar 20, 2026 | 12:00 PM"
+            payment-label="Pay now"
+            payment-badge="BEST PRICE"
+            total-price="$1,171.07"
+            total-secondary="€992.01"
+          >
+            <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about third party insurance">Third party insurance</ox-list-item>
+            <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about breakdown assistance">24/7 Breakdown assistance</ox-list-item>
+            <ox-list-item icon="check" trailing-icon="info" trailing-label="More information about winter tires">Tires suitable for winter</ox-list-item>
+            <ox-list-item icon="check" id="sidebarMileageLabel">Unlimited kilometers</ox-list-item>
+            <ox-list-item icon="check" id="sidebarProtectionLabel" hidden></ox-list-item>
+          </ox-booking-summary>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <ox-booking-footer theme="option-light">
+    <ox-link slot="link" href="#">Help</ox-link>
+    <ox-link slot="link" href="#">Rental information</ox-link>
+    <ox-link slot="link" href="#">SIXT for business</ox-link>
+    <ox-link slot="link" href="#">SIXT partners</ox-link>
+    <ox-link slot="link" href="#">SIXT Magazine</ox-link>
+    <ox-link slot="link" href="#">Privacy</ox-link>
+    <ox-link slot="link" href="#">Do not share or sell my personal information</ox-link>
+    <ox-link slot="link" href="#">Terms &amp; conditions</ox-link>
+    <ox-link slot="link" href="#">Customers with disabilities</ox-link>
+    <ox-link slot="link" href="#">Cookie-Settings</ox-link>
+    <span slot="copyright">&copy; Sixt 2026</span>
+  </ox-booking-footer>
+</body>
+</html>

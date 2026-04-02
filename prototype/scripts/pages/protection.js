@@ -47,8 +47,11 @@ const bookingOption = params.get("bookingOption") || "best-price";
 const mileageType = params.get("mileageType") || "unlimited";
 const mileageIncludedKm = params.get("mileageIncludedKm") || "";
 const mileageExtraPerKm = params.get("mileageExtraPerKm") || "";
+const vehicleTitle = params.get("vehicleTitle") || "";
+const vehicleImage = params.get("vehicleImage") || "";
+const protectionPackage = params.get("protectionPackage") || "";
 
-const state = { selectedId: null };
+const state = { selectedId: protectionPackage || null };
 
 const COVERAGE_ITEMS = [
   "Collision damages, scratches, bumps & theft",
@@ -194,6 +197,8 @@ const buildContinueHref = () => {
   if (mileageExtraPerKm) nextParams.set("mileageExtraPerKm", mileageExtraPerKm);
   if (state.selectedId) nextParams.set("protectionPackage", state.selectedId);
   if (minimumAge >= 21) nextParams.set("minimumAge", String(minimumAge));
+  if (vehicleTitle) nextParams.set("vehicleTitle", vehicleTitle);
+  if (vehicleImage) nextParams.set("vehicleImage", vehicleImage);
   return `./add-ons.html?${nextParams.toString()}`;
 };
 
@@ -280,6 +285,17 @@ window.addEventListener("scroll", syncMobileSummaryPosition, { passive: true });
 window.addEventListener("resize", scheduleMobileSummarySync);
 
 renderCards();
+/* Restore visual selection from URL when returning from a later step */
+if (protectionPackage) {
+  const card = cardsRoot.querySelector(`ox-protection-card[option-id="${protectionPackage}"]`);
+  if (card) {
+    card.dispatchEvent(new CustomEvent("protection-select", {
+      bubbles: true,
+      composed: true,
+      detail: { optionId: protectionPackage },
+    }));
+  }
+}
 cardsRoot._syncExpansionForBreakpoint?.();
 syncTotals();
 syncNotice();
