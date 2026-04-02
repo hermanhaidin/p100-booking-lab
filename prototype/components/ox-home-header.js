@@ -115,9 +115,20 @@ class OxHomeHeader extends HTMLElement {
   connectedCallback() {
     this.setAttribute('data-p100-theme', 'option-light');
     this.render();
+    this._listen();
   }
 
   attributeChangedCallback() { this.render(); }
+
+  _listen() {
+    this.shadowRoot.addEventListener('click', (e) => {
+      const btn = e.target.closest('.util-text-help, .util-icon-help');
+      if (btn) {
+        e.preventDefault();
+        this.dispatchEvent(new CustomEvent('ox-help', { bubbles: true, composed: true }));
+      }
+    });
+  }
 
   render() {
     const logoSrc = this.getAttribute('logo-src')
