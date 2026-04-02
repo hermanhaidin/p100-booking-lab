@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
+    "url": "echo \"http://$(ipconfig getifaddr en0):5173/prototype/pages/home.html\"",
     "build": "vite build",
     "preview": "vite preview"
   },

@@ -73,6 +73,11 @@
         modal.appendChild(btn);
       }
     });
+
+    /* Detail page footer override */
+    if (isOn($('[data-demo-detail-hide-footer]'))) {
+      modal.querySelectorAll('[data-demo-foot-item]').forEach(el => el.remove());
+    }
   }
 
   /* Size segmented control */
@@ -81,9 +86,7 @@
   });
 
   /* Delegated change listener for ox-switch / ox-checkbox controls */
-  modal.addEventListener('change', (e) => {
-    update();
-  });
+  modal.addEventListener('change', (e) => { update(); });
 
   /* Label click forwarding — custom elements aren't native labelable targets */
   modal.querySelectorAll('[data-demo-label]').forEach(row => {
@@ -150,6 +153,7 @@
       detailPage.style.display = 'none';
       configPage.style.display = 'flex';
       modal.removeAttribute('back');
+      $('[data-demo-detail-hide-footer]')?.removeAttribute('checked');
       update();
     });
   }

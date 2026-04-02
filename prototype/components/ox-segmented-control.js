@@ -12,7 +12,7 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`
   :host {
     background: var(--color-surface-secondary-container);
-    border-radius: var(--radius-pill, 160px);
+    border-radius: var(--radius-pill);
     display: inline-flex;
     min-height: 36px;
     position: relative;
@@ -28,7 +28,7 @@ styles.replaceSync(`
 
   .indicator {
     background: var(--color-content-primary);
-    border-radius: var(--radius-pill, 160px);
+    border-radius: var(--radius-pill);
     height: 100%;
     left: 0;
     position: absolute;
@@ -50,10 +50,10 @@ styles.replaceSync(`
     justify-content: center;
     letter-spacing: var(--typography-letter-spacing-copy, 0.12px);
     line-height: 1.5;
-    max-height: calc(8px + 2lh);
+    max-height: calc(var(--spacing-3xs) + 2lh);
     min-width: 56px;
     overflow: hidden;
-    padding: 4px var(--spacing-md);
+    padding: var(--spacing-4xs) var(--spacing-md);
     position: relative;
     text-align: center;
     -webkit-tap-highlight-color: transparent;
@@ -63,7 +63,7 @@ styles.replaceSync(`
     font-weight: 700;
   }
   ::slotted(button:focus-visible) {
-    border-radius: var(--radius-pill, 160px);
+    border-radius: var(--radius-pill);
     outline: var(--stroke-lg) solid var(--color-overlay-focus);
     outline-offset: var(--stroke-md);
   }
