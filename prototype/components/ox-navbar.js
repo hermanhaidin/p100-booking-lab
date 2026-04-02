@@ -122,6 +122,10 @@ styles.replaceSync(`
 
   .accessory { display: contents; }
 
+  /* Floating dialog mode — close handled by dialog, leading hidden unless back */
+  :host([floating]) .leading { display: none; }
+  :host([floating][leading="back"]) .leading { display: flex; }
+
   @media (min-width: 600px) {
     :host {
       --_bar-pad: var(--ox-navbar-bar-pad, var(--spacing-sm));

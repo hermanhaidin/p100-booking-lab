@@ -78,6 +78,13 @@ styles.replaceSync(`
     display: contents;
   }
 
+  /* Floating dialog — close in trailing area, user actions hidden */
+  .float-close { display: none; }
+  :host([size="small"]) .float-close,
+  :host([size="medium"]) .float-close { display: flex; }
+  :host([size="small"]) slot[name="head-actions"],
+  :host([size="medium"]) slot[name="head-actions"] { display: none; }
+
   .body {
     flex: 1 0 auto;
     margin: var(--spacing-xs) var(--_gutter) 0;
@@ -90,12 +97,6 @@ styles.replaceSync(`
   }
   .body > ::slotted(:first-child) { margin-top: 0; }
   .body > ::slotted(:last-child) { margin-bottom: 0; }
-  :host([no-foot]) .body::after {
-    content: "";
-    display: block;
-    height: var(--_gutter);
-  }
-
   .foot {
     background: var(--_bg);
     bottom: 0;
@@ -107,7 +108,11 @@ styles.replaceSync(`
     position: sticky;
   }
   :host([small-title]) .foot { position: relative; }
-  .foot[hidden] { display: none; }
+  .foot[hidden] {
+    display: block;
+    height: var(--spacing-2xl);
+    padding: 0;
+  }
   .foot ::slotted(ox-button) {
     display: flex;
     width: 100%;
@@ -177,6 +182,8 @@ styles.replaceSync(`
     }
 
     ox-navbar { --ox-navbar-gutter: var(--spacing-2xl); }
+    :host(:not([size="full"])) .float-close { display: flex; }
+    :host(:not([size="full"])) slot[name="head-actions"] { display: none; }
 
     :host([size="full"]) .body,
     :host([size="full"]) .foot { padding-inline: var(--spacing-lg); }
@@ -242,6 +249,9 @@ class OxDialog extends HTMLElement {
     this._scrollY = 0;
     this._onKey = this._onKey.bind(this);
     this._onScroll = this._onScroll.bind(this);
+    this._mql = window.matchMedia('(min-width: 600px)');
+    this._onMql = () => this._syncFloating();
+    this._mql.addEventListener('change', this._onMql);
   }
 
   connectedCallback() { this._connected = true; this.render(); this._listen(); }
@@ -249,12 +259,13 @@ class OxDialog extends HTMLElement {
   disconnectedCallback() {
     document.removeEventListener('keydown', this._onKey);
     this.shadowRoot.querySelector('.panel')?.removeEventListener('scroll', this._onScroll);
+    this._mql.removeEventListener('change', this._onMql);
     this._mo?.disconnect();
   }
 
   attributeChangedCallback(name) {
     if (name === 'open') { this.hasAttribute('open') ? this._onOpen() : this._onClose(); return; }
-    if (name === 'size') return;
+    if (name === 'size') { this._syncFloating(); return; }
     if (name === 'small-title') {
       const nav = this.shadowRoot.querySelector('ox-navbar');
       if (nav) {
@@ -298,6 +309,14 @@ class OxDialog extends HTMLElement {
 
   _onKey(e) { if (e.key === 'Escape') this._dismiss(); }
 
+  _syncFloating() {
+    const nav = this.shadowRoot.querySelector('ox-navbar');
+    if (!nav) return;
+    const size = this.getAttribute('size');
+    const floating = size === 'small' || size === 'medium' || (size !== 'full' && this._mql.matches);
+    nav.toggleAttribute('floating', floating);
+  }
+
   _onScroll() {
     const p = this.shadowRoot.querySelector('.panel');
     const nav = this.shadowRoot.querySelector('ox-navbar');
@@ -305,7 +324,9 @@ class OxDialog extends HTMLElement {
   }
 
   _listen() {
-    this.shadowRoot.addEventListener('click', (e) => { if (e.target.classList.contains('scrim')) this._dismiss(); });
+    this.shadowRoot.addEventListener('click', (e) => {
+      if (e.target.classList.contains('scrim') || e.target.closest('.float-close')) this._dismiss();
+    });
     this.shadowRoot.addEventListener('ox-close', (e) => { e.stopPropagation(); this._dismiss(); });
     this.shadowRoot.addEventListener('ox-back', (e) => {
       e.stopPropagation();
@@ -356,11 +377,12 @@ class OxDialog extends HTMLElement {
       <div class="scrim"></div>
       <section class="panel" role="dialog" aria-modal="true" aria-label="${heading || 'Dialog'}">
         <ox-navbar ${heading ? `heading="${heading}"` : ''} ${subtitle ? `subtitle="${subtitle}"` : ''} leading="${back ? 'back' : 'close'}" ${smallTitle ? 'collapsed no-sticky' : ''}
-        ><slot name="head-actions" slot="actions"></slot><slot name="head-bar-content" slot="bar-content"></slot></ox-navbar>
+        ><slot name="head-actions" slot="actions"></slot><ox-icon-button class="float-close" slot="actions" icon="close" label="Close"></ox-icon-button><slot name="head-bar-content" slot="bar-content"></slot></ox-navbar>
         <div class="body"><slot></slot></div>
         <div class="foot"><slot name="footer"></slot></div>
       </section>`;
     this._observeSlots();
+    this._syncFloating();
     /* Re-attach scroll listener if dialog is open (render rebuilds the panel DOM) */
     if (this.hasAttribute('open'))
       this.shadowRoot.querySelector('.panel')?.addEventListener('scroll', this._onScroll, { passive: true });
