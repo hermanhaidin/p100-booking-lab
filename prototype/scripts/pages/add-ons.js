@@ -41,6 +41,11 @@ const mileageType = params.get("mileageType") || "unlimited";
 const mileageIncludedKm = params.get("mileageIncludedKm") || "";
 const mileageExtraPerKm = params.get("mileageExtraPerKm") || "";
 const protectionPackage = params.get("protectionPackage") || "";
+const vehicleTitle = params.get("vehicleTitle") || "";
+const vehicleImage = params.get("vehicleImage") || "";
+
+let addonsFromUrl = [];
+try { addonsFromUrl = JSON.parse(params.get("addons") || "[]"); } catch { /* ignore */ }
 
 const ADDONS = [
   { id: "additional-driver", title: "Additional driver", price: 10.91, priceSuffix: "/ day & driver", icon: "person_add", details: "Share the driving for a safer and more relaxed trip. Each extra driver must show a valid license when picking up the vehicle.", controlType: "stepper", maxQuantity: 5 },
@@ -60,9 +65,10 @@ const ADDONS = [
   { id: "terminal-drop-off", title: "Terminal Drop-Off Service", price: 88.29, priceSuffix: "/ one-time", icon: "flight_takeoff", details: "Save time: Return your vehicle at your departure terminal (available within branch operating hours).", controlType: "switch", maxQuantity: 1 },
 ];
 
-const state = {
-  addons: {},
-};
+const state = { addons: {} };
+for (const a of addonsFromUrl) {
+  state.addons[a.id] = { selected: true, quantity: a.quantity };
+}
 
 const isOneTime = (suffix) => suffix.includes("one-time");
 
@@ -124,6 +130,9 @@ const buildBackHref = () => {
   if (mileageIncludedKm) backParams.set("mileageIncludedKm", mileageIncludedKm);
   if (mileageExtraPerKm) backParams.set("mileageExtraPerKm", mileageExtraPerKm);
   if (minimumAge >= 21) backParams.set("minimumAge", String(minimumAge));
+  if (protectionPackage) backParams.set("protectionPackage", protectionPackage);
+  if (vehicleTitle) backParams.set("vehicleTitle", vehicleTitle);
+  if (vehicleImage) backParams.set("vehicleImage", vehicleImage);
   return `./protection.html?${backParams.toString()}`;
 };
 
@@ -140,6 +149,7 @@ const buildContinueHref = () => {
   const grandTotal = total + addonTotal;
   const fwdParams = new URLSearchParams();
   fwdParams.set("total", grandTotal.toFixed(2));
+  fwdParams.set("baseTotal", total.toFixed(2));
   fwdParams.set("daily", String(offerDaily));
   fwdParams.set("rentalDays", String(rentalDays));
   fwdParams.set("bookingOption", bookingOption);
@@ -148,6 +158,8 @@ const buildContinueHref = () => {
   if (mileageExtraPerKm) fwdParams.set("mileageExtraPerKm", mileageExtraPerKm);
   if (protectionPackage) fwdParams.set("protectionPackage", protectionPackage);
   if (selectedAddons.length) fwdParams.set("addons", JSON.stringify(selectedAddons));
+  if (vehicleTitle) fwdParams.set("vehicleTitle", vehicleTitle);
+  if (vehicleImage) fwdParams.set("vehicleImage", vehicleImage);
   return `./review-booking.html?${fwdParams.toString()}`;
 };
 
@@ -255,6 +267,13 @@ window.addEventListener("scroll", syncMobileSummaryPosition, { passive: true });
 window.addEventListener("resize", scheduleMobileSummarySync);
 
 renderCards();
+/* Restore visual selection from URL when returning from a later step */
+for (const a of addonsFromUrl) {
+  const card = cardsRoot.querySelector(`ox-add-on-card[addon-id="${a.id}"]`);
+  if (!card) continue;
+  card.setAttribute("quantity", String(a.quantity));
+  card.setAttribute("selected", "");
+}
 syncTotals();
 syncNotice();
 syncBackLinks();

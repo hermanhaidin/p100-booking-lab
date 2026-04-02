@@ -15,21 +15,9 @@ paymentMethodGroupStyles.replaceSync(`
   ox-payment-method-group {
     display: flex;
     flex-direction: column;
+    gap: var(--spacing-xs);
   }
 
-  ox-payment-method-group > ox-payment-method + ox-payment-method {
-    margin-top: calc(-1 * var(--stroke-sm));
-  }
-
-  ox-payment-method-group > ox-payment-method:first-child {
-    border-top-left-radius: var(--radius-lg);
-    border-top-right-radius: var(--radius-lg);
-  }
-
-  ox-payment-method-group > ox-payment-method:last-child {
-    border-bottom-left-radius: var(--radius-lg);
-    border-bottom-right-radius: var(--radius-lg);
-  }
 `);
 
 class OxPaymentMethodGroup extends HTMLElement {

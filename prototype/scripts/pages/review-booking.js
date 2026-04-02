@@ -20,7 +20,7 @@ const formatUSD = (amount) => {
   return { currency: "$", integerPart, decimalPart: `.${decimalPart}` };
 };
 
-const EUR_RATE = 0.847;
+const EUR_RATE = 0.87;
 
 const formatEUR = (usdAmount) => {
   const eur = usdAmount * EUR_RATE;
@@ -39,6 +39,13 @@ const rentalDaysFromQuery = parseAmount(params.get("rentalDays"), 0);
 const rentalDaysFallback = offerDaily > 0 ? Math.max(1, Math.round(total / offerDaily)) : 4;
 const rentalDays = Math.max(1, Math.round(rentalDaysFromQuery || rentalDaysFallback));
 const bookingOption = params.get("bookingOption") || "best-price";
+
+/* The flexible surcharge delta (cost to upgrade, or savings from downgrading).
+   When stay-flexible, offerDaily already includes the +5% addon, so back-calculate
+   the base daily: baseDailyForNudge = offerDaily / 1.05. */
+const baseDailyForNudge = bookingOption === "stay-flexible" ? offerDaily / 1.05 : offerDaily;
+const flexibleSurcharge = baseDailyForNudge * 0.05 * rentalDays;
+
 const mileageType = params.get("mileageType") || "unlimited";
 const mileageIncludedKm = params.get("mileageIncludedKm") || "";
 const mileageExtraPerKm = params.get("mileageExtraPerKm") || "";
@@ -52,6 +59,10 @@ let addonsData = [];
 try {
   addonsData = JSON.parse(params.get("addons") || "[]");
 } catch { /* ignore parse errors */ }
+
+/* baseTotal = total before add-ons were applied (base rental + protection only).
+   Passed by add-ons.js so that navigating back re-lands on the correct base price. */
+const baseTotal = parseAmount(params.get("baseTotal"), 0) || total;
 
 /* --- DOM refs --- */
 
@@ -85,6 +96,19 @@ const sidebarProtectionLabel = document.getElementById("sidebarProtectionLabel")
 const mobileMileageLabel = document.getElementById("mobileMileageLabel");
 const mobileProtectionLabel = document.getElementById("mobileProtectionLabel");
 
+/* Booking-mode-dependent refs */
+const paymentSection = document.getElementById("paymentMethods");
+const invoiceSection = document.getElementById("invoiceAddress");
+const payLaterInPayment = document.getElementById("payLaterInPayment");
+const nudgePriceInPayment = document.getElementById("nudgePriceInPayment");
+const reviewNudgeWrap = document.getElementById("reviewNudgeWrap");
+const nudgePriceInTotal = document.getElementById("nudgePriceInTotal");
+const prepaidDetails = document.getElementById("prepaidDetails");
+const consentBestPrice = document.getElementById("consentBestPrice");
+const consentFlexible = document.getElementById("consentFlexible");
+const marketingBestPrice = document.getElementById("marketingBestPrice");
+const marketingFlexible = document.getElementById("marketingFlexible");
+
 /* --- Populate totals --- */
 
 const syncTotals = () => {
@@ -97,7 +121,17 @@ const syncTotals = () => {
     el.setAttribute("decimal", parts.decimalPart);
   }
 
-  if (totalEur) totalEur.textContent = eurText;
+  if (totalEur) {
+    const eurAmount = total * EUR_RATE;
+    const eurFormatted = new Intl.NumberFormat("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+      useGrouping: true,
+    }).format(eurAmount);
+    const [eurInt, eurDec] = eurFormatted.split(".");
+    totalEur.setAttribute("integer", eurInt);
+    totalEur.setAttribute("decimal", `.${eurDec}`);
+  }
 
   /* Update summary components */
   const priceText = `$${parts.integerPart}${parts.decimalPart}`;
@@ -167,6 +201,39 @@ const syncLabels = () => {
   }
 };
 
+/* --- Booking mode: best-price vs stay-flexible --- */
+
+const syncBookingMode = () => {
+  const isFlexible = bookingOption === "stay-flexible";
+
+  const nudgePriceText = `$${new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(flexibleSurcharge)}`;
+
+  /* Show/hide payment + invoice sections */
+  if (paymentSection) paymentSection.hidden = isFlexible;
+  if (invoiceSection) invoiceSection.hidden = isFlexible;
+
+  /* Nudge in payment section (best-price only) */
+  if (payLaterInPayment) payLaterInPayment.hidden = isFlexible;
+  if (nudgePriceInPayment) nudgePriceInPayment.textContent = nudgePriceText;
+
+  /* Nudge in total section (stay-flexible only) */
+  if (reviewNudgeWrap) reviewNudgeWrap.hidden = !isFlexible;
+  if (nudgePriceInTotal) nudgePriceInTotal.textContent = nudgePriceText;
+
+  /* Fine print */
+  if (prepaidDetails) prepaidDetails.hidden = isFlexible;
+  if (consentBestPrice) consentBestPrice.hidden = isFlexible;
+  if (consentFlexible) consentFlexible.hidden = !isFlexible;
+  if (marketingBestPrice) marketingBestPrice.hidden = isFlexible;
+  if (marketingFlexible) marketingFlexible.hidden = !isFlexible;
+
+  /* CTA label */
+  if (payAndBook) payAndBook.textContent = isFlexible ? "Book" : "Pay and Book";
+};
+
 /* --- Cancellation fee (≈8.39% of total) --- */
 
 const syncCancellationFee = () => {
@@ -183,7 +250,7 @@ const syncCancellationFee = () => {
 
 const buildBackHref = () => {
   const backParams = new URLSearchParams();
-  backParams.set("total", total.toFixed(2));
+  backParams.set("total", baseTotal.toFixed(2));
   if (offerDaily) backParams.set("daily", String(offerDaily));
   backParams.set("rentalDays", String(rentalDays));
   backParams.set("bookingOption", bookingOption);
@@ -490,8 +557,10 @@ const validateForm = () => {
     fieldsToValidate.push(...REQUIRED_CC_FIELDS);
   }
 
-  /* Add invoice address required fields */
-  fieldsToValidate.push("fieldStreet", "fieldZip", "fieldCity");
+  /* Add invoice address required fields (best-price only) */
+  if (bookingOption !== "stay-flexible") {
+    fieldsToValidate.push("fieldStreet", "fieldZip", "fieldCity");
+  }
 
   /* Add DOB if visible */
   if (fieldDob && !fieldDob.hidden) {
@@ -520,8 +589,11 @@ const validateForm = () => {
     }
   }
 
-  /* Validate comboboxes */
-  for (const combo of [fieldCountryCode, fieldCountry]) {
+  /* Validate comboboxes — skip invoice country for stay-flexible */
+  const combosToValidate = bookingOption === "stay-flexible"
+    ? [fieldCountryCode]
+    : [fieldCountryCode, fieldCountry];
+  for (const combo of combosToValidate) {
     if (!combo || combo.hidden) continue;
     if (!combo.getAttribute("value")) {
       setFieldError(combo, "Invalid entry or required field");
@@ -531,8 +603,8 @@ const validateForm = () => {
     }
   }
 
-  /* Validate state if visible */
-  if (fieldState && !fieldState.hidden) {
+  /* Validate state if visible (best-price only) */
+  if (bookingOption !== "stay-flexible" && fieldState && !fieldState.hidden) {
     if (!fieldState.getAttribute("value")) {
       setFieldError(fieldState, "Invalid entry or required field");
       if (!firstError) firstError = fieldState;
@@ -541,8 +613,8 @@ const validateForm = () => {
     }
   }
 
-  /* Check payment method is selected */
-  if (!selectedPayment) {
+  /* Check payment method is selected (best-price only) */
+  if (bookingOption !== "stay-flexible" && !selectedPayment) {
     if (!firstError) {
       firstError = document.getElementById("paymentMethods");
     }
@@ -624,6 +696,7 @@ const init = () => {
   syncSummaries();
   syncLabels();
   syncCancellationFee();
+  syncBookingMode();
   syncBackLinks();
   initComboboxes();
 

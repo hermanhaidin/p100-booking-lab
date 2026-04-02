@@ -67,6 +67,10 @@ ox-text-button.review-price-details {
   margin-bottom: 0;
 }
 
+.review-section-sep {
+  margin-bottom: var(--spacing-md);
+}
+
 .review-section__title {
   margin: 0 0 var(--spacing-xs);
 }
@@ -97,13 +101,25 @@ ox-text-button.review-price-details {
 .review-pay-later {
   display: grid;
   gap: var(--spacing-4xs);
+}
+
+#paymentMethods .review-pay-later {
   margin-top: var(--spacing-xs);
+}
+
+#reviewNudgeWrap {
+  margin-top: var(--spacing-xs);
+}
+
+#reviewNudgeWrap .review-pay-later {
+  padding-block: var(--spacing-xs);
 }
 
 .review-pay-later-row {
   align-items: center;
   display: inline-flex;
   gap: var(--spacing-4xs);
+  margin: 0;
 }
 
 .review-pay-later-title {

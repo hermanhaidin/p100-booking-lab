@@ -12,7 +12,7 @@ styles.replaceSync(`
   :host {
     background-color: var(--color-surface-container);
     border: var(--stroke-sm) solid color-mix(in srgb, var(--color-content-secondary) 25%, transparent);
-    border-radius: 0;
+    border-radius: var(--radius-md);
     box-shadow: inset 0 0 0 0 transparent;
     box-sizing: border-box;
     cursor: pointer;

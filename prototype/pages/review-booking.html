@@ -85,6 +85,7 @@
 
           <!-- Payment methods -->
           <section class="review-section" id="paymentMethods">
+            <ox-separator contrast="low" class="review-section-sep"></ox-separator>
             <h2 class="text-copy-xlarge-heavy-tight review-section__title">Payment methods</h2>
             <ox-payment-method-group id="paymentGroup">
               <ox-payment-method value="credit-card" label="Credit or debit card" trailing-icon="credit_card">
@@ -113,14 +114,15 @@
                 <p class="text-copy-medium-regular">By selecting "Pay and book", you'll complete your payment securely through Apple Pay. Please be aware that a credit or debit card must be presented in the renter's name at pickup to secure the rental.</p>
               </ox-payment-method>
             </ox-payment-method-group>
-            <div class="review-pay-later">
+            <div class="review-pay-later" id="payLaterInPayment">
               <p class="review-pay-later-title text-copy-medium-heavy">No payment method on hand?</p>
-              <p class="review-pay-later-row text-copy-small-regular">Switch to Pay Later and have free cancellation included for just $ 0.00 more. <ox-icon-button kind="primary" size="small" icon="info" label="More info"></ox-icon-button></p>
+              <p class="review-pay-later-row text-copy-small-regular"><ox-text-button kind="primary" underlined>Switch to Pay Later</ox-text-button><span class="text-copy-medium-regular"> and have free cancellation included for just <span id="nudgePriceInPayment">$0.00</span> more.</span> <ox-icon-button kind="primary" size="small" icon="info" label="More info"></ox-icon-button></p>
             </div>
           </section>
 
           <!-- Invoice address -->
           <section class="review-section" id="invoiceAddress">
+            <ox-separator contrast="low" class="review-section-sep"></ox-separator>
             <h2 class="text-copy-xlarge-heavy-tight review-section__title">Invoice address</h2>
             <div class="review-fields">
               <ox-text-field id="fieldCompany" label="Company (optional)" type="text" autocomplete="organization"></ox-text-field>
@@ -136,6 +138,7 @@
 
           <!-- Flight number -->
           <section class="review-section" id="flightSection">
+            <ox-separator contrast="low" class="review-section-sep"></ox-separator>
             <h2 class="text-copy-xlarge-heavy-tight review-section__title">Flight number</h2>
             <div class="review-fields">
               <ox-banner kind="primary" icon="info">
@@ -147,6 +150,7 @@
 
           <!-- Total + fine print -->
           <section class="review-section review-total-section" id="totalSection">
+            <ox-separator contrast="low" class="review-section-sep"></ox-separator>
             <div class="review-total__row">
               <h2 class="text-copy-xlarge-heavy-tight">Total</h2>
               <ox-price id="reviewTotalMain" size="large" currency="$" integer="1,171" decimal=".07"></ox-price>
@@ -159,17 +163,29 @@
               <ox-price id="reviewTotalEur" size="medium" kind="primary" currency="€" integer="992" decimal=".01"></ox-price>
             </div>
             <ox-text-button class="review-price-details" underlined>Price details</ox-text-button>
+            <div id="reviewNudgeWrap" hidden>
+              <ox-separator contrast="low" class="review-nudge-sep"></ox-separator>
+              <div class="review-pay-later review-pay-later--nudge">
+                <p class="review-pay-later-title text-copy-medium-heavy">Want to save <span id="nudgePriceInTotal">$0.00</span>?</p>
+                <p class="review-pay-later-row"><ox-text-button kind="primary" underlined>Switch to Pay Now</ox-text-button><span class="text-copy-medium-regular"> and save on your total.</span> <ox-icon-button kind="primary" size="small" icon="info" label="More info"></ox-icon-button></p>
+              </div>
+              <ox-separator contrast="low" class="review-nudge-sep"></ox-separator>
+            </div>
             <div class="review-fine-print text-copy-small-regular">
               <p>Refundable deposit: An additional € 500 security deposit will be blocked on your card at the pickup counter and released within a few days of the vehicle's return.</p>
-              <p class="text-copy-small-regular">IMPORTANT INFORMATION about your PREPAID reservation:</p>
-              <p>Prepaid rates are subject to the following cancellation, rebooking, and no-show policies. Please note that the charges listed below will never exceed the total prepaid amount:</p>
-              <ul>
-                <li id="cancellationFee">Booking cancellation: An amount of $98.24 will be charged to cancel the booking (possible until the agreed pickup time). Any remaining prepaid amount over $98.24 will be refunded.</li>
-                <li>No show: No refund will be issued in case of failure to pick up your vehicle (no show) or cancellation after scheduled pick up time.</li>
-                <li>No refund for unused rental days: No refund or credit will be issued for any unused rental days (due to late pickup or early return) once the vehicle has been picked up.</li>
-              </ul>
-              <p>I have read and accept the <ox-link href="#">Rental Information</ox-link>, the <ox-link href="#">Terms and Conditions</ox-link>, and the <ox-link href="#">Privacy Policy</ox-link> and acknowledge that I am booking a prepaid rate, where the total reservation rental price is immediately charged to the payment method I provide.</p>
-              <p>After completing your reservation, we may send you information about our own similar services by email and text message. You can object to this at any time free of charge by sending an email to sixtcard@sixt.com</p>
+              <div id="prepaidDetails">
+                <p>IMPORTANT INFORMATION about your PREPAID reservation:</p>
+                <p>Prepaid rates are subject to the following cancellation, rebooking, and no-show policies. Please note that the charges listed below will never exceed the total prepaid amount:</p>
+                <ul>
+                  <li id="cancellationFee">Booking cancellation: An amount of $98.24 will be charged to cancel the booking (possible until the agreed pickup time). Any remaining prepaid amount over $98.24 will be refunded.</li>
+                  <li>No show: No refund will be issued in case of failure to pick up your vehicle (no show) or cancellation after scheduled pick up time.</li>
+                  <li>No refund for unused rental days: No refund or credit will be issued for any unused rental days (due to late pickup or early return) once the vehicle has been picked up.</li>
+                </ul>
+              </div>
+              <p id="consentBestPrice">I have read and accept the <ox-link href="#" kind="secondary" underlined>Rental Information</ox-link>, the <ox-link href="#" kind="secondary" underlined>Terms and Conditions</ox-link>, and the <ox-link href="#" kind="secondary" underlined>Privacy Policy</ox-link> and acknowledge that I am booking a prepaid rate, where the total reservation rental price is immediately charged to the payment method I provide.</p>
+              <p id="consentFlexible" hidden>I have read and accept the <ox-link href="#" kind="secondary" underlined>Rental Information</ox-link>, the <ox-link href="#" kind="secondary" underlined>Terms and Conditions</ox-link>, and the <ox-link href="#" kind="secondary" underlined>Privacy Policy</ox-link>.</p>
+              <p id="marketingBestPrice">After completing your reservation, we may send you information about our own similar services by email and text message. You can object to this at any time free of charge by sending an email to sixtcard@sixt.com</p>
+              <p id="marketingFlexible" hidden>After booking, we may send you information about our own similar services by email, text message, and WhatsApp. You can opt out any time free of charge by sending an email to sixtcard@sixt.com.</p>
             </div>
             <ox-button id="payAndBook" kind="brand" size="large">Pay and Book</ox-button>
           </section>

@@ -365,7 +365,7 @@ class OxBookingSummary extends HTMLElement {
             <span class="text-copy-large-heavy-tight">${paymentLabel}</span>
             ${paymentBadge ? `<span class="pay-badge text-copy-small-heavy-caps">${paymentBadge}</span>` : ''}
           </div>
-          <ox-list-item size="medium" icon="check">Lowest price available for your rental</ox-list-item>
+          <ox-list-item size="medium" icon="check">${paymentLabel === 'Stay flexible' ? 'Rebooking any time before pickup' : 'Lowest price available for your rental'}</ox-list-item>
         </div>
         <ox-separator contrast="low"></ox-separator>
         <div class="section">

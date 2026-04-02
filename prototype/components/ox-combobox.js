@@ -165,7 +165,7 @@ styles.replaceSync(`
     cursor: pointer;
     display: flex;
     gap: var(--spacing-3xs);
-    min-height: 44px;
+    min-height: 48px;
     padding: var(--spacing-3xs) var(--spacing-xs);
   }
 
@@ -180,7 +180,12 @@ styles.replaceSync(`
   .option[hidden] { display: none; }
 
   .option-leading {
+    align-items: center;
+    display: flex;
     flex: 0 0 auto;
+    height: 24px;
+    justify-content: center;
+    width: 24px;
   }
 
   /* --- Error row --- */
@@ -345,6 +350,21 @@ class OxCombobox extends HTMLElement {
       const label = (opt.dataset.label || '').toLowerCase();
       opt.hidden = lowerQuery && !label.includes(lowerQuery);
     });
+
+    /* Deduplicate by label when a query is active — hide later occurrences
+       so options appearing in both "Most popular" and the full list don't show twice. */
+    if (lowerQuery) {
+      const seen = new Set();
+      this.shadowRoot.querySelectorAll('.option').forEach((opt) => {
+        if (opt.hidden) return;
+        const label = opt.dataset.label || '';
+        if (seen.has(label)) {
+          opt.hidden = true;
+        } else {
+          seen.add(label);
+        }
+      });
+    }
     /* Hide group headings if all options in group are hidden */
     this.shadowRoot.querySelectorAll('.group-heading').forEach((heading) => {
       let next = heading.nextElementSibling;
@@ -443,9 +463,9 @@ class OxCombobox extends HTMLElement {
       }
 
       const leadingHtml = opt.leading
-        ? `<span class="option-leading">${opt.leading}</span>`
+        ? `<span class="option-leading text-copy-xlarge-regular">${opt.leading}</span>`
         : '';
-      optionsHtml += `<div class="option text-copy-medium-regular" role="option" data-value="${opt.value}" data-label="${opt.label}" aria-selected="false">${leadingHtml}<span>${opt.label}</span></div>`;
+      optionsHtml += `<div class="option text-copy-large-regular" role="option" data-value="${opt.value}" data-label="${opt.label}" aria-selected="false">${leadingHtml}<span>${opt.label}</span></div>`;
     }
 
     const selected = this._selectedOption;

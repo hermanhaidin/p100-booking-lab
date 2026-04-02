@@ -419,7 +419,8 @@
 
     const params = new URLSearchParams({
       offerIndex: String(selectedOfferIndex),
-      offerTitle: selectedOffer.Title || '',
+      vehicleTitle: selectedOffer.Title || '',
+      vehicleImage: selectedOffer.Image || '',
       total: totalAmount.toFixed(2),
       daily: dailyAmount.toFixed(2),
       minimumAge: String(getMinimumAge(selectedOffer)),
