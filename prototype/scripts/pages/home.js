@@ -1,5 +1,5 @@
 /* Home page orchestration
-   - Dialog demo (ox-bottomsheet configurator opened via header Help button)
+   - Dialog demo (ox-dialog configurator opened via header Help button)
    - SEO link tab switching (ox-chip selected attribute + panel visibility) */
 
 /* --- Dialog demo — interactive configurator --- */
@@ -17,7 +17,7 @@
 
   /* Footer button definitions: [switchSelector, kind, label, isTextButton] */
   const footBtns = [
-    ['[data-demo-btn-primary]', 'brand', 'Confirm', false],
+    ['[data-demo-btn-primary]', 'brand', 'Continue', false],
     ['[data-demo-btn-secondary]', 'secondary', 'Download', false],
     ['[data-demo-btn-secondary2]', 'secondary', 'Share', false],
     ['[data-demo-btn-text]', null, 'Dismiss', true],
@@ -27,10 +27,12 @@
 
   function update() {
     /* Size */
-    const sizeRadio = modal.querySelector('ox-radio-button[data-demo-size][checked]');
-    const sizeVal = sizeRadio ? sizeRadio.getAttribute('value') : '';
+    const sizeCtrl = modal.querySelector('[data-demo-size-ctrl]');
+    const activeBtn = sizeCtrl?.querySelector('button[aria-selected="true"]');
+    const sizeVal = activeBtn ? activeBtn.getAttribute('value') : '';
     if (sizeVal) { modal.setAttribute('size', sizeVal); } else { modal.removeAttribute('size'); }
     modal.toggleAttribute('small-title', isOn($('[data-demo-small-title]')));
+    modal.toggleAttribute('tall', isOn($('[data-demo-tall]')));
 
     /* Header — title / subtitle */
     const showTitle = isOn($('[data-demo-show-title]'));
@@ -42,12 +44,13 @@
     if (showTitle) { modal.setAttribute('heading', TITLE_TEXT); } else { modal.removeAttribute('heading'); }
     if (showSubtitle) { modal.setAttribute('subtitle', SUBTITLE_TEXT); } else { modal.removeAttribute('subtitle'); }
 
-    /* Header — back / close */
-    modal.toggleAttribute('back', isOn($('[data-demo-show-back]')));
-
     /* Header — trailing action icons */
     const showActions = isOn($('[data-demo-show-actions]'));
     actionEls.forEach((el) => el.toggleAttribute('hidden', !showActions));
+
+    /* Header — segmented control */
+    const segCtrl = modal.querySelector('[data-demo-segmented-ctrl]');
+    if (segCtrl) segCtrl.toggleAttribute('hidden', !isOn($('[data-demo-segmented]')));
 
     /* Footer — rebuild slotted buttons */
     modal.querySelectorAll('[data-demo-foot-item]').forEach((el) => el.remove());
@@ -72,31 +75,20 @@
     });
   }
 
-  /* Radio group coordination — enforce mutual exclusivity */
-  function selectRadio(radio) {
-    $$('ox-radio-button[data-demo-size]').forEach(r => {
-      if (r !== radio) r.removeAttribute('checked');
-    });
-    radio.setAttribute('checked', '');
-    update();
-  }
+  /* Size segmented control */
+  modal.addEventListener('ox-change', (e) => {
+    if (e.target.matches('[data-demo-size-ctrl]')) { update(); return; }
+  });
 
-  /* Delegated change listener for all ox-radio-button / ox-switch controls */
+  /* Delegated change listener for ox-switch / ox-checkbox controls */
   modal.addEventListener('change', (e) => {
-    const radio = e.target.closest('ox-radio-button[data-demo-size]');
-    if (radio) { selectRadio(radio); return; }
     update();
   });
 
   /* Label click forwarding — custom elements aren't native labelable targets */
   modal.querySelectorAll('[data-demo-label]').forEach(row => {
     row.addEventListener('click', (e) => {
-      if (e.target.closest('ox-radio-button') || e.target.closest('ox-checkbox')) return;
-      const radio = row.querySelector('ox-radio-button');
-      if (radio && !radio.hasAttribute('disabled')) {
-        selectRadio(radio);
-        return;
-      }
+      if (e.target.closest('ox-checkbox')) return;
       const sw = row.querySelector('ox-checkbox');
       if (sw && !sw.hasAttribute('disabled')) {
         sw.toggleAttribute('checked');
@@ -110,6 +102,63 @@
 
   /* Open via header Help button */
   document.addEventListener('ox-help', () => modal.show());
+
+  /* Multi-page flow — Confirm swaps to detail page, Back returns */
+  const configPage = modal.querySelector('[data-demo-page="config"]');
+  const detailPage = modal.querySelector('[data-demo-page="detail"]');
+
+  function flipHeight(fn) {
+    const old = modal.shadowRoot?.querySelector('.panel');
+    const from = old ? old.offsetHeight : 0;
+    fn();
+    const panel = modal.shadowRoot?.querySelector('.panel');
+    if (!panel || !from) return;
+    panel.style.overflow = 'hidden';
+    panel.style.transition = 'none';
+    panel.style.height = 'auto';
+    const to = panel.offsetHeight;
+    if (from === to) { panel.style.overflow = ''; panel.style.transition = ''; return; }
+    panel.style.height = from + 'px';
+    panel.offsetHeight; /* force reflow — commit 'from' state */
+    panel.style.transition = 'height 300ms cubic-bezier(.4,0,.2,1)';
+    panel.style.height = to + 'px';
+    panel.addEventListener('transitionend', (e) => {
+      if (e.propertyName !== 'height') return;
+      panel.style.height = '';
+      panel.style.overflow = '';
+      panel.style.transition = '';
+    }, { once: true });
+  }
+
+  function swapPage(fn) {
+    if (modal.getAttribute('size') === 'full' || modal.hasAttribute('tall')) { fn(); return; }
+    flipHeight(fn);
+  }
+
+  function goToDetail() {
+    swapPage(() => {
+      configPage.style.display = 'none';
+      detailPage.style.display = 'flex';
+      modal.setAttribute('heading', 'Confirm your selection');
+      modal.setAttribute('subtitle', 'Review your choices before proceeding.');
+      modal.setAttribute('back', '');
+    });
+  }
+
+  function goToConfig() {
+    swapPage(() => {
+      detailPage.style.display = 'none';
+      configPage.style.display = 'flex';
+      modal.removeAttribute('back');
+      update();
+    });
+  }
+
+  modal.addEventListener('click', (e) => {
+    const btn = e.target.closest('ox-button[data-demo-foot-item]');
+    if (btn && btn.getAttribute('kind') === 'brand') goToDetail();
+  });
+  modal.addEventListener('ox-back', goToConfig);
 
   /* Initial sync */
   update();

@@ -1,7 +1,8 @@
 import './shared/base-styles.js';
 
 import './ox-add-on-card.js';
-import './ox-bottomsheet.js';
+import './ox-navbar.js';
+import './ox-dialog.js';
 import './ox-badge.js';
 import './ox-banner.js';
 import './ox-booking-footer.js';
@@ -27,6 +28,7 @@ import './ox-price.js';
 import './ox-protection-card.js';
 import './ox-protection-group.js';
 import './ox-radio-button.js';
+import './ox-segmented-control.js';
 import './ox-separator.js';
 import './ox-stepper.js';
 import './ox-switch.js';
